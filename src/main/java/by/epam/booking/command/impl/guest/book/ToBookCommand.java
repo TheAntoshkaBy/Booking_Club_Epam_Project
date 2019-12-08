@@ -6,6 +6,8 @@ import by.epam.booking.entity.Book;
 import by.epam.booking.enumeration.PageFormatList;
 import by.epam.booking.format.PageFormat;
 import by.epam.booking.repository.assistant.book.GetBookInfo;
+import by.epam.booking.service.book.BookInfoType;
+import by.epam.booking.service.book.BookLogic;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,8 +19,7 @@ public class ToBookCommand implements WebCommand {
 
         book = new Book();
         book.setId(Integer.parseInt(request.getParameter("book")));
-        GetBookInfo.getBookById(book);
-
+        book = BookLogic.bookGet(book, BookInfoType.ALL);
         request.setAttribute("book", book.getName());
         request.setAttribute("id", book.getId());
         request.setAttribute("name", book.getName());

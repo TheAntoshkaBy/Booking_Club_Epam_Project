@@ -4,9 +4,8 @@ import by.epam.booking.command.WebCommand;
 import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.entity.User;
 import by.epam.booking.format.PageFormat;
-import by.epam.booking.repository.assistant.user.UserInfoByLogin;
-import by.epam.booking.service.UserInfoType;
-import by.epam.booking.service.UserLogic;
+import by.epam.booking.service.user.UserInfoType;
+import by.epam.booking.service.user.UserLogic;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

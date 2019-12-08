@@ -5,10 +5,8 @@ import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.config.MessageManager;
 import by.epam.booking.entity.User;
 import by.epam.booking.format.PageFormat;
-import by.epam.booking.repository.assistant.user.changeLogic.ChangeSurname;
-import by.epam.booking.service.UserInfoType;
-import by.epam.booking.service.UserLogic;
-import by.epam.booking.specification.impl.user.update.UpdateSurnameByLogin;
+import by.epam.booking.service.user.UserInfoType;
+import by.epam.booking.service.user.UserLogic;
 
 import javax.servlet.http.HttpServletRequest;
 

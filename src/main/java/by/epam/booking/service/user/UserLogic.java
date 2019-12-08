@@ -1,4 +1,4 @@
-package by.epam.booking.service;
+package by.epam.booking.service.user;
 
 import by.epam.booking.command.validator.UserValidator;
 import by.epam.booking.entity.User;

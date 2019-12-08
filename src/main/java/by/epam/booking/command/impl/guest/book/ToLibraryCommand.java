@@ -21,7 +21,6 @@ public class ToLibraryCommand implements WebCommand {
             request.setAttribute("user", login);
         }
         request.setAttribute("books", GetAllBooks.getAllBooks());
-        System.out.println(GetAllBooks.getBooks());
         page.setPage( ConfigurationManager.getProperty("path.page.library"));
         return page;
     }

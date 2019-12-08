@@ -6,7 +6,7 @@ import by.epam.booking.entity.User;
 import by.epam.booking.enumeration.Role;
 import by.epam.booking.format.PageFormat;
 import by.epam.booking.repository.assistant.user.Registration;
-import by.epam.booking.service.UserLogic;
+import by.epam.booking.service.user.UserLogic;
 
 import javax.servlet.http.HttpServletRequest;
 
