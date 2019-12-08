@@ -1,15 +1,13 @@
-package by.epam.booking.logic.book;
+package by.epam.booking.repository.assistant.book;
 
-import by.epam.booking.entity.Book;
-import by.epam.booking.logic.Logic;
+import by.epam.booking.repository.assistant.RepositoryHelper;
 import by.epam.booking.repository.impl.BookRepository;
-import by.epam.booking.specification.impl.book.SelectBookById;
 import by.epam.booking.specification.impl.book.SelectMaxIdBook;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class GetMaxIdLogic extends Logic {
+public class GetMaxId extends RepositoryHelper {
     public static Integer getMaxId(){
         Integer result = null;
         ResultSet resultBook = BookRepository.getINSTANCE().query(new SelectMaxIdBook());

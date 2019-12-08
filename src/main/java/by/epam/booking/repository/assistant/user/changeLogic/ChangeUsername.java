@@ -1,12 +1,12 @@
-package by.epam.booking.logic.user.changeLogic;
+package by.epam.booking.repository.assistant.user.changeLogic;
 
-import by.epam.booking.logic.Logic;
+import by.epam.booking.repository.assistant.RepositoryHelper;
 import by.epam.booking.repository.impl.UserRepository;
 import by.epam.booking.specification.Specification;
 
 import java.sql.SQLException;
 
-public class ChangeUsernameLogic extends Logic {
+public class ChangeUsername extends RepositoryHelper {
     public static boolean changeUsername(Specification specification){
         UserRepository.getINSTANCE().query(specification);
        try {

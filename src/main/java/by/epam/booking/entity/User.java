@@ -13,6 +13,17 @@ public class User {
     private double moneyBalance;
     private long bookId;
     private boolean isActive;
+    private String bookName;
+
+    public User(String login, String password, String email, String name, String surname, Enum<Role> role, boolean isActive) {
+        this.login = login;
+        this.password = password;
+        this.email = email;
+        this.name = name;
+        this.surname = surname;
+        this.role = role;
+        this.isActive = isActive;
+    }
 
     public User() {
     }

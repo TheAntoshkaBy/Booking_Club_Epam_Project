@@ -1,15 +1,14 @@
-package by.epam.booking.logic.book;
+package by.epam.booking.repository.assistant.book;
 
 import by.epam.booking.entity.Book;
-import by.epam.booking.logic.Logic;
+import by.epam.booking.repository.assistant.RepositoryHelper;
 import by.epam.booking.repository.impl.BookRepository;
-import by.epam.booking.specification.Specification;
 import by.epam.booking.specification.impl.book.SelectBookById;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class GetBookInfoLogic extends Logic {
+public class GetBookInfo extends RepositoryHelper {
     public static boolean getBookById(Book book){
         ResultSet resultBook = BookRepository.getINSTANCE().query(new SelectBookById(book.getId()));
         try {

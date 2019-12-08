@@ -5,29 +5,30 @@ import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.config.MessageManager;
 import by.epam.booking.entity.User;
 import by.epam.booking.format.PageFormat;
-import by.epam.booking.repository.assistant.user.changeLogic.ChangeUsername;
-import by.epam.booking.service.LogicCommandType;
-import by.epam.booking.service.UserInfoType;
-import by.epam.booking.service.UserLogic;
-import by.epam.booking.specification.impl.user.update.UpdateUsernameByLogin;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.Part;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 
-public class ChangeProfileName implements WebCommand {
+public class ChangeProfileImage implements WebCommand{
     @Override
     public PageFormat execute(HttpServletRequest request) {
         PageFormat page = new PageFormat();
         User user = new User();
 
-        if(!request.getParameter("name").isEmpty()){
-            user.setLogin((String) request.getSession().getAttribute("login"));
-            user.setName(request.getParameter("name"));
-            UserLogic.userUpdate(user,user, UserInfoType.NAME);
-
+        if(!request.getParameter("image").isEmpty()){
+            try {
+               Part part = request.getParts().stream().findAny().get();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ServletException e) {
+                e.printStackTrace();
+            }
         }else {
             page.setPage(ConfigurationManager.getProperty("path.page.user"));
             request.setAttribute("type","change");
-            request.getSession().setAttribute("usernameError", MessageManager.getProperty("message.usernameEmpty"));
             return page;
         }
         page.setPage(ConfigurationManager.getProperty("path.page.user"));

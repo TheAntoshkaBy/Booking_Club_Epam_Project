@@ -1,4 +1,4 @@
-package by.epam.booking.logic;
+package by.epam.booking.repository.assistant;
 
 import by.epam.booking.connection.ConnectionPool;
 
@@ -6,7 +6,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public abstract class Logic {
+public abstract class RepositoryHelper {
     protected static void closeConnection(Connection connection) {
         if (connection != null) {
             ConnectionPool.getInstance().returnConnection(connection);

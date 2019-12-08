@@ -1,12 +1,13 @@
 package by.epam.booking.command.impl.guest.user;
 
 import by.epam.booking.command.WebCommand;
+import by.epam.booking.command.validator.UserValidator;
 import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.config.MessageManager;
 import by.epam.booking.enumeration.PageFormatList;
 import by.epam.booking.format.PageFormat;
-import by.epam.booking.logic.user.UserInfoByLoginLogic;
-import by.epam.booking.logic.user.LoginLogic;
+import by.epam.booking.repository.assistant.user.UserInfoByLogin;
+import by.epam.booking.repository.assistant.user.Login;
 import by.epam.booking.entity.User;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,10 +25,10 @@ public class LogInCommand implements WebCommand {
         String login = request.getParameter(PARAM_NAME_LOGIN);
         String password = request.getParameter(PARAM_NAME_PASSWORD);
         HttpSession session = request.getSession();
-        try {
-            if(LoginLogic.checkLogIn(login,password))
+
+            if(UserValidator.isUserConsist(login,password))
             {
-                User user = UserInfoByLoginLogic.searchUserByLogin(login);
+                User user = UserInfoByLogin.searchUserByLogin(login);
                 request.setAttribute("login", user.getLogin());
                 request.setAttribute("user", user.getName());
                 request.setAttribute("surname", user.getSurname());
@@ -47,9 +48,7 @@ public class LogInCommand implements WebCommand {
                 request.getSession().setAttribute("loginError", MessageManager.getProperty("message.loginError"));
                 return page;
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
         return page;
     }
 

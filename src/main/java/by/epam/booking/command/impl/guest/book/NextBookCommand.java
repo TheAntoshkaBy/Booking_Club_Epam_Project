@@ -5,11 +5,9 @@ import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.entity.Book;
 import by.epam.booking.enumeration.PageFormatList;
 import by.epam.booking.format.PageFormat;
-import by.epam.booking.logic.book.GetAllBooksLogic;
-import by.epam.booking.logic.book.GetBookInfoLogic;
+import by.epam.booking.repository.assistant.book.GetBookInfo;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 
 public class NextBookCommand implements WebCommand {
 
@@ -19,7 +17,7 @@ public class NextBookCommand implements WebCommand {
 
         Book book = new Book();
         book.setId(Integer.parseInt(request.getParameter("book")) + 1);
-        if(GetBookInfoLogic.getBookById(book)){
+        if(GetBookInfo.getBookById(book)){
             request.setAttribute("book", book.getName());
             request.setAttribute("name", book.getName());
             request.setAttribute("author",book.getAuthor());
@@ -29,7 +27,7 @@ public class NextBookCommand implements WebCommand {
 
         }else{
             book.setId(1);
-            GetBookInfoLogic.getBookById(book);
+            GetBookInfo.getBookById(book);
             request.setAttribute("book", book.getName());
             request.setAttribute("name", book.getName());
             request.setAttribute("author",book.getAuthor());

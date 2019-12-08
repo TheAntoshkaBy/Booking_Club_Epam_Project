@@ -1,7 +1,7 @@
-package by.epam.booking.logic.user;
+package by.epam.booking.repository.assistant.user;
 
 import by.epam.booking.config.MessageManager;
-import by.epam.booking.logic.Logic;
+import by.epam.booking.repository.assistant.RepositoryHelper;
 import by.epam.booking.repository.impl.UserRepository;
 import by.epam.booking.enumeration.Role;
 import by.epam.booking.specification.Specification;
@@ -12,7 +12,7 @@ import by.epam.booking.entity.User;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class RegistrationLogic extends Logic {
+public class Registration extends RepositoryHelper {
 
     private static String returnedPage;
 
@@ -55,6 +55,6 @@ public class RegistrationLogic extends Logic {
     }
 
     public static void setReturnedPage(String returnedPage) {
-        RegistrationLogic.returnedPage = returnedPage;
+        Registration.returnedPage = returnedPage;
     }
 }

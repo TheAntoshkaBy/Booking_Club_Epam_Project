@@ -1,7 +1,7 @@
-package by.epam.booking.logic.book;
+package by.epam.booking.repository.assistant.book;
 
 import by.epam.booking.entity.Book;
-import by.epam.booking.logic.Logic;
+import by.epam.booking.repository.assistant.RepositoryHelper;
 import by.epam.booking.repository.impl.BookRepository;
 import by.epam.booking.specification.impl.book.SelectAllBooksForTable;
 
@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class GetAllBooksLogic extends Logic {
+public class GetAllBooks extends RepositoryHelper {
     private static ArrayList<Book> books;
 
     static {

@@ -1,6 +1,6 @@
-package by.epam.booking.logic.user;
+package by.epam.booking.repository.assistant.user;
 
-import by.epam.booking.logic.Logic;
+import by.epam.booking.repository.assistant.RepositoryHelper;
 import by.epam.booking.repository.impl.UserRepository;
 import by.epam.booking.specification.Specification;
 import by.epam.booking.specification.impl.user.search.SearchLoginAndPassByLogin;
@@ -10,7 +10,7 @@ import by.epam.booking.specification.impl.user.search.SearchLoginByLogin;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class LoginLogic extends Logic {
+public class Login extends RepositoryHelper {
 
 
     public static boolean checkLogIn(String login, String pass) throws SQLException {

@@ -3,8 +3,11 @@ package by.epam.booking.command.impl.user;
 import by.epam.booking.command.WebCommand;
 import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.format.PageFormat;
-import by.epam.booking.logic.user.UserInfoByLoginLogic;
+import by.epam.booking.repository.assistant.user.UserInfoByLogin;
 import by.epam.booking.entity.User;
+import by.epam.booking.service.LogicCommandType;
+import by.epam.booking.service.UserInfoType;
+import by.epam.booking.service.UserLogic;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -19,7 +22,9 @@ public class ToMainPageCommand implements WebCommand {
         {
             page.setPage(ConfigurationManager.getProperty("path.page.registration"));
         }else{
-            User user = UserInfoByLoginLogic.searchUserByLogin(login);
+            User transferredUser = new User();
+            transferredUser.setLogin(login);
+            User user = UserLogic.userGet(transferredUser, UserInfoType.ALL);
             request.setAttribute("login", user.getLogin());
             request.setAttribute("user", user.getName());
             request.setAttribute("surname", user.getSurname());
