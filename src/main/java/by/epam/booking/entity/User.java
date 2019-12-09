@@ -11,7 +11,7 @@ public class User {
     private String surname;
     private Enum<Role> role;
     private double moneyBalance;
-    private long bookId;
+    private Integer bookId;
     private boolean isActive;
     private String bookName;
 
@@ -89,11 +89,11 @@ public class User {
         this.moneyBalance = moneyBalance;
     }
 
-    public long getBookId() {
+    public Integer getBookId() {
         return bookId;
     }
 
-    public void setBookId(long bookId) {
+    public void setBookId(Integer bookId) {
         this.bookId = bookId;
     }
 
@@ -103,6 +103,18 @@ public class User {
 
     public void setActive(boolean active) {
         isActive = active;
+    }
+
+    public void setRole(Enum<Role> role) {
+        this.role = role;
+    }
+
+    public String getBookName() {
+        return bookName;
+    }
+
+    public void setBookName(String bookName) {
+        this.bookName = bookName;
     }
 
     @Override

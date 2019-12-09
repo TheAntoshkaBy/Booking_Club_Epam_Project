@@ -9,6 +9,8 @@ import by.epam.booking.format.PageFormat;
 import by.epam.booking.repository.assistant.user.UserInfoByLogin;
 import by.epam.booking.repository.assistant.user.Login;
 import by.epam.booking.entity.User;
+import by.epam.booking.service.user.UserInfoType;
+import by.epam.booking.service.user.UserLogic;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -28,21 +30,22 @@ public class LogInCommand implements WebCommand {
 
             if(UserValidator.isUserConsist(login,password))
             {
-                User user = UserInfoByLogin.searchUserByLogin(login);
-                request.setAttribute("login", user.getLogin());
-                request.setAttribute("user", user.getName());
-                request.setAttribute("surname", user.getSurname());
-                request.setAttribute("email", user.getEmail());
-                request.setAttribute("role", user.getRole().name());
-                request.setAttribute("status", user.isActive() );
-                request.setAttribute("type","see");
+                User user = new User();
+                user.setLogin(login);
+                user = UserLogic.userGet(user, UserInfoType.ALL, UserInfoType.BOOK_NAME);
+                request.getSession().setAttribute("login", user.getLogin());
+                request.getSession().setAttribute("user", user.getName());
+                request.getSession().setAttribute("surname", user.getSurname());
+                request.getSession().setAttribute("email", user.getEmail());
+                request.getSession().setAttribute("role", user.getRole().name());
+                request.getSession().setAttribute("status", user.isActive() );
+                request.getSession().setAttribute("book", user.getBookName());
+                request.getSession().setAttribute("money", user.getMoneyBalance());
+                request.getSession().setAttribute("type","see");
 
                 page.setPageFormat(PageFormatList.FORWARD);
                 page.setPage(ConfigurationManager.getProperty("path.page.user"));
-                session.setAttribute("login",user.getLogin());
-                session.setAttribute("name",user.getName());
-                session.setAttribute("surname",user.getSurname());
-                session.setAttribute("role",user.getRole());
+
             }else {
                 page.setPage( ConfigurationManager.getProperty("path.page.login"));
                 request.getSession().setAttribute("loginError", MessageManager.getProperty("message.loginError"));

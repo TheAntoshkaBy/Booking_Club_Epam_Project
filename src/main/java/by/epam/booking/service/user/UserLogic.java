@@ -5,8 +5,10 @@ import by.epam.booking.entity.User;
 import by.epam.booking.repository.assistant.user.Login;
 import by.epam.booking.repository.assistant.user.Registration;
 import by.epam.booking.repository.assistant.user.UserInfoByLogin;
+import by.epam.booking.repository.assistant.user.changeLogic.ChangeBookId;
 import by.epam.booking.repository.assistant.user.changeLogic.ChangeSurname;
 import by.epam.booking.repository.assistant.user.changeLogic.ChangeUsername;
+import by.epam.booking.specification.impl.user.update.UpdateBookId;
 import by.epam.booking.specification.impl.user.update.UpdateLoginByLogin;
 import by.epam.booking.specification.impl.user.update.UpdateSurnameByLogin;
 import by.epam.booking.specification.impl.user.update.UpdateUsernameByLogin;
@@ -66,11 +68,13 @@ public class UserLogic {
                 case NAME:{
                     ChangeUsername.changeUsername(
                             new UpdateUsernameByLogin(mutableUser.getLogin(), changeParamOfUser.getName()));
+                    answer=true;
                 }break;
                 case SURNAME:{
                     ChangeSurname.changeSurname(new UpdateSurnameByLogin(
                             mutableUser.getLogin(),
                             changeParamOfUser.getSurname()));
+                    answer=true;
                 }break;
                 case EMAIL:{
 
@@ -98,7 +102,9 @@ public class UserLogic {
 
                 }break;
                 case READING_PLAN_NAME:{
-
+                }break;
+                case DELETE_BOOK:{
+                   answer = ChangeBookId.changeBookId(new UpdateBookId(mutableUser.getLogin(), changeParamOfUser.getBookId()));
                 }break;
             }
         }

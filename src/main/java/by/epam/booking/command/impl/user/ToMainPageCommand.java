@@ -20,15 +20,6 @@ public class ToMainPageCommand implements WebCommand {
         {
             page.setPage(ConfigurationManager.getProperty("path.page.registration"));
         }else{
-            User transferredUser = new User();
-            transferredUser.setLogin(login);
-            User user = UserLogic.userGet(transferredUser, UserInfoType.ALL);
-            request.setAttribute("login", user.getLogin());
-            request.setAttribute("user", user.getName());
-            request.setAttribute("surname", user.getSurname());
-            request.setAttribute("email", user.getEmail());
-            request.setAttribute("role", user.getRole().name());
-            request.setAttribute("status", user.isActive());
             request.setAttribute("type","see");
             page.setPage( ConfigurationManager.getProperty("path.page.user"));
         }

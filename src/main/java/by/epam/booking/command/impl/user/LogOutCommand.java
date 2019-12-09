@@ -15,6 +15,12 @@ public class LogOutCommand implements WebCommand {
         page.setPage( ConfigurationManager.getProperty("path.page.login"));
         HttpSession session = request.getSession();
         session.setAttribute("login", null);
+        request.getSession().setAttribute("user", null);
+        request.getSession().setAttribute("surname", null);
+        request.getSession().setAttribute("email", null);
+        request.getSession().setAttribute("role", null);
+        request.getSession().setAttribute("status", null );
+        request.getSession().setAttribute("book", null);
         return page;
     }
 }

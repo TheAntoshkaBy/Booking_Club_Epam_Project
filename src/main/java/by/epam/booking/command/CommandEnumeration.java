@@ -6,10 +6,7 @@ import by.epam.booking.command.impl.guest.book.ToBookCommand;
 import by.epam.booking.command.impl.guest.book.ToLibraryCommand;
 import by.epam.booking.command.impl.guest.user.*;
 import by.epam.booking.command.impl.user.*;
-import by.epam.booking.command.impl.user.change.ChangeProfileImage;
-import by.epam.booking.command.impl.user.change.ChangeProfileLogin;
-import by.epam.booking.command.impl.user.change.ChangeProfileName;
-import by.epam.booking.command.impl.user.change.ChangeProfileSurname;
+import by.epam.booking.command.impl.user.change.*;
 
 public enum CommandEnumeration {
 
@@ -91,6 +88,11 @@ public enum CommandEnumeration {
     CHANGE_PROFILE_IMAGE{
         {
             this.command = new ChangeProfileImage();
+        }
+    },
+    DELETE_USER_BOOK{
+        {
+            this.command = new DeleteUserBookCommand();
         }
     }
     ;
