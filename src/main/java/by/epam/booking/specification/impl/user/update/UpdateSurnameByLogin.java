@@ -25,6 +25,7 @@ public class UpdateSurnameByLogin implements Specification {
             statement = connection.prepareStatement(SQL_REQUEST);
             statement.setString(1,newSurname);
             statement.setString(2,login);
+            statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }

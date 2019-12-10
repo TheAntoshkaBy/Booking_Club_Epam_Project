@@ -26,6 +26,13 @@ public class GetBookInfo extends RepositoryHelper {
                 return false;
         }catch (SQLException e){
             e.printStackTrace();
+        }finally {
+            try {
+                closeConnection(resultBook.getStatement().getConnection());
+                closeStatement(resultBook.getStatement());
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return true;
     }

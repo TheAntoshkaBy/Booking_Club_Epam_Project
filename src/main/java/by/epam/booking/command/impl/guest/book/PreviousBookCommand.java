@@ -17,26 +17,24 @@ public class PreviousBookCommand implements WebCommand {
     public PageFormat execute(HttpServletRequest request) {
 
         Book book = new Book();
-        book.setId(Integer.parseInt(request.getParameter("book")) - 1);
+        book.setId(Integer.parseInt( request.getParameter("bookId") ) - 1);
         if(BookLogic.bookGet(book, BookInfoType.ALL) != null){
-            request.setAttribute("book", book.getName());
+            request.setAttribute("bookId", book.getId());
             request.setAttribute("name", book.getName());
             request.setAttribute("author",book.getAuthor());
             request.setAttribute("description",book.getDescription());
             request.setAttribute("count",book.getCount());
-            request.setAttribute("id", book.getId());
 
         }else{
             Book endBook = new Book();
             endBook = BookLogic.bookGet(endBook, BookInfoType.GET_MAX_ID);
             book.setId(endBook.getId());
             GetBookInfo.getBookById(book);
-            request.setAttribute("book", book.getName());
+            request.setAttribute("bookId", book.getId());
             request.setAttribute("name", book.getName());
             request.setAttribute("author",book.getAuthor());
             request.setAttribute("description",book.getDescription());
             request.setAttribute("count",book.getCount());
-            request.setAttribute("id", book.getId());
         }
 
         PageFormat page = new PageFormat(PageFormatList.FORWARD, ConfigurationManager.getProperty("path.page.book"));

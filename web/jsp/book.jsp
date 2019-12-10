@@ -41,7 +41,7 @@
         </form>
     </div>
 </nav>
-You choose - ${book}
+You choose - ${bookId}
 <div class="container-fluid">
     <div class="row">
         <div class="col-2">
@@ -64,20 +64,31 @@ You choose - ${book}
                 <label><fmt:message key="submit.book.count"/>:${count}</label>
                 <br><br>
             </p>
+            <c:if test="${bookName == null}">
+                <form action="${pageContext.request.contextPath}/controller" method="post">
+                    <br>
+                    <input type="hidden" name="command" value="add_user_book"/>
+                    <input type="hidden" name="bookId" value="${bookId}"/>
+                    <input type="submit" value="<fmt:message key="label.add.book"/> ${book} ">
+                    <br>
+                        ${surnameError}
+                    <br>
+                </form>
+            </c:if>
         </div>
     </div>
     <div class="row">
         <div class="col-5">
             <form action="${pageContext.request.contextPath}/controller" method="post">
             <input type="hidden" name="command" value="previous_book"/>
-            <input type="hidden" name="book" value="${id}"/>
+            <input type="hidden" name="bookId" value="${bookId}"/>
             <input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="id" value="Предыдущая" />
             </form>
         </div>
         <div class="col-5">
             <form action="${pageContext.request.contextPath}/controller" method="post">
                 <input type="hidden" name="command" value="next_book"/>
-                <input type="hidden" name="book" value="${id}"/>
+                <input type="hidden" name="bookId" value="${bookId}"/>
                 <input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="id" value="Следующая" />
             </form>
         </div>

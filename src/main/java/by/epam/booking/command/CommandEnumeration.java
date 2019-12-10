@@ -94,6 +94,11 @@ public enum CommandEnumeration {
         {
             this.command = new DeleteUserBookCommand();
         }
+    },
+    ADD_USER_BOOK{
+        {
+            this.command = new AddNewBookCommand();
+        }
     }
     ;
 

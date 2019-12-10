@@ -26,6 +26,7 @@ public class UpdateBookId implements Specification {
                 statement = connection.prepareStatement(SQL_REQUEST);
                 statement.setInt(1,newBookId);
                 statement.setString(2,login);
+                statement.executeUpdate();
             }else {
                 statement = connection.prepareStatement(NULL_SQL_REQUEST);
                 statement.setString(1,login);

@@ -32,6 +32,13 @@ public class GetAllBooks extends RepositoryHelper {
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
+            }finally {
+                try {
+                    closeConnection(bookSet.getStatement().getConnection());
+                    closeStatement(bookSet.getStatement());
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
 
         return books;

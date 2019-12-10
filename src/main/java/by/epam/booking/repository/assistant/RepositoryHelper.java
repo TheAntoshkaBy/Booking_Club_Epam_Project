@@ -7,13 +7,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public abstract class RepositoryHelper {
-    protected static void closeConnection(Connection connection) {
+    public static void closeConnection(Connection connection) {
         if (connection != null) {
             ConnectionPool.getInstance().returnConnection(connection);
         }
     }
 
-    protected static void closeStatement(Statement statement) {
+    public static void closeStatement(Statement statement) {
         if (statement != null) {
             try {
                 statement.close();

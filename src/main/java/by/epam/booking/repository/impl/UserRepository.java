@@ -2,6 +2,7 @@ package by.epam.booking.repository.impl;
 
 import by.epam.booking.connection.ConnectionPool;
 import by.epam.booking.repository.DataBaseRepository;
+import by.epam.booking.repository.assistant.RepositoryHelper;
 import by.epam.booking.specification.Specification;
 import by.epam.booking.entity.User;
 
@@ -61,15 +62,14 @@ public class UserRepository implements DataBaseRepository<User> {
 
     }
 
-    // FIXME: 02.12.2019 Спросить как лучше работать с обновлениями
     @Override
     public ResultSet query(Specification specification) {
         ResultSet resultSet = null;
         try {
             if(specification.isUpdate())
             {
-                specification.specify().executeUpdate();
-                statement= specification.specify();
+                statement =specification.specify();
+                RepositoryHelper.closeConnection(statement.getConnection());
             }else {
                 resultSet = specification.specify().executeQuery();
             }

@@ -46,6 +46,14 @@ public class Login extends RepositoryHelper {
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
+            }finally {
+                try {
+                    closeConnection(loginUser.getStatement().getConnection());
+                    closeStatement(loginUser.getStatement());
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
             }
 
         return (searchedLogin != null);

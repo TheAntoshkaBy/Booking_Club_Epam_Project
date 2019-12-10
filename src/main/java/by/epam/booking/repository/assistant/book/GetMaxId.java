@@ -19,6 +19,13 @@ public class GetMaxId extends RepositoryHelper {
             closeStatement(resultBook.getStatement());
         }catch (SQLException e){
             e.printStackTrace();
+        }finally {
+            try {
+                closeConnection(resultBook.getStatement().getConnection());
+                closeStatement(resultBook.getStatement());
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
         return result;

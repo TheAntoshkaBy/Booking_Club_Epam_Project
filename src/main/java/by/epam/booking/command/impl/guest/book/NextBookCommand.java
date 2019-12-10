@@ -18,9 +18,9 @@ public class NextBookCommand implements WebCommand {
     public PageFormat execute(HttpServletRequest request) {
 
         Book book = new Book();
-        book.setId(Integer.parseInt(request.getParameter("book")) + 1);
+        book.setId(Integer.parseInt( request.getParameter("bookId") ) + 1);
         if(BookLogic.bookGet(book, BookInfoType.ALL) != null){
-            request.setAttribute("book", book.getName());
+            request.setAttribute("bookId", book.getId());
             request.setAttribute("name", book.getName());
             request.setAttribute("author",book.getAuthor());
             request.setAttribute("description",book.getDescription());
@@ -30,7 +30,7 @@ public class NextBookCommand implements WebCommand {
         }else{
             book.setId(1);
             BookLogic.bookGet(book,BookInfoType.ALL);
-            request.setAttribute("book", book.getName());
+            request.setAttribute("bookId", book.getId());
             request.setAttribute("name", book.getName());
             request.setAttribute("author",book.getAuthor());
             request.setAttribute("description",book.getDescription());

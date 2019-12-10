@@ -38,8 +38,8 @@ public class LogInCommand implements WebCommand {
                 request.getSession().setAttribute("surname", user.getSurname());
                 request.getSession().setAttribute("email", user.getEmail());
                 request.getSession().setAttribute("role", user.getRole().name());
-                request.getSession().setAttribute("status", user.isActive() );
-                request.getSession().setAttribute("book", user.getBookName());
+                request.getSession().setAttribute("status", user.isActive());
+                request.getSession().setAttribute("bookName", user.getBookName());
                 request.getSession().setAttribute("money", user.getMoneyBalance());
                 request.getSession().setAttribute("type","see");
 

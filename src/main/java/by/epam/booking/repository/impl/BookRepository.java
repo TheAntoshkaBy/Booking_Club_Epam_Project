@@ -36,8 +36,6 @@ public class BookRepository implements DataBaseRepository<Book> {
             preparedStatement.setString(2, book.getAuthor());
             preparedStatement.setString(3, book.getName());
             preparedStatement.setString(4, book.getDescription());
-
-
             preparedStatement.executeUpdate();
             closeConnection(preparedStatement.getConnection());
         } catch (SQLException e) {

@@ -2,6 +2,7 @@ package by.epam.booking.service.user;
 
 import by.epam.booking.command.validator.UserValidator;
 import by.epam.booking.entity.User;
+import by.epam.booking.repository.assistant.user.GetBookName;
 import by.epam.booking.repository.assistant.user.Login;
 import by.epam.booking.repository.assistant.user.Registration;
 import by.epam.booking.repository.assistant.user.UserInfoByLogin;
@@ -20,36 +21,15 @@ public class UserLogic {
         for (UserInfoType type : types) {
             switch (type){
                 case ALL:{
-                    user =  UserInfoByLogin.searchUserByLogin(transferredUser.getLogin());
+                    user = UserInfoByLogin.searchUserByLogin(transferredUser.getLogin());
                 }break;
                 case NAME:{
                     assert user != null;
                     user.setName(transferredUser.getLogin());
                 }break;
-                case SURNAME:{
 
-                }break;
-                case EMAIL:{
-
-                }break;
-                case PASSWORD:{
-
-                }break;
-                case LOGIN:{
-
-                }break;
-                case ROLE:{
-
-                }break;
-
-                case IS_ACTIVE:{
-
-                }break;
-                case MONEY_BALANCE:{
-
-                }break;
                 case BOOK_NAME:{
-
+                    user.setBookName(GetBookName.getBookName(transferredUser.getLogin()));
                 }break;
                 case READING_PLAN_NAME:{
 
@@ -76,35 +56,16 @@ public class UserLogic {
                             changeParamOfUser.getSurname()));
                     answer=true;
                 }break;
-                case EMAIL:{
-
-                }break;
-                case PASSWORD:{
-
-                }break;
                 case LOGIN:{
                     if(!UserValidator.changeLogin(changeParamOfUser.getLogin())){
                         return false;
                     }
                    answer = Login.changeLogIn(new UpdateLoginByLogin(mutableUser.getLogin(),changeParamOfUser.getLogin()));
                 }break;
-                case ROLE:{
-
-                }break;
-
-                case IS_ACTIVE:{
-
-                }break;
-                case MONEY_BALANCE:{
-
-                }break;
-                case BOOK_NAME:{
-
+                case BOOK:{
+                    answer = ChangeBookId.changeBookId(new UpdateBookId(mutableUser.getLogin(), changeParamOfUser.getBookId()));
                 }break;
                 case READING_PLAN_NAME:{
-                }break;
-                case DELETE_BOOK:{
-                   answer = ChangeBookId.changeBookId(new UpdateBookId(mutableUser.getLogin(), changeParamOfUser.getBookId()));
                 }break;
             }
         }

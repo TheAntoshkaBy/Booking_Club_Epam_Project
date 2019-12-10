@@ -26,6 +26,7 @@ public class UpdateLoginByLogin implements Specification
             statement = connection.prepareStatement(SQL_REQUEST);
             statement.setString(1,newUserLogin);
             statement.setString(2,userLogin);
+            statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }

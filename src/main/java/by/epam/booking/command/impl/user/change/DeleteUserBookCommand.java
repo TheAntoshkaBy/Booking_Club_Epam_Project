@@ -18,8 +18,8 @@ public class DeleteUserBookCommand implements WebCommand {
         User user = new User();
         user.setLogin((String) request.getSession().getAttribute("login"));
         user.setBookId(null);
-        if(UserLogic.userUpdate(user,user,UserInfoType.DELETE_BOOK)){
-            request.getSession().setAttribute("book",null);
+        if(UserLogic.userUpdate(user,user,UserInfoType.BOOK)){
+            request.getSession().setAttribute("bookName",null);
         }
 
         page.setPage(ConfigurationManager.getProperty("path.page.user"));

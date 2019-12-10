@@ -21,6 +21,15 @@ public final class ConnectionPool {
     private static final ReentrantLock getInstanceLock = new ReentrantLock();
     private static final ReentrantLock returnConnectionLock = new ReentrantLock();
     private static BlockingQueue<Connection> connections = new LinkedBlockingDeque<>(MAX_POOL_SIZE);
+
+    public static ArrayDeque<Connection> getBusyConnections() {
+        return busyConnections;
+    }
+
+    public static void setBusyConnections(ArrayDeque<Connection> busyConnections) {
+        ConnectionPool.busyConnections = busyConnections;
+    }
+
     private static ArrayDeque<Connection> busyConnections = new ArrayDeque<Connection>(MAX_POOL_SIZE);
 
 
@@ -40,6 +49,7 @@ public final class ConnectionPool {
                 getConnectionLock.lock();
                 connection = connections.take();
                 busyConnections.offer(connection);
+            System.out.println( "get Connection " +connections.size());
         } catch (InterruptedException e) {
            //log
         }finally {
@@ -49,11 +59,11 @@ public final class ConnectionPool {
     }
 
     public void returnConnection(Connection connection) {
-
         try {
             returnConnectionLock.lock();
             busyConnections.remove(connection);
             connections.offer(connection);
+            System.out.println("Close Connection " + connections.size());
         } finally {
             returnConnectionLock.unlock();
         }

@@ -58,7 +58,7 @@ ${user} welcome to BKLibrary
             <form action="${pageContext.request.contextPath}/controller" method="post">
                 <tr>
                     <input type="hidden" name="command" value="to_book"/>
-                    <input type="hidden" name="book" value="${book.id}"/>
+                    <input type="hidden" name="bookId" value="${book.id}"/>
                     <td><div class="d-flex justify-content-around"><h4><span class="badge badge-outline-primary"><c:out value="${book.name}"/></span></h4></div></td>
                     <td><div class="d-flex justify-content-around"><h4><span class="badge badge-outline-primary"> <c:out value="${book.author}"/></span></h4></div></td>
                     <td><div class="d-flex justify-content-around"><h4><span class="badge badge-outline-primary"><c:out value="${book.count}"/> </span></h4></div></td>
