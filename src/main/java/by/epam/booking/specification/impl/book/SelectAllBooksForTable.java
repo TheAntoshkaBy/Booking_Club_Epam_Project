@@ -12,7 +12,7 @@ public class SelectAllBooksForTable implements Specification {
     private final String SQL_REQUEST = "SELECT name,author,count,idBook,description FROM "+ BOOK_TABLE;
     private Book book;
     @Override
-    public PreparedStatement specify() throws SQLException {
+    public PreparedStatement specify() {
         PreparedStatement statement = null;
         try {
             statement = ConnectionPool.getInstance().getConnection().prepareStatement(SQL_REQUEST);

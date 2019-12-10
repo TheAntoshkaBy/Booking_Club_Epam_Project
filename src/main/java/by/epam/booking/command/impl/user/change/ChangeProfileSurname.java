@@ -15,9 +15,9 @@ public class ChangeProfileSurname implements WebCommand {
     @Override
     public PageFormat execute(HttpServletRequest request) {
         PageFormat page = new PageFormat();
+        User transferredUser = new User();
 
         if(!request.getParameter("surname").isEmpty()){
-            User transferredUser = new User();
             transferredUser.setLogin((String) request.getSession().getAttribute("login"));
             transferredUser.setSurname(request.getParameter("surname"));
             UserLogic.userUpdate(transferredUser,transferredUser, UserInfoType.SURNAME);
@@ -28,7 +28,8 @@ public class ChangeProfileSurname implements WebCommand {
             return page;
         }
         page.setPage(ConfigurationManager.getProperty("path.page.user"));
-        request.setAttribute("type","change");
+        request.getSession().setAttribute("type","change");
+        request.getSession().setAttribute("surname",transferredUser.getSurname());
         request.getSession().setAttribute("surnameError","");
         request.getSession().setAttribute("ChangedSave",MessageManager.getProperty("message.changed.Save"));
         return page;

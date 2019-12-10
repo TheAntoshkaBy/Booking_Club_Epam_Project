@@ -19,11 +19,10 @@ public class GetBookInfo extends RepositoryHelper {
                 book.setName(resultBook.getString("name"));
                 book.setDescription(resultBook.getString("description"));
             }
-            closeConnection(resultBook.getStatement().getConnection());
-            closeStatement(resultBook.getStatement());
             // FIXME: 03.12.2019 Фигурные скобки
-            if(book.getName()==null)
+            if(book.getName()==null){
                 return false;
+            }
         }catch (SQLException e){
             e.printStackTrace();
         }finally {

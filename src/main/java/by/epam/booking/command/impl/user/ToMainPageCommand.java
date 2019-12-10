@@ -20,7 +20,7 @@ public class ToMainPageCommand implements WebCommand {
         {
             page.setPage(ConfigurationManager.getProperty("path.page.registration"));
         }else{
-            request.setAttribute("type","see");
+            request.getSession().setAttribute("type","see");
             page.setPage( ConfigurationManager.getProperty("path.page.user"));
         }
         return page;

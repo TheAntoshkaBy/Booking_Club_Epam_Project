@@ -23,12 +23,12 @@ public class SettingsProfileCommand implements WebCommand {
             User searchedUser = new User();
             searchedUser.setLogin(login);
             User user = UserLogic.userGet(searchedUser, UserInfoType.ALL);
-            request.setAttribute("login", user.getLogin());
-            request.setAttribute("user", user.getName());
-            request.setAttribute("surname", user.getSurname());
-            request.setAttribute("email", user.getEmail());
-            request.setAttribute("role", user.getRole().name());
-            request.setAttribute("status", user.isActive() );
+            request.getSession().setAttribute("login", user.getLogin());
+            request.getSession().setAttribute("user", user.getName());
+            request.getSession().setAttribute("surname", user.getSurname());
+            request.getSession().setAttribute("email", user.getEmail());
+            request.getSession().setAttribute("role", user.getRole().name());
+            request.getSession().setAttribute("status", user.isActive() );
 
             request.setAttribute("type","change");
             request.getSession().setAttribute("loginError", "");

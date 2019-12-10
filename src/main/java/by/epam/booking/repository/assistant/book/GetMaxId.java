@@ -15,8 +15,6 @@ public class GetMaxId extends RepositoryHelper {
             while (resultBook.next()){
                 result = resultBook.getInt(1);
             }
-            closeConnection(resultBook.getStatement().getConnection());
-            closeStatement(resultBook.getStatement());
         }catch (SQLException e){
             e.printStackTrace();
         }finally {

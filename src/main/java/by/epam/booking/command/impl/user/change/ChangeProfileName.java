@@ -29,6 +29,7 @@ public class ChangeProfileName implements WebCommand {
         }
         page.setPage(ConfigurationManager.getProperty("path.page.user"));
         request.setAttribute("type","change");
+        request.getSession().setAttribute("name",user.getName());
         request.getSession().setAttribute("usernameError","");
         request.getSession().setAttribute("ChangedSave",MessageManager.getProperty("message.changed.Save"));
         return page;

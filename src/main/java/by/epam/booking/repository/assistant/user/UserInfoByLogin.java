@@ -50,6 +50,8 @@ public class UserInfoByLogin extends RepositoryHelper {
         try {
             userInfo.next();
             name = userInfo.getString("name");
+            closeConnection(userInfo.getStatement().getConnection());
+            closeStatement(userInfo.getStatement());
         }catch (SQLException e) {
             try {
                 closeConnection(userInfo.getStatement().getConnection());
