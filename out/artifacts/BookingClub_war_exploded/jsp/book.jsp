@@ -108,13 +108,43 @@ You choose - ${bookId}
                                     <span class="date"><c:out value="${comments.date}"/></span>
                                 </div>
                             </div>
-                            <div class="media-text text-justify"><c:out value="${comments.text}"/></div>
+                            <div class="card" style="width: 100rem;">
+                                <div class="card-body">
+                                    <h4 class="card-title"><c:out value="${comments.header}"/></h4>
+                                    <p class="card-text"><c:out value="${comments.text}"/></p>
+                                </div>
+                            </div>
                         </div>
                     </li>
                 </ul>
     </c:forEach>
     </div>
-
+<c:if test="${login != null}">
+    <div class="container-fluid" >
+        <form action="${pageContext.request.contextPath}/controller" method="post">
+            <div class="form-group">
+                <input type="text" class="form-control"  name="commentHeader" id="commentHeader" placeholder="<fmt:message key="label.add.header.text"/>">
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" name="text" id="text"  rows="5" placeholder="<fmt:message key="label.add.comment.text"/>"></textarea>
+            </div>
+            <input type="hidden" name="command" value="add_book_comment"/>
+            <input type="hidden" name="bookId" value="${bookId}"/>
+            <input type="submit" value="<fmt:message key="label.add.comment"/> ${book} ">
+        </form>
+    </div>
+</c:if>
+<c:if test="${login == null}">
+    <div class="container-fluid" >
+    <p class="text-left">
+        <label>
+            <fmt:message key="label.book.request.log.one"/>
+            <a href="${pageContext.request.contextPath}/jsp/login.jsp"><fmt:message key="label.login"/> </a>
+            <fmt:message key="label.book.request.log.two"/>
+        </label>
+    </p>
+    </div>
+</c:if>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>

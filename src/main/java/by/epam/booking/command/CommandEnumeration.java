@@ -1,9 +1,8 @@
 package by.epam.booking.command;
 
-import by.epam.booking.command.impl.guest.book.NextBookCommand;
-import by.epam.booking.command.impl.guest.book.PreviousBookCommand;
-import by.epam.booking.command.impl.guest.book.ToBookCommand;
-import by.epam.booking.command.impl.guest.book.ToLibraryCommand;
+import by.epam.booking.command.impl.guest.book.*;
+import by.epam.booking.command.impl.guest.plan.ToConcreteReadingPlanCommand;
+import by.epam.booking.command.impl.guest.plan.ToReadingPlansCommand;
 import by.epam.booking.command.impl.guest.user.*;
 import by.epam.booking.command.impl.user.*;
 import by.epam.booking.command.impl.user.change.*;
@@ -98,6 +97,21 @@ public enum CommandEnumeration {
     ADD_USER_BOOK{
         {
             this.command = new AddNewBookCommand();
+        }
+    },
+    ADD_BOOK_COMMENT{
+        {
+            this.command = new NewCommentCommand();
+        }
+    },
+    TO_READING_PLANS{
+        {
+            this.command = new ToReadingPlansCommand();
+        }
+    },
+    TO_READING_PLAN{
+        {
+            this.command = new ToConcreteReadingPlanCommand();
         }
     }
     ;

@@ -1,10 +1,11 @@
 package by.epam.booking.service.book;
 
 import by.epam.booking.entity.Book;
+import by.epam.booking.repository.assistant.book.AddComment;
 import by.epam.booking.repository.assistant.book.GetBookComments;
 import by.epam.booking.repository.assistant.book.GetBookInfo;
 import by.epam.booking.repository.assistant.book.GetMaxId;
-import by.epam.booking.specification.impl.book.GetAllCommentsBook;
+import by.epam.booking.specification.impl.book.AddNewBookCommentSpecification;
 
 
 public class BookLogic {
@@ -38,7 +39,8 @@ public class BookLogic {
                 }break;
                 case GET_LIST_COMMENT:{
 
-                }
+                }break;
+
             }
         }
         return book;
@@ -61,6 +63,9 @@ public class BookLogic {
                 }break;
                 case COUNT:{
 
+                }break;
+                case ADD_COMMENT:{
+                    answer = AddComment.addComment(new AddNewBookCommentSpecification(mutableBook.getBuffComment(),mutableBook.getBuffDate()));
                 }break;
 
             }

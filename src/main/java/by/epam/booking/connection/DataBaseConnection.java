@@ -24,7 +24,6 @@ import java.sql.SQLException;
                 DataBaseManager.getProperty("mysql.useDateTimeCode")            +
                 DataBaseManager.getProperty("mysql.amp")                        +
                 DataBaseManager.getProperty("mysql.useUnicode")                 +
-                DataBaseManager.getProperty("mysql.encoding")                   +
                 DataBaseManager.getProperty("mysql.serverTimeZone");
         try {
             dbConnection = DriverManager.getConnection(connectionString,

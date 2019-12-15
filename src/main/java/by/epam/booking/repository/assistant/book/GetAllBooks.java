@@ -3,6 +3,7 @@ package by.epam.booking.repository.assistant.book;
 import by.epam.booking.entity.Book;
 import by.epam.booking.repository.assistant.RepositoryHelper;
 import by.epam.booking.repository.impl.BookRepository;
+import by.epam.booking.specification.impl.book.GetAllBooksByReadingPlanSpecification;
 import by.epam.booking.specification.impl.book.SelectAllBooksForTable;
 
 import java.sql.ResultSet;
@@ -40,6 +41,34 @@ public class GetAllBooks extends RepositoryHelper {
                     e.printStackTrace();
                 }
             }
+
+        return books;
+    }
+
+    public static ArrayList<Book> getAllBooksInPlan(int planId){
+        ResultSet bookSet = BookRepository.getINSTANCE().query(new GetAllBooksByReadingPlanSpecification(planId));
+        Book book;
+        books.clear();
+        try {
+            while (bookSet.next()){
+                book = new Book();
+                book.setAuthor(bookSet.getString("author"));
+                book.setName(bookSet.getString("name"));
+                book.setCount(bookSet.getInt("count"));
+                book.setId(bookSet.getInt("idBook"));
+                book.setDescription(bookSet.getString("description"));
+                books.add(book);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                closeConnection(bookSet.getStatement().getConnection());
+                closeStatement(bookSet.getStatement());
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
 
         return books;
     }

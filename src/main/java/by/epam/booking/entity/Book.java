@@ -9,6 +9,8 @@ public class Book {
     private String description;
     private Integer id;
     private ArrayList<Comment> comments;
+    private Comment buffComment;
+    private long buffDate;
 
     public Book(Integer count, String author, String name, String description, Integer id,ArrayList<Comment> comments) {
         this.count = count;
@@ -17,6 +19,22 @@ public class Book {
         this.description = description;
         this.id = id;
         this.comments = comments;
+    }
+
+    public Comment getBuffComment() {
+        return buffComment;
+    }
+
+    public void setBuffComment(Comment buffComment) {
+        this.buffComment = buffComment;
+    }
+
+    public long getBuffDate() {
+        return buffDate;
+    }
+
+    public void setBuffDate(long buffDate) {
+        this.buffDate = buffDate;
     }
 
     public Book() {

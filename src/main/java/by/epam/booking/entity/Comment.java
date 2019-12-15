@@ -7,11 +7,25 @@ import java.util.Date;
 
 public class Comment {
     private int id;
+    private int bookId;
+    private int readingPlanId;
     private Date date;
     private String author;
     private String text;
     private String header;
+    private boolean owner;
 
+    public Comment(int bookId, String author, String text, String header) {
+        this.bookId = bookId;
+        this.readingPlanId = readingPlanId;
+        this.author = author;
+        this.text = text;
+        this.header = header;
+        owner=true;
+    }
+
+    public Comment() {
+    }
 
     public int getId() {
         return id;
@@ -51,5 +65,21 @@ public class Comment {
 
     public void setHeader(String header) {
         this.header = header;
+    }
+
+    public int getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(int bookId) {
+        this.bookId = bookId;
+    }
+
+    public int getReadingPlanId() {
+        return readingPlanId;
+    }
+
+    public void setReadingPlanId(int readingPlanId) {
+        this.readingPlanId = readingPlanId;
     }
 }
