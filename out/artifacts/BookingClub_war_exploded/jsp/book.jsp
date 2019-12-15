@@ -3,11 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <fmt:setLocale value="${locale}"/>
 <fmt:setBundle basename="pagecontent"/>
+
 <html>
 <head>
     <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
         <title>Book</title>
+        <link href="${pageContext.request.contextPath}/css/comment.css" rel="stylesheet">
+        <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
     </head>
 </head>
 <body>
@@ -44,6 +47,22 @@
 You choose - ${bookId}
 <div class="container-fluid">
     <div class="row">
+        <div class="col-5">
+            <form action="${pageContext.request.contextPath}/controller" method="post">
+                <input type="hidden" name="command" value="previous_book"/>
+                <input type="hidden" name="bookId" value="${bookId}"/>
+                <input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="id" value="Предыдущая" />
+            </form>
+        </div>
+        <div class="col-5">
+            <form action="${pageContext.request.contextPath}/controller" method="post">
+                <input type="hidden" name="command" value="next_book"/>
+                <input type="hidden" name="bookId" value="${bookId}"/>
+                <input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="id" value="Следующая" />
+            </form>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-2">
             <img src="img/book.jpg"  class="rounded float-left" alt="Me" width="300" height="400"/>
         </div>
@@ -77,22 +96,25 @@ You choose - ${bookId}
             </c:if>
         </div>
     </div>
-    <div class="row">
-        <div class="col-5">
-            <form action="${pageContext.request.contextPath}/controller" method="post">
-            <input type="hidden" name="command" value="previous_book"/>
-            <input type="hidden" name="bookId" value="${bookId}"/>
-            <input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="id" value="Предыдущая" />
-            </form>
-        </div>
-        <div class="col-5">
-            <form action="${pageContext.request.contextPath}/controller" method="post">
-                <input type="hidden" name="command" value="next_book"/>
-                <input type="hidden" name="bookId" value="${bookId}"/>
-                <input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="id" value="Следующая" />
-            </form>
-        </div>
+    <div class="comments">
+        <h3 class="title-comments">Комментарии</h3>
+    <c:forEach items="${comments}" var="comments">
+                <ul class="media-list">
+                    <li class="media">
+                        <div class="media-body">
+                            <div class="media-heading">
+                                <div class="author"><c:out value="${comments.author}"/></div>
+                                <div class="metadata">
+                                    <span class="date"><c:out value="${comments.date}"/></span>
+                                </div>
+                            </div>
+                            <div class="media-text text-justify"><c:out value="${comments.text}"/></div>
+                        </div>
+                    </li>
+                </ul>
+    </c:forEach>
     </div>
+
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>

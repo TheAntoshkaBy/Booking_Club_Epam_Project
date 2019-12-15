@@ -1,19 +1,20 @@
-package by.epam.booking.specification.impl.user.search;
+package by.epam.booking.specification.impl.book;
 
 import by.epam.booking.connection.ConnectionPool;
-import by.epam.booking.entity.User;
+import by.epam.booking.entity.Book;
 import by.epam.booking.specification.Specification;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class GetUserBookNameByIdBook implements Specification {
-    private final String SQL_REQUEST = "SELECT b.name FROM "+ USER_TABLE +" JOIN Book b on u.bookId = b.idBook"+" WHERE u.login=?";
-    private String login;
+public class GetAllCommentsBook implements Specification {
 
-    public GetUserBookNameByIdBook(String login)
-    {
-        this.login = login;
+    private int bookId;
+    private final String SQL_REQUEST = "SELECT c.author, c.date,c.header, c.text FROM "+ BOOK_TABLE +
+            " JOIN Comments c on b.idBook = c.bookId WHERE c.bookId=?";
+
+    public GetAllCommentsBook(int bookId) {
+        this.bookId = bookId;
     }
 
     @Override
@@ -21,7 +22,7 @@ public class GetUserBookNameByIdBook implements Specification {
         PreparedStatement statement = null;
         try {
             statement = ConnectionPool.getInstance().getConnection().prepareStatement(SQL_REQUEST);
-            statement.setString(1,login);
+            statement.setInt(1,bookId);
         } catch (SQLException e) {
             e.printStackTrace();
         }

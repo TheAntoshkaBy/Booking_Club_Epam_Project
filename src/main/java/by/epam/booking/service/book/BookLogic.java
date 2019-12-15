@@ -1,18 +1,11 @@
 package by.epam.booking.service.book;
 
-import by.epam.booking.command.validator.UserValidator;
 import by.epam.booking.entity.Book;
-import by.epam.booking.entity.User;
+import by.epam.booking.repository.assistant.book.GetBookComments;
 import by.epam.booking.repository.assistant.book.GetBookInfo;
 import by.epam.booking.repository.assistant.book.GetMaxId;
-import by.epam.booking.repository.assistant.user.Login;
-import by.epam.booking.repository.assistant.user.UserInfoByLogin;
-import by.epam.booking.repository.assistant.user.changeLogic.ChangeSurname;
-import by.epam.booking.repository.assistant.user.changeLogic.ChangeUsername;
-import by.epam.booking.service.user.UserInfoType;
-import by.epam.booking.specification.impl.user.update.UpdateLoginByLogin;
-import by.epam.booking.specification.impl.user.update.UpdateSurnameByLogin;
-import by.epam.booking.specification.impl.user.update.UpdateUsernameByLogin;
+import by.epam.booking.specification.impl.book.GetAllCommentsBook;
+
 
 public class BookLogic {
     public static Book bookGet(Book transferredBook, BookInfoType... types){
@@ -21,6 +14,7 @@ public class BookLogic {
             switch (type){
                 case ALL:{
                     if(GetBookInfo.getBookById(transferredBook)){
+                        transferredBook.setComments(GetBookComments.getAllBooks(transferredBook.getId()));
                         return transferredBook;
                     }else {
                         return null;
@@ -42,6 +36,9 @@ public class BookLogic {
                 case GET_MAX_ID:{
                     book.setId(GetMaxId.getMaxId());
                 }break;
+                case GET_LIST_COMMENT:{
+
+                }
             }
         }
         return book;

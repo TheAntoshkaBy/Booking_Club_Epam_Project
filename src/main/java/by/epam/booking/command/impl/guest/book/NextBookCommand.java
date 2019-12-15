@@ -26,6 +26,7 @@ public class NextBookCommand implements WebCommand {
             request.setAttribute("description",book.getDescription());
             request.setAttribute("count",book.getCount());
             request.setAttribute("id", book.getId());
+            request.setAttribute("comments", book.getComments());
 
         }else{
             book.setId(1);
@@ -36,6 +37,7 @@ public class NextBookCommand implements WebCommand {
             request.setAttribute("description",book.getDescription());
             request.setAttribute("count",book.getCount());
             request.setAttribute("id", book.getId());
+            request.setAttribute("comments", book.getComments());
         }
 
         PageFormat page = new PageFormat(PageFormatList.FORWARD, ConfigurationManager.getProperty("path.page.book"));

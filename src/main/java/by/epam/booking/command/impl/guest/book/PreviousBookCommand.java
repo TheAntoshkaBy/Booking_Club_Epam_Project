@@ -24,6 +24,7 @@ public class PreviousBookCommand implements WebCommand {
             request.setAttribute("author",book.getAuthor());
             request.setAttribute("description",book.getDescription());
             request.setAttribute("count",book.getCount());
+            request.setAttribute("comments", book.getComments());
 
         }else{
             Book endBook = new Book();
@@ -35,6 +36,7 @@ public class PreviousBookCommand implements WebCommand {
             request.setAttribute("author",book.getAuthor());
             request.setAttribute("description",book.getDescription());
             request.setAttribute("count",book.getCount());
+            request.setAttribute("comments", book.getComments());
         }
 
         PageFormat page = new PageFormat(PageFormatList.FORWARD, ConfigurationManager.getProperty("path.page.book"));

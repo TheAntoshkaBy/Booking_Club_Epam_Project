@@ -1,21 +1,26 @@
 package by.epam.booking.entity;
 
+import java.util.ArrayList;
+
 public class Book {
     private Integer count;
     private String author;
     private String name;
     private String description;
     private Integer id;
+    private ArrayList<Comment> comments;
 
-    public Book(Integer count, String author, String name, String description, Integer id) {
+    public Book(Integer count, String author, String name, String description, Integer id,ArrayList<Comment> comments) {
         this.count = count;
         this.author = author;
         this.name = name;
         this.description = description;
         this.id = id;
+        this.comments = comments;
     }
 
     public Book() {
+        comments = new ArrayList<>();
     }
 
     public Integer getCount() {
@@ -61,12 +66,19 @@ public class Book {
         return sb.toString();
     }
 
-
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public ArrayList<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(ArrayList<Comment> comments) {
+        this.comments = comments;
     }
 }

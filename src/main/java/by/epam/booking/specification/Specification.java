@@ -8,8 +8,8 @@ import java.sql.SQLException;
 
 public interface Specification {
 
-    String USER_TABLE = "Booking_Club.User";
-    String BOOK_TABLE = "Book";
+    String USER_TABLE = "Booking_Club.User u";
+    String BOOK_TABLE = "Booking_Club.Book b";
     PreparedStatement specify() throws SQLException;
     boolean isUpdate();
 }
