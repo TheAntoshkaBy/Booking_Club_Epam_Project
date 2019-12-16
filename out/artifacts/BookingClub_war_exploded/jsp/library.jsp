@@ -19,7 +19,7 @@
         </li>
     </form>
     <div class="collapse navbar-collapse" id="navbarSupport">
-        <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav">
         </ul>
         <form class="form-inline my-2 my-lg-0" action="${pageContext.request.contextPath}/controller"  method="post">
             <input type="hidden" name="command" value="to_reading_plans"/>

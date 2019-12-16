@@ -25,6 +25,8 @@ public class UserInfoByLogin extends RepositoryHelper {
                buffUser.setRole(userInfo.getString("u.role"));
                buffUser.setBookName(userInfo.getString("b.name"));
                buffUser.setMoneyBalance(userInfo.getDouble("u.moneyBalance"));
+               buffUser.setReadingPlanName(userInfo.getString("r.name"));
+               buffUser.setReadingPlanId(userInfo.getInt("r.idReadingPlan"));
         } catch (SQLException e) {
             try {
                 closeConnection(userInfo.getStatement().getConnection());

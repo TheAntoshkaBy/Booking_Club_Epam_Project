@@ -21,8 +21,8 @@ REGISTRATION
         </li>
     </form>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <form class="form-inline my-2 my-lg-0" action="${pageContext.request.contextPath}/controller"  method="post">
+        <ul class="navbar-nav">
+            <form class="form-inline my-1 my-lg-0" action="${pageContext.request.contextPath}/controller"  method="post">
                 <li class="nav-item">
                     <input type="hidden" name="command" value="to_library"/>
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
@@ -31,14 +31,18 @@ REGISTRATION
                 </li>
             </form>
         </ul>
-        <form class="form-inline my-2 my-lg-0" action="${pageContext.request.contextPath}/controller"  method="post">
-            <input type="hidden" name="command" value="logout"/>
+        <ul class="navbar-nav">
+        <form class="form-inline my-1 my-lg-0" action="${pageContext.request.contextPath}/controller"  method="post">
+            <li class="nav-item">
+            <input type="hidden" name="command" value="to_login"/>
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
                 <label>
-                    <fmt:message key="label.logOut"/>
+                    <fmt:message key="label.login"/>
                 </label>
             </button>
+            </li>
         </form>
+        </ul>
     </div>
 </nav>
 <form action="${pageContext.request.contextPath}/controller" method="post">

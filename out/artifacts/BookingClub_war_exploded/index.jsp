@@ -31,14 +31,6 @@
           </li>
         </form>
       </ul>
-      <form class="form-inline my-2 my-lg-0" action="${pageContext.request.contextPath}/controller"  method="post">
-        <input type="hidden" name="command" value="logout"/>
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-          <label>
-            <fmt:message key="label.logOut"/>
-          </label>
-        </button>
-      </form>
     </div>
   </nav>
   <form method="POST" action="${pageContext.request.contextPath}/controller">

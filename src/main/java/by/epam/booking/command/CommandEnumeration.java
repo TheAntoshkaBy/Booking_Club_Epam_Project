@@ -112,6 +112,12 @@ public enum CommandEnumeration {
     TO_READING_PLAN{
         {
             this.command = new ToConcreteReadingPlanCommand();
+
+        }
+    },
+    DELETE_READING_PLAN{
+        {
+            this.command = new DeleteReadingPlan();
         }
     }
     ;

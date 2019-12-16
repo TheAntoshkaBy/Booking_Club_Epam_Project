@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 public class ToLibraryCommand implements WebCommand {
+
     @Override
     public PageFormat execute(HttpServletRequest request) {
         PageFormat page = new PageFormat();
@@ -22,6 +23,7 @@ public class ToLibraryCommand implements WebCommand {
         }
         request.setAttribute("books", GetAllBooks.getAllBooks());
         page.setPage( ConfigurationManager.getProperty("path.page.library"));
+
         return page;
     }
 }

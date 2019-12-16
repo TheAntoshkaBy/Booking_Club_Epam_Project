@@ -18,18 +18,6 @@
             </button>
         </li>
     </form>
-    <div class="collapse navbar-collapse" id="navbarSupport">
-        <ul class="navbar-nav">
-        </ul>
-        <form class="form-inline my-2 my-lg-0" action="${pageContext.request.contextPath}/controller"  method="post">
-            <input type="hidden" name="command" value="to_reading_plans"/>
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-                <label>
-                    <fmt:message key="submit.reading.plan"/>
-                </label>
-            </button>
-        </form>
-    </div>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
         </ul>
@@ -57,46 +45,29 @@ ${user} welcome to BKLibrary
 
             <thead class="thead-dark">
             <tr>
-                <th scope="col"><div class="d-flex justify-content-around"><fmt:message key="table.name.library.book.name"/></div></th>
-                <th scope="col"><div class="d-flex justify-content-around"><fmt:message key="table.name.library.author"/></div></th>
-                <th scope="col"><div class="d-flex justify-content-around"><fmt:message key="table.name.library.book.count"/> </div></th>
+                <th scope="col"><div class="d-flex justify-content-around"><fmt:message key="table.name.reading.plan"/></div></th>
             </tr>
             </thead>
             <tbody>
             <style>
                 .big-checkbox  {width: 10px; height: 10px;}
             </style>
-            <c:forEach items="${books}" var="book">
-            <form action="${pageContext.request.contextPath}/controller" method="post">
-                <tr>
-                    <input type="hidden" name="command" value="to_book"/>
-                    <input type="hidden" name="bookId" value="${book.id}"/>
-                    <td><div class="d-flex justify-content-around"><h4><span class="badge badge-outline-primary"><c:out value="${book.name}"/></span></h4></div></td>
-                    <td><div class="d-flex justify-content-around"><h4><span class="badge badge-outline-primary"> <c:out value="${book.author}"/></span></h4></div></td>
-                    <td><div class="d-flex justify-content-around"><h4><span class="badge badge-outline-primary"><c:out value="${book.count}"/> </span></h4></div></td>
-                    <th scope="row"><div class="d-flex justify-content-around"><input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="id" value="Подробнее" /></div></th>
-                </tr>
-            </form>
+            <c:forEach items="${readingPlanBooks}" var="book">
+                <form action="${pageContext.request.contextPath}/controller" method="post">
+                    <tr>
+                        <<input type="hidden" name="command" value="to_book"/>
+                        <input type="hidden" name="bookId" value="${book.id}"/>
+                        <td><div class="d-flex justify-content-around"><h4><span class="badge badge-outline-primary"><c:out value="${book.name}"/></span></h4></div></td>
+                        <td><div class="d-flex justify-content-around"><h4><span class="badge badge-outline-primary"> <c:out value="${book.author}"/></span></h4></div></td>
+                        <td><div class="d-flex justify-content-around"><h4><span class="badge badge-outline-primary"><c:out value="${book.count}"/> </span></h4></div></td>
+                        <th scope="row"><div class="d-flex justify-content-around"><input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="id" value="Подробнее" /></div></th>
+                        </tr>
+                </form>
             </c:forEach>
             </tbody>
         </table>
     </div>
 </form>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -105,3 +76,4 @@ ${user} welcome to BKLibrary
 
 </body>
 </html>
+

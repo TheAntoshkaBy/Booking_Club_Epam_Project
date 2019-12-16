@@ -22,8 +22,8 @@ public class ToConcreteReadingPlanCommand implements WebCommand {
         readingPlan = new ReadingPlan();
         readingPlan.setIdReadingPlan(Integer.parseInt(request.getParameter("idReadingPlan")));
         ReadingPlanLogic.planGet(readingPlan, ReadingPlanInfoType.GET_ALL_BOOKS_OF_PLAN);
-        System.out.println(readingPlan.getBooks());
-        PageFormat page = new PageFormat(PageFormatList.FORWARD, ConfigurationManager.getProperty("path.page.plans"));
+        request.getSession().setAttribute("readingPlanBooks",readingPlan.getBooks());
+        PageFormat page = new PageFormat(PageFormatList.FORWARD, ConfigurationManager.getProperty("path.page.plan.book"));
         return page;
     }
 }

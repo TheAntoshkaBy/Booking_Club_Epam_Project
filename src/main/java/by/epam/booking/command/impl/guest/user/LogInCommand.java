@@ -34,13 +34,15 @@ public class LogInCommand implements WebCommand {
                 user.setLogin(login);
                 user = UserLogic.userGet(user, UserInfoType.ALL, UserInfoType.BOOK_NAME);
                 request.getSession().setAttribute("login", user.getLogin());
-                request.getSession().setAttribute("user", user.getName());
+                request.getSession().setAttribute("userName", user.getName());
                 request.getSession().setAttribute("surname", user.getSurname());
                 request.getSession().setAttribute("email", user.getEmail());
                 request.getSession().setAttribute("role", user.getRole().name());
                 request.getSession().setAttribute("status", user.isActive());
                 request.getSession().setAttribute("bookName", user.getBookName());
                 request.getSession().setAttribute("money", user.getMoneyBalance());
+                request.getSession().setAttribute("readingPlanName",user.getReadingPlanName());
+                request.getSession().setAttribute("readingPlanId",user.getReadingPlanId());
                 request.getSession().setAttribute("type","see");
 
                 page.setPageFormat(PageFormatList.FORWARD);

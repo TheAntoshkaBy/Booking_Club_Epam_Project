@@ -10,6 +10,7 @@ import by.epam.booking.service.book.BookInfoType;
 import by.epam.booking.service.book.BookLogic;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 
 public class ToBookCommand implements WebCommand {
     private Book book;
@@ -27,7 +28,6 @@ public class ToBookCommand implements WebCommand {
         request.setAttribute("description",book.getDescription());
         request.setAttribute("count",book.getCount());
         request.setAttribute("comments", book.getComments());
-
         PageFormat page = new PageFormat(PageFormatList.FORWARD, ConfigurationManager.getProperty("path.page.book"));
         return page;
     }

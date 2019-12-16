@@ -7,14 +7,19 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class UpdateBookId implements Specification {
+public class UpdateReadingPlanSpecification implements Specification {
     private String login;
-    private Integer newBookId;
-    private String SQL_REQUEST = "UPDATE " + USER_TABLE +" SET bookId=? WHERE login=?";
-    private String NULL_SQL_REQUEST = "UPDATE "+USER_TABLE+" SET bookId=NULL WHERE login=?";
-    public UpdateBookId(String login, Integer newBookId) {
+    private Integer newReadingPlanId;
+    private String SQL_REQUEST = "UPDATE " + USER_TABLE +" SET redingPlanId WHERE login=?";
+    private String NULL_SQL_REQUEST = "UPDATE "+USER_TABLE+" SET readingPlanId=NULL WHERE login=?";
+    public UpdateReadingPlanSpecification(String login, Integer newReadingPlanId) {
         this.login = login;
-        this.newBookId = newBookId;
+        this.newReadingPlanId = newReadingPlanId;
+    }
+
+    public UpdateReadingPlanSpecification(String login) {
+        this.login = login;
+        this.newReadingPlanId = null;
     }
 
     @Override
@@ -22,9 +27,9 @@ public class UpdateBookId implements Specification {
         PreparedStatement statement = null;
         try {
             Connection connection = ConnectionPool.getInstance().getConnection();
-            if(newBookId!=null){
+            if(newReadingPlanId!=null){
                 statement = connection.prepareStatement(SQL_REQUEST);
-                statement.setInt(1,newBookId);
+                statement.setInt(1,newReadingPlanId);
                 statement.setString(2,login);
                 statement.executeUpdate();
             }else {

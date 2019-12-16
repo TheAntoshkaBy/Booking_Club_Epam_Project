@@ -83,7 +83,7 @@ You choose - ${bookId}
                 <label><fmt:message key="submit.book.count"/>:${count}</label>
                 <br><br>
             </p>
-            <c:if test="${bookName == null}">
+            <c:if test="${bookName == null and login != null}">
                 <form action="${pageContext.request.contextPath}/controller" method="post">
                     <br>
                     <input type="hidden" name="command" value="add_user_book"/>

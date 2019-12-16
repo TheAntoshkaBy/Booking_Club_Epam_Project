@@ -12,6 +12,8 @@ public class User {
     private Enum<Role> role;
     private double moneyBalance;
     private Integer bookId;
+    private Integer readingPlanId;
+    private String readingPlanName;
     private boolean isActive;
     private String bookName;
 
@@ -117,6 +119,22 @@ public class User {
         this.bookName = bookName;
     }
 
+    public Integer getReadingPlanId() {
+        return readingPlanId;
+    }
+
+    public void setReadingPlanId(Integer readingPlanId) {
+        this.readingPlanId = readingPlanId;
+    }
+
+    public String getReadingPlanName() {
+        return readingPlanName;
+    }
+
+    public void setReadingPlanName(String readingPlanName) {
+        this.readingPlanName = readingPlanName;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("User{");
@@ -125,4 +143,5 @@ public class User {
         sb.append('}');
         return sb.toString();
     }
+
 }

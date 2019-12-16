@@ -7,12 +7,10 @@ import by.epam.booking.repository.assistant.user.Login;
 import by.epam.booking.repository.assistant.user.Registration;
 import by.epam.booking.repository.assistant.user.UserInfoByLogin;
 import by.epam.booking.repository.assistant.user.changeLogic.ChangeBookId;
+import by.epam.booking.repository.assistant.user.changeLogic.ChangeReadingPlanId;
 import by.epam.booking.repository.assistant.user.changeLogic.ChangeSurname;
 import by.epam.booking.repository.assistant.user.changeLogic.ChangeUsername;
-import by.epam.booking.specification.impl.user.update.UpdateBookId;
-import by.epam.booking.specification.impl.user.update.UpdateLoginByLogin;
-import by.epam.booking.specification.impl.user.update.UpdateSurnameByLogin;
-import by.epam.booking.specification.impl.user.update.UpdateUsernameByLogin;
+import by.epam.booking.specification.impl.user.update.*;
 
 
 public class UserLogic {
@@ -66,6 +64,9 @@ public class UserLogic {
                     answer = ChangeBookId.changeBookId(new UpdateBookId(mutableUser.getLogin(), changeParamOfUser.getBookId()));
                 }break;
                 case READING_PLAN_NAME:{
+                }break;
+                case DELETE_READING_PLAN:{
+                    answer = ChangeReadingPlanId.changeReadingPlanId(new UpdateReadingPlanSpecification(mutableUser.getLogin()));
                 }break;
             }
         }
