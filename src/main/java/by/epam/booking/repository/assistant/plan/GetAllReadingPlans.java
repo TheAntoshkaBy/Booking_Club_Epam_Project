@@ -23,7 +23,7 @@ public class GetAllReadingPlans extends RepositoryHelper {
 
     public static ArrayList<ReadingPlan> getAllPlans(){
         Specification specification = new GetAllReadingPlansSpecification();
-        ResultSet planSet = BookRepository.getINSTANCE().query(specification);
+        ResultSet planSet = BookRepository.getInstance().query(specification);
         ReadingPlan readingPlan;
         readingPlans.clear();
         try {

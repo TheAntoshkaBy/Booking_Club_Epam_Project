@@ -2,12 +2,14 @@ package by.epam.booking.repository.assistant.user;
 
 import by.epam.booking.repository.assistant.RepositoryHelper;
 import by.epam.booking.repository.impl.UserRepository;
+import by.epam.booking.specification.impl.user.search.GetListOfCompletedBooksByUserLogin;
 import by.epam.booking.specification.impl.user.search.SearchNameByLogin;
 import by.epam.booking.specification.impl.user.search.SearchUserByLogin;
 import by.epam.booking.entity.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class UserInfoByLogin extends RepositoryHelper {
 
@@ -27,6 +29,7 @@ public class UserInfoByLogin extends RepositoryHelper {
                buffUser.setMoneyBalance(userInfo.getDouble("u.moneyBalance"));
                buffUser.setReadingPlanName(userInfo.getString("r.name"));
                buffUser.setReadingPlanId(userInfo.getInt("r.idReadingPlan"));
+               buffUser.setBookId(userInfo.getInt("u.bookId"));
         } catch (SQLException e) {
             try {
                 closeConnection(userInfo.getStatement().getConnection());
@@ -65,5 +68,26 @@ public class UserInfoByLogin extends RepositoryHelper {
         }
         return name;
     }
+    public static ArrayList<Integer> getCompletedBooks(String login)
+    {
+        ArrayList<Integer> booksId = new ArrayList<>();
+        ResultSet userInfo = UserRepository.getINSTANCE().query(new GetListOfCompletedBooksByUserLogin(login));
+        try {
+            while (userInfo.next()){
+                booksId.add(userInfo.getInt("bkm.idBook"));
+            }
+            closeConnection(userInfo.getStatement().getConnection());
+            closeStatement(userInfo.getStatement());
 
+        }catch (SQLException e) {
+            try {
+                closeConnection(userInfo.getStatement().getConnection());
+                closeStatement(userInfo.getStatement());
+                return null;
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return booksId;
+    }
 }

@@ -20,6 +20,8 @@ public class UserLogic {
             switch (type){
                 case ALL:{
                     user = UserInfoByLogin.searchUserByLogin(transferredUser.getLogin());
+                    assert user != null;
+                    user.setCompletedBooks(UserInfoByLogin.getCompletedBooks(transferredUser.getLogin()));
                 }break;
                 case NAME:{
                     assert user != null;

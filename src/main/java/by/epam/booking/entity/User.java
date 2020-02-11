@@ -2,6 +2,8 @@ package by.epam.booking.entity;
 
 import by.epam.booking.enumeration.Role;
 
+import java.util.ArrayList;
+
 public class User {
 
     private String login;
@@ -16,6 +18,7 @@ public class User {
     private String readingPlanName;
     private boolean isActive;
     private String bookName;
+    private ArrayList<Integer> completedBooks;
 
     public User(String login, String password, String email, String name, String surname, Enum<Role> role, boolean isActive) {
         this.login = login;
@@ -133,6 +136,14 @@ public class User {
 
     public void setReadingPlanName(String readingPlanName) {
         this.readingPlanName = readingPlanName;
+    }
+
+    public ArrayList<Integer> getCompletedBooks() {
+        return completedBooks;
+    }
+
+    public void setCompletedBooks(ArrayList<Integer> completeBooks) {
+        this.completedBooks = completeBooks;
     }
 
     @Override

@@ -10,7 +10,7 @@ import java.sql.SQLException;
 public class GetMaxId extends RepositoryHelper {
     public static Integer getMaxId(){
         Integer result = null;
-        ResultSet resultBook = BookRepository.getINSTANCE().query(new SelectMaxIdBook());
+        ResultSet resultBook = BookRepository.getInstance().query(new SelectMaxIdBook());
         try {
             while (resultBook.next()){
                 result = resultBook.getInt(1);

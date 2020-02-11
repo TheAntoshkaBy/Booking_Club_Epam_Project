@@ -12,13 +12,11 @@ public class Book {
     private Comment buffComment;
     private long buffDate;
 
-    public Book(Integer count, String author, String name, String description, Integer id,ArrayList<Comment> comments) {
+    public Book(String name, String author,  String description, Integer count) {
         this.count = count;
         this.author = author;
         this.name = name;
         this.description = description;
-        this.id = id;
-        this.comments = comments;
     }
 
     public Comment getBuffComment() {

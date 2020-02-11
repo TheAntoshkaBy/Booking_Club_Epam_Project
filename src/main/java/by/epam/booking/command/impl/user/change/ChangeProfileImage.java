@@ -17,20 +17,16 @@ public class ChangeProfileImage implements WebCommand{
     public PageFormat execute(HttpServletRequest request) {
         PageFormat page = new PageFormat();
         User user = new User();
+        String imagePath = null;
+        Part part;
+        try {
+            part = request.getParts().stream()
+                    .filter(p -> p.getSubmittedFileName() != null && !p.getSubmittedFileName().isEmpty())
+                    .findFirst().orElse(null);
+        } catch (IOException | ServletException e) {
 
-        if(!request.getParameter("image").isEmpty()){
-            try {
-               Part part = request.getParts().stream().findAny().get();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ServletException e) {
-                e.printStackTrace();
-            }
-        }else {
-            page.setPage(ConfigurationManager.getProperty("path.page.user"));
-            request.setAttribute("type","change");
-            return page;
         }
+
         page.setPage(ConfigurationManager.getProperty("path.page.user"));
         request.setAttribute("type","change");
         request.getSession().setAttribute("usernameError","");

@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 public class GetBookInfo extends RepositoryHelper {
     public static boolean getBookById(Book book){
-        ResultSet resultBook = BookRepository.getINSTANCE().query(new SelectBookById(book.getId()));
+        ResultSet resultBook = BookRepository.getInstance().query(new SelectBookById(book.getId()));
         try {
             while (resultBook.next()){
                 book.setId(resultBook.getInt("idBook"));

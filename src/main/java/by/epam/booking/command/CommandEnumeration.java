@@ -1,5 +1,6 @@
 package by.epam.booking.command;
 
+import by.epam.booking.command.impl.admin.book.*;
 import by.epam.booking.command.impl.guest.book.*;
 import by.epam.booking.command.impl.guest.plan.ToConcreteReadingPlanCommand;
 import by.epam.booking.command.impl.guest.plan.ToReadingPlansCommand;
@@ -118,6 +119,51 @@ public enum CommandEnumeration {
     DELETE_READING_PLAN{
         {
             this.command = new DeleteReadingPlan();
+        }
+    },
+    TO_FRONT_PAGE{
+        {
+            this.command = new ToFrontPage();
+        }
+    },
+    TO_BOOK_SETTINGS{
+        {
+            this.command = new ToBookSettingsCommand();
+        }
+    },
+    CHANGE_BOOK_NAME{
+        {
+            this.command = new ChangeBookName();
+        }
+    },
+    CHANGE_BOOK_AUTHOR{
+        {
+            this.command = new ChangeBookAuthor();
+        }
+    },
+    CHANGE_BOOK_DESCRIPTION{
+        {
+            this.command = new ChangeBookDescription();
+        }
+    },
+    GO_TO_ADD_BOOK{
+        {
+            this.command = new GoToAddBook();
+        }
+    },
+    ADD_BOOK{
+        {
+            this.command = new AddBook();
+        }
+    },
+    SEND_TO_ADMIN{
+        {
+            this.command = new SendToAdmin();
+        }
+    },
+    TO_LIST_COMPLETE_BOOKS{
+        {
+            this.command = new ToListCompleteBooks();
         }
     }
     ;

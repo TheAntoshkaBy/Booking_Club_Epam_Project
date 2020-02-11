@@ -18,7 +18,7 @@ public class GetAllBooks extends RepositoryHelper {
     }
 
     public static ArrayList<Book> getAllBooks(){
-        ResultSet bookSet = BookRepository.getINSTANCE().query(new SelectAllBooksForTable());
+        ResultSet bookSet = BookRepository.getInstance().query(new SelectAllBooksForTable());
         Book book;
         books.clear();
             try {
@@ -46,7 +46,7 @@ public class GetAllBooks extends RepositoryHelper {
     }
 
     public static ArrayList<Book> getAllBooksInPlan(int planId){
-        ResultSet bookSet = BookRepository.getINSTANCE().query(new GetAllBooksByReadingPlanSpecification(planId));
+        ResultSet bookSet = BookRepository.getInstance().query(new GetAllBooksByReadingPlanSpecification(planId));
         Book book;
         books.clear();
         try {

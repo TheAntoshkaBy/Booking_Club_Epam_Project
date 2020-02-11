@@ -20,7 +20,7 @@ public class GetBookComments extends RepositoryHelper {
     }
 
     public static ArrayList<Comment> getAllBooks(int bookId){
-        ResultSet bookSet = BookRepository.getINSTANCE().query(new GetAllCommentsBook(bookId));
+        ResultSet bookSet = BookRepository.getInstance().query(new GetAllCommentsBook(bookId));
         Comment comment;
         comments.clear();
         try {

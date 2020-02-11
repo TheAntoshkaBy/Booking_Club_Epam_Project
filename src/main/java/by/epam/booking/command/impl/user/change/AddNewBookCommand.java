@@ -21,8 +21,9 @@ public class AddNewBookCommand implements WebCommand {
         user.setLogin((String) request.getSession().getAttribute("login"));
         user.setBookId(Integer.parseInt(request.getParameter("bookId")));
         if(UserLogic.userUpdate(user,user, UserInfoType.BOOK)){
-            user = UserLogic.userGet(user,UserInfoType.BOOK_NAME);
+            user = UserLogic.userGet(user,UserInfoType.ALL);
             request.getSession().setAttribute("bookName",user.getBookName());
+            request.getSession().setAttribute("userBookId",user.getBookId());
         }
 
         Book book = new Book();

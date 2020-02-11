@@ -28,6 +28,7 @@ public class ToBookCommand implements WebCommand {
         request.setAttribute("description",book.getDescription());
         request.setAttribute("count",book.getCount());
         request.setAttribute("comments", book.getComments());
+        request.getSession().setAttribute("bookSettings","see");
         PageFormat page = new PageFormat(PageFormatList.FORWARD, ConfigurationManager.getProperty("path.page.book"));
         return page;
     }

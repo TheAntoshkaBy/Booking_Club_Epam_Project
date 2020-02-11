@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class SearchUserByLogin implements Specification {
 
-    private final String SQL_REQUEST = "SELECT u.name,r.name,r.idReadingPlan,u.login,u.surname,u.email,u.password,u.moneyBalance,u.isActive,u.role,b.name " +
+    private final String SQL_REQUEST = "SELECT u.name,r.name,r.idReadingPlan,u.login,u.surname,u.email,u.password,u.moneyBalance,u.isActive,u.role,b.name, u.bookId " +
             "FROM " + USER_TABLE +
             " LEFT JOIN Book b on u.bookId = b.idBook"+
             " LEFT JOIN ReadingPlan r on u.readingPlanId = r.idReadingPlan"+

@@ -33,23 +33,49 @@ public class LogInCommand implements WebCommand {
                 User user = new User();
                 user.setLogin(login);
                 user = UserLogic.userGet(user, UserInfoType.ALL, UserInfoType.BOOK_NAME);
-                request.getSession().setAttribute("login", user.getLogin());
-                request.getSession().setAttribute("userName", user.getName());
-                request.getSession().setAttribute("surname", user.getSurname());
-                request.getSession().setAttribute("email", user.getEmail());
-                request.getSession().setAttribute("role", user.getRole().name());
-                request.getSession().setAttribute("status", user.isActive());
-                request.getSession().setAttribute("bookName", user.getBookName());
-                request.getSession().setAttribute("money", user.getMoneyBalance());
-                request.getSession().setAttribute("readingPlanName",user.getReadingPlanName());
-                request.getSession().setAttribute("readingPlanId",user.getReadingPlanId());
-                request.getSession().setAttribute("type","see");
+                if(UserValidator.userIsActive(user)){
+                    request.getSession().setAttribute("login", user.getLogin());
+                    request.getSession().setAttribute("userName", user.getName());
+                    request.getSession().setAttribute("surname", user.getSurname());
+                    request.getSession().setAttribute("email", user.getEmail());
+                    request.getSession().setAttribute("role", user.getRole().name());
+                    request.getSession().setAttribute("status", user.isActive());
+                    request.getSession().setAttribute("completedBooks", user.getCompletedBooks());
+                    if(user.getBookName() != null){
+                        request.getSession().setAttribute("bookName", user.getBookName());
+                    }else {
+                        request.getSession().setAttribute("bookName", "--");
+                    }
+                    request.getSession().setAttribute("money", user.getMoneyBalance());
+                    if(user.getReadingPlanName() != null){
+                        request.getSession().setAttribute("readingPlanName",user.getReadingPlanName());
+                    }else {
+                        request.getSession().setAttribute("readingPlanName","--");
+                    }
+                    request.getSession().setAttribute("type","see");
+                    if(user.getBookId() != 0){
+                        request.getSession().setAttribute("userBookId", user.getBookId());
+                    }else {
+                        request.getSession().setAttribute("userBookId", null);
+                    }
+                    if(user.getReadingPlanId() != 0){
+                        request.getSession().setAttribute("userPlanId", user.getReadingPlanId());
+                    }else {
+                        request.getSession().setAttribute("userPlanId", null);
+                    }
 
-                page.setPageFormat(PageFormatList.FORWARD);
-                page.setPage(ConfigurationManager.getProperty("path.page.user"));
+
+                    page.setPageFormat(PageFormatList.FORWARD);
+                    page.setPage(ConfigurationManager.getProperty("path.page.user"));
+
+                }else {
+                    page.setPageFormat(PageFormatList.REDIRECT);
+                    page.setPage(ConfigurationManager.getProperty("path.page.user.passive"));
+                }
 
             }else {
                 page.setPage( ConfigurationManager.getProperty("path.page.login"));
+                page.setPageFormat(PageFormatList.REDIRECT);
                 request.getSession().setAttribute("loginError", MessageManager.getProperty("message.loginError"));
                 return page;
             }

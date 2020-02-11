@@ -18,9 +18,9 @@ public class BookRepository implements DataBaseRepository<Book> {
                     "(count, author, name, description) VALUES (?,?,?,?)";
     private Statement statement;
 
-    private static final UserRepository INSTANCE = new UserRepository();
+    private static final BookRepository INSTANCE = new BookRepository();
 
-    public static UserRepository getINSTANCE() {
+    public static BookRepository getInstance() {
         return INSTANCE;
     }
 

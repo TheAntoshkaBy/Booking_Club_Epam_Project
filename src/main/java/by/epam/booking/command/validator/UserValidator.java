@@ -1,5 +1,6 @@
 package by.epam.booking.command.validator;
 
+import by.epam.booking.entity.User;
 import by.epam.booking.repository.assistant.user.Login;
 
 import java.sql.SQLException;
@@ -19,5 +20,10 @@ public class UserValidator {
             e.printStackTrace();
         }
         return answer;
+    }
+
+    public static boolean userIsActive(User user)
+    {
+        return user.isActive();
     }
 }

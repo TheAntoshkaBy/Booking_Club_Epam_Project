@@ -3,6 +3,7 @@ package by.epam.booking.command.impl.guest.user;
 import by.epam.booking.command.WebCommand;
 import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.entity.User;
+import by.epam.booking.enumeration.PageFormatList;
 import by.epam.booking.enumeration.Role;
 import by.epam.booking.format.PageFormat;
 import by.epam.booking.repository.assistant.user.Registration;
@@ -31,6 +32,7 @@ public class RegistrationCommand implements WebCommand {
         if(UserLogic.registration(user))
         {
             request.setAttribute("user", name);
+            page.setPageFormat(PageFormatList.REDIRECT);
             page.setPage(ConfigurationManager.getProperty("path.page.login"));
         }else {
             page.setPage(ConfigurationManager.getProperty("path.page.registration"));
