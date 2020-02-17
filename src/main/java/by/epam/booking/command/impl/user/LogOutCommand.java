@@ -22,6 +22,14 @@ public class LogOutCommand implements WebCommand {
         request.getSession().setAttribute("status", null );
         request.getSession().setAttribute("book", null);
         request.getSession().setAttribute("bookName", null);
+        request.getSession().setAttribute("userBookId", null);
+        request.getSession().setAttribute("readingPlanName", null);
+        request.getSession().setAttribute("userPlanId", null);
+        request.getSession().setAttribute("completedBooksId", null);
+        request.getSession().setAttribute("completedBooks", null);
+
+
+
         return page;
     }
 }

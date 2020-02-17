@@ -11,8 +11,12 @@ import by.epam.booking.service.book.BookInfoType;
 import by.epam.booking.service.book.BookLogic;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 
 public class PreviousBookCommand implements WebCommand {
+
+    public static final String UPLOAD_DIR = "book_image";
+
     @Override
     public PageFormat execute(HttpServletRequest request) {
 
@@ -25,18 +29,20 @@ public class PreviousBookCommand implements WebCommand {
             request.setAttribute("description",book.getDescription());
             request.setAttribute("count",book.getCount());
             request.setAttribute("comments", book.getComments());
+            request.setAttribute("bookImage",UPLOAD_DIR + File.separator + book.getImage());
 
         }else{
             Book endBook = new Book();
             endBook = BookLogic.bookGet(endBook, BookInfoType.GET_MAX_ID);
             book.setId(endBook.getId());
-            GetBookInfo.getBookById(book);
+            BookLogic.bookGet(book, BookInfoType.ALL);
             request.setAttribute("bookId", book.getId());
             request.setAttribute("name", book.getName());
             request.setAttribute("author",book.getAuthor());
             request.setAttribute("description",book.getDescription());
             request.setAttribute("count",book.getCount());
             request.setAttribute("comments", book.getComments());
+            request.setAttribute("bookImage",UPLOAD_DIR + File.separator + book.getImage());
         }
 
         PageFormat page = new PageFormat(PageFormatList.FORWARD, ConfigurationManager.getProperty("path.page.book"));

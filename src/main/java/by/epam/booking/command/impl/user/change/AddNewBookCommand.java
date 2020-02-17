@@ -34,8 +34,10 @@ public class AddNewBookCommand implements WebCommand {
         request.setAttribute("name", book.getName());
         request.setAttribute("author",book.getAuthor());
         request.setAttribute("description",book.getDescription());
+        book.setCount(book.getCount()-1);
         request.setAttribute("count",book.getCount());
 
+        BookLogic.bookUpdate(book,book,BookInfoType.COUNT);
         PageFormat page = new PageFormat(PageFormatList.FORWARD, ConfigurationManager.getProperty("path.page.book"));
         return page;
     }

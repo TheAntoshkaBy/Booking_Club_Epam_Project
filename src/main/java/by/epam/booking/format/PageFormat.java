@@ -7,8 +7,7 @@ public class PageFormat {
     private PageFormatList pageFormat;
     private String page;
 
-    public PageFormat()
-    {
+    public PageFormat() {
         page = "null";
         pageFormat = PageFormatList.FORWARD;
     }

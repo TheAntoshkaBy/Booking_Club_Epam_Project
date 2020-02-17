@@ -2,14 +2,9 @@ package by.epam.booking.service.user;
 
 import by.epam.booking.command.validator.UserValidator;
 import by.epam.booking.entity.User;
-import by.epam.booking.repository.assistant.user.GetBookName;
-import by.epam.booking.repository.assistant.user.Login;
-import by.epam.booking.repository.assistant.user.Registration;
-import by.epam.booking.repository.assistant.user.UserInfoByLogin;
-import by.epam.booking.repository.assistant.user.changeLogic.ChangeBookId;
-import by.epam.booking.repository.assistant.user.changeLogic.ChangeReadingPlanId;
-import by.epam.booking.repository.assistant.user.changeLogic.ChangeSurname;
-import by.epam.booking.repository.assistant.user.changeLogic.ChangeUsername;
+import by.epam.booking.repository.assistant.user.*;
+import by.epam.booking.repository.assistant.user.changeLogic.*;
+import by.epam.booking.specification.impl.money.UpdateMoneySpecification;
 import by.epam.booking.specification.impl.user.update.*;
 
 
@@ -22,6 +17,7 @@ public class UserLogic {
                     user = UserInfoByLogin.searchUserByLogin(transferredUser.getLogin());
                     assert user != null;
                     user.setCompletedBooks(UserInfoByLogin.getCompletedBooks(transferredUser.getLogin()));
+                    user.setImage(GetUserDataString.getString(transferredUser.getLogin()));
                 }break;
                 case NAME:{
                     assert user != null;
@@ -32,6 +28,9 @@ public class UserLogic {
                     user.setBookName(GetBookName.getBookName(transferredUser.getLogin()));
                 }break;
                 case READING_PLAN_NAME:{
+
+                }break;
+                case BOOK_COMPLETED:{
 
                 }break;
             }
@@ -69,6 +68,18 @@ public class UserLogic {
                 }break;
                 case DELETE_READING_PLAN:{
                     answer = ChangeReadingPlanId.changeReadingPlanId(new UpdateReadingPlanSpecification(mutableUser.getLogin()));
+                }break;
+                case ADD_NEW_BOOK_COMPLETED:{
+                    answer = ChangeUser.change(new UpdateBookCompletedList(mutableUser.getLogin(),mutableUser.getBookId()));
+                }break;
+                case DELETE_BOOK_COMPLETED:{
+                    answer = ChangeUser.change(new DeleteBookFromCompletedList(mutableUser.getLogin(),mutableUser.getBookId()));
+                }break;
+                case UPDATE_PROFILE_IMAGE:{
+                    answer = ChangeUser.change(new UpdateProfileImage(mutableUser.getLogin(),mutableUser.getImage()));
+                }break;
+                case MONEY_BALANCE:{
+                    answer = TransactionFromMoneyBalance.moneyExecutor(mutableUser.getMoneyBalance(),mutableUser.getLogin(),mutableUser.getBuffMoneyType(),mutableUser.getBuffDate());
                 }break;
             }
         }

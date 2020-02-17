@@ -19,6 +19,9 @@ public class User {
     private boolean isActive;
     private String bookName;
     private ArrayList<Integer> completedBooks;
+    private String image;
+    private long buffDate;
+    private String buffMoneyType;
 
     public User(String login, String password, String email, String name, String surname, Enum<Role> role, boolean isActive) {
         this.login = login;
@@ -144,6 +147,30 @@ public class User {
 
     public void setCompletedBooks(ArrayList<Integer> completeBooks) {
         this.completedBooks = completeBooks;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public long getBuffDate() {
+        return buffDate;
+    }
+
+    public void setBuffDate(long buffDate) {
+        this.buffDate = buffDate;
+    }
+
+    public String getBuffMoneyType() {
+        return buffMoneyType;
+    }
+
+    public void setBuffMoneyType(String buffMoneyType) {
+        this.buffMoneyType = buffMoneyType;
     }
 
     @Override

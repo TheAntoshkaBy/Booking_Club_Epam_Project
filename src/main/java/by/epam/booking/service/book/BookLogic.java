@@ -6,10 +6,9 @@ import by.epam.booking.repository.assistant.book.GetBookComments;
 import by.epam.booking.repository.assistant.book.GetBookInfo;
 import by.epam.booking.repository.assistant.book.GetMaxId;
 import by.epam.booking.repository.assistant.book.change.ChangeBook;
+import by.epam.booking.repository.assistant.user.changeLogic.ChangeUser;
 import by.epam.booking.specification.impl.book.AddNewBookCommentSpecification;
-import by.epam.booking.specification.impl.book.update.UpdateBookAuthorById;
-import by.epam.booking.specification.impl.book.update.UpdateBookDescriptionById;
-import by.epam.booking.specification.impl.book.update.UpdateBookNameById;
+import by.epam.booking.specification.impl.book.update.*;
 
 
 public class BookLogic {
@@ -20,6 +19,7 @@ public class BookLogic {
                 case ALL:{
                     if(GetBookInfo.getBookById(transferredBook)){
                         transferredBook.setComments(GetBookComments.getAllBooks(transferredBook.getId()));
+                        transferredBook.setImage(GetBookInfo.getBookImageById(transferredBook));
                         return transferredBook;
                     }else {
                         return null;
@@ -65,11 +65,17 @@ public class BookLogic {
                 case DESCRIPTION:{
                     ChangeBook.change(new UpdateBookDescriptionById(mutableBook.getId(),mutableBook.getDescription()));
                 }break;
-                case COUNT:{
-
-                }break;
                 case ADD_COMMENT:{
                     answer = AddComment.addComment(new AddNewBookCommentSpecification(mutableBook.getBuffComment(),mutableBook.getBuffDate()));
+                }break;
+                case DELETE:{
+                    answer = ChangeBook.change(new DeleteBook(mutableBook.getId()));
+                }break;
+                case COUNT:{
+                    answer = ChangeBook.change(new BookChangeCount(mutableBook.getId(),mutableBook.getCount()));
+                }break;
+                case IMAGE:{
+                    answer = ChangeBook.change(new BookChangeImageSpecification(mutableBook.getId(),mutableBook.getImage()));
                 }break;
 
             }

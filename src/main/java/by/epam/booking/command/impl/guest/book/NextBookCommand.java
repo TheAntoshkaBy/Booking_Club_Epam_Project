@@ -10,9 +10,11 @@ import by.epam.booking.service.book.BookInfoType;
 import by.epam.booking.service.book.BookLogic;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 
 public class NextBookCommand implements WebCommand {
 
+    public static final String UPLOAD_DIR = "book_image";
 
     @Override
     public PageFormat execute(HttpServletRequest request) {
@@ -27,6 +29,7 @@ public class NextBookCommand implements WebCommand {
             request.setAttribute("count",book.getCount());
             request.setAttribute("id", book.getId());
             request.setAttribute("comments", book.getComments());
+            request.setAttribute("bookImage",UPLOAD_DIR + File.separator + book.getImage());
 
         }else{
             book.setId(1);
@@ -38,6 +41,7 @@ public class NextBookCommand implements WebCommand {
             request.setAttribute("count",book.getCount());
             request.setAttribute("id", book.getId());
             request.setAttribute("comments", book.getComments());
+            request.setAttribute("bookImage",UPLOAD_DIR + File.separator + book.getImage());
         }
 
         PageFormat page = new PageFormat(PageFormatList.FORWARD, ConfigurationManager.getProperty("path.page.book"));

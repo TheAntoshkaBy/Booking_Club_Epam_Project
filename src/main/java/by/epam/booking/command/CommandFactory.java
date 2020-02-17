@@ -18,8 +18,10 @@ public class CommandFactory {
             CommandEnumeration currentEnum = CommandEnumeration.valueOf(action.toUpperCase());
             current = currentEnum.getCurrentCommand();
         } catch (IllegalArgumentException ignored) {
+
         }
         return current;
     }
 
 }
+// FIXME: 14.02.2020

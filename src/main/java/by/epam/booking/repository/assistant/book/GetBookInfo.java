@@ -3,6 +3,7 @@ package by.epam.booking.repository.assistant.book;
 import by.epam.booking.entity.Book;
 import by.epam.booking.repository.assistant.RepositoryHelper;
 import by.epam.booking.repository.impl.BookRepository;
+import by.epam.booking.specification.impl.book.GetBookImage;
 import by.epam.booking.specification.impl.book.SelectBookById;
 
 import java.sql.ResultSet;
@@ -34,5 +35,24 @@ public class GetBookInfo extends RepositoryHelper {
             }
         }
         return true;
+    }
+    public static String getBookImageById(Book book){
+        ResultSet resultBook = BookRepository.getInstance().query(new GetBookImage(book.getId()));
+        try {
+            while (resultBook.next()){
+                book.setImage(resultBook.getString("b.book_image"));
+            }
+            // FIXME: 03.12.2019 Фигурные скобки
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            try {
+                closeConnection(resultBook.getStatement().getConnection());
+                closeStatement(resultBook.getStatement());
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return book.getImage();
     }
 }

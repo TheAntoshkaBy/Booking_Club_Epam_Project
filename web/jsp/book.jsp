@@ -71,7 +71,7 @@
         <div class="row justify-content-center">
 <c:if test="${ not empty bookSettings and bookSettings eq 'see' }">
     <div class="col-lg-4">
-                    <img class="img-fluid"  src="img/book.png" alt="" style="border-radius: 30px" width="400" height="400" />
+                    <img class="img-fluid"  src="${bookImage}" alt="" style="border-radius: 30px" width="400" height="400" />
                 </div>
     <div class="col-lg-8 text-center book">
                     <h1>${userName} ${surname}</h1>
@@ -223,7 +223,8 @@
 <c:if test="${ not empty bookSettings and bookSettings eq 'settings' }">
     <div class="col-lg-4" style="color: red">
         <form class="form-inline" action="${pageContext.request.contextPath}/controller"  enctype="multipart/form-data" method="post">
-            <input type="hidden" name="command" value="change_profile_image"/>
+            <input type="hidden" name="command" value="change_book_image"/>
+            <input type="hidden" name="bookId" value="${bookId}"/>
             <input type="file" name="image" accept="image/jpeg,image/png" class="btn btn-outline-secondary" required/>
             <button class="btn btn-outline-success my-0" type="submit">
                 <label>

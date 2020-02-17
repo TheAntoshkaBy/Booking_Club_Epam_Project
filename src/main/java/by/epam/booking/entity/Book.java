@@ -11,12 +11,15 @@ public class Book {
     private ArrayList<Comment> comments;
     private Comment buffComment;
     private long buffDate;
+    private boolean status;
+    private String image;
 
     public Book(String name, String author,  String description, Integer count) {
         this.count = count;
         this.author = author;
         this.name = name;
         this.description = description;
+        status = false;
     }
 
     public Comment getBuffComment() {
@@ -37,6 +40,7 @@ public class Book {
 
     public Book() {
         comments = new ArrayList<>();
+        status = false;
     }
 
     public Integer getCount() {
@@ -96,5 +100,21 @@ public class Book {
 
     public void setComments(ArrayList<Comment> comments) {
         this.comments = comments;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

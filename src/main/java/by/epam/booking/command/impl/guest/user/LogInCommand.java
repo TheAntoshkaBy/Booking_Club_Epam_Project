@@ -14,12 +14,14 @@ import by.epam.booking.service.user.UserLogic;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.sql.SQLException;
 
 public class LogInCommand implements WebCommand {
 
     private static final String PARAM_NAME_LOGIN = "login";
     private static final String PARAM_NAME_PASSWORD = "password";
+    public static final String UPLOAD_DIR = "profile_image";
 
     @Override
     public PageFormat execute(HttpServletRequest request) {
@@ -40,7 +42,9 @@ public class LogInCommand implements WebCommand {
                     request.getSession().setAttribute("email", user.getEmail());
                     request.getSession().setAttribute("role", user.getRole().name());
                     request.getSession().setAttribute("status", user.isActive());
-                    request.getSession().setAttribute("completedBooks", user.getCompletedBooks());
+                    String applicationDir = request.getServletContext().getRealPath("");
+                    request.getSession().setAttribute("userImage",UPLOAD_DIR + File.separator + user.getImage());
+                    request.getSession().setAttribute("completedBooksId", user.getCompletedBooks());
                     if(user.getBookName() != null){
                         request.getSession().setAttribute("bookName", user.getBookName());
                     }else {

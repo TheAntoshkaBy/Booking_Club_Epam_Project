@@ -15,7 +15,7 @@ public final class ConfigurationManager {
     static {
         loadProperties();
     }
-
+    private ConfigurationManager() { }
     public static String getProperty(String key) {
         return properties.getProperty(key);
 
@@ -30,6 +30,6 @@ public final class ConfigurationManager {
             e.printStackTrace();
         }
     }
-    private ConfigurationManager() { }
+
 
 }

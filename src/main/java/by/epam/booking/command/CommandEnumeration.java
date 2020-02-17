@@ -1,6 +1,7 @@
 package by.epam.booking.command;
 
 import by.epam.booking.command.impl.admin.book.*;
+import by.epam.booking.command.impl.admin.finance.ToFinanceList;
 import by.epam.booking.command.impl.guest.book.*;
 import by.epam.booking.command.impl.guest.plan.ToConcreteReadingPlanCommand;
 import by.epam.booking.command.impl.guest.plan.ToReadingPlansCommand;
@@ -164,6 +165,36 @@ public enum CommandEnumeration {
     TO_LIST_COMPLETE_BOOKS{
         {
             this.command = new ToListCompleteBooks();
+        }
+    },
+    NEW_COMPLETED_BOOK{
+        {
+            this.command = new NewCompletedBook();
+        }
+    },
+    DELETE_COMPLETED_BOOK{
+        {
+            this.command = new DeleteCompletedBook();
+        }
+    },
+    DELETE_BOOK{
+        {
+            this.command = new DeleteBook();
+        }
+    },
+    CHANGE_BOOK_IMAGE{
+        {
+            this.command = new ChangeBookImage();
+        }
+    },
+    PAY{
+        {
+            this.command = new PayCommand();
+        }
+    },
+    TO_FINANCE_LIST{
+        {
+            this.command = new ToFinanceList();
         }
     }
     ;

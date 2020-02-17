@@ -68,7 +68,7 @@ public class UserRepository implements DataBaseRepository<User> {
         try {
             if(specification.isUpdate())
             {
-                statement =specification.specify();
+                statement = specification.specify();
                 RepositoryHelper.closeConnection(statement.getConnection());
             }else {
                 resultSet = specification.specify().executeQuery();
