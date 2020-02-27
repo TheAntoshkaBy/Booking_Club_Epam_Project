@@ -17,11 +17,13 @@ import java.io.IOException;
 public class EncodingFilter implements Filter {
     private String code;
     private String locale;
+    private static final String ENCODING  = "encoding";
+    private static final String LOCALE  = "locale";
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        code = filterConfig.getInitParameter("encoding");
-        locale = filterConfig.getInitParameter("locale");
+        code = filterConfig.getInitParameter(ENCODING);
+        locale = filterConfig.getInitParameter(LOCALE);
     }
 
     @Override
@@ -33,9 +35,9 @@ public class EncodingFilter implements Filter {
         }
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpSession session = request.getSession();
-        String sessionLocale = (String) session.getAttribute("locale");
+        String sessionLocale = (String) session.getAttribute(LOCALE);
         if (sessionLocale == null) {
-            session.setAttribute("locale", locale);
+            session.setAttribute(LOCALE, locale);
         }
         filterChain.doFilter(servletRequest, servletResponse);
     }

@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class MessageManager {
+
+    private static final String RESOURCE = "message.properties";
     private static Properties properties;
 
     static {
@@ -19,7 +21,7 @@ public class MessageManager {
     private static void loadProperties() {
         try {
             properties = new Properties();
-            InputStream resource = ConfigurationManager.class.getClassLoader().getResourceAsStream("message.properties");
+            InputStream resource = ConfigurationManager.class.getClassLoader().getResourceAsStream(RESOURCE);
             properties.load(resource);
         } catch (IOException e) {
             e.printStackTrace();

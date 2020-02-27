@@ -132,7 +132,7 @@
                         </table>
                     </div>
                 </form>
-                <c:if test="${not empty role and role eq 'ADMIN'}">
+                <c:if test="${not empty userRoleType and userRoleType eq 'ADMIN'}">
                     <div>
                         <form action="${pageContext.request.contextPath}/controller" method="post">
                             <input type="hidden" name="command" value="go_to_add_book"/>

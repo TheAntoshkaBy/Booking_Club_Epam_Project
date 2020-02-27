@@ -3,8 +3,8 @@ package by.epam.booking.servlet;
 import by.epam.booking.command.CommandFactory;
 import by.epam.booking.command.WebCommand;
 import by.epam.booking.connection.ConnectionPool;
-import by.epam.booking.enumeration.PageFormatList;
-import by.epam.booking.format.PageFormat;
+import by.epam.booking.type.PageChangeType;
+import by.epam.booking.command.Router;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -33,8 +33,8 @@ public class MainControllerServlet extends HttpServlet {
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         CommandFactory commandFactory = new CommandFactory();
         WebCommand command = commandFactory.defineCommand(request);
-        PageFormat page = command.execute(request);
-        if(page.getPageFormat() == PageFormatList.FORWARD)
+        Router page = command.execute(request);
+        if(page.getPageFormat() == PageChangeType.FORWARD)
         {
             getServletContext()
                     .getRequestDispatcher(page.getPage())

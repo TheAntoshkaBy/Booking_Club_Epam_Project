@@ -1,16 +1,13 @@
 package by.epam.booking.config;
 
-import by.epam.booking.format.PageFormat;
-
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Locale;
 import java.util.Properties;
-import java.util.ResourceBundle;
 
 public final class ConfigurationManager {
 
     private static Properties properties;
+    private static final String RESOURCE = "config.properties";
 
     static {
         loadProperties();
@@ -24,7 +21,7 @@ public final class ConfigurationManager {
     private static void loadProperties() {
         try {
             properties = new Properties();
-            InputStream resource = ConfigurationManager.class.getClassLoader().getResourceAsStream("config.properties");
+            InputStream resource = ConfigurationManager.class.getClassLoader().getResourceAsStream(RESOURCE);
             properties.load(resource);
         } catch (IOException e) {
             e.printStackTrace();

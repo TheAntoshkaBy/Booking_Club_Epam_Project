@@ -1,10 +1,8 @@
 package by.epam.booking.service.user;
 
-import by.epam.booking.command.validator.UserValidator;
 import by.epam.booking.entity.User;
 import by.epam.booking.repository.assistant.user.*;
-import by.epam.booking.repository.assistant.user.changeLogic.*;
-import by.epam.booking.specification.impl.money.UpdateMoneySpecification;
+import by.epam.booking.repository.assistant.user.change.*;
 import by.epam.booking.specification.impl.user.update.*;
 
 
@@ -45,38 +43,38 @@ public class UserLogic {
 
                 }break;
                 case NAME:{
-                    ChangeUsername.changeUsername(
+                    ChangeUserInfo.change(
                             new UpdateUsernameByLogin(mutableUser.getLogin(), changeParamOfUser.getName()));
                     answer=true;
                 }break;
                 case SURNAME:{
-                    ChangeSurname.changeSurname(new UpdateSurnameByLogin(
+                    ChangeUserInfo.change(new UpdateSurnameByLogin(
                             mutableUser.getLogin(),
                             changeParamOfUser.getSurname()));
                     answer=true;
                 }break;
                 case LOGIN:{
-                    if(!UserValidator.changeLogin(changeParamOfUser.getLogin())){
+                    if(!CheckUser.changeLogin(changeParamOfUser.getLogin())){
                         return false;
                     }
                    answer = Login.changeLogIn(new UpdateLoginByLogin(mutableUser.getLogin(),changeParamOfUser.getLogin()));
                 }break;
                 case BOOK:{
-                    answer = ChangeBookId.changeBookId(new UpdateBookId(mutableUser.getLogin(), changeParamOfUser.getBookId()));
+                    answer = ChangeUserInfo.change(new UpdateBookId(mutableUser.getLogin(), changeParamOfUser.getBookId()));
                 }break;
                 case READING_PLAN_NAME:{
                 }break;
                 case DELETE_READING_PLAN:{
-                    answer = ChangeReadingPlanId.changeReadingPlanId(new UpdateReadingPlanSpecification(mutableUser.getLogin()));
+                    answer = ChangeUserInfo.change(new UpdateReadingPlanSpecification(mutableUser.getLogin()));
                 }break;
                 case ADD_NEW_BOOK_COMPLETED:{
-                    answer = ChangeUser.change(new UpdateBookCompletedList(mutableUser.getLogin(),mutableUser.getBookId()));
+                    answer = ChangeUserInfo.change(new UpdateBookCompletedList(mutableUser.getLogin(),mutableUser.getBookId()));
                 }break;
                 case DELETE_BOOK_COMPLETED:{
-                    answer = ChangeUser.change(new DeleteBookFromCompletedList(mutableUser.getLogin(),mutableUser.getBookId()));
+                    answer = ChangeUserInfo.change(new DeleteBookFromCompletedList(mutableUser.getLogin(),mutableUser.getBookId()));
                 }break;
                 case UPDATE_PROFILE_IMAGE:{
-                    answer = ChangeUser.change(new UpdateProfileImage(mutableUser.getLogin(),mutableUser.getImage()));
+                    answer = ChangeUserInfo.change(new UpdateProfileImage(mutableUser.getLogin(),mutableUser.getImage()));
                 }break;
                 case MONEY_BALANCE:{
                     answer = TransactionFromMoneyBalance.moneyExecutor(mutableUser.getMoneyBalance(),mutableUser.getLogin(),mutableUser.getBuffMoneyType(),mutableUser.getBuffDate());

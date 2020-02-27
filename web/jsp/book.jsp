@@ -144,7 +144,7 @@
                 <input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="id" value="<fmt:message key="submit.next.page"/>" />
             </form>
         </div>
-        <c:if test="${not empty role and role eq 'ADMIN' and bookSettings eq 'see'}">
+        <c:if test="${not empty userRoleType and userRoleType eq 'ADMIN' and bookSettings eq 'see'}">
             <div class="col-12 fa-align-center">
                 <form action="${pageContext.request.contextPath}/controller" method="post">
                     <input type="hidden" name="command" value="to_book_settings"/>
@@ -153,7 +153,7 @@
                 </form>
             </div>
         </c:if>
-        <c:if test="${not empty role and role eq 'ADMIN' and bookSettings eq 'settings'}">
+        <c:if test="${not empty userRoleType and userRoleType eq 'ADMIN' and bookSettings eq 'settings'}">
             <div class="col-12 fa-align-center">
                 <form action="${pageContext.request.contextPath}/controller" method="post">
                     <input type="hidden" name="command" value="to_book"/>

@@ -5,7 +5,9 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class DataBaseManager {
+
     private static Properties properties;
+    private final static String RESOURCE = "database.properties";
 
     static {
         loadProperties();
@@ -19,7 +21,7 @@ public class DataBaseManager {
     private static void loadProperties() {
         try {
             properties = new Properties();
-            InputStream resource = ConfigurationManager.class.getClassLoader().getResourceAsStream("database.properties");
+            InputStream resource = ConfigurationManager.class.getClassLoader().getResourceAsStream(RESOURCE);
             properties.load(resource);
         } catch (IOException e) {
             e.printStackTrace();

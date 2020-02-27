@@ -6,7 +6,6 @@ import by.epam.booking.repository.assistant.book.GetBookComments;
 import by.epam.booking.repository.assistant.book.GetBookInfo;
 import by.epam.booking.repository.assistant.book.GetMaxId;
 import by.epam.booking.repository.assistant.book.change.ChangeBook;
-import by.epam.booking.repository.assistant.user.changeLogic.ChangeUser;
 import by.epam.booking.specification.impl.book.AddNewBookCommentSpecification;
 import by.epam.booking.specification.impl.book.update.*;
 

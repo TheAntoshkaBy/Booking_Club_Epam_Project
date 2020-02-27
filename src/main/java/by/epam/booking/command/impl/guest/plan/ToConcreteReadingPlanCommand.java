@@ -2,28 +2,28 @@ package by.epam.booking.command.impl.guest.plan;
 
 import by.epam.booking.command.WebCommand;
 import by.epam.booking.config.ConfigurationManager;
-import by.epam.booking.entity.Book;
 import by.epam.booking.entity.ReadingPlan;
-import by.epam.booking.enumeration.PageFormatList;
-import by.epam.booking.format.PageFormat;
-import by.epam.booking.repository.assistant.plan.GetAllReadingPlans;
+import by.epam.booking.command.Router;
 import by.epam.booking.service.plan.ReadingPlanInfoType;
 import by.epam.booking.service.plan.ReadingPlanLogic;
+import by.epam.booking.type.PageChangeType;
+import by.epam.booking.type.ParameterName;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 
 public class ToConcreteReadingPlanCommand implements WebCommand {
-    private ArrayList<Book> books;
-    private ReadingPlan readingPlan;
+
+    private static final String PATH_PAGE = "path.page.plan.book";
 
     @Override
-    public PageFormat execute(HttpServletRequest request) {
-        readingPlan = new ReadingPlan();
-        readingPlan.setIdReadingPlan(Integer.parseInt(request.getParameter("idReadingPlan")));
+    public Router execute(HttpServletRequest request) {
+
+        ReadingPlan readingPlan = new ReadingPlan();
+        readingPlan.setIdReadingPlan(Integer.parseInt(request.getParameter(ParameterName.PARAM_READING_PLAN_ID)));
         ReadingPlanLogic.planGet(readingPlan, ReadingPlanInfoType.GET_ALL_BOOKS_OF_PLAN);
-        request.getSession().setAttribute("readingPlanBooks",readingPlan.getBooks());
-        PageFormat page = new PageFormat(PageFormatList.FORWARD, ConfigurationManager.getProperty("path.page.plan.book"));
+        request.getSession().setAttribute(ParameterName.PARAM_READING_PLAN_BOOKS, readingPlan.getBooks());
+        Router page = new Router(PageChangeType.FORWARD, ConfigurationManager.getProperty(PATH_PAGE));
+
         return page;
     }
 }

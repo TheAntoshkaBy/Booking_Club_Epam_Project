@@ -3,7 +3,7 @@ package by.epam.booking.repository.assistant.user;
 import by.epam.booking.config.MessageManager;
 import by.epam.booking.repository.assistant.RepositoryHelper;
 import by.epam.booking.repository.impl.UserRepository;
-import by.epam.booking.enumeration.Role;
+import by.epam.booking.type.UserRoleType;
 import by.epam.booking.specification.Specification;
 import by.epam.booking.specification.impl.user.search.SearchEmailsByEmail;
 import by.epam.booking.specification.impl.user.search.SearchLoginAndPassByLogin;
@@ -24,7 +24,7 @@ public class Registration extends RepositoryHelper {
         user.setSurname(surname);
         user.setPassword(password);
         user.setActive(false);
-        user.setRole(Role.USER);
+        user.setRole(UserRoleType.USER);
         if(checkEqualsLogin(new SearchLoginAndPassByLogin(user))){
             returnedPage = MessageManager.getProperty("message.equal.login");
             return false;

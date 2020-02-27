@@ -4,9 +4,10 @@ import by.epam.booking.command.WebCommand;
 import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.config.MessageManager;
 import by.epam.booking.entity.User;
-import by.epam.booking.format.PageFormat;
+import by.epam.booking.command.Router;
 import by.epam.booking.service.user.UserInfoType;
 import by.epam.booking.service.user.UserLogic;
+import by.epam.booking.type.ParameterName;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Part;
@@ -19,10 +20,13 @@ import java.util.UUID;
 public class ChangeProfileImage implements WebCommand{
 
     public static final String UPLOAD_DIR = "profile_image";
+    private static final String PATH_PAGE_USER = "path.page.user";
+    private static final String MESSAGE = "message.changed.Save";
+    private static final String PARAM_TYPE_VALUE = "change";
 
     @Override
-    public PageFormat execute(HttpServletRequest request) {
-        PageFormat page = new PageFormat();
+    public Router execute(HttpServletRequest request) {
+        Router page = new Router();
         User user = new User();
         String applicationDir = request.getServletContext().getRealPath("");
         String uploadFileDir = applicationDir + File.separator + UPLOAD_DIR + File.separator;
@@ -48,15 +52,15 @@ public class ChangeProfileImage implements WebCommand{
             e.printStackTrace();
         }
 
-        user.setLogin((String) request.getSession().getAttribute("login"));
+        user.setLogin((String) request.getSession().getAttribute(ParameterName.PARAM_USER_LOGIN));
         user.setImage(imagePath);
         UserLogic.userUpdate(user,user, UserInfoType.UPDATE_PROFILE_IMAGE);
-        request.getSession().setAttribute("userImage",UPLOAD_DIR + File.separator + imagePath);
+        request.getSession().setAttribute(ParameterName.PARAM_USER_IMAGE,UPLOAD_DIR + File.separator + imagePath);
 
-        page.setPage(ConfigurationManager.getProperty("path.page.user"));
-        request.setAttribute("type","change");
-        request.getSession().setAttribute("usernameError","");
-        request.getSession().setAttribute("ChangedSave",MessageManager.getProperty("message.changed.Save"));
+        page.setPage(ConfigurationManager.getProperty(PATH_PAGE_USER));
+        request.setAttribute(ParameterName.PARAM_TYPE_PROFILE,PARAM_TYPE_VALUE);
+        request.getSession().setAttribute(ParameterName.PARAM_USERNAME_ERROR,"");
+        request.getSession().setAttribute(ParameterName.PARAM_CHANGE_SAVED,MessageManager.getProperty(MESSAGE));
         return page;
     }
 }

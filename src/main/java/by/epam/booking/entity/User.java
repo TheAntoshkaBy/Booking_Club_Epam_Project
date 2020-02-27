@@ -1,6 +1,6 @@
 package by.epam.booking.entity;
 
-import by.epam.booking.enumeration.Role;
+import by.epam.booking.type.UserRoleType;
 
 import java.util.ArrayList;
 
@@ -11,7 +11,7 @@ public class User {
     private String email;
     private String name;
     private String surname;
-    private Enum<Role> role;
+    private Enum<UserRoleType> role;
     private double moneyBalance;
     private Integer bookId;
     private Integer readingPlanId;
@@ -23,7 +23,7 @@ public class User {
     private long buffDate;
     private String buffMoneyType;
 
-    public User(String login, String password, String email, String name, String surname, Enum<Role> role, boolean isActive) {
+    public User(String login, String password, String email, String name, String surname, Enum<UserRoleType> role, boolean isActive) {
         this.login = login;
         this.password = password;
         this.email = email;
@@ -76,18 +76,18 @@ public class User {
         this.surname = surname;
     }
 
-    public Enum<Role> getRole() {
+    public Enum<UserRoleType> getRole() {
         return role;
     }
 
     public void setRole(String role) {
         if(role.equals("ADMIN"))
-        this.role = Role.ADMIN;
+        this.role = UserRoleType.ADMIN;
         else
-            this.role = Role.USER;
+            this.role = UserRoleType.USER;
     }
-    public void setRole(Role role) {
-       this.role = role;
+    public void setRole(UserRoleType userRoleType) {
+       this.role = userRoleType;
     }
     public double getMoneyBalance() {
         return moneyBalance;
@@ -113,7 +113,7 @@ public class User {
         isActive = active;
     }
 
-    public void setRole(Enum<Role> role) {
+    public void setRole(Enum<UserRoleType> role) {
         this.role = role;
     }
 

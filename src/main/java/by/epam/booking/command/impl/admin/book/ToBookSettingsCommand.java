@@ -3,39 +3,36 @@ package by.epam.booking.command.impl.admin.book;
 import by.epam.booking.command.WebCommand;
 import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.entity.Book;
-import by.epam.booking.entity.User;
-import by.epam.booking.enumeration.PageFormatList;
-import by.epam.booking.format.PageFormat;
+import by.epam.booking.command.Router;
 import by.epam.booking.service.book.BookInfoType;
 import by.epam.booking.service.book.BookLogic;
-import by.epam.booking.service.user.UserInfoType;
-import by.epam.booking.service.user.UserLogic;
+import by.epam.booking.type.PageChangeType;
+import by.epam.booking.type.ParameterName;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 public class ToBookSettingsCommand implements WebCommand {
 
+    private static final String SETTINGS_PARAM_VALUE = "settings";
+    private static final String PATH_PAGE = "path.page.book";
     private Book book;
 
     @Override
-    public PageFormat execute(HttpServletRequest request) {
-        PageFormat page = new PageFormat();
-        HttpSession session = request.getSession();
-        String login = (String) session.getAttribute("login");
+    public Router execute(HttpServletRequest request) {
+        Router page;
 
         book = new Book();
-        book.setId(Integer.parseInt(request.getParameter("bookId")));
+        book.setId(Integer.parseInt(request.getParameter(ParameterName.PARAM_BOOK_ID)));
         book = BookLogic.bookGet(book, BookInfoType.ALL);
-        assert book != null;
-        request.setAttribute("bookId", book.getId());
-        request.setAttribute("name", book.getName());
-        request.setAttribute("author",book.getAuthor());
-        request.setAttribute("description",book.getDescription());
-        request.setAttribute("count",book.getCount());
-        request.setAttribute("comments", book.getComments());
-        request.getSession().setAttribute("bookSettings","settings");
-        page = new PageFormat(PageFormatList.FORWARD, ConfigurationManager.getProperty("path.page.book"));
+
+        request.setAttribute(ParameterName.PARAM_BOOK_ID, book.getId());
+        request.setAttribute(ParameterName.BOOK_NAME_PARAMETER, book.getName());
+        request.setAttribute(ParameterName.PARAM_BOOK_AUTHOR, book.getAuthor());
+        request.setAttribute(ParameterName.PARAM_BOOK_DESCRIPTION, book.getDescription());
+        request.setAttribute(ParameterName.PARAM_BOOK_COUNT, book.getCount());
+        request.setAttribute(ParameterName.PARAM_BOOK_COMMENTS, book.getComments());
+        request.getSession().setAttribute(ParameterName.PARAM_SETTINGS_FOR_BOOK_PAGE, SETTINGS_PARAM_VALUE);
+        page = new Router(PageChangeType.FORWARD, ConfigurationManager.getProperty(PATH_PAGE));
         return page;
     }
 }

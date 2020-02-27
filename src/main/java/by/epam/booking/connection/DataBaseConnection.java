@@ -6,29 +6,44 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
- final class DataBaseConnection {
+final class DataBaseConnection {
+
+    private static final String HEAD = "mysql.head";
+    private static final String HOST = "mysql.host";
+    private static final String PORT = "mysql.port";
+    private static final String NAME = "mysql.name";
+    private static final String CERTIFICATE = "mysql.verify.server.certificate";
+    private static final String SSL = "mysql.useSSL";
+    private static final String REQ_SSL = "mysql.requireSSL";
+    private static final String DATE_TIME = "mysql.useDateTimeCode";
+    private static final String AMP = "mysql.amp";
+    private static final String UNICODE = "mysql.useUnicode";
+    private static final String TIME_ZONE = "mysql.serverTimeZone";
+    private static final String USER = "mysql.user";
+    private static final String PASSWORD = "mysql.password";
+    private static final String DRIVER = "mysql.driver";
 
     static {
         loadDriver();
     }
 
-     static Connection createConnection() {
+    static Connection createConnection() {
         Connection dbConnection = null;
-        String connectionString = DataBaseManager.getProperty("mysql.head")     +
-                DataBaseManager.getProperty("mysql.host")                       +
-                DataBaseManager.getProperty("mysql.port")                       +
-                DataBaseManager.getProperty("mysql.name")                       +
-                DataBaseManager.getProperty("mysql.verify.server.certificate")  +
-                DataBaseManager.getProperty("mysql.useSSL")                     +
-                DataBaseManager.getProperty("mysql.requireSSL")                 +
-                DataBaseManager.getProperty("mysql.useDateTimeCode")            +
-                DataBaseManager.getProperty("mysql.amp")                        +
-                DataBaseManager.getProperty("mysql.useUnicode")                 +
-                DataBaseManager.getProperty("mysql.serverTimeZone");
+        String connectionString = DataBaseManager.getProperty(HEAD)     +
+                DataBaseManager.getProperty(HOST)                       +
+                DataBaseManager.getProperty(PORT)                       +
+                DataBaseManager.getProperty(NAME)                       +
+                DataBaseManager.getProperty(CERTIFICATE)                +
+                DataBaseManager.getProperty(SSL)                        +
+                DataBaseManager.getProperty(REQ_SSL)                    +
+                DataBaseManager.getProperty(DATE_TIME)                  +
+                DataBaseManager.getProperty(AMP)                        +
+                DataBaseManager.getProperty(UNICODE)                    +
+                DataBaseManager.getProperty(TIME_ZONE);
         try {
             dbConnection = DriverManager.getConnection(connectionString,
-                    DataBaseManager.getProperty("mysql.user"),
-                    DataBaseManager.getProperty("mysql.password"));
+                    DataBaseManager.getProperty(USER),
+                    DataBaseManager.getProperty(PASSWORD));
 
             if (!dbConnection.isClosed()) {
                 System.out.println("Соединение с БД установлено");
@@ -41,9 +56,9 @@ import java.sql.SQLException;
 
     private static void loadDriver() {
         try {
-            Class.forName(DataBaseManager.getProperty("mysql.driver"));
+            Class.forName(DataBaseManager.getProperty(DRIVER));
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            e.printStackTrace();// FIXME: 27.02.2020
         }
     }
 
