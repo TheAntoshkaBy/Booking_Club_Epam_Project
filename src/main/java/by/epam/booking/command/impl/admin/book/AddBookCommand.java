@@ -4,17 +4,19 @@ import by.epam.booking.command.WebCommand;
 import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.entity.Book;
 import by.epam.booking.command.Router;
+import by.epam.booking.exception.RepositoryException;
 import by.epam.booking.repository.impl.BookRepository;
 import by.epam.booking.type.PageChangeType;
 import by.epam.booking.type.ParameterName;
 
 import javax.servlet.http.HttpServletRequest;
+import java.sql.SQLException;
 
 public class AddBookCommand implements WebCommand {
     private static final String PAGE_PATH = "path.page.book.add";
 
     @Override
-    public Router execute(HttpServletRequest request) {
+    public Router execute(HttpServletRequest request) throws SQLException, RepositoryException {
         Router page = new Router();
         String name = request.getParameter(ParameterName.BOOK_NAME_PARAMETER);
         String author = request.getParameter(ParameterName.PARAM_BOOK_AUTHOR);

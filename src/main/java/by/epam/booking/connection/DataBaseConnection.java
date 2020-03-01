@@ -1,12 +1,19 @@
 package by.epam.booking.connection;
 
 import by.epam.booking.config.DataBaseManager;
+import by.epam.booking.exception.ConnectionPoolException;
+import by.epam.booking.exception.ConnectionToDataBaseException;
+import com.sun.mail.iap.ConnectionException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 final class DataBaseConnection {
+
+    private static Logger logger = LogManager.getLogger();
 
     private static final String HEAD = "mysql.head";
     private static final String HOST = "mysql.host";
@@ -27,7 +34,7 @@ final class DataBaseConnection {
         loadDriver();
     }
 
-    static Connection createConnection() {
+    static Connection createConnection() throws ConnectionToDataBaseException {
         Connection dbConnection = null;
         String connectionString = DataBaseManager.getProperty(HEAD)     +
                 DataBaseManager.getProperty(HOST)                       +
@@ -46,10 +53,10 @@ final class DataBaseConnection {
                     DataBaseManager.getProperty(PASSWORD));
 
             if (!dbConnection.isClosed()) {
-                System.out.println("Соединение с БД установлено");
+                logger.debug("DataBase connection is successful!");
             }
         } catch (SQLException e) {
-            System.out.println("Не удалось загрузить класс драйвера");
+            throw new ConnectionToDataBaseException(e);
         }
         return dbConnection;
     }
@@ -58,7 +65,7 @@ final class DataBaseConnection {
         try {
             Class.forName(DataBaseManager.getProperty(DRIVER));
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();// FIXME: 27.02.2020
+            logger.debug("Driver load is successful!");
         }
     }
 

@@ -5,6 +5,7 @@ import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.config.MessageManager;
 import by.epam.booking.entity.User;
 import by.epam.booking.command.Router;
+import by.epam.booking.exception.RepositoryException;
 import by.epam.booking.service.user.UserInfoType;
 import by.epam.booking.service.user.UserLogic;
 import by.epam.booking.type.ParameterName;
@@ -20,7 +21,7 @@ public class ChangeProfileName implements WebCommand {
 
 
     @Override
-    public Router execute(HttpServletRequest request) {
+    public Router execute(HttpServletRequest request) throws RepositoryException {
         Router page = new Router();
         User user = new User();
 

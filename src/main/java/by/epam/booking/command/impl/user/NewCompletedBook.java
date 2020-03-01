@@ -4,6 +4,7 @@ import by.epam.booking.command.WebCommand;
 import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.entity.User;
 import by.epam.booking.command.Router;
+import by.epam.booking.exception.RepositoryException;
 import by.epam.booking.service.user.UserInfoType;
 import by.epam.booking.service.user.UserLogic;
 import by.epam.booking.type.PageChangeType;
@@ -19,7 +20,7 @@ public class NewCompletedBook implements WebCommand {
     private static final String PARAM_TYPE_VALUE = "change";
 
     @Override
-    public Router execute(HttpServletRequest request) {
+    public Router execute(HttpServletRequest request) throws RepositoryException {
         Router page = new Router();
 
         ArrayList<Integer> booksId = (ArrayList<Integer>) request.getSession()

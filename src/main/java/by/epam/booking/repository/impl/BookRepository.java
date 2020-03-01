@@ -2,10 +2,12 @@ package by.epam.booking.repository.impl;
 
 import by.epam.booking.connection.ConnectionPool;
 import by.epam.booking.entity.Book;
+import by.epam.booking.exception.ConnectionPoolException;
+import by.epam.booking.exception.RepositoryException;
+import by.epam.booking.exception.SpecificationException;
 import by.epam.booking.repository.DataBaseRepository;
 import by.epam.booking.repository.assistant.RepositoryHelper;
 import by.epam.booking.specification.Specification;
-import by.epam.booking.entity.User;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,15 +26,14 @@ public class BookRepository implements DataBaseRepository<Book> {
         return INSTANCE;
     }
 
-    // FIXME: 03.12.2019 вопрос по закрытиям конекшена
     @Override
-    public void add(Book book) {
+    public void add(Book book) throws RepositoryException, SQLException {
         PreparedStatement preparedStatement = null;
         try {
 
             preparedStatement = ConnectionPool.getInstance().getConnection().prepareStatement(SQL_INSERT_USER);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new RepositoryException(e);
         }
         try {
             preparedStatement.setInt(1, book.getCount());
@@ -42,13 +43,9 @@ public class BookRepository implements DataBaseRepository<Book> {
             preparedStatement.executeUpdate();
             closeConnection(preparedStatement.getConnection());
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RepositoryException(e);
         }finally {
-            try {
-                closeConnection(preparedStatement.getConnection());
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            closeConnection(preparedStatement.getConnection());
             closeStatement(preparedStatement);
         }
     }
@@ -60,7 +57,7 @@ public class BookRepository implements DataBaseRepository<Book> {
 
 
     @Override
-    public ResultSet query(Specification specification) {
+    public ResultSet query(Specification specification) throws RepositoryException {
         ResultSet resultSet = null;
         try {
             if(specification.isUpdate())
@@ -70,8 +67,8 @@ public class BookRepository implements DataBaseRepository<Book> {
             }else {
                 resultSet = specification.specify().executeQuery();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException | SpecificationException e) {
+            throw new RepositoryException(e);
         }
         return resultSet;
     }

@@ -3,6 +3,8 @@ package by.epam.booking.repository.impl;
 import by.epam.booking.connection.ConnectionPool;
 import by.epam.booking.entity.Balance;
 import by.epam.booking.entity.ReadingPlan;
+import by.epam.booking.exception.RepositoryException;
+import by.epam.booking.exception.SpecificationException;
 import by.epam.booking.repository.DataBaseRepository;
 import by.epam.booking.repository.assistant.RepositoryHelper;
 import by.epam.booking.specification.Specification;
@@ -33,7 +35,7 @@ public class MoneyStoreRepository implements DataBaseRepository<Balance> {
     }
 
     @Override
-    public ResultSet query(Specification specification) {
+    public ResultSet query(Specification specification) throws RepositoryException {
         ResultSet resultSet = null;
         try {
             if(specification.isUpdate())
@@ -44,8 +46,8 @@ public class MoneyStoreRepository implements DataBaseRepository<Balance> {
                 resultSet = specification.specify().executeQuery();
             }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException | SpecificationException e) {
+            throw new RepositoryException(e);
         }
         return resultSet;
     }

@@ -1,13 +1,16 @@
 package by.epam.booking.service.user;
 
 import by.epam.booking.entity.User;
+import by.epam.booking.exception.RepositoryException;
 import by.epam.booking.repository.assistant.user.*;
 import by.epam.booking.repository.assistant.user.change.*;
 import by.epam.booking.specification.impl.user.update.*;
 
+import java.sql.SQLException;
+
 
 public class UserLogic {
-    public static User userGet(User transferredUser, UserInfoType... types){
+    public static User userGet(User transferredUser, UserInfoType... types) throws RepositoryException {
         User user = new User();
         for (UserInfoType type : types) {
             switch (type){
@@ -35,7 +38,7 @@ public class UserLogic {
         }
         return user;
     }
-    public static boolean userUpdate(User mutableUser, User changeParamOfUser, UserInfoType ... types){
+    public static boolean userUpdate(User mutableUser, User changeParamOfUser, UserInfoType ... types) throws RepositoryException {
         boolean answer  = false;
         for (UserInfoType type : types) {
             switch (type){
@@ -44,11 +47,11 @@ public class UserLogic {
                 }break;
                 case NAME:{
                     ChangeUserInfo.change(
-                            new UpdateUsernameByLogin(mutableUser.getLogin(), changeParamOfUser.getName()));
+                            new UpdateUsernameByLoginSpecification(mutableUser.getLogin(), changeParamOfUser.getName()));
                     answer=true;
                 }break;
                 case SURNAME:{
-                    ChangeUserInfo.change(new UpdateSurnameByLogin(
+                    ChangeUserInfo.change(new UpdateSurnameByLoginSpecification(
                             mutableUser.getLogin(),
                             changeParamOfUser.getSurname()));
                     answer=true;
@@ -57,10 +60,10 @@ public class UserLogic {
                     if(!CheckUser.changeLogin(changeParamOfUser.getLogin())){
                         return false;
                     }
-                   answer = Login.changeLogIn(new UpdateLoginByLogin(mutableUser.getLogin(),changeParamOfUser.getLogin()));
+                   answer = Login.changeLogIn(new UpdateLoginByLoginSpecification(mutableUser.getLogin(),changeParamOfUser.getLogin()));
                 }break;
                 case BOOK:{
-                    answer = ChangeUserInfo.change(new UpdateBookId(mutableUser.getLogin(), changeParamOfUser.getBookId()));
+                    answer = ChangeUserInfo.change(new UpdateBookIdSpecification(mutableUser.getLogin(), changeParamOfUser.getBookId()));
                 }break;
                 case READING_PLAN_NAME:{
                 }break;
@@ -68,13 +71,13 @@ public class UserLogic {
                     answer = ChangeUserInfo.change(new UpdateReadingPlanSpecification(mutableUser.getLogin()));
                 }break;
                 case ADD_NEW_BOOK_COMPLETED:{
-                    answer = ChangeUserInfo.change(new UpdateBookCompletedList(mutableUser.getLogin(),mutableUser.getBookId()));
+                    answer = ChangeUserInfo.change(new UpdateBookCompletedListSpecification(mutableUser.getLogin(),mutableUser.getBookId()));
                 }break;
                 case DELETE_BOOK_COMPLETED:{
-                    answer = ChangeUserInfo.change(new DeleteBookFromCompletedList(mutableUser.getLogin(),mutableUser.getBookId()));
+                    answer = ChangeUserInfo.change(new DeleteBookFromCompletedListSpecification(mutableUser.getLogin(),mutableUser.getBookId()));
                 }break;
                 case UPDATE_PROFILE_IMAGE:{
-                    answer = ChangeUserInfo.change(new UpdateProfileImage(mutableUser.getLogin(),mutableUser.getImage()));
+                    answer = ChangeUserInfo.change(new UpdateProfileImageSpecification(mutableUser.getLogin(),mutableUser.getImage()));
                 }break;
                 case MONEY_BALANCE:{
                     answer = TransactionFromMoneyBalance.moneyExecutor(mutableUser.getMoneyBalance(),mutableUser.getLogin(),mutableUser.getBuffMoneyType(),mutableUser.getBuffDate());
@@ -83,7 +86,7 @@ public class UserLogic {
         }
         return answer;
     }
-    public static boolean registration(User user){
+    public static boolean registration(User user) throws SQLException, RepositoryException {
         return Registration.registration(user.getLogin(),user.getPassword(),user.getName(),user.getSurname(),user.getEmail());
     }
 }

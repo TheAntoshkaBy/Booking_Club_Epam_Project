@@ -1,6 +1,7 @@
 package by.epam.booking.specification.impl.money;
 
 import by.epam.booking.connection.ConnectionPool;
+import by.epam.booking.exception.ConnectionPoolException;
 import by.epam.booking.specification.Specification;
 
 import java.sql.PreparedStatement;
@@ -18,7 +19,7 @@ public class GetAllBalanceSpecification implements Specification {
         PreparedStatement statement = null;
         try {
             statement = ConnectionPool.getInstance().getConnection().prepareStatement(SQL_REQUEST);
-        } catch (SQLException e) {
+        } catch (SQLException | ConnectionPoolException e) {
             e.printStackTrace();
         }
         return statement;

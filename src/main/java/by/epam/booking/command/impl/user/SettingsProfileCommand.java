@@ -4,6 +4,7 @@ import by.epam.booking.command.WebCommand;
 import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.entity.User;
 import by.epam.booking.command.Router;
+import by.epam.booking.exception.RepositoryException;
 import by.epam.booking.service.user.UserInfoType;
 import by.epam.booking.service.user.UserLogic;
 import by.epam.booking.type.ParameterName;
@@ -18,7 +19,7 @@ public class SettingsProfileCommand implements WebCommand {
     private static final String PARAM_CHANGE_VALUE = "change";
 
     @Override
-    public Router execute(HttpServletRequest request) {
+    public Router execute(HttpServletRequest request) throws RepositoryException {
         Router page = new Router();
         HttpSession session = request.getSession();
         String login = (String) session.getAttribute(ParameterName.PARAM_USER_LOGIN);

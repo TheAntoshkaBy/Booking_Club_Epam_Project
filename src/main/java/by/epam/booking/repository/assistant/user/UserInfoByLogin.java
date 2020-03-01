@@ -1,10 +1,11 @@
 package by.epam.booking.repository.assistant.user;
 
+import by.epam.booking.exception.RepositoryException;
 import by.epam.booking.repository.assistant.RepositoryHelper;
 import by.epam.booking.repository.impl.UserRepository;
 import by.epam.booking.specification.impl.user.search.GetListOfCompletedBooksByUserLogin;
-import by.epam.booking.specification.impl.user.search.SearchNameByLogin;
-import by.epam.booking.specification.impl.user.search.SearchUserByLogin;
+import by.epam.booking.specification.impl.user.search.SearchNameByLoginSpecification;
+import by.epam.booking.specification.impl.user.search.SearchUserByLoginSpecification;
 import by.epam.booking.entity.User;
 
 import java.sql.ResultSet;
@@ -13,10 +14,9 @@ import java.util.ArrayList;
 
 public class UserInfoByLogin extends RepositoryHelper {
 
-    public static User searchUserByLogin(String login)
-    {
+    public static User searchUserByLogin(String login) throws RepositoryException {
         User buffUser = new User();
-        ResultSet userInfo = UserRepository.getINSTANCE().query(new SearchUserByLogin(login));
+        ResultSet userInfo = UserRepository.getINSTANCE().query(new SearchUserByLoginSpecification(login));
         try {
             userInfo.next();
                buffUser.setLogin(userInfo.getString("u.login"));
@@ -35,8 +35,8 @@ public class UserInfoByLogin extends RepositoryHelper {
                 closeConnection(userInfo.getStatement().getConnection());
                 closeStatement(userInfo.getStatement());
                 return null;
-            } catch (SQLException ex) {
-                ex.printStackTrace();
+            } catch (SQLException | RepositoryException ex) {
+                throw new RepositoryException(e);
             }
         }
         try {
@@ -48,10 +48,9 @@ public class UserInfoByLogin extends RepositoryHelper {
         return buffUser;
     }
 
-    public static String getUserName(String login)
-    {
+    public static String getUserName(String login) throws RepositoryException {
         String name = null;
-        ResultSet userInfo = UserRepository.getINSTANCE().query(new SearchNameByLogin(login));
+        ResultSet userInfo = UserRepository.getINSTANCE().query(new SearchNameByLoginSpecification(login));
         try {
             userInfo.next();
             name = userInfo.getString("name");
@@ -62,14 +61,13 @@ public class UserInfoByLogin extends RepositoryHelper {
                 closeConnection(userInfo.getStatement().getConnection());
                 closeStatement(userInfo.getStatement());
                 return null;
-            } catch (SQLException ex) {
-                ex.printStackTrace();
+            } catch (SQLException | RepositoryException ex) {
+                throw new RepositoryException(e);
             }
         }
         return name;
     }
-    public static ArrayList<Integer> getCompletedBooks(String login)
-    {
+    public static ArrayList<Integer> getCompletedBooks(String login) throws RepositoryException {
         ArrayList<Integer> booksId = new ArrayList<>();
         ResultSet userInfo = UserRepository.getINSTANCE().query(new GetListOfCompletedBooksByUserLogin(login));
         try {
@@ -79,13 +77,13 @@ public class UserInfoByLogin extends RepositoryHelper {
             closeConnection(userInfo.getStatement().getConnection());
             closeStatement(userInfo.getStatement());
 
-        }catch (SQLException e) {
+        }catch (SQLException | RepositoryException e) {
             try {
                 closeConnection(userInfo.getStatement().getConnection());
                 closeStatement(userInfo.getStatement());
                 return null;
-            } catch (SQLException ex) {
-                ex.printStackTrace();
+            } catch (SQLException | RepositoryException ex) {
+                throw new RepositoryException(e);
             }
         }
         return booksId;

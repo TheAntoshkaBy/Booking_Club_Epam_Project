@@ -4,6 +4,7 @@ import by.epam.booking.command.WebCommand;
 import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.entity.Book;
 import by.epam.booking.command.Router;
+import by.epam.booking.exception.RepositoryException;
 import by.epam.booking.service.book.BookInfoType;
 import by.epam.booking.service.book.BookLogic;
 import by.epam.booking.type.PageChangeType;
@@ -11,6 +12,7 @@ import by.epam.booking.type.ParameterName;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
+import java.sql.SQLException;
 
 public class ToBookCommand implements WebCommand {
     public static final String UPLOAD_DIR = "book_image";
@@ -18,7 +20,7 @@ public class ToBookCommand implements WebCommand {
     public static final String PARAM_VALUE_FOR_PAGE = "see";
 
     @Override
-    public Router execute(HttpServletRequest request) {
+    public Router execute(HttpServletRequest request) throws SQLException, RepositoryException {
 
         Book book = new Book();
         book.setId(Integer.parseInt(request.getParameter(ParameterName.PARAM_BOOK_ID)));

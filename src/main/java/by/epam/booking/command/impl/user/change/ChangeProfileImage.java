@@ -5,9 +5,13 @@ import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.config.MessageManager;
 import by.epam.booking.entity.User;
 import by.epam.booking.command.Router;
+import by.epam.booking.exception.CommandException;
+import by.epam.booking.exception.RepositoryException;
 import by.epam.booking.service.user.UserInfoType;
 import by.epam.booking.service.user.UserLogic;
 import by.epam.booking.type.ParameterName;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Part;
@@ -23,9 +27,10 @@ public class ChangeProfileImage implements WebCommand{
     private static final String PATH_PAGE_USER = "path.page.user";
     private static final String MESSAGE = "message.changed.Save";
     private static final String PARAM_TYPE_VALUE = "change";
+    private static Logger logger = LogManager.getLogger();
 
     @Override
-    public Router execute(HttpServletRequest request) {
+    public Router execute(HttpServletRequest request) throws CommandException, RepositoryException {
         Router page = new Router();
         User user = new User();
         String applicationDir = request.getServletContext().getRealPath("");
@@ -41,7 +46,8 @@ public class ChangeProfileImage implements WebCommand{
                     .filter(p -> p.getSubmittedFileName() != null && !p.getSubmittedFileName().isEmpty())
                     .findFirst().orElse(null);
         } catch (IOException | ServletException e) {
-
+            logger.error("Load image problem ", e);
+            throw new CommandException(e);
         }
         
         String path = part.getSubmittedFileName();
@@ -49,7 +55,7 @@ public class ChangeProfileImage implements WebCommand{
         try {
             part.write(uploadFileDir + imagePath);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new CommandException(e);
         }
 
         user.setLogin((String) request.getSession().getAttribute(ParameterName.PARAM_USER_LOGIN));

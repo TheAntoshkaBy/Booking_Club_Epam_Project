@@ -51,7 +51,9 @@
                             <fmt:message key="label.login"/>
                         </label>
                         <div class="col-sm-8 ">
-                            <input type="text" name="login" id="login" class="float-sm-left">
+                            <input type="text" name="login" id="login" class="float-sm-left"pattern="[A-Za-zА-Яа-я\d\-\_]{0,45}"
+                                   maxlength="45"
+                                   title="<fmt:message key="invalid.login"/>" required/>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -59,7 +61,11 @@
                             <fmt:message key="label.password"/>
                         </label>
                         <div class="col-sm-8">
-                            <input type="password" name="password" id="password" class="float-sm-left">
+                            <input type="password" name="password" id="password" class="float-sm-left"
+                                   pattern="(?=.*[A-ZА-Я])(?=.*[a-zа-я])(?=.*\d)([A-Za-zА-Яа-я\d]{8,45})"
+                                   maxlength="45"
+                                   title = "<fmt:message key="invalid.registration.password"/>"
+                                   required/>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -67,8 +73,11 @@
                             <fmt:message key="label.email"/>
                         </label>
                         <div class="col-sm-8">
-                            <input  type="text" name="email" id="email" class="float-sm-left" pattern="\w+([\.-]?\w+)*@\w+([\.-]?\w+)*\.\w{2,4}"
-                                    title="<fmt:message key="invalid.registration.email"/>" required/>
+                            <input  type="text" name="email" id="email" class="float-sm-left"
+                                    pattern="\w+([\.-]?\w+)*@\w+([\.-]?\w+)*\.\w{2,4}"
+                                    maxlength="45"
+                                    title = "<fmt:message key="invalid.registration.email"/>"
+                                    required/>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -76,7 +85,11 @@
                             <fmt:message key="label.name"/>
                         </label>
                         <div class="col-sm-8">
-                            <input type="text" name="name" id="name" class="float-sm-left">
+                            <input type="text" name="name" id="name" class="float-sm-left"
+                                   pattern="^([А-Я]{1}[а-яё]{1,23}|[A-Z]{1}[a-z]{1,23})$"
+                                   maxlength="45"
+                                   title = "<fmt:message key="invalid.name"/>"
+                                   required/>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -84,7 +97,11 @@
                         <fmt:message key="label.surname"/>
                     </label>
                     <div class="col-sm-8">
-                        <input type="text" name="surname" id="surname" class="float-sm-left">
+                        <input type="text" name="surname" id="surname" class="float-sm-left"
+                               pattern="^([А-Я]{1}[а-яё]{1,23}|[A-Z]{1}[a-z]{1,23})$"
+                               maxlength="45"
+                               title = "<fmt:message key="invalid.name"/>"
+                               required/>
                     </div>
             </div>
                     <br>

@@ -1,12 +1,13 @@
 package by.epam.booking.repository.assistant.user;
 
 import by.epam.booking.config.MessageManager;
+import by.epam.booking.exception.RepositoryException;
 import by.epam.booking.repository.assistant.RepositoryHelper;
 import by.epam.booking.repository.impl.UserRepository;
 import by.epam.booking.type.UserRoleType;
 import by.epam.booking.specification.Specification;
-import by.epam.booking.specification.impl.user.search.SearchEmailsByEmail;
-import by.epam.booking.specification.impl.user.search.SearchLoginAndPassByLogin;
+import by.epam.booking.specification.impl.user.search.SearchEmailsByEmailSpecification;
+import by.epam.booking.specification.impl.user.search.SearchLoginAndPassByLoginSpecification;
 import by.epam.booking.entity.User;
 
 import java.sql.ResultSet;
@@ -16,7 +17,7 @@ public class Registration extends RepositoryHelper {
 
     private static String returnedPage;
 
-    public static boolean registration(String login, String password, String name, String surname, String email) {
+    public static boolean registration(String login, String password, String name, String surname, String email) throws SQLException, RepositoryException {
         User user = new User();
         user.setLogin(login);
         user.setEmail(email);
@@ -25,10 +26,10 @@ public class Registration extends RepositoryHelper {
         user.setPassword(password);
         user.setActive(false);
         user.setRole(UserRoleType.USER);
-        if(checkEqualsLogin(new SearchLoginAndPassByLogin(user))){
+        if(checkEqualsLogin(new SearchLoginAndPassByLoginSpecification(user))){
             returnedPage = MessageManager.getProperty("message.equal.login");
             return false;
-        }else if(checkEqualsLogin(new SearchEmailsByEmail(user))){
+        }else if(checkEqualsLogin(new SearchEmailsByEmailSpecification(user))){
             returnedPage = MessageManager.getProperty("message.equal.email");
             return false;
         }
@@ -44,7 +45,7 @@ public class Registration extends RepositoryHelper {
             response = checkLogIn.next();
             closeConnection(checkLogIn.getStatement().getConnection());
             closeStatement(checkLogIn.getStatement());
-        } catch (SQLException e) {
+        } catch (SQLException | RepositoryException e) {
             e.printStackTrace();
         }
         return response;

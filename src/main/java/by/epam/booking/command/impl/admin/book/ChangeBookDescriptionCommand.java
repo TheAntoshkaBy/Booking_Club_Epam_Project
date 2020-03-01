@@ -4,20 +4,22 @@ import by.epam.booking.command.WebCommand;
 import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.entity.Book;
 import by.epam.booking.command.Router;
+import by.epam.booking.exception.RepositoryException;
 import by.epam.booking.service.book.BookInfoType;
 import by.epam.booking.service.book.BookLogic;
 import by.epam.booking.type.PageChangeType;
 import by.epam.booking.type.ParameterName;
 
 import javax.servlet.http.HttpServletRequest;
+import java.sql.SQLException;
 
 public class ChangeBookDescriptionCommand implements WebCommand {
 
     private final String VALUE_FOR_PAGE = "settings";
-    private final String PAGE_PATH = "path.page.book";
+    private final String PAGE_PATH = "path.page.book";// FIXME: 27.02.2020 Разные названия констант
 
     @Override
-    public Router execute(HttpServletRequest request) {
+    public Router execute(HttpServletRequest request) throws SQLException, RepositoryException {
         Router page;
         Book book;
         book = new Book();

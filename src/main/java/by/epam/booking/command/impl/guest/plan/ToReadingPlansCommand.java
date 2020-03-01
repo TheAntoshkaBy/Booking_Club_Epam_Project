@@ -4,11 +4,13 @@ import by.epam.booking.command.WebCommand;
 import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.entity.ReadingPlan;
 import by.epam.booking.command.Router;
+import by.epam.booking.exception.RepositoryException;
 import by.epam.booking.repository.assistant.plan.GetAllReadingPlans;
 import by.epam.booking.type.PageChangeType;
 import by.epam.booking.type.ParameterName;
 
 import javax.servlet.http.HttpServletRequest;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ToReadingPlansCommand implements WebCommand {
@@ -16,7 +18,7 @@ public class ToReadingPlansCommand implements WebCommand {
     private static final String PATH_PAGE = "path.page.plans";
 
     @Override
-    public Router execute(HttpServletRequest request) {
+    public Router execute(HttpServletRequest request) throws SQLException, RepositoryException {
 
         ArrayList<ReadingPlan> readingPlans = GetAllReadingPlans.getAllPlans();
         request.setAttribute(ParameterName.PARAM_ALL_READING_PLANS, readingPlans);

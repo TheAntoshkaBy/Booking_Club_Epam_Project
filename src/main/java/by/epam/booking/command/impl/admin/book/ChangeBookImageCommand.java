@@ -5,9 +5,12 @@ import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.config.MessageManager;
 import by.epam.booking.entity.Book;
 import by.epam.booking.command.Router;
+import by.epam.booking.exception.CommandException;
 import by.epam.booking.service.book.BookInfoType;
 import by.epam.booking.service.book.BookLogic;
 import by.epam.booking.type.ParameterName;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -23,9 +26,8 @@ public class ChangeBookImageCommand implements WebCommand {
     public static final String PROFILE_TYPE = "change";
     public static final String SAVING_MESSAGE = "message.changed.Save";
 
-
     @Override
-    public Router execute(HttpServletRequest request) {
+    public Router execute(HttpServletRequest request) throws CommandException {
         Router page = new Router();
         Book book = new Book();
         String applicationDir = request.getServletContext().getRealPath("");
@@ -41,7 +43,7 @@ public class ChangeBookImageCommand implements WebCommand {
                     .filter(p -> p.getSubmittedFileName() != null && !p.getSubmittedFileName().isEmpty())
                     .findFirst().orElse(null);
         } catch (IOException | ServletException e) {
-
+            throw new CommandException(e);
         }
 
         String path = part.getSubmittedFileName();
@@ -49,7 +51,7 @@ public class ChangeBookImageCommand implements WebCommand {
         try {
             part.write(uploadFileDir + imagePath);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new CommandException(e);
         }
 
         book.setId(Integer.parseInt(request.getParameter(ParameterName.PARAM_BOOK_ID)));

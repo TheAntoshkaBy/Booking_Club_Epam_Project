@@ -4,6 +4,7 @@ import by.epam.booking.command.WebCommand;
 import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.entity.Book;
 import by.epam.booking.entity.User;
+import by.epam.booking.exception.RepositoryException;
 import by.epam.booking.type.PageChangeType;
 import by.epam.booking.command.Router;
 import by.epam.booking.service.book.BookInfoType;
@@ -13,6 +14,7 @@ import by.epam.booking.service.user.UserLogic;
 import by.epam.booking.type.ParameterName;
 
 import javax.servlet.http.HttpServletRequest;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class DeleteCompletedBook implements WebCommand {
@@ -22,7 +24,7 @@ public class DeleteCompletedBook implements WebCommand {
 
 
     @Override
-    public Router execute(HttpServletRequest request) {
+    public Router execute(HttpServletRequest request) throws SQLException, RepositoryException {
         Router page = new Router();
 
         ArrayList<Integer> booksId = (ArrayList<Integer>) request.getSession()

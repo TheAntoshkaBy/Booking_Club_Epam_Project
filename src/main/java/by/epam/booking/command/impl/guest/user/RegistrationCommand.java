@@ -4,6 +4,7 @@ import by.epam.booking.command.WebCommand;
 import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.entity.User;
 import by.epam.booking.command.Router;
+import by.epam.booking.exception.RepositoryException;
 import by.epam.booking.repository.assistant.user.Registration;
 import by.epam.booking.service.user.UserLogic;
 import by.epam.booking.type.PageChangeType;
@@ -11,6 +12,7 @@ import by.epam.booking.type.ParameterName;
 import by.epam.booking.type.UserRoleType;
 
 import javax.servlet.http.HttpServletRequest;
+import java.sql.SQLException;
 
 public class RegistrationCommand implements WebCommand {
 
@@ -23,7 +25,7 @@ public class RegistrationCommand implements WebCommand {
     private static final String PATH_PAGE_TO_REGISTRATION = "path.page.registration";
 
     @Override
-    public Router execute(HttpServletRequest request) {
+    public Router execute(HttpServletRequest request) throws SQLException, RepositoryException {
 
         Router page = new Router();
         String login = request.getParameter(PARAM_NAME_LOGIN);

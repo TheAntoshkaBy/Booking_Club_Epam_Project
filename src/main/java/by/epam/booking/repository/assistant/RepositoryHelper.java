@@ -1,6 +1,7 @@
 package by.epam.booking.repository.assistant;
 
 import by.epam.booking.connection.ConnectionPool;
+import by.epam.booking.exception.RepositoryException;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -13,12 +14,12 @@ public abstract class RepositoryHelper {
         }
     }
 
-    public static void closeStatement(Statement statement) {
+    public static void closeStatement(Statement statement) throws RepositoryException {
         if (statement != null) {
             try {
                 statement.close();
             } catch (SQLException e) {
-                e.printStackTrace();
+                throw new RepositoryException(e);
             }
         }
     }

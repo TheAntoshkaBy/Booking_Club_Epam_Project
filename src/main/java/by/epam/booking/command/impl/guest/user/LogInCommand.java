@@ -1,6 +1,8 @@
 package by.epam.booking.command.impl.guest.user;
 
 import by.epam.booking.command.WebCommand;
+import by.epam.booking.exception.RepositoryException;
+import by.epam.booking.exception.ServiceException;
 import by.epam.booking.service.user.CheckUser;
 import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.config.MessageManager;
@@ -28,7 +30,7 @@ public class LogInCommand implements WebCommand {
     private static final String PARAM_TYPE_PROFILE_PAGE_VALUE = "see";
 
     @Override
-    public Router execute(HttpServletRequest request) {
+    public Router execute(HttpServletRequest request) throws ServiceException, RepositoryException {
         Router page = new Router();
         String login = request.getParameter(PARAM_NAME_LOGIN);
         String password = request.getParameter(PARAM_NAME_PASSWORD);

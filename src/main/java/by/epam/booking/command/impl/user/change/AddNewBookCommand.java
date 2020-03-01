@@ -4,6 +4,7 @@ import by.epam.booking.command.WebCommand;
 import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.entity.Book;
 import by.epam.booking.entity.User;
+import by.epam.booking.exception.RepositoryException;
 import by.epam.booking.type.PageChangeType;
 import by.epam.booking.command.Router;
 import by.epam.booking.service.book.BookInfoType;
@@ -13,13 +14,14 @@ import by.epam.booking.service.user.UserLogic;
 import by.epam.booking.type.ParameterName;
 
 import javax.servlet.http.HttpServletRequest;
+import java.sql.SQLException;
 
 public class AddNewBookCommand implements WebCommand {
 
     private static String PATH_PAGE = "path.page.book";
 
     @Override
-    public Router execute(HttpServletRequest request) {
+    public Router execute(HttpServletRequest request) throws SQLException, RepositoryException {
         User user = new User();
         user.setLogin((String) request.getSession().getAttribute(ParameterName.PARAM_USER_LOGIN));
         user.setBookId(Integer.parseInt(request.getParameter(ParameterName.PARAM_BOOK_ID)));

@@ -1,10 +1,13 @@
 package by.epam.booking.repository.impl;
 
 import by.epam.booking.connection.ConnectionPool;
+import by.epam.booking.entity.User;
+import by.epam.booking.exception.ConnectionPoolException;
+import by.epam.booking.exception.RepositoryException;
+import by.epam.booking.exception.SpecificationException;
 import by.epam.booking.repository.DataBaseRepository;
 import by.epam.booking.repository.assistant.RepositoryHelper;
 import by.epam.booking.specification.Specification;
-import by.epam.booking.entity.User;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,22 +19,21 @@ public class UserRepository implements DataBaseRepository<User> {
     private static final String SQL_INSERT_USER =
             "INSERT INTO Booking_Club.User " +
                     "(login, password, email, name, surname, role, isActive) VALUES (?,?,?,?,?,?,?)";
-    private Statement statement;
-
     private static final UserRepository INSTANCE = new UserRepository();
+    private Statement statement;
 
     public static UserRepository getINSTANCE() {
         return INSTANCE;
     }
 
     @Override
-    public void add(User user) {
+    public void add(User user) throws RepositoryException, SQLException {
         PreparedStatement preparedStatement = null;
         try {
 
             preparedStatement = ConnectionPool.getInstance().getConnection().prepareStatement(SQL_INSERT_USER);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new RepositoryException(e);
         }
         try {
             preparedStatement.setString(1, user.getLogin());
@@ -40,19 +42,16 @@ public class UserRepository implements DataBaseRepository<User> {
             preparedStatement.setString(4, user.getName());
             preparedStatement.setString(5, user.getSurname());
             preparedStatement.setString(6, user.getRole().name());
-            preparedStatement.setBoolean(7,false);
+            preparedStatement.setBoolean(7, false);
 
 
             preparedStatement.executeUpdate();
             closeConnection(preparedStatement.getConnection());
         } catch (SQLException e) {
-            e.printStackTrace();
-        }finally {
-            try {
-                closeConnection(preparedStatement.getConnection());
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            throw new RepositoryException(e);
+        } finally {
+
+            closeConnection(preparedStatement.getConnection());
             closeStatement(preparedStatement);
         }
     }
@@ -66,15 +65,14 @@ public class UserRepository implements DataBaseRepository<User> {
     public ResultSet query(Specification specification) {
         ResultSet resultSet = null;
         try {
-            if(specification.isUpdate())
-            {
+            if (specification.isUpdate()) {
                 statement = specification.specify();
                 RepositoryHelper.closeConnection(statement.getConnection());
-            }else {
+            } else {
                 resultSet = specification.specify().executeQuery();
             }
 
-        } catch (SQLException e) {
+        } catch (SQLException | SpecificationException e) {
             e.printStackTrace();
         }
         return resultSet;

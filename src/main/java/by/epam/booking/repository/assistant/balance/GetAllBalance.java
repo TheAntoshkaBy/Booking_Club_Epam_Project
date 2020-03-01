@@ -1,11 +1,10 @@
 package by.epam.booking.repository.assistant.balance;
 
 import by.epam.booking.entity.Balance;
+import by.epam.booking.exception.RepositoryException;
 import by.epam.booking.repository.assistant.RepositoryHelper;
 import by.epam.booking.repository.impl.MoneyStoreRepository;
-import by.epam.booking.repository.impl.UserRepository;
 import by.epam.booking.specification.impl.money.GetAllBalanceSpecification;
-import by.epam.booking.specification.impl.user.search.GetUserBookNameByIdBook;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,12 +12,11 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class GetAllBalance extends RepositoryHelper {
-    public static ArrayList<Balance> getAll()
-    {
+    public static ArrayList<Balance> getAll() throws RepositoryException, SQLException {
         ArrayList<Balance> balances = new ArrayList<>();
         ResultSet userInfo = MoneyStoreRepository.getINSTANCE().query(new GetAllBalanceSpecification());
         try {
-            while (userInfo.next()){
+            while (userInfo.next()) {
                 Balance balance = new Balance();
                 balance.setBalance(userInfo.getDouble("moneyBalance"));
                 balance.setIdOperation(userInfo.getInt("idOperation"));
@@ -28,15 +26,11 @@ public class GetAllBalance extends RepositoryHelper {
                 balance.setDate(date);
                 balances.add(balance);
             }
-        }catch (SQLException e) {
-
-        }finally {
-            try {
-                closeConnection(userInfo.getStatement().getConnection());
-                closeStatement(userInfo.getStatement());
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+        } catch (SQLException e) {
+            throw new RepositoryException(e);
+        } finally {
+            closeConnection(userInfo.getStatement().getConnection());
+            closeStatement(userInfo.getStatement());
         }
         return balances;
     }

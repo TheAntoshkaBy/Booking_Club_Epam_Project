@@ -1,11 +1,10 @@
 package by.epam.booking.repository.assistant.book;
 
-import by.epam.booking.entity.Book;
 import by.epam.booking.entity.Comment;
+import by.epam.booking.exception.RepositoryException;
 import by.epam.booking.repository.assistant.RepositoryHelper;
 import by.epam.booking.repository.impl.BookRepository;
-import by.epam.booking.specification.impl.book.GetAllCommentsBook;
-import by.epam.booking.specification.impl.book.SelectAllBooksForTable;
+import by.epam.booking.specification.impl.book.GetAllCommentsBookSpecification;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,12 +18,12 @@ public class GetBookComments extends RepositoryHelper {
         comments = new ArrayList<Comment>();
     }
 
-    public static ArrayList<Comment> getAllBooks(int bookId){
-        ResultSet bookSet = BookRepository.getInstance().query(new GetAllCommentsBook(bookId));
+    public static ArrayList<Comment> getAllBooks(int bookId) throws RepositoryException, SQLException {
+        ResultSet bookSet = BookRepository.getInstance().query(new GetAllCommentsBookSpecification(bookId));
         Comment comment;
         comments.clear();
         try {
-            while (bookSet.next()){
+            while (bookSet.next()) {
                 comment = new Comment();
                 comment.setAuthor(bookSet.getString("c.author"));
                 Date date = new Date(bookSet.getLong("c.date"));
@@ -34,18 +33,15 @@ public class GetBookComments extends RepositoryHelper {
                 comments.add(comment);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-        }finally {
-            try {
-                closeConnection(bookSet.getStatement().getConnection());
-                closeStatement(bookSet.getStatement());
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            throw new RepositoryException(e);
+        } finally {
+            closeConnection(bookSet.getStatement().getConnection());
+            closeStatement(bookSet.getStatement());
         }
 
         return comments;
     }
+
     public static ArrayList<Comment> getBooks() {
         return comments;
     }

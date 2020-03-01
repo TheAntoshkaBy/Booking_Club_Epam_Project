@@ -2,6 +2,8 @@ package by.epam.booking.specification.impl.book;
 
 import by.epam.booking.connection.ConnectionPool;
 import by.epam.booking.entity.Book;
+import by.epam.booking.exception.ConnectionPoolException;
+import by.epam.booking.exception.SpecificationException;
 import by.epam.booking.specification.Specification;
 
 import java.sql.PreparedStatement;
@@ -19,13 +21,13 @@ public class GetAllBooksByReadingPlanSpecification implements Specification {
     }
 
     @Override
-    public PreparedStatement specify() {
+    public PreparedStatement specify() throws SpecificationException {
         PreparedStatement statement = null;
         try {
             statement = ConnectionPool.getInstance().getConnection().prepareStatement(SQL_REQUEST);
             statement.setInt(1,planId);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new SpecificationException(e);
         }
         return statement;
     }

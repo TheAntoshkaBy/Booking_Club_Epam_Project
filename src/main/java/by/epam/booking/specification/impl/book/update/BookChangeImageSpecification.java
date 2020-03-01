@@ -1,6 +1,8 @@
 package by.epam.booking.specification.impl.book.update;
 
 import by.epam.booking.connection.ConnectionPool;
+import by.epam.booking.exception.ConnectionPoolException;
+import by.epam.booking.exception.SpecificationException;
 import by.epam.booking.specification.Specification;
 
 import java.sql.Connection;
@@ -19,7 +21,7 @@ public class BookChangeImageSpecification implements Specification {
     }
 
     @Override
-    public PreparedStatement specify() throws SQLException {
+    public PreparedStatement specify() throws SQLException, SpecificationException {
         PreparedStatement statement = null;
         try {
             Connection connection = ConnectionPool.getInstance().getConnection();
@@ -27,8 +29,8 @@ public class BookChangeImageSpecification implements Specification {
             statement.setString(1,bookImage);
             statement.setInt(2,bookId);
             statement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new SpecificationException(e);
         }
         return statement;
     }

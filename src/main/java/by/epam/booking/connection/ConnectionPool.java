@@ -1,6 +1,10 @@
 package by.epam.booking.connection;
 
+import by.epam.booking.exception.ConnectionPoolException;
+import by.epam.booking.exception.ConnectionToDataBaseException;
 import com.sun.jmx.remote.internal.ArrayQueue;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.Driver;
@@ -21,6 +25,7 @@ public final class ConnectionPool {
     private static final ReentrantLock getInstanceLock = new ReentrantLock();
     private static final ReentrantLock returnConnectionLock = new ReentrantLock();
     private static BlockingQueue<Connection> connections = new LinkedBlockingDeque<>(MAX_POOL_SIZE);
+    private static Logger logger = LogManager.getLogger();
 
     public static ArrayDeque<Connection> getBusyConnections() {
         return busyConnections;
@@ -34,24 +39,29 @@ public final class ConnectionPool {
 
 
     static {
-        initConnectionPool();
+        try {
+            initConnectionPool();
+        } catch (ConnectionToDataBaseException e) {
+            logger.error("Get connection error: " + e);
+        }
     }
 
-    private static void initConnectionPool()    {
+    private static void initConnectionPool() throws ConnectionToDataBaseException {
         while (connections.size() < MAX_POOL_SIZE) {
             connections.offer(DataBaseConnection.createConnection());
         }
     }
 
-    public Connection getConnection() {
+    public Connection getConnection() throws ConnectionPoolException {
         Connection connection = null;
         try {
                 getConnectionLock.lock();
                 connection = connections.take();
                 busyConnections.offer(connection);
-            System.out.println( "get Connection " +connections.size());
+            logger.error("get Connection " +connections.size());
         } catch (InterruptedException e) {
-           //log
+            logger.error("Get connection error: " + e);
+            throw new ConnectionPoolException(e);
         }finally {
             getConnectionLock.unlock();
         }
@@ -63,7 +73,7 @@ public final class ConnectionPool {
             returnConnectionLock.lock();
             busyConnections.remove(connection);
             connections.offer(connection);
-            System.out.println("Close Connection " + connections.size());
+            logger.error("Close Connection " + connections.size());
         } finally {
             returnConnectionLock.unlock();
         }
@@ -85,22 +95,25 @@ public final class ConnectionPool {
     }
 
 
-    private  void deregisterDrivers() {
+    private  void deregisterDrivers() throws ConnectionPoolException {
         Enumeration<Driver> drivers = DriverManager.getDrivers();
         while (drivers.hasMoreElements()) {
             Driver driver = drivers.nextElement();
             try {
                 DriverManager.deregisterDriver(driver);
             } catch (SQLException e) {
+                logger.error("Deregister drivers error: " + e);
+                throw new ConnectionPoolException(e);
             }
         }
     }
 
-    public void destroyPool() {
+    public void destroyPool() throws ConnectionPoolException {
         for (int i = 0; i < MAX_POOL_SIZE; i++) {
             try {
                 connections.take().close();
             } catch (SQLException | InterruptedException e) {
+                logger.error("Get connection error: " + e);
             }
             deregisterDrivers();
         }

@@ -1,10 +1,11 @@
 package by.epam.booking.repository.assistant.book;
 
 import by.epam.booking.entity.Book;
+import by.epam.booking.exception.RepositoryException;
 import by.epam.booking.repository.assistant.RepositoryHelper;
 import by.epam.booking.repository.impl.BookRepository;
 import by.epam.booking.specification.impl.book.GetAllBooksByReadingPlanSpecification;
-import by.epam.booking.specification.impl.book.SelectAllBooksForTable;
+import by.epam.booking.specification.impl.book.SelectAllBooksForTableSpecification;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,40 +18,12 @@ public class GetAllBooks extends RepositoryHelper {
         books = new ArrayList<Book>();
     }
 
-    public static ArrayList<Book> getAllBooks(){
-        ResultSet bookSet = BookRepository.getInstance().query(new SelectAllBooksForTable());
-        Book book;
-        books.clear();
-            try {
-                while (bookSet.next()){
-                    book = new Book();
-                    book.setAuthor(bookSet.getString("author"));
-                    book.setName(bookSet.getString("name"));
-                    book.setCount(bookSet.getInt("count"));
-                    book.setId(bookSet.getInt("idBook"));
-                    book.setDescription(bookSet.getString("description"));
-                    books.add(book);
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }finally {
-                try {
-                    closeConnection(bookSet.getStatement().getConnection());
-                    closeStatement(bookSet.getStatement());
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-
-        return books;
-    }
-
-    public static ArrayList<Book> getAllBooksInPlan(int planId){
-        ResultSet bookSet = BookRepository.getInstance().query(new GetAllBooksByReadingPlanSpecification(planId));
+    public static ArrayList<Book> getAllBooks() throws RepositoryException {
+        ResultSet bookSet = BookRepository.getInstance().query(new SelectAllBooksForTableSpecification());
         Book book;
         books.clear();
         try {
-            while (bookSet.next()){
+            while (bookSet.next()) {
                 book = new Book();
                 book.setAuthor(bookSet.getString("author"));
                 book.setName(bookSet.getString("name"));
@@ -60,8 +33,8 @@ public class GetAllBooks extends RepositoryHelper {
                 books.add(book);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-        }finally {
+            throw new RepositoryException(e);
+        } finally {
             try {
                 closeConnection(bookSet.getStatement().getConnection());
                 closeStatement(bookSet.getStatement());
@@ -72,6 +45,31 @@ public class GetAllBooks extends RepositoryHelper {
 
         return books;
     }
+
+    public static ArrayList<Book> getAllBooksInPlan(int planId) throws RepositoryException, SQLException {
+        ResultSet bookSet = BookRepository.getInstance().query(new GetAllBooksByReadingPlanSpecification(planId));
+        Book book;
+        books.clear();
+        try {
+            while (bookSet.next()) {
+                book = new Book();
+                book.setAuthor(bookSet.getString("author"));
+                book.setName(bookSet.getString("name"));
+                book.setCount(bookSet.getInt("count"));
+                book.setId(bookSet.getInt("idBook"));
+                book.setDescription(bookSet.getString("description"));
+                books.add(book);
+            }
+        } catch (SQLException e) {
+            throw new RepositoryException(e);
+        } finally {
+            closeConnection(bookSet.getStatement().getConnection());
+            closeStatement(bookSet.getStatement());
+        }
+
+        return books;
+    }
+
     public static ArrayList<Book> getBooks() {
         return books;
     }

@@ -1,18 +1,17 @@
 package by.epam.booking.repository.assistant.user;
 
+import by.epam.booking.exception.RepositoryException;
 import by.epam.booking.repository.assistant.RepositoryHelper;
 import by.epam.booking.repository.impl.UserRepository;
-import by.epam.booking.specification.impl.user.search.GetUserBookNameByIdBook;
-import by.epam.booking.specification.impl.user.search.SearchNameByLogin;
+import by.epam.booking.specification.impl.user.search.GetUserBookNameByIdBookSpecification;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class GetBookName extends RepositoryHelper {
-    public static String getBookName(String login)
-    {
+    public static String getBookName(String login) throws RepositoryException {
         String name = null;
-        ResultSet userInfo = UserRepository.getINSTANCE().query(new GetUserBookNameByIdBook(login));
+        ResultSet userInfo = UserRepository.getINSTANCE().query(new GetUserBookNameByIdBookSpecification(login));
         try {
             userInfo.next();
             name = userInfo.getString("b.name");
@@ -22,8 +21,8 @@ public class GetBookName extends RepositoryHelper {
             try {
                 closeConnection(userInfo.getStatement().getConnection());
                 closeStatement(userInfo.getStatement());
-            } catch (SQLException e) {
-                e.printStackTrace();
+            } catch (SQLException | RepositoryException e) {
+               throw new RepositoryException(e);
             }
         }
         return name;

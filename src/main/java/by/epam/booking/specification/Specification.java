@@ -1,6 +1,7 @@
 package by.epam.booking.specification;
 
 import by.epam.booking.connection.ConnectionPool;
+import by.epam.booking.exception.SpecificationException;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -12,6 +13,6 @@ public interface Specification {
     String BOOK_TABLE = "Booking_Club.Book b";
     String READING_PLAN_TABLE = "Booking_Club.ReadingPlan r";
     String BOOK_COMPLETED = "Booking_Club.Book_Complitor";
-    PreparedStatement specify() throws SQLException;
+    PreparedStatement specify() throws SQLException, SpecificationException;
     boolean isUpdate();
 }

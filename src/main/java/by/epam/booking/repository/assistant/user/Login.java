@@ -1,11 +1,12 @@
 package by.epam.booking.repository.assistant.user;
 
+import by.epam.booking.exception.RepositoryException;
 import by.epam.booking.repository.assistant.RepositoryHelper;
 import by.epam.booking.repository.impl.UserRepository;
 import by.epam.booking.specification.Specification;
-import by.epam.booking.specification.impl.user.search.SearchLoginAndPassByLogin;
+import by.epam.booking.specification.impl.user.search.SearchLoginAndPassByLoginSpecification;
 import by.epam.booking.entity.User;
-import by.epam.booking.specification.impl.user.search.SearchLoginByLogin;
+import by.epam.booking.specification.impl.user.search.SearchLoginByLoginSpecification;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,14 +14,14 @@ import java.sql.SQLException;
 public class Login extends RepositoryHelper {
 
 
-    public static boolean checkLogIn(String login, String pass) throws SQLException {
+    public static boolean checkLogIn(String login, String pass) throws SQLException, RepositoryException {
 
         if(login.isEmpty() || pass.isEmpty())
             return false;
 
         User user = new User();
         user.setLogin(login);
-        ResultSet checkLogIn = UserRepository.getINSTANCE().query(new SearchLoginAndPassByLogin(user));
+        ResultSet checkLogIn = UserRepository.getINSTANCE().query(new SearchLoginAndPassByLoginSpecification(user));
 
         User checkUser = new User();
         while (checkLogIn.next()){
@@ -38,7 +39,7 @@ public class Login extends RepositoryHelper {
 
     public static boolean isLoginExist(String login){
 
-        ResultSet loginUser = UserRepository.getINSTANCE().query(new SearchLoginByLogin(login));
+        ResultSet loginUser = UserRepository.getINSTANCE().query(new SearchLoginByLoginSpecification(login));
         String searchedLogin=null;
             try {
                 while (loginUser.next()){
@@ -50,7 +51,7 @@ public class Login extends RepositoryHelper {
                 try {
                     closeConnection(loginUser.getStatement().getConnection());
                     closeStatement(loginUser.getStatement());
-                } catch (SQLException e) {
+                } catch (SQLException | RepositoryException e) {
                     e.printStackTrace();
                 }
 
@@ -64,7 +65,7 @@ public class Login extends RepositoryHelper {
         try {
             closeConnection(UserRepository.getINSTANCE().getStatement().getConnection());
             closeStatement(UserRepository.getINSTANCE().getStatement());
-        }catch (SQLException e){
+        }catch (SQLException | RepositoryException e){
             e.printStackTrace();
         }
         return true;
