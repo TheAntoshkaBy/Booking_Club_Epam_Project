@@ -48,6 +48,8 @@ public class ParameterName {
     public static final String PARAM_SURNAME_ERROR = "surnameError";
     public static final String PARAM_LOGIN_ERROR = "loginError";
     public static final String PARAM_REGISTRATION_ERROR = "registrationError";
+    public static final String PARAM_PASS_ERROR = "passError";
+    public static final String PARAM_EMAIL_ERROR = "emailError";
 
     public static final String PARAM_CHANGE_SAVED = "ChangedSave";
 

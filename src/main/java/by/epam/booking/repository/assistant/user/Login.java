@@ -37,7 +37,7 @@ public class Login extends RepositoryHelper {
                 && checkUser.getPassword().equals(pass);
     }
 
-    public static boolean isLoginExist(String login){
+    public static boolean checkLogIn(String login){
 
         ResultSet loginUser = UserRepository.getINSTANCE().query(new SearchLoginByLoginSpecification(login));
         String searchedLogin=null;

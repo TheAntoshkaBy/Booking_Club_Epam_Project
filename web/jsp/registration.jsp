@@ -54,6 +54,9 @@
                             <input type="text" name="login" id="login" class="float-sm-left"pattern="[A-Za-zА-Яа-я\d\-\_]{0,45}"
                                    maxlength="45"
                                    title="<fmt:message key="invalid.login"/>" required/>
+                            <c:if test="${loginError}">
+                                <label style="color: #9fcdff"><fmt:message key="invalid.registration.login"/></label>
+                            </c:if>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -66,6 +69,9 @@
                                    maxlength="45"
                                    title = "<fmt:message key="invalid.registration.password"/>"
                                    required/>
+                            <c:if test="${passwordError}">
+                                <label style="color: #9fcdff"><fmt:message key="invalid.registration.password"/></label>
+                            </c:if>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -78,6 +84,9 @@
                                     maxlength="45"
                                     title = "<fmt:message key="invalid.registration.email"/>"
                                     required/>
+                            <c:if test="${emailError}">
+                                <label style="color: #9fcdff"><fmt:message key="invalid.registration.email"/></label>
+                            </c:if>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -90,6 +99,9 @@
                                    maxlength="45"
                                    title = "<fmt:message key="invalid.name"/>"
                                    required/>
+                            <c:if test="${nameError}">
+                                <label style="color: #9fcdff"><fmt:message key="invalid.name"/></label>
+                            </c:if>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -102,11 +114,15 @@
                                maxlength="45"
                                title = "<fmt:message key="invalid.name"/>"
                                required/>
+                        <c:if test="${surnameError}">
+                            <label style="color: #9fcdff"><fmt:message key="label.invalid.surname"/></label>
+                        </c:if>
                     </div>
+
             </div>
                     <br>
                     <br>
-                    ${loginError}
+                    <br>
                     <br>
                     <br>
                     <div class="form-group row">

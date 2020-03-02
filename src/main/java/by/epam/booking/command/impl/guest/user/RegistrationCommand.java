@@ -13,6 +13,7 @@ import by.epam.booking.type.UserRoleType;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
+import java.util.Map;
 
 public class RegistrationCommand implements WebCommand {
 
@@ -34,12 +35,14 @@ public class RegistrationCommand implements WebCommand {
         String name = request.getParameter(NAME_OF_USER);
         String surname = request.getParameter(SURNAME_OF_USER);
         User user = new User(login, password, email, name, surname, UserRoleType.USER, false);
-        if (UserLogic.registration(user)) {
-            request.setAttribute(ParameterName.PARAM_USER_INTERIM, name);
+
+        Map<String,Boolean> userData = UserLogic.registration(user);
+        if (userData.get("correct")) {
             page.setPageFormat(PageChangeType.REDIRECT);
             page.setPage(ConfigurationManager.getProperty(PATH_PAGE_TO_LOGIN));
         } else {
             page.setPage(ConfigurationManager.getProperty(PATH_PAGE_TO_REGISTRATION));
+            userData.forEach(request::setAttribute);
             request.getSession().setAttribute(ParameterName.PARAM_REGISTRATION_ERROR, Registration.getReturnedPage());
         }
 

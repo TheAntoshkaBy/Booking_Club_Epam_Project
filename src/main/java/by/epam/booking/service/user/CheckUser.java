@@ -11,7 +11,7 @@ public class CheckUser {
     public static boolean changeLogin(String login) {
         if (login == null || login.isEmpty())
             return false;
-        return !Login.isLoginExist(login);
+        return !Login.checkLogIn(login);
     }
 
     public static boolean isUserConsist(String login, String password) throws ServiceException {
@@ -21,6 +21,12 @@ public class CheckUser {
         } catch (SQLException | RepositoryException e) {
             throw new ServiceException(e);
         }
+        return answer;
+    }
+
+    public static boolean isUserConsist(String login){
+        boolean answer = false;
+        answer = Login.checkLogIn(login);
         return answer;
     }
 

@@ -76,7 +76,6 @@ public class LogInCommand implements WebCommand {
                     request.getSession().setAttribute(ParameterName.PARAM_USER_PLAN_ID, null);
                 }
 
-
                 page.setPageFormat(PageChangeType.FORWARD);
                 page.setPage(ConfigurationManager.getProperty(PATH_PAGE_USER));
 

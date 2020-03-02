@@ -4,9 +4,13 @@ import by.epam.booking.entity.User;
 import by.epam.booking.exception.RepositoryException;
 import by.epam.booking.repository.assistant.user.*;
 import by.epam.booking.repository.assistant.user.change.*;
+import by.epam.booking.service.validation.NewUserValidator;
 import by.epam.booking.specification.impl.user.update.*;
+import by.epam.booking.type.ParameterName;
 
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class UserLogic {
@@ -86,7 +90,46 @@ public class UserLogic {
         }
         return answer;
     }
-    public static boolean registration(User user) throws SQLException, RepositoryException {
-        return Registration.registration(user.getLogin(),user.getPassword(),user.getName(),user.getSurname(),user.getEmail());
+
+    private static Map<String, Boolean> checkUserDataIsCorrect(String name, String surname, String login, String password, String email) {
+        boolean incorrectName = !NewUserValidator.getInstance().isCorrectName(name);
+        boolean incorrectSurname = !NewUserValidator.getInstance().isCorrectSurName(surname);
+        boolean incorrectLogin = !NewUserValidator.getInstance().isCorrectLogin(login);
+        boolean incorrectPass = !NewUserValidator.getInstance().isCorrectPassword(password);
+        boolean incorrectEmail = !NewUserValidator.getInstance().isCorrectEmail(email);
+
+        Map<String, Boolean> map = new HashMap<>();
+        map.put(ParameterName.PARAM_USERNAME_ERROR, incorrectName);
+        map.put(ParameterName.PARAM_SURNAME_ERROR, incorrectSurname);
+        map.put(ParameterName.PARAM_LOGIN_ERROR, incorrectLogin);
+        map.put(ParameterName.PARAM_PASS_ERROR, incorrectPass);
+        map.put(ParameterName.PARAM_EMAIL_ERROR, incorrectEmail);
+        return map;
+    }
+
+    public static Map<String,Boolean> registration(User user) throws SQLException, RepositoryException {
+
+        Map<String, Boolean> userDataCheck =
+                checkUserDataIsCorrect(
+                        user.getName(),
+                        user.getSurname(),
+                        user.getLogin(),
+                        user.getPassword(),
+                        user.getEmail()
+                );
+        boolean isValid = userDataCheck.values().stream().filter(o -> o.equals(true)).findAny().orElse(false);
+        if(!isValid){
+            Registration.registration(
+                    user.getLogin(),
+                    user.getPassword(),
+                    user.getName(),
+                    user.getSurname(),
+                    user.getEmail());
+            userDataCheck.put("correct",true);
+        }else {
+            userDataCheck.put("correct",false);
+        }
+        return userDataCheck;
+
     }
 }
