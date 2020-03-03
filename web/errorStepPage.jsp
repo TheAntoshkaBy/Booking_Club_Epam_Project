@@ -14,9 +14,9 @@
 
     <title>Grayscale - Start Bootstrap Theme</title>
     <style>
-        <%@include file="../vendor/bootstrap/css/bootstrap.min.css"%>
-        <%@include file="../css/grayscale2.css"%>
-        <%@include file="../vendor/fontawesome-free/css/all.min.css"%>
+        <%@include file="vendor/bootstrap/css/bootstrap.min.css"%>
+        <%@include file="css/grayscale2.css"%>
+        <%@include file="vendor/fontawesome-free/css/all.min.css"%>
     </style>
     <script>
         $('#exampleModal').on('show.bs.modal', function (event) {
@@ -42,7 +42,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="../css/grayscale2.css" rel="stylesheet">
+    <link href="css/grayscale2.css" rel="stylesheet">
 </head>
 <body id="page-top">
 <!-- Navigation -->
@@ -61,8 +61,8 @@
 <header class="masthead2">
     <div class="container d-flex h-100 align-items-center">
         <div class="mx-auto text-center ">
-            <h1 class="mx-auto my-0 text-uppercase"><fmt:message key="text.blocked.h1"/></h1>
-            <h2 class="text-white-50 mx-auto mt-2 mb-5"><fmt:message key="text.blocked.h2"/></h2>
+            <h1 class="mx-auto my-0 text-uppercase"><fmt:message key="text.blocked.err.step.h1"/></h1>
+            <h2 class="text-white-50 mx-auto mt-2 mb-5"><fmt:message key="text.blocked.err.step.h2"/></h2>
         </div>
     </div>
 </header>
@@ -114,10 +114,10 @@
 <!-- Footer -->
 
 <script type="text/javascript">
-    <%@include file="../vendor/jquery/jquery.min.js"%>
-    <%@include file="../vendor/bootstrap/js/bootstrap.bundle.min.js"%>
-    <%@include file="../vendor/jquery-easing/jquery.easing.min.js"%>
-    <%@include file="../js/grayscale.min.js"%>
+    <%@include file="vendor/jquery/jquery.min.js"%>
+    <%@include file="vendor/bootstrap/js/bootstrap.bundle.min.js"%>
+    <%@include file="vendor/jquery-easing/jquery.easing.min.js"%>
+    <%@include file="js/grayscale.min.js"%>
 
 </script>
 </body>

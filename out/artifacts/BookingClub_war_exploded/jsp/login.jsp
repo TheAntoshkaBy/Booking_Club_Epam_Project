@@ -50,7 +50,12 @@
                             <fmt:message key="label.login"/>
                         </label>
                         <div class="col-sm-8 ">
-                        <input type="text" name="login" id="login" class="float-sm-left">
+                            <input type="text" name="login" id="login" class="float-sm-left"pattern="[A-Za-zА-Яа-я\d\-\_]{0,45}"
+                                   maxlength="45"
+                                   title="<fmt:message key="invalid.login"/>" required/>
+                            <c:if test="${loginError}">
+                                <label style="color: #9fcdff"><fmt:message key="invalid.registration.login"/></label>
+                            </c:if>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -58,7 +63,14 @@
                         <fmt:message key="label.password"/>
                     </label>
                         <div class="col-sm-8">
-                        <input type="password" name="password" id="password" class="float-sm-left">
+                            <input type="password" name="password" id="password" class="float-sm-left"
+                                   pattern="((?=.*[a-zа-я])(?=.*\d)([A-Za-zА-Яа-я\d]{8,45})"
+                                   maxlength="45"
+                                   title = "<fmt:message key="invalid.registration.password"/>"
+                                   required/>
+                            <c:if test="${passwordError}">
+                                <label style="color: #9fcdff"><fmt:message key="invalid.registration.password"/></label>
+                            </c:if>
                         </div>
                     </div>
                     <br>

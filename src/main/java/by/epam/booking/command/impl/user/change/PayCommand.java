@@ -15,7 +15,7 @@ import java.util.Date;
 
 public class PayCommand implements WebCommand {
 
-    private static final String PARAM_VALUE_TO_PAGE = "change";
+    private static final String PARAM_VALUE_TO_PAGE = "see";
     private static final String PATH_PAGE = "path.page.user";
 
     @Override
@@ -23,9 +23,6 @@ public class PayCommand implements WebCommand {
         Router page = new Router();
         Date date = new Date();
         long dateInBd = date.getTime();
-        System.out.println(request.getParameter(ParameterName.PARAM_FINANCE_CURRENCY));
-        System.out.println(Double.parseDouble(request.getParameter(ParameterName.PARAM_BOOK_COUNT)));
-
 
         User user = new User();
         user.setLogin((String) request.getSession().getAttribute(ParameterName.PARAM_USER_LOGIN));
@@ -34,12 +31,11 @@ public class PayCommand implements WebCommand {
         user.setBuffDate(dateInBd);
 
         UserLogic.userUpdate(user,user, UserInfoType.MONEY_BALANCE);
-
-
-
+        user = UserLogic.userGet(user,UserInfoType.ALL);
+        request.getSession().setAttribute(ParameterName.PARAM_FINANCE_MONEY,user.getMoneyBalance());
         request.getSession().setAttribute(ParameterName.PARAM_TYPE_PROFILE,PARAM_VALUE_TO_PAGE);
         page.setPage( ConfigurationManager.getProperty(PATH_PAGE));
-        page.setPageFormat(PageChangeType.FORWARD);
+        page.setPageFormat(PageChangeType.REDIRECT);
         return page;
     }
 }

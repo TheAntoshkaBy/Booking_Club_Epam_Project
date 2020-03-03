@@ -1,6 +1,8 @@
 package by.epam.booking.command.impl.guest.user;
 
 import by.epam.booking.command.WebCommand;
+import by.epam.booking.defence.EncryptPassword;
+import by.epam.booking.exception.CommandException;
 import by.epam.booking.exception.RepositoryException;
 import by.epam.booking.exception.ServiceException;
 import by.epam.booking.service.user.CheckUser;
@@ -10,6 +12,7 @@ import by.epam.booking.entity.User;
 import by.epam.booking.command.Router;
 import by.epam.booking.service.user.UserInfoType;
 import by.epam.booking.service.user.UserLogic;
+import by.epam.booking.service.validation.LoginValidation;
 import by.epam.booking.type.PageChangeType;
 import by.epam.booking.type.ParameterName;
 
@@ -30,11 +33,16 @@ public class LogInCommand implements WebCommand {
     private static final String PARAM_TYPE_PROFILE_PAGE_VALUE = "see";
 
     @Override
-    public Router execute(HttpServletRequest request) throws ServiceException, RepositoryException {
+    public Router execute(HttpServletRequest request) throws ServiceException, RepositoryException, CommandException {
         Router page = new Router();
         String login = request.getParameter(PARAM_NAME_LOGIN);
-        String password = request.getParameter(PARAM_NAME_PASSWORD);
+        String password = EncryptPassword.encrypt(request.getParameter(PARAM_NAME_PASSWORD));
         HttpSession session = request.getSession();
+        try {
+            if (LoginValidation.getInstance().isXssAttack(login)
+                    || LoginValidation.getInstance().isXssAttack(password)) {
+                throw new CommandException();
+            }
 
         if (CheckUser.isUserConsist(login, password)) {
             User user = new User();
@@ -80,7 +88,7 @@ public class LogInCommand implements WebCommand {
                 page.setPage(ConfigurationManager.getProperty(PATH_PAGE_USER));
 
             } else {
-                page.setPageFormat(PageChangeType.REDIRECT);
+                page.setPageFormat(PageChangeType.FORWARD);
                 page.setPage(ConfigurationManager.getProperty(PATH_PAGE_USER_PASSIVE));
             }
 
@@ -90,7 +98,9 @@ public class LogInCommand implements WebCommand {
             request.getSession().setAttribute(ParameterName.PARAM_LOGIN_ERROR, MessageManager.getProperty(MESSAGE));
             return page;
         }
-
+        } catch (ServiceException e) {
+            throw new CommandException(e);
+        }
         return page;
     }
 

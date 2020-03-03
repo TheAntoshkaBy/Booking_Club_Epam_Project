@@ -36,7 +36,7 @@ public class SettingsProfileCommand implements WebCommand {
             request.getSession().setAttribute(ParameterName.PARAM_USER_ROLE, user.getRole().name());
             request.getSession().setAttribute(ParameterName.PARAM_USER_STATUS, user.isActive());
 
-            request.setAttribute(ParameterName.PARAM_TYPE_PROFILE, PARAM_CHANGE_VALUE);
+            request.getSession().setAttribute(ParameterName.PARAM_TYPE_PROFILE, PARAM_CHANGE_VALUE);
             request.getSession().setAttribute(ParameterName.PARAM_LOGIN_ERROR, "");
             session.setAttribute(ParameterName.PARAM_USER_LOGIN, user.getLogin());
             page.setPage(ConfigurationManager.getProperty(PATH_PAGE_USER));

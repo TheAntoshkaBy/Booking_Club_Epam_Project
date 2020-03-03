@@ -27,7 +27,7 @@ public class AddBookCommand implements WebCommand {
         BookRepository.getInstance().add(book);
 
         page.setPage(ConfigurationManager.getProperty(PAGE_PATH));
-        page.setPageFormat(PageChangeType.FORWARD);
+        page.setPageFormat(PageChangeType.REDIRECT);
         return page;
 
 

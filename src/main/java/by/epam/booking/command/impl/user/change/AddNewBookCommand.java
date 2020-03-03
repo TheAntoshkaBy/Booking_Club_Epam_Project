@@ -14,11 +14,13 @@ import by.epam.booking.service.user.UserLogic;
 import by.epam.booking.type.ParameterName;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.sql.SQLException;
 
 public class AddNewBookCommand implements WebCommand {
 
     private static String PATH_PAGE = "path.page.book";
+    public static final String UPLOAD_DIR = "book_image";
 
     @Override
     public Router execute(HttpServletRequest request) throws SQLException, RepositoryException {
@@ -35,15 +37,15 @@ public class AddNewBookCommand implements WebCommand {
         book.setId(Integer.parseInt(request.getParameter(ParameterName.PARAM_BOOK_ID)));
         book = BookLogic.bookGet(book, BookInfoType.ALL);
         assert book != null;
-        request.setAttribute(ParameterName.PARAM_BOOK_ID, book.getId());
-        request.setAttribute(ParameterName.BOOK_NAME_PARAMETER, book.getName());
-        request.setAttribute(ParameterName.PARAM_BOOK_AUTHOR,book.getAuthor());
-        request.setAttribute(ParameterName.PARAM_BOOK_DESCRIPTION,book.getDescription());
+        request.getSession().setAttribute(ParameterName.PARAM_BOOK_ID, book.getId());
+        request.getSession().setAttribute(ParameterName.BOOK_NAME_PARAMETER, book.getName());
+        request.getSession().setAttribute(ParameterName.PARAM_BOOK_AUTHOR,book.getAuthor());
+        request.getSession().setAttribute(ParameterName.PARAM_BOOK_DESCRIPTION,book.getDescription());
         book.setCount(book.getCount()-1);
-        request.setAttribute(ParameterName.PARAM_BOOK_COUNT,book.getCount());
-
         BookLogic.bookUpdate(book,book,BookInfoType.COUNT);
-        Router page = new Router(PageChangeType.FORWARD, ConfigurationManager.getProperty(PATH_PAGE));
+        request.getSession().setAttribute(ParameterName.PARAM_BOOK_COUNT,book.getCount());
+        request.getSession().setAttribute(ParameterName.PARAM_BOOK_IMAGE,UPLOAD_DIR + File.separator + book.getImage());
+        Router page = new Router(PageChangeType.REDIRECT, ConfigurationManager.getProperty(PATH_PAGE));
         return page;
     }
 }

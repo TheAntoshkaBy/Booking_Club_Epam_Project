@@ -37,7 +37,7 @@ public class NewCompletedBook implements WebCommand {
         request.getSession().setAttribute(ParameterName.PARAM_USER_BOOK_STATUS, PARAM_BOOK_STATUS_VALUE);
         request.getSession().setAttribute(ParameterName.PARAM_TYPE_PROFILE, PARAM_TYPE_VALUE);
         page.setPage(ConfigurationManager.getProperty(PATH_PAGE));
-        page.setPageFormat(PageChangeType.FORWARD);
+        page.setPageFormat(PageChangeType.REDIRECT);
 
         return page;
     }

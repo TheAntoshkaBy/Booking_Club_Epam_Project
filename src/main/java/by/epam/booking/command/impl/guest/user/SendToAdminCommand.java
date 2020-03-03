@@ -17,7 +17,7 @@ public class SendToAdminCommand implements WebCommand {
         System.out.println(request.getParameter("theme"));
         System.out.println(request.getParameter("message"));
         page.setPage(ConfigurationManager.getProperty(PATH_PAGE));
-        page.setPageFormat(PageChangeType.REDIRECT);
+        page.setPageFormat(PageChangeType.FORWARD);
         return page;
     }
 }

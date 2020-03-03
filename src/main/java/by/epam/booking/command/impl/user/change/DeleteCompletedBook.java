@@ -44,10 +44,10 @@ public class DeleteCompletedBook implements WebCommand {
             book.setId(booksId.get(i));
             books.add(BookLogic.bookGet(book, BookInfoType.ALL));
         }
-        request.setAttribute(ParameterName.PARAM_COMPLETED_BOOKS, books);
+        request.getSession().setAttribute(ParameterName.PARAM_COMPLETED_BOOKS, books);
         request.getSession().setAttribute(ParameterName.PARAM_TYPE_PROFILE,PARAM_VALUE_TO_PAGE);
         page.setPage( ConfigurationManager.getProperty(PATH_PAGE));
-        page.setPageFormat(PageChangeType.FORWARD);
+        page.setPageFormat(PageChangeType.REDIRECT);
         return page;
     }
 }

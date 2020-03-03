@@ -9,6 +9,7 @@ import by.epam.booking.exception.CommandException;
 import by.epam.booking.exception.RepositoryException;
 import by.epam.booking.service.user.UserInfoType;
 import by.epam.booking.service.user.UserLogic;
+import by.epam.booking.type.PageChangeType;
 import by.epam.booking.type.ParameterName;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -63,8 +64,9 @@ public class ChangeProfileImage implements WebCommand{
         UserLogic.userUpdate(user,user, UserInfoType.UPDATE_PROFILE_IMAGE);
         request.getSession().setAttribute(ParameterName.PARAM_USER_IMAGE,UPLOAD_DIR + File.separator + imagePath);
 
+        page.setPageFormat(PageChangeType.REDIRECT);
         page.setPage(ConfigurationManager.getProperty(PATH_PAGE_USER));
-        request.setAttribute(ParameterName.PARAM_TYPE_PROFILE,PARAM_TYPE_VALUE);
+        request.getSession().setAttribute(ParameterName.PARAM_TYPE_PROFILE,PARAM_TYPE_VALUE);
         request.getSession().setAttribute(ParameterName.PARAM_USERNAME_ERROR,"");
         request.getSession().setAttribute(ParameterName.PARAM_CHANGE_SAVED,MessageManager.getProperty(MESSAGE));
         return page;

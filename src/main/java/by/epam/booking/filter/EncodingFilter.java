@@ -1,14 +1,12 @@
 package by.epam.booking.filter;
 
-
+import javax.servlet.*;
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-
-// FIXME: 18.11.2019 Разобраться как работают фильтры до конца!
 
 @WebFilter(urlPatterns = {"/*"},
         initParams = {

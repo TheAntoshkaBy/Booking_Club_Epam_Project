@@ -71,7 +71,7 @@
         <div class="row justify-content-center">
 <c:if test="${ not empty bookSettings and bookSettings eq 'see' }">
     <div class="col-lg-4">
-                    <img class="img-fluid"  src="${bookImage}" alt="" style="border-radius: 30px" width="400" height="400" />
+                    <img class="img-fluid"  src="${pageContext.request.contextPath}/${bookImage}" alt="" style="border-radius: 30px" width="400" height="400" />
                 </div>
     <div class="col-lg-8 text-center book">
                     <h1>${userName} ${surname}</h1>

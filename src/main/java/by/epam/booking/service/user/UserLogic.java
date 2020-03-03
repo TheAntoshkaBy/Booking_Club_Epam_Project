@@ -1,5 +1,6 @@
 package by.epam.booking.service.user;
 
+import by.epam.booking.defence.EncryptPassword;
 import by.epam.booking.entity.User;
 import by.epam.booking.exception.RepositoryException;
 import by.epam.booking.repository.assistant.user.*;
@@ -121,7 +122,7 @@ public class UserLogic {
         if(!isValid){
             Registration.registration(
                     user.getLogin(),
-                    user.getPassword(),
+                    EncryptPassword.encrypt(user.getPassword()),
                     user.getName(),
                     user.getSurname(),
                     user.getEmail());

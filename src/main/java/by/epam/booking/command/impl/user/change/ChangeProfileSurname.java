@@ -8,6 +8,7 @@ import by.epam.booking.command.Router;
 import by.epam.booking.exception.RepositoryException;
 import by.epam.booking.service.user.UserInfoType;
 import by.epam.booking.service.user.UserLogic;
+import by.epam.booking.type.PageChangeType;
 import by.epam.booking.type.ParameterName;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +29,7 @@ public class ChangeProfileSurname implements WebCommand {
             transferredUser.setLogin((String) request.getSession().getAttribute(ParameterName.PARAM_USER_LOGIN));
             transferredUser.setSurname(request.getParameter(ParameterName.PARAM_USER_SURNAME));
             UserLogic.userUpdate(transferredUser,transferredUser, UserInfoType.SURNAME);
+            page.setPageFormat(PageChangeType.REDIRECT);
         }else {
             page.setPage(ConfigurationManager.getProperty(PATH_PAGE));
             request.setAttribute(ParameterName.PARAM_TYPE_PROFILE,PARAM_VALUE_TO_PAGE);

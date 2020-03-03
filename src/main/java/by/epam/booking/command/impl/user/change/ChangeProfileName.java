@@ -8,6 +8,7 @@ import by.epam.booking.command.Router;
 import by.epam.booking.exception.RepositoryException;
 import by.epam.booking.service.user.UserInfoType;
 import by.epam.booking.service.user.UserLogic;
+import by.epam.booking.type.PageChangeType;
 import by.epam.booking.type.ParameterName;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +30,7 @@ public class ChangeProfileName implements WebCommand {
             user.setLogin((String) request.getSession().getAttribute(ParameterName.PARAM_USER_LOGIN));
             user.setName(request.getParameter(ParameterName.BOOK_NAME_PARAMETER));
             UserLogic.userUpdate(user,user, UserInfoType.NAME);
+            page.setPageFormat(PageChangeType.REDIRECT);
 
         }else {
             page.setPage(ConfigurationManager.getProperty(PATH_PAGE));
@@ -37,9 +39,10 @@ public class ChangeProfileName implements WebCommand {
                     MessageManager.getProperty(MESSAGE));
             return page;
         }
+
         page.setPage(ConfigurationManager.getProperty(PATH_PAGE));
-        request.setAttribute(ParameterName.PARAM_TYPE_PROFILE,PARAM_VALUE_TO_PAGE);
-        request.getSession().setAttribute(ParameterName.BOOK_NAME_PARAMETER,user.getName());
+        request.getSession().setAttribute(ParameterName.PARAM_TYPE_PROFILE,PARAM_VALUE_TO_PAGE);
+        request.getSession().setAttribute(ParameterName.PARAM_USER_NAME,user.getName());
         request.getSession().setAttribute(ParameterName.PARAM_USERNAME_ERROR,"");
         request.getSession().setAttribute(ParameterName.PARAM_CHANGE_SAVED,MessageManager
                 .getProperty(MESSAGE_SAVE_CHANGED));

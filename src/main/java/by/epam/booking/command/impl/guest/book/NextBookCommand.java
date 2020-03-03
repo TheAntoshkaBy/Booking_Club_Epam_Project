@@ -26,14 +26,14 @@ public class NextBookCommand implements WebCommand {
         Book book = new Book();
         book.setId(Integer.parseInt(request.getParameter(ParameterName.PARAM_BOOK_ID)) + 1);
         if (BookLogic.bookGet(book, BookInfoType.ALL) != null) {
-            request.setAttribute(ParameterName.PARAM_BOOK_ID, book.getId());
-            request.setAttribute(ParameterName.BOOK_NAME_PARAMETER, book.getName());
-            request.setAttribute(ParameterName.PARAM_BOOK_AUTHOR, book.getAuthor());
-            request.setAttribute(ParameterName.PARAM_BOOK_DESCRIPTION, book.getDescription());
-            request.setAttribute(ParameterName.PARAM_BOOK_COUNT, book.getCount());
-            request.setAttribute(ParameterName.PARAM_BOOK_ID_INTERIM, book.getId());
-            request.setAttribute(ParameterName.PARAM_BOOK_COMMENTS, book.getComments());
-            request.setAttribute(ParameterName.PARAM_BOOK_IMAGE, UPLOAD_DIR + File.separator + book.getImage());
+            request.getSession().setAttribute(ParameterName.PARAM_BOOK_ID, book.getId());
+            request.getSession().setAttribute(ParameterName.BOOK_NAME_PARAMETER, book.getName());
+            request.getSession().setAttribute(ParameterName.PARAM_BOOK_AUTHOR, book.getAuthor());
+            request.getSession().setAttribute(ParameterName.PARAM_BOOK_DESCRIPTION, book.getDescription());
+            request.getSession().setAttribute(ParameterName.PARAM_BOOK_COUNT, book.getCount());
+            request.getSession().setAttribute(ParameterName.PARAM_BOOK_ID_INTERIM, book.getId());
+            request.getSession().setAttribute(ParameterName.PARAM_BOOK_COMMENTS, book.getComments());
+            request.getSession().setAttribute(ParameterName.PARAM_BOOK_IMAGE, UPLOAD_DIR + File.separator + book.getImage());
 
         } else {
             book.setId(1);

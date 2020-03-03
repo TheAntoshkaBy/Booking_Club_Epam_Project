@@ -2,6 +2,7 @@ package by.epam.booking.command.impl.guest.user;
 
 import by.epam.booking.command.WebCommand;
 import by.epam.booking.config.ConfigurationManager;
+import by.epam.booking.defence.EncryptPassword;
 import by.epam.booking.entity.User;
 import by.epam.booking.command.Router;
 import by.epam.booking.exception.RepositoryException;
@@ -38,7 +39,7 @@ public class RegistrationCommand implements WebCommand {
 
         Map<String,Boolean> userData = UserLogic.registration(user);
         if (userData.get("correct")) {
-            page.setPageFormat(PageChangeType.REDIRECT);
+            page.setPageFormat(PageChangeType.FORWARD);
             page.setPage(ConfigurationManager.getProperty(PATH_PAGE_TO_LOGIN));
         } else {
             page.setPage(ConfigurationManager.getProperty(PATH_PAGE_TO_REGISTRATION));

@@ -11,6 +11,7 @@ import by.epam.booking.service.book.BookInfoType;
 import by.epam.booking.service.book.BookLogic;
 import by.epam.booking.service.user.UserInfoType;
 import by.epam.booking.service.user.UserLogic;
+import by.epam.booking.type.PageChangeType;
 import by.epam.booking.type.ParameterName;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,8 +42,9 @@ public class DeleteUserBookCommand implements WebCommand {
             request.getSession().setAttribute(ParameterName.PARAM_USER_BOOK_ID,null);
         }
 
+        page.setPageFormat(PageChangeType.REDIRECT);
         page.setPage(ConfigurationManager.getProperty(PATH_PAGE));
-        request.setAttribute(ParameterName.PARAM_TYPE_PROFILE,PARAM_VALUE_TO_PAGE);
+        request.getSession().setAttribute(ParameterName.PARAM_TYPE_PROFILE,PARAM_VALUE_TO_PAGE);
         request.getSession().setAttribute(ParameterName.PARAM_CHANGE_SAVED,
                 MessageManager.getProperty(MESSAGE_SAVE_CHANGED));
         return page;

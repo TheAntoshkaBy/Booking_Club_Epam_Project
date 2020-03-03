@@ -65,7 +65,7 @@
                         </label>
                         <div class="col-sm-8">
                             <input type="password" name="password" id="password" class="float-sm-left"
-                                   pattern="(?=.*[A-ZА-Я])(?=.*[a-zа-я])(?=.*\d)([A-Za-zА-Яа-я\d]{8,45})"
+                                   pattern="(?=.*[a-zа-я])(?=.*\d)([A-Za-zА-Яа-я\d]{8,45})"
                                    maxlength="45"
                                    title = "<fmt:message key="invalid.registration.password"/>"
                                    required/>

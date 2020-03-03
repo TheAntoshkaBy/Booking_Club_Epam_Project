@@ -33,16 +33,15 @@ public class NewCommentCommand implements WebCommand {
         Comment comment = new Comment(book.getId(), login, text, commentHeader);
         book.setBuffComment(comment);
         BookLogic.bookUpdate(book, book, BookInfoType.ADD_COMMENT);
-        System.out.println(comment.getText());
         book = BookLogic.bookGet(book, BookInfoType.ALL);
         assert book != null;
-        request.setAttribute(ParameterName.PARAM_BOOK_ID, book.getId());
-        request.setAttribute(ParameterName.BOOK_NAME_PARAMETER, book.getName());
-        request.setAttribute(ParameterName.PARAM_BOOK_AUTHOR, book.getAuthor());
-        request.setAttribute(ParameterName.PARAM_BOOK_DESCRIPTION, book.getDescription());
-        request.setAttribute(ParameterName.PARAM_BOOK_COUNT, book.getCount());
-        request.setAttribute(ParameterName.PARAM_BOOK_COMMENTS, book.getComments());
-        Router page = new Router(PageChangeType.FORWARD, ConfigurationManager.getProperty(PATH_PAGE));
+        request.getSession().setAttribute(ParameterName.PARAM_BOOK_ID, book.getId());
+        request.getSession().setAttribute(ParameterName.BOOK_NAME_PARAMETER, book.getName());
+        request.getSession().setAttribute(ParameterName.PARAM_BOOK_AUTHOR, book.getAuthor());
+        request.getSession().setAttribute(ParameterName.PARAM_BOOK_DESCRIPTION, book.getDescription());
+        request.getSession().setAttribute(ParameterName.PARAM_BOOK_COUNT, book.getCount());
+        request.getSession().setAttribute(ParameterName.PARAM_BOOK_COMMENTS, book.getComments());
+        Router page = new Router(PageChangeType.REDIRECT, ConfigurationManager.getProperty(PATH_PAGE));
         return page;
     }
 }
