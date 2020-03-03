@@ -29,17 +29,13 @@ public class ChangeBookAuthorCommand implements WebCommand {
         book.setId(Integer.parseInt(request.getParameter(ParameterName.PARAM_BOOK_ID)));
         book = BookLogic.bookGet(book, BookInfoType.ALL);
 
-        request.getSession().setAttribute(ParameterName.PARAM_BOOK_ID, book.getId());
-        request.getSession().setAttribute(ParameterName.BOOK_NAME_PARAMETER, book.getName());
-        request.getSession().setAttribute(ParameterName.PARAM_BOOK_DESCRIPTION, book.getDescription());
-        request.getSession().setAttribute(ParameterName.PARAM_BOOK_COUNT, book.getCount());
-        request.getSession().setAttribute(ParameterName.PARAM_BOOK_COMMENT, book.getComments());
-
         if (!request.getParameter(ParameterName.PARAM_BOOK_AUTHOR).isEmpty()) {
             book.setAuthor(request.getParameter(ParameterName.PARAM_BOOK_AUTHOR));
             BookLogic.bookUpdate(book, book, BookInfoType.AUTHOR);
             request.getSession().setAttribute(ParameterName.PARAM_BOOK_AUTHOR, book.getAuthor());
             logger.debug("Author of book " + book + " successfully added!");
+        }else {
+            logger.warn("Author don't changed because gladiolus");
         }
 
         request.getSession().setAttribute(ParameterName.PARAM_SETTINGS_FOR_BOOK_PAGE, VALUE_FOR_PAGE);

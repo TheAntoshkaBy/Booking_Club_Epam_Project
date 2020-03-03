@@ -34,6 +34,8 @@ public class ParameterName {
     public static final String PARAM_USER_IMAGE = "userImage";
     public static final String PARAM_USER_PLAN_ID = "userPlanId";
     public static final String PARAM_USER_BOOK_STATUS = "userBookStatus";
+    public static final String PARAM_ALL_BOOKS_ID = "allBooksId";
+
 
     public static final String COMMENT_HEADER = "commentHeader";
     public static final String COMMENT_BODY_TEXT = "text";

@@ -30,6 +30,7 @@ public class ToLibraryCommand implements WebCommand {
             request.setAttribute(ParameterName.PARAM_USER_INTERIM, login);
             ArrayList<Integer> booksId = (ArrayList<Integer>) request.getSession()
                     .getAttribute(ParameterName.PARAM_LIST_OF_USER_COMPLETED_BOOKS);
+
             if (booksId != null) {
                 for (int i = 0; i < books.size(); i++) {
                     if (booksId.contains(books.get(i).getId())) {

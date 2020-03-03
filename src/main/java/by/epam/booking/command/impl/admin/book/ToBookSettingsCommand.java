@@ -27,12 +27,6 @@ public class ToBookSettingsCommand implements WebCommand {
         book.setId(Integer.parseInt(request.getParameter(ParameterName.PARAM_BOOK_ID)));
         book = BookLogic.bookGet(book, BookInfoType.ALL);
 
-        request.setAttribute(ParameterName.PARAM_BOOK_ID, book.getId());
-        request.setAttribute(ParameterName.BOOK_NAME_PARAMETER, book.getName());
-        request.setAttribute(ParameterName.PARAM_BOOK_AUTHOR, book.getAuthor());
-        request.setAttribute(ParameterName.PARAM_BOOK_DESCRIPTION, book.getDescription());
-        request.setAttribute(ParameterName.PARAM_BOOK_COUNT, book.getCount());
-        request.setAttribute(ParameterName.PARAM_BOOK_COMMENTS, book.getComments());
         request.getSession().setAttribute(ParameterName.PARAM_SETTINGS_FOR_BOOK_PAGE, SETTINGS_PARAM_VALUE);
         page = new Router(PageChangeType.FORWARD, ConfigurationManager.getProperty(PATH_PAGE));
         return page;

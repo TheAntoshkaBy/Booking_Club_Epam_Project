@@ -5,6 +5,7 @@ import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.entity.Book;
 import by.epam.booking.command.Router;
 import by.epam.booking.exception.RepositoryException;
+import by.epam.booking.repository.assistant.book.GetAllBooksId;
 import by.epam.booking.service.book.BookInfoType;
 import by.epam.booking.service.book.BookLogic;
 import by.epam.booking.type.PageChangeType;
@@ -13,6 +14,7 @@ import by.epam.booking.type.ParameterName;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class ToBookCommand implements WebCommand {
     public static final String UPLOAD_DIR = "book_image";
@@ -22,9 +24,11 @@ public class ToBookCommand implements WebCommand {
     @Override
     public Router execute(HttpServletRequest request) throws SQLException, RepositoryException {
 
+        ArrayList<Integer> booksId = GetAllBooksId.getAllBooksId();
         Book book = new Book();
         book.setId(Integer.parseInt(request.getParameter(ParameterName.PARAM_BOOK_ID)));
         book = BookLogic.bookGet(book, BookInfoType.ALL);
+        request.getSession().setAttribute(ParameterName.PARAM_ALL_BOOKS_ID, booksId);
         request.getSession().setAttribute(ParameterName.PARAM_BOOK_ID, book.getId());
         request.getSession().setAttribute(ParameterName.BOOK_NAME_PARAMETER, book.getName());
         request.getSession().setAttribute(ParameterName.PARAM_BOOK_AUTHOR, book.getAuthor());

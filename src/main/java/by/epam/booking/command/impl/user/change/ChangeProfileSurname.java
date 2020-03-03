@@ -10,6 +10,8 @@ import by.epam.booking.service.user.UserInfoType;
 import by.epam.booking.service.user.UserLogic;
 import by.epam.booking.type.PageChangeType;
 import by.epam.booking.type.ParameterName;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -19,6 +21,7 @@ public class ChangeProfileSurname implements WebCommand {
     private static final String PATH_PAGE = "path.page.user";
     private static final String MESSAGE = "message.usernameEmpty";
     private static final String MESSAGE_SAVE_CHANGED = "message.changed.Save";
+    private static Logger logger = LogManager.getLogger();
 
     @Override
     public Router execute(HttpServletRequest request) throws RepositoryException {

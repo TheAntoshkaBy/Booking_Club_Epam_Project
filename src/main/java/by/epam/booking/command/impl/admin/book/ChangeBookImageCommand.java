@@ -25,6 +25,7 @@ public class ChangeBookImageCommand implements WebCommand {
     public static final String PATH = "path.page.user";
     public static final String PROFILE_TYPE = "change";
     public static final String SAVING_MESSAGE = "message.changed.Save";
+    private static Logger logger = LogManager.getLogger();
 
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {
@@ -59,8 +60,9 @@ public class ChangeBookImageCommand implements WebCommand {
         BookLogic.bookUpdate(book, book, BookInfoType.IMAGE);
         request.getSession().setAttribute(ParameterName.PARAM_BOOK_IMAGE, UPLOAD_DIR + File.separator + imagePath);
 
+        logger.debug("Image successfully changed!");
         page.setPage(ConfigurationManager.getProperty(PATH));
-        request.setAttribute(ParameterName.PARAM_TYPE_PROFILE, PROFILE_TYPE);
+        request.getSession().setAttribute(ParameterName.PARAM_TYPE_PROFILE, PROFILE_TYPE);
         request.getSession().setAttribute(ParameterName.PARAM_USERNAME_ERROR, "");
         request.getSession().setAttribute(ParameterName.PARAM_CHANGED_SAVE, MessageManager.getProperty(SAVING_MESSAGE));
         return page;

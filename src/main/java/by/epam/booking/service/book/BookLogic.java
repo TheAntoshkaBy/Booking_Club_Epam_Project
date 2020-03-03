@@ -28,22 +28,10 @@ public class BookLogic {
                     }
 
                 }
-                case NAME:{
-
-                }break;
-                case AUTHOR:{
-
-                }break;
-                case DESCRIPTION:{
-
-                }break;
-                case COUNT:{
-
-                }break;
                 case GET_MAX_ID:{
                     book.setId(GetMaxId.getMaxId());
                 }break;
-                case GET_LIST_COMMENT:{
+                case ALL_ID:{
 
                 }break;
 

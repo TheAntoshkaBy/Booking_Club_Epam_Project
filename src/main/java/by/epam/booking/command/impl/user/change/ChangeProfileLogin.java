@@ -10,6 +10,8 @@ import by.epam.booking.service.user.UserInfoType;
 import by.epam.booking.service.user.UserLogic;
 import by.epam.booking.type.PageChangeType;
 import by.epam.booking.type.ParameterName;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,6 +22,7 @@ public class ChangeProfileLogin implements WebCommand {
     private static final String MESSAGE_ABOUT_CONSIST_LOGIN = "message.login.consist";
     private static final String MESSAGE_ABOUT_CHANGED_SAVE = "message.changed.Save";
     private static final String MESSAGE_ABOUT_EMPTY_LOGIN = "message.loginEmpty";
+    private static Logger logger = LogManager.getLogger();
 
     @Override
     public Router execute(HttpServletRequest request) throws RepositoryException {

@@ -12,6 +12,8 @@ import by.epam.booking.service.book.BookLogic;
 import by.epam.booking.service.user.UserInfoType;
 import by.epam.booking.service.user.UserLogic;
 import by.epam.booking.type.ParameterName;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
@@ -21,6 +23,7 @@ public class AddNewBookCommand implements WebCommand {
 
     private static String PATH_PAGE = "path.page.book";
     public static final String UPLOAD_DIR = "book_image";
+    private static Logger logger = LogManager.getLogger();
 
     @Override
     public Router execute(HttpServletRequest request) throws SQLException, RepositoryException {

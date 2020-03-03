@@ -10,6 +10,8 @@ import by.epam.booking.repository.assistant.user.UserInfoByLogin;
 import by.epam.booking.service.book.BookInfoType;
 import by.epam.booking.service.book.BookLogic;
 import by.epam.booking.type.ParameterName;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -21,6 +23,8 @@ public class DeleteBookCommand implements WebCommand {
     private static final String BOOK_ID_EMPTY_PARAMETER_VALUE = null;
     private static final String EMPTY_BOOK_NAME_PARAMETER_VALUE = "--";
     private static final String PAGE_PATH = "path.page.library";
+    private static Logger logger = LogManager.getLogger();
+
 
     @Override
     public Router execute(HttpServletRequest request) throws RepositoryException {
@@ -51,6 +55,8 @@ public class DeleteBookCommand implements WebCommand {
 
             }
         }
+
+        logger.warn("Book delete!");
         request.setAttribute(ParameterName.PARAM_LIST_OF_BOOKS_INTERIM, books);
         page.setPage(ConfigurationManager.getProperty(PAGE_PATH));
 

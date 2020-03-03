@@ -9,6 +9,8 @@ import by.epam.booking.service.book.BookInfoType;
 import by.epam.booking.service.book.BookLogic;
 import by.epam.booking.type.PageChangeType;
 import by.epam.booking.type.ParameterName;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
@@ -17,6 +19,7 @@ public class ChangeBookNameCommand implements WebCommand {
 
     private final String VALUE_FOR_PAGE = "settings";
     private final String PAGE_PATH = "path.page.book";
+    private static Logger logger = LogManager.getLogger();
 
     @Override
     public Router execute(HttpServletRequest request) throws SQLException, RepositoryException {
@@ -28,15 +31,13 @@ public class ChangeBookNameCommand implements WebCommand {
         assert book != null;
         request.setAttribute(ParameterName.PARAM_BOOK_ID, book.getId());
 
-        request.setAttribute(ParameterName.PARAM_BOOK_AUTHOR, book.getAuthor());
-        request.setAttribute(ParameterName.PARAM_BOOK_DESCRIPTION, book.getDescription());
-        request.setAttribute(ParameterName.PARAM_BOOK_COUNT, book.getCount());
-        request.setAttribute(ParameterName.PARAM_BOOK_COMMENT, book.getComments());
-
         if (!request.getParameter(ParameterName.BOOK_NAME_PARAMETER).isEmpty()) {
             book.setName(request.getParameter(ParameterName.BOOK_NAME_PARAMETER));
             BookLogic.bookUpdate(book, book, BookInfoType.NAME);
             request.setAttribute(ParameterName.BOOK_NAME_PARAMETER, book.getName());
+            logger.debug("Book name successfully changed!" +  book);
+        }else {
+            logger.warn("Empty book name field!");
         }
 
         request.getSession().setAttribute(ParameterName.PARAM_SETTINGS_FOR_BOOK_PAGE, VALUE_FOR_PAGE);
