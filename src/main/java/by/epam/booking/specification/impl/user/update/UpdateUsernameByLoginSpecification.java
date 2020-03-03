@@ -5,6 +5,8 @@ import by.epam.booking.entity.User;
 import by.epam.booking.exception.ConnectionPoolException;
 import by.epam.booking.exception.SpecificationException;
 import by.epam.booking.specification.Specification;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.sql.rowset.serial.SerialStruct;
 import java.sql.Connection;
@@ -16,6 +18,7 @@ public class UpdateUsernameByLoginSpecification implements Specification {
     private String login;
     private String newName;
     private String SQL_REQUEST = "UPDATE "+USER_TABLE+" SET name=? WHERE login=?";
+    private static Logger logger = LogManager.getLogger();
 
     public UpdateUsernameByLoginSpecification(String login, String newName) {
         this.login = login;

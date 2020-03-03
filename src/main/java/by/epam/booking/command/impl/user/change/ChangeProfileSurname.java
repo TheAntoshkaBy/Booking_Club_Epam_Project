@@ -33,6 +33,7 @@ public class ChangeProfileSurname implements WebCommand {
             transferredUser.setSurname(request.getParameter(ParameterName.PARAM_USER_SURNAME));
             UserLogic.userUpdate(transferredUser,transferredUser, UserInfoType.SURNAME);
             page.setPageFormat(PageChangeType.REDIRECT);
+            logger.debug("User surname changed");
         }else {
             page.setPage(ConfigurationManager.getProperty(PATH_PAGE));
             request.setAttribute(ParameterName.PARAM_TYPE_PROFILE,PARAM_VALUE_TO_PAGE);

@@ -5,11 +5,15 @@ import by.epam.booking.entity.Book;
 import by.epam.booking.exception.ConnectionPoolException;
 import by.epam.booking.exception.SpecificationException;
 import by.epam.booking.specification.Specification;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class SelectLibraryTableInfoByAuthorAndNameSpecification implements Specification {
+
+    private static Logger logger = LogManager.getLogger();
     private final String SQL_REQUEST = "SELECT count FROM "+ BOOK_TABLE +"  WHERE name=? AND author=?";
     private Book book;
 

@@ -5,11 +5,15 @@ import by.epam.booking.exception.ConnectionPoolException;
 import by.epam.booking.exception.SpecificationException;
 import by.epam.booking.specification.Specification;
 import by.epam.booking.entity.User;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class SearchLoginAndPassByLoginSpecification implements Specification {
+
+    private static Logger logger = LogManager.getLogger();
     private final String SQL_REQUEST = "SELECT login, password FROM "+ USER_TABLE +"  WHERE login=?";
     private User user;
 

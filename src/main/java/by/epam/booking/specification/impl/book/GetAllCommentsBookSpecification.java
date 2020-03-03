@@ -5,12 +5,15 @@ import by.epam.booking.entity.Book;
 import by.epam.booking.exception.ConnectionPoolException;
 import by.epam.booking.exception.SpecificationException;
 import by.epam.booking.specification.Specification;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class GetAllCommentsBookSpecification implements Specification {
 
+    private static Logger logger = LogManager.getLogger();
     private int bookId;
     private final String SQL_REQUEST = "SELECT c.author, c.date,c.header, c.text FROM "+ BOOK_TABLE +
             " JOIN Comments c on b.idBook = c.bookId WHERE c.bookId=?";

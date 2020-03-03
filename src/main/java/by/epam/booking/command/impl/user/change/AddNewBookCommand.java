@@ -37,9 +37,9 @@ public class AddNewBookCommand implements WebCommand {
         }
 
         Book book = new Book();
+
         book.setId(Integer.parseInt(request.getParameter(ParameterName.PARAM_BOOK_ID)));
         book = BookLogic.bookGet(book, BookInfoType.ALL);
-        assert book != null;
         request.getSession().setAttribute(ParameterName.PARAM_BOOK_ID, book.getId());
         request.getSession().setAttribute(ParameterName.BOOK_NAME_PARAMETER, book.getName());
         request.getSession().setAttribute(ParameterName.PARAM_BOOK_AUTHOR,book.getAuthor());
@@ -48,6 +48,9 @@ public class AddNewBookCommand implements WebCommand {
         BookLogic.bookUpdate(book,book,BookInfoType.COUNT);
         request.getSession().setAttribute(ParameterName.PARAM_BOOK_COUNT,book.getCount());
         request.getSession().setAttribute(ParameterName.PARAM_BOOK_IMAGE,UPLOAD_DIR + File.separator + book.getImage());
+
+        logger.debug("New book added!");
+
         Router page = new Router(PageChangeType.REDIRECT, ConfigurationManager.getProperty(PATH_PAGE));
         return page;
     }

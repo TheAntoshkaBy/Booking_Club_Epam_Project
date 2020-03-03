@@ -56,6 +56,7 @@ final class DataBaseConnection {
                 logger.debug("DataBase connection is successful!");
             }
         } catch (SQLException e) {
+            logger.error("DataBase connection is fail!");
             throw new ConnectionToDataBaseException(e);
         }
         return dbConnection;

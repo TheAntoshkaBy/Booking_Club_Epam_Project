@@ -4,12 +4,16 @@ import by.epam.booking.connection.ConnectionPool;
 import by.epam.booking.exception.ConnectionPoolException;
 import by.epam.booking.exception.SpecificationException;
 import by.epam.booking.specification.Specification;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class UpdateBookCompletedListSpecification implements Specification {
+
+    private static Logger logger = LogManager.getLogger();
     private String login;
     private Integer newBookId;
     private String SQL_REQUEST = "INSERT INTO " + BOOK_COMPLETED + " (userLogin, idBook) VALUES (?,?)";

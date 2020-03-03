@@ -4,6 +4,8 @@ import by.epam.booking.connection.ConnectionPool;
 import by.epam.booking.exception.ConnectionPoolException;
 import by.epam.booking.exception.SpecificationException;
 import by.epam.booking.specification.Specification;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,6 +17,7 @@ public class UpdateMoneySpecification implements Specification {
    private String typeOperation;
    private long date;
 
+    private static Logger logger = LogManager.getLogger();
     private String SQL_REQUEST =  "UPDATE "+USER_TABLE+" SET moneyBalance=? WHERE login=?";
 
 

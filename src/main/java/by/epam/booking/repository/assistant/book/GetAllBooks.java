@@ -6,12 +6,17 @@ import by.epam.booking.repository.assistant.RepositoryHelper;
 import by.epam.booking.repository.impl.BookRepository;
 import by.epam.booking.specification.impl.book.GetAllBooksByReadingPlanSpecification;
 import by.epam.booking.specification.impl.book.SelectAllBooksForTableSpecification;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class GetAllBooks extends RepositoryHelper {
+
+    private static Logger logger = LogManager.getLogger();
+
     private static ArrayList<Book> books;
 
     static {

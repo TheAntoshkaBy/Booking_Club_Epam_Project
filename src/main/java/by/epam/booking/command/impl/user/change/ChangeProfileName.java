@@ -34,6 +34,7 @@ public class ChangeProfileName implements WebCommand {
             user.setName(request.getParameter(ParameterName.BOOK_NAME_PARAMETER));
             UserLogic.userUpdate(user,user, UserInfoType.NAME);
             page.setPageFormat(PageChangeType.REDIRECT);
+            logger.debug("User name changed");
 
         }else {
             page.setPage(ConfigurationManager.getProperty(PATH_PAGE));

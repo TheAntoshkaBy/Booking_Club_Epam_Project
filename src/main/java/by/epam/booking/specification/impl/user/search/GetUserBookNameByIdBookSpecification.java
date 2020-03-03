@@ -5,11 +5,15 @@ import by.epam.booking.entity.User;
 import by.epam.booking.exception.ConnectionPoolException;
 import by.epam.booking.exception.SpecificationException;
 import by.epam.booking.specification.Specification;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class GetUserBookNameByIdBookSpecification implements Specification {
+
+    private static Logger logger = LogManager.getLogger();
     private final String SQL_REQUEST = "SELECT b.name FROM "+ USER_TABLE +" JOIN Book b on u.bookId = b.idBook"+" WHERE u.login=?";
     private String login;
 

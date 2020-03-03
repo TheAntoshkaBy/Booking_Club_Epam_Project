@@ -4,6 +4,8 @@ import by.epam.booking.connection.ConnectionPool;
 import by.epam.booking.exception.ConnectionPoolException;
 import by.epam.booking.exception.SpecificationException;
 import by.epam.booking.specification.Specification;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,6 +13,7 @@ import java.sql.SQLException;
 
 public class UpdateLoginByLoginSpecification implements Specification
 {
+    private static Logger logger = LogManager.getLogger();
     private String userLogin;
     private String newUserLogin;
     private String SQL_REQUEST = "UPDATE "+USER_TABLE+" SET login=? WHERE login=?";

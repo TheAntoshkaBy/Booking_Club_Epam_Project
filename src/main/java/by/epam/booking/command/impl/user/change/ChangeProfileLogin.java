@@ -43,6 +43,7 @@ public class ChangeProfileLogin implements WebCommand {
                 request.getSession().setAttribute(ParameterName.PARAM_USERNAME_ERROR, "");
                 request.getSession().setAttribute(ParameterName.PARAM_CHANGE_SAVED,
                         MessageManager.getProperty(MESSAGE_ABOUT_CHANGED_SAVE));
+                logger.debug("Login changed!");
             } else {
                 page.setPage(ConfigurationManager.getProperty(PATH_PAGE_USER));
                 request.setAttribute(ParameterName.PARAM_TYPE_PROFILE, PARAM_TYPE_VALUE);

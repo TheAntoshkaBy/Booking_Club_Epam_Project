@@ -3,12 +3,16 @@ package by.epam.booking.specification.impl.book.update;
 import by.epam.booking.connection.ConnectionPool;
 import by.epam.booking.exception.ConnectionPoolException;
 import by.epam.booking.specification.Specification;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class UpdateBookNameByIdSpecification implements Specification {
+
+    private static Logger logger = LogManager.getLogger();
     private Integer id;
     private String newName;
     private String SQL_REQUEST = "UPDATE "+BOOK_TABLE+" SET name=? WHERE idBook=?";

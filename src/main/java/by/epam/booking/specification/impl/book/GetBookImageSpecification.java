@@ -4,11 +4,15 @@ import by.epam.booking.connection.ConnectionPool;
 import by.epam.booking.exception.ConnectionPoolException;
 import by.epam.booking.exception.SpecificationException;
 import by.epam.booking.specification.Specification;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class GetBookImageSpecification implements Specification {
+
+    private static Logger logger = LogManager.getLogger();
     private final String SQL_REQUEST = "SELECT book_image FROM "+ BOOK_TABLE +"  WHERE idBook=?";
     private Integer login;
 

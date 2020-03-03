@@ -4,15 +4,19 @@ import by.epam.booking.connection.ConnectionPool;
 import by.epam.booking.exception.ConnectionPoolException;
 import by.epam.booking.exception.SpecificationException;
 import by.epam.booking.specification.Specification;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class DeleteBookFromCompletedListSpecification implements Specification {
+
     private String login;
     private Integer newBookId;
     private String SQL_REQUEST = "DELETE FROM " + BOOK_COMPLETED + " WHERE userLogin=? AND idBook=?";
+    private static Logger logger = LogManager.getLogger();
 
     public DeleteBookFromCompletedListSpecification(String login, Integer newBookId) {
         this.login = login;

@@ -7,12 +7,17 @@ import by.epam.booking.specification.Specification;
 import by.epam.booking.specification.impl.money.AddMoneyCheckSpecification;
 import by.epam.booking.specification.impl.money.GetUserMoneySpecification;
 import by.epam.booking.specification.impl.money.UpdateMoneySpecification;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class TransactionFromMoneyBalance extends RepositoryHelper {
+
+    private static Logger logger = LogManager.getLogger();
+
     public static boolean moneyExecutor(Double moneyBalanceAdd, String login, String type, long date) throws RepositoryException {
 
         Statement stGetBalance = null;

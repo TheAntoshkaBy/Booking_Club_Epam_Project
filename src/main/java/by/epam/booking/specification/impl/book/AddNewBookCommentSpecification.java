@@ -5,11 +5,15 @@ import by.epam.booking.entity.Comment;
 import by.epam.booking.exception.ConnectionPoolException;
 import by.epam.booking.exception.SpecificationException;
 import by.epam.booking.specification.Specification;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class AddNewBookCommentSpecification implements Specification {
+
+    private static Logger logger = LogManager.getLogger();
     private static final String SQL_INSERT_USER =
             "INSERT INTO Booking_Club.Comments " +
                     "(date, author, bookId, text, header) VALUES (?,?,?,?,?)";

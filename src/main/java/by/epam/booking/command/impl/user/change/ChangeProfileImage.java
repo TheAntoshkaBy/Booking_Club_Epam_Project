@@ -56,6 +56,7 @@ public class ChangeProfileImage implements WebCommand{
         try {
             part.write(uploadFileDir + imagePath);
         } catch (IOException e) {
+            logger.error("Change profile image error!" + e);
             throw new CommandException(e);
         }
 

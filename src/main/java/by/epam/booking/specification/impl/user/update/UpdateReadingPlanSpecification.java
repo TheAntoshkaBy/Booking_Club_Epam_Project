@@ -4,16 +4,21 @@ import by.epam.booking.connection.ConnectionPool;
 import by.epam.booking.exception.ConnectionPoolException;
 import by.epam.booking.exception.SpecificationException;
 import by.epam.booking.specification.Specification;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class UpdateReadingPlanSpecification implements Specification {
+
     private String login;
     private Integer newReadingPlanId;
     private String SQL_REQUEST = "UPDATE " + USER_TABLE +" SET redingPlanId WHERE login=?";
     private String NULL_SQL_REQUEST = "UPDATE "+USER_TABLE+" SET readingPlanId=NULL WHERE login=?";
+    private static Logger logger = LogManager.getLogger();
+
     public UpdateReadingPlanSpecification(String login, Integer newReadingPlanId) {
         this.login = login;
         this.newReadingPlanId = newReadingPlanId;

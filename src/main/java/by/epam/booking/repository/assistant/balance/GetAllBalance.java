@@ -5,6 +5,8 @@ import by.epam.booking.exception.RepositoryException;
 import by.epam.booking.repository.assistant.RepositoryHelper;
 import by.epam.booking.repository.impl.MoneyStoreRepository;
 import by.epam.booking.specification.impl.money.GetAllBalanceSpecification;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,6 +14,9 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class GetAllBalance extends RepositoryHelper {
+
+    private static Logger logger = LogManager.getLogger();
+
     public static ArrayList<Balance> getAll() throws RepositoryException, SQLException {
         ArrayList<Balance> balances = new ArrayList<>();
         ResultSet userInfo = MoneyStoreRepository.getINSTANCE().query(new GetAllBalanceSpecification());

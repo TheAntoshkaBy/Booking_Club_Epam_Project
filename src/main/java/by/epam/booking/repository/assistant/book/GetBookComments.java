@@ -5,6 +5,8 @@ import by.epam.booking.exception.RepositoryException;
 import by.epam.booking.repository.assistant.RepositoryHelper;
 import by.epam.booking.repository.impl.BookRepository;
 import by.epam.booking.specification.impl.book.GetAllCommentsBookSpecification;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,6 +14,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class GetBookComments extends RepositoryHelper {
+
+    private static Logger logger = LogManager.getLogger();
     private static ArrayList<Comment> comments;
 
     static {

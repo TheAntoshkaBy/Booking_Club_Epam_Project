@@ -4,12 +4,16 @@ import by.epam.booking.connection.ConnectionPool;
 import by.epam.booking.exception.ConnectionPoolException;
 import by.epam.booking.exception.SpecificationException;
 import by.epam.booking.specification.Specification;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class SearchLoginByLoginSpecification implements Specification {
-        private final String SQL_REQUEST = "SELECT login FROM "+ USER_TABLE +"  WHERE login=?";
+
+    private static Logger logger = LogManager.getLogger();
+    private final String SQL_REQUEST = "SELECT login FROM "+ USER_TABLE +"  WHERE login=?";
         private String login;
 
         public SearchLoginByLoginSpecification(String login)

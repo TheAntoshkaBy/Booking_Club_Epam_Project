@@ -4,15 +4,19 @@ import by.epam.booking.connection.ConnectionPool;
 import by.epam.booking.exception.ConnectionPoolException;
 import by.epam.booking.exception.SpecificationException;
 import by.epam.booking.specification.Specification;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class UpdateProfileImageSpecification implements Specification {
+
     private String userLogin;
     private String profileImage;
     private String SQL_REQUEST = "UPDATE "+USER_TABLE+" SET profile_image=? WHERE login=?";
+    private static Logger logger = LogManager.getLogger();
 
     public UpdateProfileImageSpecification(String userLogin, String profileImage) {
         this.userLogin = userLogin;

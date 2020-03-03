@@ -7,12 +7,15 @@ import by.epam.booking.specification.Specification;
 import by.epam.booking.specification.impl.user.search.SearchLoginAndPassByLoginSpecification;
 import by.epam.booking.entity.User;
 import by.epam.booking.specification.impl.user.search.SearchLoginByLoginSpecification;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Login extends RepositoryHelper {
 
+    private static Logger logger = LogManager.getLogger();
 
     public static boolean checkLogIn(String login, String pass) throws SQLException, RepositoryException {
 

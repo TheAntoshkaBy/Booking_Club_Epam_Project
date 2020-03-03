@@ -7,12 +7,16 @@ import by.epam.booking.specification.impl.user.search.GetListOfCompletedBooksByU
 import by.epam.booking.specification.impl.user.search.SearchNameByLoginSpecification;
 import by.epam.booking.specification.impl.user.search.SearchUserByLoginSpecification;
 import by.epam.booking.entity.User;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class UserInfoByLogin extends RepositoryHelper {
+
+    private static Logger logger = LogManager.getLogger();
 
     public static User searchUserByLogin(String login) throws RepositoryException {
         User buffUser = new User();

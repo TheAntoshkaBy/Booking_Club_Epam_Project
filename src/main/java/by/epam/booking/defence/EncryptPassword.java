@@ -1,12 +1,18 @@
 package by.epam.booking.defence;
 
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class EncryptPassword {
+
+    private static Logger logger = LogManager.getLogger();
+
     public static String encrypt(String password) {
         String encryptPassword = null;
         try {
@@ -16,7 +22,7 @@ public class EncryptPassword {
             BigInteger bigInteger = new BigInteger(1, bytes);
             encryptPassword = bigInteger.toString(16);
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            logger.error("Encrypt error", e);
         }
         return encryptPassword;
     }

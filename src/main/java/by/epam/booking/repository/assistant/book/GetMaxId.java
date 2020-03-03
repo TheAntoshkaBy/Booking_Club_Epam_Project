@@ -4,11 +4,16 @@ import by.epam.booking.exception.RepositoryException;
 import by.epam.booking.repository.assistant.RepositoryHelper;
 import by.epam.booking.repository.impl.BookRepository;
 import by.epam.booking.specification.impl.book.SelectMaxIdBookSpecification;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class GetMaxId extends RepositoryHelper {
+
+    private static Logger logger = LogManager.getLogger();
+
     public static Integer getMaxId() throws SQLException, RepositoryException {
         Integer result = null;
         ResultSet resultBook = BookRepository.getInstance().query(new SelectMaxIdBookSpecification());

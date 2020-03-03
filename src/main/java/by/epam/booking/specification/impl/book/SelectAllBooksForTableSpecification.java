@@ -5,14 +5,19 @@ import by.epam.booking.entity.Book;
 import by.epam.booking.exception.ConnectionPoolException;
 import by.epam.booking.exception.SpecificationException;
 import by.epam.booking.specification.Specification;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class SelectAllBooksForTableSpecification implements Specification {
+
+    private static Logger logger = LogManager.getLogger();
     private final String SQL_REQUEST = "SELECT name,author,count,idBook,description FROM "+ BOOK_TABLE;
     private Book book;
+
     @Override
     public PreparedStatement specify() throws SpecificationException {
         PreparedStatement statement = null;

@@ -4,6 +4,8 @@ import by.epam.booking.connection.ConnectionPool;
 import by.epam.booking.exception.ConnectionPoolException;
 import by.epam.booking.exception.SpecificationException;
 import by.epam.booking.specification.Specification;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,6 +18,7 @@ public class AddMoneyCheckSpecification implements Specification {
     private String type;
     private long date;
     private String SQL_REQUEST = "INSERT INTO Booking_Club.MoneyStory (moneyBalance, authorOperationLogin, typeOperation, date) VALUES (?,?,?,?); ";
+    private static Logger logger = LogManager.getLogger();
 
     public AddMoneyCheckSpecification(Double money, String login, String type, long date) {
         this.money = money;

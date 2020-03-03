@@ -8,6 +8,8 @@ import by.epam.booking.exception.SpecificationException;
 import by.epam.booking.repository.DataBaseRepository;
 import by.epam.booking.repository.assistant.RepositoryHelper;
 import by.epam.booking.specification.Specification;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,8 +19,8 @@ import java.sql.Statement;
 public class MoneyStoreRepository implements DataBaseRepository<Balance> {
 
     private PreparedStatement statement;
-
     private static final UserRepository INSTANCE = new UserRepository();
+    private static Logger logger = LogManager.getLogger();
 
     public static UserRepository getINSTANCE() {
         return INSTANCE;

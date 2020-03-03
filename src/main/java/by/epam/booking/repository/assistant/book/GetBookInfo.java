@@ -6,11 +6,16 @@ import by.epam.booking.repository.assistant.RepositoryHelper;
 import by.epam.booking.repository.impl.BookRepository;
 import by.epam.booking.specification.impl.book.GetBookImageSpecification;
 import by.epam.booking.specification.impl.book.SelectBookByIdSpecification;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class GetBookInfo extends RepositoryHelper {
+
+    private static Logger logger = LogManager.getLogger();
+
     public static boolean getBookById(Book book) throws RepositoryException, SQLException {
         ResultSet resultBook = BookRepository.getInstance().query(new SelectBookByIdSpecification(book.getId()));
         try {

@@ -5,11 +5,15 @@ import by.epam.booking.entity.Book;
 import by.epam.booking.exception.ConnectionPoolException;
 import by.epam.booking.exception.SpecificationException;
 import by.epam.booking.specification.Specification;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class GetAllBooksByReadingPlanSpecification implements Specification {
+
+    private static Logger logger = LogManager.getLogger();
     private final String SQL_REQUEST = "SELECT b.name, b.description,b.author, b.count, b.idBook FROM Booking_Club.PlanPosition p " +
             "JOIN Booking_Club.Book b ON p.bookId=b.idBook" +
             " WHERE p.planId=?";

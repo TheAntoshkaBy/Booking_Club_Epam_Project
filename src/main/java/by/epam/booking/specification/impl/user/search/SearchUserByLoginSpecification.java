@@ -4,12 +4,15 @@ import by.epam.booking.connection.ConnectionPool;
 import by.epam.booking.exception.ConnectionPoolException;
 import by.epam.booking.exception.SpecificationException;
 import by.epam.booking.specification.Specification;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class SearchUserByLoginSpecification implements Specification {
 
+    private static Logger logger = LogManager.getLogger();
     private final String SQL_REQUEST = "SELECT u.name,r.name,r.idReadingPlan,u.login,u.surname,u.email,u.password,u.moneyBalance,u.isActive,u.role,b.name, u.bookId " +
             "FROM " + USER_TABLE +
             " LEFT JOIN Book b on u.bookId = b.idBook"+

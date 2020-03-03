@@ -8,6 +8,8 @@ import by.epam.booking.exception.SpecificationException;
 import by.epam.booking.repository.DataBaseRepository;
 import by.epam.booking.repository.assistant.RepositoryHelper;
 import by.epam.booking.specification.Specification;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,6 +18,7 @@ import java.sql.Statement;
 
 public class UserRepository implements DataBaseRepository<User> {
 
+    private static Logger logger = LogManager.getLogger();
     private static final String SQL_INSERT_USER =
             "INSERT INTO Booking_Club.User " +
                     "(login, password, email, name, surname, role, isActive) VALUES (?,?,?,?,?,?,?)";

@@ -13,6 +13,8 @@ import by.epam.booking.service.user.UserInfoType;
 import by.epam.booking.service.user.UserLogic;
 import by.epam.booking.type.PageChangeType;
 import by.epam.booking.type.ParameterName;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
@@ -23,6 +25,7 @@ public class DeleteUserBookCommand implements WebCommand {
     private static final String PARAM_VALUE_BOOK_NAME = "--";
     private static final String PATH_PAGE = "path.page.user";
     private static final String MESSAGE_SAVE_CHANGED = "message.changed.Save";
+    private static Logger logger = LogManager.getLogger();
 
     @Override
     public Router execute(HttpServletRequest request) throws SQLException, RepositoryException {
@@ -40,6 +43,7 @@ public class DeleteUserBookCommand implements WebCommand {
 
             request.getSession().setAttribute(ParameterName.PARAM_USER_BOOK_NAME,PARAM_VALUE_BOOK_NAME);
             request.getSession().setAttribute(ParameterName.PARAM_USER_BOOK_ID,null);
+            logger.debug("User book "+ book + " deleted");
         }
 
         page.setPageFormat(PageChangeType.REDIRECT);

@@ -9,12 +9,15 @@ import by.epam.booking.specification.Specification;
 import by.epam.booking.specification.impl.user.search.SearchEmailsByEmailSpecification;
 import by.epam.booking.specification.impl.user.search.SearchLoginAndPassByLoginSpecification;
 import by.epam.booking.entity.User;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Registration extends RepositoryHelper {
 
+    private static Logger logger = LogManager.getLogger();
     private static String returnedPage;
 
     public static boolean registration(String login, String password, String name, String surname, String email) throws SQLException, RepositoryException {

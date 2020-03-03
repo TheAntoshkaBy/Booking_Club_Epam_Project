@@ -12,6 +12,8 @@ import by.epam.booking.service.book.BookLogic;
 import by.epam.booking.service.user.UserInfoType;
 import by.epam.booking.service.user.UserLogic;
 import by.epam.booking.type.ParameterName;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
@@ -21,6 +23,7 @@ public class DeleteCompletedBook implements WebCommand {
 
     private static final String PARAM_VALUE_TO_PAGE = "see";
     private static final String PATH_PAGE = "path.page.completed.books";
+    private static Logger logger = LogManager.getLogger();
 
 
     @Override
@@ -44,6 +47,7 @@ public class DeleteCompletedBook implements WebCommand {
             book.setId(booksId.get(i));
             books.add(BookLogic.bookGet(book, BookInfoType.ALL));
         }
+        logger.debug("Books " + books +" successfully delete");
         request.getSession().setAttribute(ParameterName.PARAM_COMPLETED_BOOKS, books);
         request.getSession().setAttribute(ParameterName.PARAM_TYPE_PROFILE,PARAM_VALUE_TO_PAGE);
         page.setPage( ConfigurationManager.getProperty(PATH_PAGE));
