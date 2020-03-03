@@ -25,7 +25,7 @@ public class ChangeBookDescriptionCommand implements WebCommand {
         book = new Book();
         book.setId(Integer.parseInt(request.getParameter(ParameterName.PARAM_BOOK_ID)));
         book = BookLogic.bookGet(book, BookInfoType.ALL);
-        request.setAttribute(ParameterName.PARAM_BOOK_ID, book.getId());
+        request.getSession().setAttribute(ParameterName.PARAM_BOOK_ID, book.getId());
         request.setAttribute(ParameterName.BOOK_NAME_PARAMETER, book.getName());
         request.setAttribute(ParameterName.PARAM_BOOK_AUTHOR, book.getAuthor());
         request.setAttribute(ParameterName.PARAM_BOOK_DESCRIPTION, book.getDescription());

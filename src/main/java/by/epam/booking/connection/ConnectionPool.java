@@ -42,7 +42,7 @@ public final class ConnectionPool {
         try {
             initConnectionPool();
         } catch (ConnectionToDataBaseException e) {
-            logger.error("Get connection error: " + e);
+            logger.error("Get connection error: ", e);
         }
     }
 
