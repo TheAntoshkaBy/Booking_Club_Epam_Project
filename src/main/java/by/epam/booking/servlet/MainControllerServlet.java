@@ -33,7 +33,7 @@ public class MainControllerServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (CommandException | RepositoryException | SQLException | ServiceException e) {
+        } catch (CommandException e) {
             throw new ServletException(e);
         }
     }
@@ -42,12 +42,13 @@ public class MainControllerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (CommandException | RepositoryException | SQLException | ServiceException e) {
+        } catch (CommandException e) {
            throw new  ServletException(e);
         }
     }
 
-    private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, CommandException, RepositoryException, SQLException, ServiceException {
+    private void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, CommandException {
         CommandFactory commandFactory = new CommandFactory();
         WebCommand command = commandFactory.defineCommand(request);
         Router page = command.execute(request);

@@ -5,7 +5,9 @@ import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.config.MessageManager;
 import by.epam.booking.entity.User;
 import by.epam.booking.command.Router;
+import by.epam.booking.exception.CommandException;
 import by.epam.booking.exception.RepositoryException;
+import by.epam.booking.exception.ServiceException;
 import by.epam.booking.service.user.UserInfoType;
 import by.epam.booking.service.user.UserLogic;
 import by.epam.booking.type.PageChangeType;
@@ -24,14 +26,19 @@ public class ChangeProfileSurname implements WebCommand {
     private static Logger logger = LogManager.getLogger();
 
     @Override
-    public Router execute(HttpServletRequest request) throws RepositoryException {
+    public Router execute(HttpServletRequest request) throws CommandException {
         Router page = new Router();
         User transferredUser = new User();
 
         if(!request.getParameter(ParameterName.PARAM_USER_SURNAME).isEmpty()){
             transferredUser.setLogin((String) request.getSession().getAttribute(ParameterName.PARAM_USER_LOGIN));
             transferredUser.setSurname(request.getParameter(ParameterName.PARAM_USER_SURNAME));
-            UserLogic.userUpdate(transferredUser,transferredUser, UserInfoType.SURNAME);
+            try {
+                UserLogic.userUpdate(transferredUser,transferredUser, UserInfoType.SURNAME);
+            } catch (ServiceException e) {
+                logger.error(e);
+                throw new CommandException(e);
+            }
             page.setPageFormat(PageChangeType.REDIRECT);
             logger.debug("User surname changed");
         }else {

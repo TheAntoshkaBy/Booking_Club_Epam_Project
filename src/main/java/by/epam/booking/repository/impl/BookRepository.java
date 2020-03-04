@@ -31,27 +31,27 @@ public class BookRepository implements DataBaseRepository<Book> {
     }
 
     @Override
-    public void add(Book book) throws RepositoryException, SQLException {
+    public void add(Book book) throws RepositoryException {
         PreparedStatement preparedStatement = null;
-        try {
 
-            preparedStatement = ConnectionPool.getInstance().getConnection().prepareStatement(SQL_INSERT_USER);
-        } catch (SQLException | ConnectionPoolException e) {
-            throw new RepositoryException(e);
-        }
         try {
-            preparedStatement.setInt(1, book.getCount());
-            preparedStatement.setString(2, book.getAuthor());
-            preparedStatement.setString(3, book.getName());
-            preparedStatement.setString(4, book.getDescription());
-            preparedStatement.executeUpdate();
-            closeConnection(preparedStatement.getConnection());
-        } catch (SQLException e) {
+            try {
+                preparedStatement = ConnectionPool.getInstance().getConnection().prepareStatement(SQL_INSERT_USER);
+                preparedStatement.setInt(1, book.getCount());
+                preparedStatement.setString(2, book.getAuthor());
+                preparedStatement.setString(3, book.getName());
+                preparedStatement.setString(4, book.getDescription());
+                preparedStatement.executeUpdate();
+                closeConnection(preparedStatement.getConnection());
+            }finally {
+                closeConnection(preparedStatement.getConnection());
+                closeStatement(preparedStatement);
+            }
+        }catch (SQLException | ConnectionPoolException e){
+            logger.error(e);
             throw new RepositoryException(e);
-        }finally {
-            closeConnection(preparedStatement.getConnection());
-            closeStatement(preparedStatement);
         }
+
     }
 
     @Override

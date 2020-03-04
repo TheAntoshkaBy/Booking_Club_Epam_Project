@@ -22,26 +22,31 @@ public class GetBookComments extends RepositoryHelper {
         comments = new ArrayList<Comment>();
     }
 
-    public static ArrayList<Comment> getAllBooks(int bookId) throws RepositoryException, SQLException {
+    public static ArrayList<Comment> getAllBooks(int bookId) throws RepositoryException{
         ResultSet bookSet = BookRepository.getInstance().query(new GetAllCommentsBookSpecification(bookId));
         Comment comment;
         comments.clear();
+
         try {
-            while (bookSet.next()) {
-                comment = new Comment();
-                comment.setAuthor(bookSet.getString("c.author"));
-                Date date = new Date(bookSet.getLong("c.date"));
-                comment.setDate(date);
-                comment.setText(bookSet.getString("c.text"));
-                comment.setHeader(bookSet.getString("c.header"));
-                comments.add(comment);
+            try {
+                while (bookSet.next()) {
+                    comment = new Comment();
+                    comment.setAuthor(bookSet.getString("c.author"));
+                    Date date = new Date(bookSet.getLong("c.date"));
+                    comment.setDate(date);
+                    comment.setText(bookSet.getString("c.text"));
+                    comment.setHeader(bookSet.getString("c.header"));
+                    comments.add(comment);
+                }
+            } finally {
+                closeConnection(bookSet.getStatement().getConnection());
+                closeStatement(bookSet.getStatement());
             }
-        } catch (SQLException e) {
+        }catch (SQLException e){
+            logger.error(e);
             throw new RepositoryException(e);
-        } finally {
-            closeConnection(bookSet.getStatement().getConnection());
-            closeStatement(bookSet.getStatement());
         }
+
 
         return comments;
     }

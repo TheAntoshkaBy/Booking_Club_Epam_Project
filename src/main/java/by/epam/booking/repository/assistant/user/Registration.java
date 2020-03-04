@@ -20,7 +20,8 @@ public class Registration extends RepositoryHelper {
     private static Logger logger = LogManager.getLogger();
     private static String returnedPage;
 
-    public static boolean registration(String login, String password, String name, String surname, String email) throws SQLException, RepositoryException {
+    public static boolean registration(String login, String password, String name, String surname, String email)
+            throws RepositoryException {
         User user = new User();
         user.setLogin(login);
         user.setEmail(email);
@@ -40,16 +41,20 @@ public class Registration extends RepositoryHelper {
         return true;
     }
 
-    private static boolean checkEqualsLogin(Specification specification) {
+    private static boolean checkEqualsLogin(Specification specification) throws RepositoryException {
         ResultSet checkLogIn = UserRepository.getINSTANCE().query(specification);
         boolean response = false;
         try {
-            checkLogIn.next();
-            response = checkLogIn.next();
-            closeConnection(checkLogIn.getStatement().getConnection());
-            closeStatement(checkLogIn.getStatement());
-        } catch (SQLException | RepositoryException e) {
-            e.printStackTrace();
+            try {
+                checkLogIn.next();
+                response = checkLogIn.next();
+            }finally {
+                closeConnection(checkLogIn.getStatement().getConnection());
+                closeStatement(checkLogIn.getStatement());
+            }
+        } catch (SQLException e) {
+            logger.error(e);
+            throw new RepositoryException(e);
         }
         return response;
     }

@@ -5,7 +5,9 @@ import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.config.MessageManager;
 import by.epam.booking.entity.User;
 import by.epam.booking.command.Router;
+import by.epam.booking.exception.CommandException;
 import by.epam.booking.exception.RepositoryException;
+import by.epam.booking.exception.ServiceException;
 import by.epam.booking.service.user.UserInfoType;
 import by.epam.booking.service.user.UserLogic;
 import by.epam.booking.type.PageChangeType;
@@ -25,14 +27,19 @@ public class ChangeProfileName implements WebCommand {
 
 
     @Override
-    public Router execute(HttpServletRequest request) throws RepositoryException {
+    public Router execute(HttpServletRequest request) throws CommandException {
         Router page = new Router();
         User user = new User();
 
         if(!request.getParameter(ParameterName.BOOK_NAME_PARAMETER).isEmpty()){
             user.setLogin((String) request.getSession().getAttribute(ParameterName.PARAM_USER_LOGIN));
             user.setName(request.getParameter(ParameterName.BOOK_NAME_PARAMETER));
-            UserLogic.userUpdate(user,user, UserInfoType.NAME);
+            try {
+                UserLogic.userUpdate(user,user, UserInfoType.NAME);
+            } catch (ServiceException e) {
+                logger.error(e);
+                throw new CommandException(e);
+            }
             page.setPageFormat(PageChangeType.REDIRECT);
             logger.debug("User name changed");
 

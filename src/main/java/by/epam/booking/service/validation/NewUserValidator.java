@@ -1,6 +1,8 @@
 package by.epam.booking.service.validation;
 
 
+import by.epam.booking.exception.RepositoryException;
+import by.epam.booking.exception.ServiceException;
 import by.epam.booking.service.user.CheckUser;
 
 import java.util.regex.Pattern;
@@ -30,7 +32,7 @@ public class NewUserValidator {
     public boolean isCorrectSurName(String surname) {
         return surname != null && Pattern.matches(SURNAME_REG, surname);
     }
-    public boolean isCorrectLogin(String login) {
+    public boolean isCorrectLogin(String login) throws ServiceException {
         return login != null && Pattern.matches(LOGIN_REG, login) && !CheckUser.isUserConsist(login);
     }
     public boolean isCorrectPassword(String password) {

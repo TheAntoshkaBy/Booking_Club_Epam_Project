@@ -30,7 +30,8 @@ public class GetAllBooksByReadingPlanSpecification implements Specification {
         try {
             statement = ConnectionPool.getInstance().getConnection().prepareStatement(SQL_REQUEST);
             statement.setInt(1,planId);
-        } catch (SQLException | ConnectionPoolException e) {
+        } catch (ConnectionPoolException | SQLException e) {
+            logger.error(e);
             throw new SpecificationException(e);
         }
         return statement;

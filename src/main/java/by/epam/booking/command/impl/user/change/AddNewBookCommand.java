@@ -4,7 +4,9 @@ import by.epam.booking.command.WebCommand;
 import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.entity.Book;
 import by.epam.booking.entity.User;
+import by.epam.booking.exception.CommandException;
 import by.epam.booking.exception.RepositoryException;
+import by.epam.booking.exception.ServiceException;
 import by.epam.booking.type.PageChangeType;
 import by.epam.booking.command.Router;
 import by.epam.booking.service.book.BookInfoType;
@@ -26,20 +28,30 @@ public class AddNewBookCommand implements WebCommand {
     private static Logger logger = LogManager.getLogger();
 
     @Override
-    public Router execute(HttpServletRequest request) throws SQLException, RepositoryException {
+    public Router execute(HttpServletRequest request) throws CommandException {
         User user = new User();
         user.setLogin((String) request.getSession().getAttribute(ParameterName.PARAM_USER_LOGIN));
         user.setBookId(Integer.parseInt(request.getParameter(ParameterName.PARAM_BOOK_ID)));
-        if(UserLogic.userUpdate(user,user, UserInfoType.BOOK)){
-            user = UserLogic.userGet(user,UserInfoType.ALL);
-            request.getSession().setAttribute(ParameterName.PARAM_USER_BOOK_NAME,user.getBookName());
-            request.getSession().setAttribute(ParameterName.PARAM_USER_BOOK_ID,user.getBookId());
+        try {
+            if(UserLogic.userUpdate(user,user, UserInfoType.BOOK)){
+                user = UserLogic.userGet(user,UserInfoType.ALL);
+                request.getSession().setAttribute(ParameterName.PARAM_USER_BOOK_NAME,user.getBookName());
+                request.getSession().setAttribute(ParameterName.PARAM_USER_BOOK_ID,user.getBookId());
+            }
+        } catch (ServiceException e) {
+            logger.error(e);
+            throw new CommandException(e);
         }
 
         Book book = new Book();
 
         book.setId(Integer.parseInt(request.getParameter(ParameterName.PARAM_BOOK_ID)));
-        book = BookLogic.bookGet(book, BookInfoType.ALL);
+        try {
+            book = BookLogic.bookGet(book, BookInfoType.ALL);
+        } catch (ServiceException e) {
+            logger.error(e);
+            throw new CommandException(e);
+        }
         request.getSession().setAttribute(ParameterName.PARAM_BOOK_ID, book.getId());
         request.getSession().setAttribute(ParameterName.BOOK_NAME_PARAMETER, book.getName());
         request.getSession().setAttribute(ParameterName.PARAM_BOOK_AUTHOR,book.getAuthor());

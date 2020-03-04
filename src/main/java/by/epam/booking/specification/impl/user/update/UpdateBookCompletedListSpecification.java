@@ -35,6 +35,7 @@ public class UpdateBookCompletedListSpecification implements Specification {
             statement.executeUpdate();
 
         } catch (SQLException | ConnectionPoolException e) {
+            logger.error(e);
             throw new SpecificationException(e);
         }
         return statement;

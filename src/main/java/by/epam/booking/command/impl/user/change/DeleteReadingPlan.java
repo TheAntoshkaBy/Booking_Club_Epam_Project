@@ -5,7 +5,9 @@ import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.config.MessageManager;
 import by.epam.booking.entity.User;
 import by.epam.booking.command.Router;
+import by.epam.booking.exception.CommandException;
 import by.epam.booking.exception.RepositoryException;
+import by.epam.booking.exception.ServiceException;
 import by.epam.booking.service.user.UserInfoType;
 import by.epam.booking.service.user.UserLogic;
 import by.epam.booking.type.PageChangeType;
@@ -23,14 +25,19 @@ public class DeleteReadingPlan implements WebCommand {
     private static Logger logger = LogManager.getLogger();
 
     @Override
-    public Router execute(HttpServletRequest request) throws RepositoryException {
+    public Router execute(HttpServletRequest request) throws CommandException {
         Router page = new Router();
         User user = new User();
         user.setLogin((String) request.getSession().getAttribute(ParameterName.PARAM_USER_LOGIN));
         user.setReadingPlanId(null);
-        if(UserLogic.userUpdate(user,user,UserInfoType.DELETE_READING_PLAN)){
-            request.getSession().setAttribute(ParameterName.PARAM_NAME_OF_READING_PLAN,null);
-            request.getSession().setAttribute(ParameterName.PARAM_READING_PLAN_ID,null);
+        try {
+            if(UserLogic.userUpdate(user,user,UserInfoType.DELETE_READING_PLAN)){
+                request.getSession().setAttribute(ParameterName.PARAM_NAME_OF_READING_PLAN,null);
+                request.getSession().setAttribute(ParameterName.PARAM_READING_PLAN_ID,null);
+            }
+        } catch (ServiceException e) {
+            logger.error(e);
+            throw new CommandException(e);
         }
         page.setPageFormat(PageChangeType.REDIRECT);
         page.setPage(ConfigurationManager.getProperty(PATH_PAGE));

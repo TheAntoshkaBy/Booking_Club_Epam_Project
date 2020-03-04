@@ -24,27 +24,30 @@ public class GetAllReadingPlans extends RepositoryHelper {
         readingPlans = new ArrayList<ReadingPlan>();
     }
 
-    public static ArrayList<ReadingPlan> getAllPlans() throws RepositoryException, SQLException {
+    public static ArrayList<ReadingPlan> getAllPlans() throws RepositoryException {
         Specification specification = new GetAllReadingPlansSpecification();
         ResultSet planSet = BookRepository.getInstance().query(specification);
         ReadingPlan readingPlan;
         readingPlans.clear();
-        try {
-            while (planSet.next()) {
-                readingPlan = new ReadingPlan();
-                readingPlan.setName(planSet.getString("r.name"));
-                readingPlan.setDescription(planSet.getString("r.description"));
-                readingPlan.setIdReadingPlan(planSet.getInt("r.idReadingPlan"));
-                ArrayList<Book> books = GetAllBooks.getAllBooksInPlan(readingPlan.getIdReadingPlan());
-                readingPlan.setBooks(books);
-                readingPlans.add(readingPlan);
-            }
-        } catch (SQLException | RepositoryException e) {
-            throw new RepositoryException(e);
-        } finally {
 
-            closeConnection(planSet.getStatement().getConnection());
-            closeStatement(planSet.getStatement());
+        try {
+            try {
+                while (planSet.next()) {
+                    readingPlan = new ReadingPlan();
+                    readingPlan.setName(planSet.getString("r.name"));
+                    readingPlan.setDescription(planSet.getString("r.description"));
+                    readingPlan.setIdReadingPlan(planSet.getInt("r.idReadingPlan"));
+                    ArrayList<Book> books = GetAllBooks.getAllBooksInPlan(readingPlan.getIdReadingPlan());
+                    readingPlan.setBooks(books);
+                    readingPlans.add(readingPlan);
+                }
+            } finally {
+                closeConnection(planSet.getStatement().getConnection());
+                closeStatement(planSet.getStatement());
+            }
+        }catch (SQLException e){
+            logger.error(e);
+            throw new RepositoryException(e);
         }
 
         return readingPlans;

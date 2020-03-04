@@ -4,7 +4,9 @@ import by.epam.booking.command.WebCommand;
 import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.entity.Book;
 import by.epam.booking.command.Router;
+import by.epam.booking.exception.CommandException;
 import by.epam.booking.exception.RepositoryException;
+import by.epam.booking.exception.ServiceException;
 import by.epam.booking.service.book.BookInfoType;
 import by.epam.booking.service.book.BookLogic;
 import by.epam.booking.type.PageChangeType;
@@ -22,12 +24,17 @@ public class ChangeBookDescriptionCommand implements WebCommand {
     private static Logger logger = LogManager.getLogger();
 
     @Override
-    public Router execute(HttpServletRequest request) throws SQLException, RepositoryException {
+    public Router execute(HttpServletRequest request) throws CommandException {
         Router page;
         Book book;
         book = new Book();
         book.setId(Integer.parseInt(request.getParameter(ParameterName.PARAM_BOOK_ID)));
-        book = BookLogic.bookGet(book, BookInfoType.ALL);
+        try {
+            book = BookLogic.bookGet(book, BookInfoType.ALL);
+        } catch (ServiceException e) {
+            logger.error(e);
+            throw new CommandException(e);
+        }
 
         if (!request.getParameter(ParameterName.PARAM_BOOK_DESCRIPTION).isEmpty()) {
             book.setDescription(request.getParameter(ParameterName.PARAM_BOOK_DESCRIPTION));

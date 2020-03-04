@@ -6,7 +6,9 @@ import by.epam.booking.config.MessageManager;
 import by.epam.booking.entity.Book;
 import by.epam.booking.entity.User;
 import by.epam.booking.command.Router;
+import by.epam.booking.exception.CommandException;
 import by.epam.booking.exception.RepositoryException;
+import by.epam.booking.exception.ServiceException;
 import by.epam.booking.service.book.BookInfoType;
 import by.epam.booking.service.book.BookLogic;
 import by.epam.booking.service.user.UserInfoType;
@@ -28,22 +30,27 @@ public class DeleteUserBookCommand implements WebCommand {
     private static Logger logger = LogManager.getLogger();
 
     @Override
-    public Router execute(HttpServletRequest request) throws SQLException, RepositoryException {
+    public Router execute(HttpServletRequest request) throws CommandException {
         Router page = new Router();
         User user = new User();
         user.setLogin((String) request.getSession().getAttribute(ParameterName.PARAM_USER_LOGIN));
         user.setBookId(null);
-        if(UserLogic.userUpdate(user,user,UserInfoType.BOOK)){
+        try {
+            if(UserLogic.userUpdate(user,user,UserInfoType.BOOK)){
 
-            Book book = new Book();
-            book.setId((Integer) request.getSession().getAttribute(ParameterName.PARAM_USER_BOOK_ID));
-            book = BookLogic.bookGet(book,BookInfoType.ALL);
-            book.setCount(book.getCount()+1);
-            BookLogic.bookUpdate(book,book, BookInfoType.COUNT);
+                Book book = new Book();
+                book.setId((Integer) request.getSession().getAttribute(ParameterName.PARAM_USER_BOOK_ID));
+                book = BookLogic.bookGet(book,BookInfoType.ALL);
+                book.setCount(book.getCount()+1);
+                BookLogic.bookUpdate(book,book, BookInfoType.COUNT);
 
-            request.getSession().setAttribute(ParameterName.PARAM_USER_BOOK_NAME,PARAM_VALUE_BOOK_NAME);
-            request.getSession().setAttribute(ParameterName.PARAM_USER_BOOK_ID,null);
-            logger.debug("User book "+ book + " deleted");
+                request.getSession().setAttribute(ParameterName.PARAM_USER_BOOK_NAME,PARAM_VALUE_BOOK_NAME);
+                request.getSession().setAttribute(ParameterName.PARAM_USER_BOOK_ID,null);
+                logger.debug("User book "+ book + " deleted");
+            }
+        } catch (ServiceException e) {
+            logger.error(e);
+            throw new CommandException(e);
         }
 
         page.setPageFormat(PageChangeType.REDIRECT);

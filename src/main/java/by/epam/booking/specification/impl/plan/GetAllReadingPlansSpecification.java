@@ -25,6 +25,7 @@ public class GetAllReadingPlansSpecification implements Specification {
         try {
             statement = ConnectionPool.getInstance().getConnection().prepareStatement(SQL_REQUEST);
         } catch (SQLException | ConnectionPoolException e) {
+            logger.error(e);
             throw new SpecificationException(e);
         }
         return statement;

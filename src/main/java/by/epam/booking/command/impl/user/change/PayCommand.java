@@ -3,7 +3,9 @@ package by.epam.booking.command.impl.user.change;
 import by.epam.booking.command.WebCommand;
 import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.entity.User;
+import by.epam.booking.exception.CommandException;
 import by.epam.booking.exception.RepositoryException;
+import by.epam.booking.exception.ServiceException;
 import by.epam.booking.type.PageChangeType;
 import by.epam.booking.command.Router;
 import by.epam.booking.service.user.UserInfoType;
@@ -22,7 +24,7 @@ public class PayCommand implements WebCommand {
     private static Logger logger = LogManager.getLogger();
 
     @Override
-    public Router execute(HttpServletRequest request) throws RepositoryException {
+    public Router execute(HttpServletRequest request) throws CommandException {
         Router page = new Router();
         Date date = new Date();
         long dateInBd = date.getTime();
@@ -33,8 +35,13 @@ public class PayCommand implements WebCommand {
         user.setBuffMoneyType(request.getParameter(ParameterName.PARAM_FINANCE_CURRENCY));
         user.setBuffDate(dateInBd);
 
-        UserLogic.userUpdate(user,user, UserInfoType.MONEY_BALANCE);
-        user = UserLogic.userGet(user,UserInfoType.ALL);
+        try {
+            UserLogic.userUpdate(user,user, UserInfoType.MONEY_BALANCE);
+            user = UserLogic.userGet(user,UserInfoType.ALL);
+        } catch (ServiceException e) {
+            logger.error(e);
+            throw new CommandException(e);
+        }
         request.getSession().setAttribute(ParameterName.PARAM_FINANCE_MONEY,user.getMoneyBalance());
         request.getSession().setAttribute(ParameterName.PARAM_TYPE_PROFILE,PARAM_VALUE_TO_PAGE);
         logger.debug("User balance get " + user.getMoneyBalance());

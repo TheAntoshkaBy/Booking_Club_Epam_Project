@@ -4,6 +4,7 @@ import by.epam.booking.command.WebCommand;
 import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.entity.Book;
 import by.epam.booking.command.Router;
+import by.epam.booking.exception.CommandException;
 import by.epam.booking.exception.RepositoryException;
 import by.epam.booking.repository.assistant.book.GetAllBooks;
 import by.epam.booking.repository.assistant.user.UserInfoByLogin;
@@ -15,6 +16,7 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class DeleteBookCommand implements WebCommand {
@@ -27,7 +29,7 @@ public class DeleteBookCommand implements WebCommand {
 
 
     @Override
-    public Router execute(HttpServletRequest request) throws RepositoryException {
+    public Router execute(HttpServletRequest request) throws CommandException {
         Router page = new Router();
         HttpSession session = request.getSession();
 
@@ -37,23 +39,28 @@ public class DeleteBookCommand implements WebCommand {
         BookLogic.bookUpdate(book, book, BookInfoType.DELETE);
         request.getSession().setAttribute(ParameterName.PARAM_USER_BOOK_ID, BOOK_ID_EMPTY_PARAMETER_VALUE);
         request.getSession().setAttribute(ParameterName.PARAM_USER_BOOK_NAME, EMPTY_BOOK_NAME_PARAMETER_VALUE);
-        ArrayList<Book> books = GetAllBooks.getAllBooks();
-
-        String login = UserInfoByLogin.getUserName((String) session.getAttribute(ParameterName.PARAM_USER_LOGIN));
-        if (login == null) {
-            request.setAttribute("user", GUEST_PARAMETER_VALUE);
-        } else {
-            request.setAttribute("user", login);
-            ArrayList<Integer> booksId = (ArrayList<Integer>) request.getSession()
-                    .getAttribute(ParameterName.PARAM_LIST_OF_USER_COMPLETED_BOOKS);
-            if (booksId != null) {
-                for (int i = 0; i < books.size(); i++) {
-                    if (booksId.contains(books.get(i).getId())) {
-                        books.get(i).setStatus(true);
+        ArrayList<Book> books = null;
+        try {
+            books = GetAllBooks.getAllBooks();
+            String login = UserInfoByLogin.getUserName((String) session.getAttribute(ParameterName.PARAM_USER_LOGIN));
+            if (login == null) {
+                request.setAttribute("user", GUEST_PARAMETER_VALUE);
+            } else {
+                request.setAttribute("user", login);
+                ArrayList<Integer> booksId = (ArrayList<Integer>) request.getSession()
+                        .getAttribute(ParameterName.PARAM_LIST_OF_USER_COMPLETED_BOOKS);
+                if (booksId != null) {
+                    for (int i = 0; i < books.size(); i++) {
+                        if (booksId.contains(books.get(i).getId())) {
+                            books.get(i).setStatus(true);
+                        }
                     }
-                }
 
+                }
             }
+        } catch (RepositoryException e) {
+            logger.error(e);
+            throw new CommandException(e);
         }
 
         logger.warn("Book delete!");

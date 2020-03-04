@@ -14,18 +14,22 @@ public class GetMaxId extends RepositoryHelper {
 
     private static Logger logger = LogManager.getLogger();
 
-    public static Integer getMaxId() throws SQLException, RepositoryException {
+    public static Integer getMaxId() throws RepositoryException {
         Integer result = null;
         ResultSet resultBook = BookRepository.getInstance().query(new SelectMaxIdBookSpecification());
+
         try {
-            while (resultBook.next()) {
-                result = resultBook.getInt(1);
+            try {
+                while (resultBook.next()) {
+                    result = resultBook.getInt(1);
+                }
+            } finally {
+                closeConnection(resultBook.getStatement().getConnection());
+                closeStatement(resultBook.getStatement());
             }
-        } catch (SQLException e) {
+        }catch (SQLException e){
+            logger.error(e);
             throw new RepositoryException(e);
-        } finally {
-            closeConnection(resultBook.getStatement().getConnection());
-            closeStatement(resultBook.getStatement());
         }
 
         return result;

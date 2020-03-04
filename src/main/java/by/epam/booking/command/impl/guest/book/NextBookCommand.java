@@ -4,7 +4,9 @@ import by.epam.booking.command.WebCommand;
 import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.entity.Book;
 import by.epam.booking.command.Router;
+import by.epam.booking.exception.CommandException;
 import by.epam.booking.exception.RepositoryException;
+import by.epam.booking.exception.ServiceException;
 import by.epam.booking.repository.assistant.book.GetAllBooks;
 import by.epam.booking.service.book.BookInfoType;
 import by.epam.booking.service.book.BookLogic;
@@ -26,7 +28,7 @@ public class NextBookCommand implements WebCommand {
 
 
     @Override
-    public Router execute(HttpServletRequest request) throws SQLException, RepositoryException {
+    public Router execute(HttpServletRequest request) throws CommandException {
 
         ArrayList<Integer> booksId = (ArrayList<Integer>) request.getSession().getAttribute(ParameterName.PARAM_ALL_BOOKS_ID);
 
@@ -39,8 +41,13 @@ public class NextBookCommand implements WebCommand {
             book.setId(booksId.get(booksId.indexOf(book.getId())+1));
         }
         logger.debug("Next book id" + book.getId());
+        try {
             BookLogic.bookGet(book, BookInfoType.ALL);
-            request.getSession().setAttribute(ParameterName.PARAM_BOOK_ID, book.getId());
+        } catch (ServiceException e) {
+            logger.error(e);
+            throw new CommandException(e);
+        }
+        request.getSession().setAttribute(ParameterName.PARAM_BOOK_ID, book.getId());
             request.getSession().setAttribute(ParameterName.BOOK_NAME_PARAMETER, book.getName());
             request.getSession().setAttribute(ParameterName.PARAM_BOOK_AUTHOR, book.getAuthor());
             request.getSession().setAttribute(ParameterName.PARAM_BOOK_DESCRIPTION, book.getDescription());

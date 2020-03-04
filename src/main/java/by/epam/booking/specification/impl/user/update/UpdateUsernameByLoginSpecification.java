@@ -35,6 +35,7 @@ public class UpdateUsernameByLoginSpecification implements Specification {
             statement.setString(2,login);
             statement.executeUpdate();
         } catch (SQLException | ConnectionPoolException e) {
+            logger.error(e);
             throw new SpecificationException(e);
         }
         return statement;

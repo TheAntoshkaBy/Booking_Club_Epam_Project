@@ -17,19 +17,22 @@ public class GetUserDataString extends RepositoryHelper {
     public static String getString(String login) throws RepositoryException {
         String name = null;
         ResultSet userInfo = UserRepository.getINSTANCE().query(new GetUserProfileImageSpecification(login));
-        try {
-            userInfo.next();
-            name = userInfo.getString("u.profile_image");
-        }catch (SQLException e) {
 
-        }finally {
+        try {
+
             try {
+                userInfo.next();
+                name = userInfo.getString("u.profile_image");
+            } finally {
+
                 closeConnection(userInfo.getStatement().getConnection());
                 closeStatement(userInfo.getStatement());
-            } catch (SQLException | RepositoryException e) {
-                throw new RepositoryException(e);
             }
+        } catch (SQLException e) {
+            logger.error(e);
+            throw new RepositoryException(e);
         }
+
         return name;
     }
 }

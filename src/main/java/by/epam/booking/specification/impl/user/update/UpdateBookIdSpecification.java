@@ -40,6 +40,7 @@ public class UpdateBookIdSpecification implements Specification {
             }
 
         } catch (SQLException | ConnectionPoolException e) {
+            logger.error(e);
             throw new SpecificationException(e);
         }
         return statement;

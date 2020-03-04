@@ -16,11 +16,12 @@ public class SelectMaxIdBookSpecification implements Specification {
     private static Logger logger = LogManager.getLogger();
 
     @Override
-    public PreparedStatement specify() throws SQLException, SpecificationException {
+    public PreparedStatement specify() throws SpecificationException {
         PreparedStatement statement = null;
         try {
             statement = ConnectionPool.getInstance().getConnection().prepareStatement(SQL_REQUEST);
         } catch (SQLException | ConnectionPoolException e) {
+            logger.error(e);
             throw new SpecificationException(e);
         }
         return statement;

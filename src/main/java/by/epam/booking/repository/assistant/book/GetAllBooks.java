@@ -28,48 +28,51 @@ public class GetAllBooks extends RepositoryHelper {
         Book book;
         books.clear();
         try {
-            while (bookSet.next()) {
-                book = new Book();
-                book.setAuthor(bookSet.getString("author"));
-                book.setName(bookSet.getString("name"));
-                book.setCount(bookSet.getInt("count"));
-                book.setId(bookSet.getInt("idBook"));
-                book.setDescription(bookSet.getString("description"));
-                books.add(book);
-            }
-        } catch (SQLException e) {
-            throw new RepositoryException(e);
-        } finally {
             try {
+                while (bookSet.next()) {
+                    book = new Book();
+                    book.setAuthor(bookSet.getString("author"));
+                    book.setName(bookSet.getString("name"));
+                    book.setCount(bookSet.getInt("count"));
+                    book.setId(bookSet.getInt("idBook"));
+                    book.setDescription(bookSet.getString("description"));
+                    books.add(book);
+                }
+            } finally {
                 closeConnection(bookSet.getStatement().getConnection());
                 closeStatement(bookSet.getStatement());
-            } catch (SQLException e) {
-                e.printStackTrace();
             }
+        }catch (SQLException e){
+            logger.error(e);
+            throw new RepositoryException(e);
         }
-
         return books;
     }
 
-    public static ArrayList<Book> getAllBooksInPlan(int planId) throws RepositoryException, SQLException {
+    public static ArrayList<Book> getAllBooksInPlan(int planId) throws RepositoryException {
         ResultSet bookSet = BookRepository.getInstance().query(new GetAllBooksByReadingPlanSpecification(planId));
         Book book;
         books.clear();
+
         try {
-            while (bookSet.next()) {
-                book = new Book();
-                book.setAuthor(bookSet.getString("author"));
-                book.setName(bookSet.getString("name"));
-                book.setCount(bookSet.getInt("count"));
-                book.setId(bookSet.getInt("idBook"));
-                book.setDescription(bookSet.getString("description"));
-                books.add(book);
+            try {
+                while (bookSet.next()) {
+                    book = new Book();
+                    book.setAuthor(bookSet.getString("author"));
+                    book.setName(bookSet.getString("name"));
+                    book.setCount(bookSet.getInt("count"));
+                    book.setId(bookSet.getInt("idBook"));
+                    book.setDescription(bookSet.getString("description"));
+                    books.add(book);
+                }
+            }finally {
+                closeConnection(bookSet.getStatement().getConnection());
+                closeStatement(bookSet.getStatement());
+
             }
-        } catch (SQLException e) {
+        }catch (SQLException e){
+            logger.error(e);
             throw new RepositoryException(e);
-        } finally {
-            closeConnection(bookSet.getStatement().getConnection());
-            closeStatement(bookSet.getStatement());
         }
 
         return books;

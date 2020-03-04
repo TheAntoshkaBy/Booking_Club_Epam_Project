@@ -30,25 +30,28 @@ public class ReadingPlanRepository implements DataBaseRepository<ReadingPlan> {
     }
 
     @Override
-    public void add(ReadingPlan readingPlan) throws RepositoryException, SQLException {
+    public void add(ReadingPlan readingPlan) throws RepositoryException {
         PreparedStatement preparedStatement = null;
-        try {
-            preparedStatement = ConnectionPool.getInstance().getConnection().prepareStatement(SQL_INSERT_USER);
-        } catch (SQLException | ConnectionPoolException e) {
-            throw new RepositoryException(e);
-        }
-        try {
-            preparedStatement.setString(1, readingPlan.getName());
-            preparedStatement.setString(2, readingPlan.getDescription());
-            preparedStatement.executeUpdate();
-            closeConnection(preparedStatement.getConnection());
-        } catch (SQLException e) {
-            throw new RepositoryException(e);
-        } finally {
 
-            closeConnection(preparedStatement.getConnection());
-            closeStatement(preparedStatement);
+        try {
+            try {
+                preparedStatement = ConnectionPool.getInstance().getConnection().prepareStatement(SQL_INSERT_USER);
+                preparedStatement.setString(1, readingPlan.getName());
+                preparedStatement.setString(2, readingPlan.getDescription());
+                preparedStatement.executeUpdate();
+                closeConnection(preparedStatement.getConnection());
+            } finally {
+                assert preparedStatement != null;
+                closeConnection(preparedStatement.getConnection());
+                closeStatement(preparedStatement);
+            }
+        }catch (SQLException | ConnectionPoolException e){
+            logger.error(e);
+            throw new RepositoryException(e);
         }
+
+
+
     }
 
     @Override

@@ -18,11 +18,11 @@ import java.sql.Statement;
 
 public class UserRepository implements DataBaseRepository<User> {
 
-    private static Logger logger = LogManager.getLogger();
     private static final String SQL_INSERT_USER =
             "INSERT INTO Booking_Club.User " +
                     "(login, password, email, name, surname, role, isActive) VALUES (?,?,?,?,?,?,?)";
     private static final UserRepository INSTANCE = new UserRepository();
+    private static Logger logger = LogManager.getLogger();
     private Statement statement;
 
     public static UserRepository getINSTANCE() {
@@ -30,33 +30,31 @@ public class UserRepository implements DataBaseRepository<User> {
     }
 
     @Override
-    public void add(User user) throws RepositoryException, SQLException {
+    public void add(User user) throws RepositoryException {
         PreparedStatement preparedStatement = null;
-        try {
 
-            preparedStatement = ConnectionPool.getInstance().getConnection().prepareStatement(SQL_INSERT_USER);
+        try {
+            try {
+                preparedStatement = ConnectionPool.getInstance().getConnection().prepareStatement(SQL_INSERT_USER);
+                preparedStatement.setString(1, user.getLogin());
+                preparedStatement.setString(2, user.getPassword());
+                preparedStatement.setString(3, user.getEmail());
+                preparedStatement.setString(4, user.getName());
+                preparedStatement.setString(5, user.getSurname());
+                preparedStatement.setString(6, user.getRole().name());
+                preparedStatement.setBoolean(7, false);
+                preparedStatement.executeUpdate();
+                closeConnection(preparedStatement.getConnection());
+            } finally {
+
+                closeConnection(preparedStatement.getConnection());
+                closeStatement(preparedStatement);
+            }
         } catch (SQLException | ConnectionPoolException e) {
+            logger.error(e);
             throw new RepositoryException(e);
         }
-        try {
-            preparedStatement.setString(1, user.getLogin());
-            preparedStatement.setString(2, user.getPassword());
-            preparedStatement.setString(3, user.getEmail());
-            preparedStatement.setString(4, user.getName());
-            preparedStatement.setString(5, user.getSurname());
-            preparedStatement.setString(6, user.getRole().name());
-            preparedStatement.setBoolean(7, false);
 
-
-            preparedStatement.executeUpdate();
-            closeConnection(preparedStatement.getConnection());
-        } catch (SQLException e) {
-            throw new RepositoryException(e);
-        } finally {
-
-            closeConnection(preparedStatement.getConnection());
-            closeStatement(preparedStatement);
-        }
     }
 
     @Override

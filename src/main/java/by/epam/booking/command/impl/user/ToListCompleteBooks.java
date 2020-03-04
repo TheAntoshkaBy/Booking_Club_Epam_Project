@@ -4,11 +4,15 @@ import by.epam.booking.command.WebCommand;
 import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.entity.Book;
 import by.epam.booking.command.Router;
+import by.epam.booking.exception.CommandException;
 import by.epam.booking.exception.RepositoryException;
+import by.epam.booking.exception.ServiceException;
 import by.epam.booking.service.book.BookInfoType;
 import by.epam.booking.service.book.BookLogic;
 import by.epam.booking.type.PageChangeType;
 import by.epam.booking.type.ParameterName;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
@@ -18,9 +22,10 @@ public class ToListCompleteBooks implements WebCommand {
 
     private static final String PATH_PAGE = "path.page.completed.books";
     private static final String PARAM_TYPE_VALUE = "see";
+    private static Logger logger = LogManager.getLogger();
 
     @Override
-    public Router execute(HttpServletRequest request) throws SQLException, RepositoryException {
+    public Router execute(HttpServletRequest request) throws CommandException {
         Router page = new Router();
         ArrayList<Integer> idBooks = (ArrayList<Integer>) request.getSession()
                 .getAttribute(ParameterName.PARAM_LIST_OF_USER_COMPLETED_BOOKS);
@@ -28,7 +33,12 @@ public class ToListCompleteBooks implements WebCommand {
         for (int i = 0; i < idBooks.size(); i++) {
             Book book = new Book();
             book.setId(idBooks.get(i));
-            books.add(BookLogic.bookGet(book, BookInfoType.ALL));
+            try {
+                books.add(BookLogic.bookGet(book, BookInfoType.ALL));
+            } catch (ServiceException e) {
+                logger.error(e);
+                throw new CommandException(e);
+            }
         }
         request.setAttribute(ParameterName.PARAM_COMPLETED_BOOKS, books);
         request.getSession().setAttribute(ParameterName.PARAM_TYPE_PROFILE, PARAM_TYPE_VALUE);

@@ -17,19 +17,22 @@ public class GetBookName extends RepositoryHelper {
     public static String getBookName(String login) throws RepositoryException {
         String name = null;
         ResultSet userInfo = UserRepository.getINSTANCE().query(new GetUserBookNameByIdBookSpecification(login));
-        try {
-            userInfo.next();
-            name = userInfo.getString("b.name");
-        }catch (SQLException e) {
 
-        }finally {
+        try {
             try {
+                while (userInfo.next()){
+                    name = userInfo.getString("b.name");
+                }
+            }finally {
                 closeConnection(userInfo.getStatement().getConnection());
                 closeStatement(userInfo.getStatement());
-            } catch (SQLException | RepositoryException e) {
-               throw new RepositoryException(e);
             }
+
+        }catch (SQLException e){
+            logger.error(e);
+            throw new RepositoryException(e);
         }
+
         return name;
     }
 }

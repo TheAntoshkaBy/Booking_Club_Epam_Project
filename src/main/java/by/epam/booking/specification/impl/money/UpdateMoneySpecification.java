@@ -27,7 +27,7 @@ public class UpdateMoneySpecification implements Specification {
     }
 
     @Override
-    public PreparedStatement specify() throws SQLException, SpecificationException {
+    public PreparedStatement specify() throws SpecificationException {
         PreparedStatement statement = null;
         try {
             Connection connection = ConnectionPool.getInstance().getConnection();
@@ -38,6 +38,7 @@ public class UpdateMoneySpecification implements Specification {
             statement.executeUpdate();
 
         } catch (SQLException | ConnectionPoolException e) {
+            logger.error(e);
             throw new SpecificationException(e);
         }
         return statement;

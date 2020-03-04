@@ -13,10 +13,10 @@ import java.sql.SQLException;
 
 public class AddNewBookCommentSpecification implements Specification {
 
-    private static Logger logger = LogManager.getLogger();
     private static final String SQL_INSERT_USER =
             "INSERT INTO Booking_Club.Comments " +
                     "(date, author, bookId, text, header) VALUES (?,?,?,?,?)";
+    private static Logger logger = LogManager.getLogger();
     private Comment comment;
     private long date;
 
@@ -28,25 +28,21 @@ public class AddNewBookCommentSpecification implements Specification {
     @Override
     public PreparedStatement specify() throws SpecificationException {
         PreparedStatement preparedStatement = null;
-        try {
 
-            preparedStatement = ConnectionPool.getInstance().getConnection().prepareStatement(SQL_INSERT_USER);
-        } catch (SQLException | ConnectionPoolException e) {
-            throw new SpecificationException(e);
-        }
         try {
+            preparedStatement = ConnectionPool.getInstance().getConnection().prepareStatement(SQL_INSERT_USER);
             preparedStatement.setLong(1, date);
             preparedStatement.setString(2, comment.getAuthor());
             preparedStatement.setInt(3, comment.getBookId());
-            preparedStatement.setString(4,comment.getText());
-            preparedStatement.setString(5,comment.getHeader());
+            preparedStatement.setString(4, comment.getText());
+            preparedStatement.setString(5, comment.getHeader());
             preparedStatement.executeUpdate();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException | ConnectionPoolException e) {
+            logger.error(e);
+            throw new SpecificationException(e);
         }
-
-       return preparedStatement;
+        return preparedStatement;
     }
 
     @Override

@@ -17,7 +17,7 @@ public class Login extends RepositoryHelper {
 
     private static Logger logger = LogManager.getLogger();
 
-    public static boolean checkLogIn(String login, String pass) throws SQLException, RepositoryException {
+    public static boolean checkLogIn(String login, String pass) throws RepositoryException {
 
         if(login.isEmpty() || pass.isEmpty())
             return false;
@@ -27,49 +27,60 @@ public class Login extends RepositoryHelper {
         ResultSet checkLogIn = UserRepository.getINSTANCE().query(new SearchLoginAndPassByLoginSpecification(user));
 
         User checkUser = new User();
-        while (checkLogIn.next()){
-            checkUser.setLogin(checkLogIn.getString("login"));
-            checkUser.setPassword(checkLogIn.getString("password"));
-        }
-        if(checkUser.getLogin() == null || checkUser.getPassword() == null)
-            return false;
 
-        closeConnection(checkLogIn.getStatement().getConnection());
-        closeStatement(checkLogIn.getStatement());
+        try {
+            try {
+                while (checkLogIn.next()){
+                    checkUser.setLogin(checkLogIn.getString("login"));
+                    checkUser.setPassword(checkLogIn.getString("password"));
+                }
+                if(checkUser.getLogin() == null || checkUser.getPassword() == null)
+                    return false;
+
+            }finally {
+                closeConnection(checkLogIn.getStatement().getConnection());
+                closeStatement(checkLogIn.getStatement());
+            }
+        } catch (SQLException e){
+            logger.error(e);
+            throw new RepositoryException(e);
+        }
+
         return checkUser.getLogin().equals(login)
                 && checkUser.getPassword().equals(pass);
     }
 
-    public static boolean checkLogIn(String login){
+    public static boolean checkLogIn(String login) throws RepositoryException {
 
         ResultSet loginUser = UserRepository.getINSTANCE().query(new SearchLoginByLoginSpecification(login));
         String searchedLogin=null;
+
+        try {
             try {
                 while (loginUser.next()){
                     searchedLogin = loginUser.getString("login");
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }finally {
-                try {
-                    closeConnection(loginUser.getStatement().getConnection());
-                    closeStatement(loginUser.getStatement());
-                } catch (SQLException | RepositoryException e) {
-                    e.printStackTrace();
-                }
-
+            } finally {
+                closeConnection(loginUser.getStatement().getConnection());
+                closeStatement(loginUser.getStatement());
             }
+
+        }catch (SQLException e){
+            logger.error(e);
+            throw new RepositoryException(e);
+        }
 
         return (searchedLogin != null);
     }
 
-    public static boolean changeLogIn(Specification specification){
+    public static boolean changeLogIn(Specification specification) throws RepositoryException{
         UserRepository.getINSTANCE().query(specification);
         try {
             closeConnection(UserRepository.getINSTANCE().getStatement().getConnection());
             closeStatement(UserRepository.getINSTANCE().getStatement());
-        }catch (SQLException | RepositoryException e){
-            e.printStackTrace();
+        }catch (SQLException e){
+            logger.error("Close Connection in time Change Login Error ", e);
+            throw new RepositoryException(e);
         }
         return true;
     }

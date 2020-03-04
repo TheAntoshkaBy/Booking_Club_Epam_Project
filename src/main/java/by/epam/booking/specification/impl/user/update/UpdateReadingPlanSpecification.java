@@ -38,14 +38,14 @@ public class UpdateReadingPlanSpecification implements Specification {
                 statement = connection.prepareStatement(SQL_REQUEST);
                 statement.setInt(1,newReadingPlanId);
                 statement.setString(2,login);
-                statement.executeUpdate();
             }else {
                 statement = connection.prepareStatement(NULL_SQL_REQUEST);
                 statement.setString(1,login);
-                statement.executeUpdate();
             }
+            statement.executeUpdate();
 
         } catch (SQLException | ConnectionPoolException e) {
+            logger.error(e);
             throw new SpecificationException(e);
         }
         return statement;

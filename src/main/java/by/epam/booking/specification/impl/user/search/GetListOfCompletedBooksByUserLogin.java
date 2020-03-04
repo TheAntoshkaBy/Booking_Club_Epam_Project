@@ -28,6 +28,7 @@ public class GetListOfCompletedBooksByUserLogin implements Specification {
             statement = ConnectionPool.getInstance().getConnection().prepareStatement(SQL_REQUEST);
             statement.setString(1,login);
         } catch (SQLException | ConnectionPoolException e) {
+            logger.error(e);
             throw new SpecificationException(e);
         }
         return statement;

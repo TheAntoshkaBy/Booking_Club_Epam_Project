@@ -16,41 +16,50 @@ public class GetBookInfo extends RepositoryHelper {
 
     private static Logger logger = LogManager.getLogger();
 
-    public static boolean getBookById(Book book) throws RepositoryException, SQLException {
+    public static boolean getBookById(Book book) throws RepositoryException{
         ResultSet resultBook = BookRepository.getInstance().query(new SelectBookByIdSpecification(book.getId()));
+
         try {
-            while (resultBook.next()) {
-                book.setId(resultBook.getInt("idBook"));
-                book.setCount(resultBook.getInt("count"));
-                book.setAuthor(resultBook.getString("author"));
-                book.setName(resultBook.getString("name"));
-                book.setDescription(resultBook.getString("description"));
+            try {
+                while (resultBook.next()) {
+                    book.setId(resultBook.getInt("idBook"));
+                    book.setCount(resultBook.getInt("count"));
+                    book.setAuthor(resultBook.getString("author"));
+                    book.setName(resultBook.getString("name"));
+                    book.setDescription(resultBook.getString("description"));
+                }
+                if (book.getName() == null) {
+                    return false;
+                }
+            } finally {
+                closeConnection(resultBook.getStatement().getConnection());
+                closeStatement(resultBook.getStatement());
             }
-            if (book.getName() == null) {
-                return false;
-            }
-        } catch (SQLException e) {
+        }catch (SQLException e){
+            logger.error(e);
             throw new RepositoryException(e);
-        } finally {
-            closeConnection(resultBook.getStatement().getConnection());
-            closeStatement(resultBook.getStatement());
         }
+
         return true;
     }
 
-    public static String getBookImageById(Book book) throws RepositoryException, SQLException {
+    public static String getBookImageById(Book book) throws RepositoryException {
         ResultSet resultBook = BookRepository.getInstance().query(new GetBookImageSpecification(book.getId()));
-        try {
-            while (resultBook.next()) {
-                book.setImage(resultBook.getString("b.book_image"));
-            }
-        } catch (SQLException e) {
-            throw new RepositoryException(e);
-        } finally {
 
+        try {
+            try {
+                while (resultBook.next()) {
+                    book.setImage(resultBook.getString("b.book_image"));
+                }
+            } finally {
                 closeConnection(resultBook.getStatement().getConnection());
                 closeStatement(resultBook.getStatement());
+            }
+        }catch (SQLException e){
+            logger.error(e);
+            throw new RepositoryException(e);
         }
+
         return book.getImage();
     }
 }

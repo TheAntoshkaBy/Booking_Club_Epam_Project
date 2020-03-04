@@ -29,6 +29,7 @@ public class GetAllCommentsBookSpecification implements Specification {
             statement = ConnectionPool.getInstance().getConnection().prepareStatement(SQL_REQUEST);
             statement.setInt(1,bookId);
         } catch (SQLException | ConnectionPoolException e) {
+            logger.error(e);
             throw new SpecificationException(e);
         }
         return statement;

@@ -22,12 +22,13 @@ public class GetBookImageSpecification implements Specification {
     }
 
     @Override
-    public PreparedStatement specify() throws SQLException, SpecificationException {
+    public PreparedStatement specify() throws SpecificationException {
         PreparedStatement statement = null;
         try {
             statement = ConnectionPool.getInstance().getConnection().prepareStatement(SQL_REQUEST);
             statement.setInt(1,login);
         } catch (SQLException | ConnectionPoolException e) {
+            logger.error(e);
             throw new SpecificationException(e);
         }
         return statement;

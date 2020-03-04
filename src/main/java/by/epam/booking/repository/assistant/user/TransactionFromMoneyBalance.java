@@ -18,59 +18,61 @@ public class TransactionFromMoneyBalance extends RepositoryHelper {
 
     private static Logger logger = LogManager.getLogger();
 
-    public static boolean moneyExecutor(Double moneyBalanceAdd, String login, String type, long date) throws RepositoryException {
+    public static boolean moneyExecutor(Double moneyBalanceAdd, String login, String type, long date)
+            throws RepositoryException, SQLException {
 
         Statement stGetBalance = null;
         Statement stSetBalance = null;
         Statement stNewMoneyOperation = null;
 
         try {
-            Specification getSpecification = new GetUserMoneySpecification(login);
-
-
-            ResultSet rsGetBalance = getSpecification.specify().executeQuery();
-
-            stGetBalance = rsGetBalance.getStatement();
-            Double newBalance = 0d;
-            while (rsGetBalance.next()) {
-                newBalance = rsGetBalance.getDouble(1);
-            }
-
-            newBalance+= moneyBalanceAdd;
-
-            Specification specificationForSetBalance = new UpdateMoneySpecification(newBalance,login);
-            stSetBalance = specificationForSetBalance.specify();
-
-            stGetBalance.getConnection().commit();
-            stSetBalance.getConnection().commit();
-
-            Specification specificationSetNewMoneyCheck = new AddMoneyCheckSpecification(moneyBalanceAdd,login,type,date);
-            stNewMoneyOperation = specificationSetNewMoneyCheck.specify();
-
-
-            stNewMoneyOperation.getConnection().commit();
-        }catch (SQLException | SpecificationException e) {
             try {
-                stGetBalance.getConnection().rollback();
-                stSetBalance.getConnection().rollback();
-                stNewMoneyOperation.getConnection().rollback();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
+                Specification getSpecification = new GetUserMoneySpecification(login);
 
-        }finally {
-            try {
+                ResultSet rsGetBalance = getSpecification.specify().executeQuery();//k1
+
+                stGetBalance = rsGetBalance.getStatement();
+                System.out.println(stGetBalance.getConnection().getAutoCommit());
+                Double newBalance = 0d;
+                while (rsGetBalance.next()) {
+                    newBalance = rsGetBalance.getDouble(1);
+                }
+
+                newBalance+= moneyBalanceAdd;
+
+                Specification specificationForSetBalance = new UpdateMoneySpecification(newBalance,login);//k2
+                stSetBalance = specificationForSetBalance.specify();
+
+                System.out.println(stSetBalance.getConnection().getAutoCommit());
+
+                stGetBalance.getConnection().commit();
+                stSetBalance.getConnection().commit();
+
+                System.out.println(stGetBalance.getConnection().getAutoCommit());
+                System.out.println(stSetBalance.getConnection().getAutoCommit());
+                Specification specificationSetNewMoneyCheck = new AddMoneyCheckSpecification(moneyBalanceAdd,login,type,date);
+                stNewMoneyOperation = specificationSetNewMoneyCheck.specify();
+                System.out.println(stNewMoneyOperation.getConnection().getAutoCommit());
+                stNewMoneyOperation.getConnection().commit();
+                System.out.println(stNewMoneyOperation.getConnection().getAutoCommit());
+            }finally {
+
+                stGetBalance.getConnection().setAutoCommit(true);
+                stSetBalance.getConnection().setAutoCommit(true);
+                stNewMoneyOperation.getConnection().setAutoCommit(true);
+// FIXME: 04.03.2020 
                 closeConnection(stGetBalance.getConnection());
                 closeConnection(stSetBalance.getConnection());
                 closeConnection(stNewMoneyOperation.getConnection());
-            } catch (SQLException e) {
-                e.printStackTrace();
             }
-            closeStatement(stGetBalance);
-            closeStatement(stSetBalance);
-            closeStatement(stNewMoneyOperation);
-        }
 
+        } catch (SQLException | SpecificationException e){
+            stGetBalance.getConnection().rollback();
+            stSetBalance.getConnection().rollback();
+            stNewMoneyOperation.getConnection().rollback();
+            logger.error(e);
+            throw new RepositoryException(e);
+        }
         return true;
     }
 }

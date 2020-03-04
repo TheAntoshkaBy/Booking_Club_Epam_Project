@@ -2,6 +2,7 @@ package by.epam.booking.specification.impl.book.update;
 
 import by.epam.booking.connection.ConnectionPool;
 import by.epam.booking.exception.ConnectionPoolException;
+import by.epam.booking.exception.SpecificationException;
 import by.epam.booking.specification.Specification;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,7 +24,7 @@ public class UpdateBookNameByIdSpecification implements Specification {
     }
 
     @Override
-    public PreparedStatement specify() throws SQLException {
+    public PreparedStatement specify() throws SpecificationException {
         PreparedStatement statement = null;
         try {
             Connection connection = ConnectionPool.getInstance().getConnection();
@@ -32,7 +33,8 @@ public class UpdateBookNameByIdSpecification implements Specification {
             statement.setInt(2,id);
             statement.executeUpdate();
         } catch (SQLException | ConnectionPoolException e) {
-            e.printStackTrace();
+            logger.error(e);
+            throw new SpecificationException(e);
         }
         return statement;
     }

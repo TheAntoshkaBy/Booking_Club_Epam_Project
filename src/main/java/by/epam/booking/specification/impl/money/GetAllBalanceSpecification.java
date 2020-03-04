@@ -2,6 +2,7 @@ package by.epam.booking.specification.impl.money;
 
 import by.epam.booking.connection.ConnectionPool;
 import by.epam.booking.exception.ConnectionPoolException;
+import by.epam.booking.exception.SpecificationException;
 import by.epam.booking.specification.Specification;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,12 +19,13 @@ public class GetAllBalanceSpecification implements Specification {
     }
 
     @Override
-    public PreparedStatement specify() {
+    public PreparedStatement specify() throws SpecificationException {
         PreparedStatement statement = null;
         try {
             statement = ConnectionPool.getInstance().getConnection().prepareStatement(SQL_REQUEST);
         } catch (SQLException | ConnectionPoolException e) {
-            e.printStackTrace();
+            logger.error(e);
+            throw new SpecificationException(e);
         }
         return statement;
     }

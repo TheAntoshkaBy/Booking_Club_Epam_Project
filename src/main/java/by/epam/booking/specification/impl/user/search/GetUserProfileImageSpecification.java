@@ -22,12 +22,13 @@ public class GetUserProfileImageSpecification implements Specification {
     }
 
     @Override
-    public PreparedStatement specify() throws SQLException, SpecificationException {
+    public PreparedStatement specify() throws SpecificationException {
         PreparedStatement statement = null;
         try {
             statement = ConnectionPool.getInstance().getConnection().prepareStatement(SQL_REQUEST);
             statement.setString(1,this.login);
         } catch (SQLException | ConnectionPoolException e) {
+            logger.error(e);
             throw new SpecificationException(e);
         }
         return statement;

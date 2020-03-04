@@ -13,6 +13,6 @@ public interface Specification {
     String BOOK_TABLE = "Booking_Club.Book b";
     String READING_PLAN_TABLE = "Booking_Club.ReadingPlan r";
     String BOOK_COMPLETED = "Booking_Club.Book_Complitor";
-    PreparedStatement specify() throws SQLException, SpecificationException;
+    PreparedStatement specify() throws SpecificationException;
     boolean isUpdate();
 }

@@ -24,7 +24,7 @@ public class UpdateProfileImageSpecification implements Specification {
     }
 
     @Override
-    public PreparedStatement specify() throws SQLException, SpecificationException {
+    public PreparedStatement specify() throws SpecificationException {
         PreparedStatement statement = null;
         try {
             Connection connection = ConnectionPool.getInstance().getConnection();
@@ -33,6 +33,7 @@ public class UpdateProfileImageSpecification implements Specification {
             statement.setString(2,userLogin);
             statement.executeUpdate();
         } catch (SQLException | ConnectionPoolException e) {
+            logger.error(e);
             throw new SpecificationException(e);
         }
         return statement;

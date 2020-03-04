@@ -4,7 +4,9 @@ import by.epam.booking.command.Router;
 import by.epam.booking.command.WebCommand;
 import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.entity.Book;
+import by.epam.booking.exception.CommandException;
 import by.epam.booking.exception.RepositoryException;
+import by.epam.booking.exception.ServiceException;
 import by.epam.booking.repository.impl.BookRepository;
 import by.epam.booking.type.PageChangeType;
 import by.epam.booking.type.ParameterName;
@@ -20,7 +22,7 @@ public class AddBookCommand implements WebCommand {
     private static Logger logger = LogManager.getLogger();
 
     @Override
-    public Router execute(HttpServletRequest request) throws SQLException, RepositoryException {
+    public Router execute(HttpServletRequest request) throws CommandException {
         Router page = new Router();
         String name = request.getParameter(ParameterName.BOOK_NAME_PARAMETER);
         String author = request.getParameter(ParameterName.PARAM_BOOK_AUTHOR);
@@ -28,7 +30,12 @@ public class AddBookCommand implements WebCommand {
         String count = request.getParameter(ParameterName.PARAM_BOOK_COUNT);
 
         Book book = new Book(name, author, description, Integer.parseInt(count));
-        BookRepository.getInstance().add(book);
+        try {
+            BookRepository.getInstance().add(book);
+        } catch (RepositoryException e) {
+            logger.error(e);
+            throw new CommandException(e);
+        }
 
         logger.debug("Add book " + book + " to library");// FIXME: 03.03.2020
         page.setPage(ConfigurationManager.getProperty(PAGE_PATH));

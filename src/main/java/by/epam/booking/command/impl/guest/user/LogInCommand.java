@@ -33,7 +33,7 @@ public class LogInCommand implements WebCommand {
     private static final String PARAM_TYPE_PROFILE_PAGE_VALUE = "see";
 
     @Override
-    public Router execute(HttpServletRequest request) throws ServiceException, RepositoryException, CommandException {
+    public Router execute(HttpServletRequest request) throws CommandException {
         Router page = new Router();
         String login = request.getParameter(PARAM_NAME_LOGIN);
         String password = EncryptPassword.encrypt(request.getParameter(PARAM_NAME_PASSWORD));

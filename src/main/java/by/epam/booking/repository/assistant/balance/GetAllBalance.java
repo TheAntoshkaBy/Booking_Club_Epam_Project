@@ -17,26 +17,30 @@ public class GetAllBalance extends RepositoryHelper {
 
     private static Logger logger = LogManager.getLogger();
 
-    public static ArrayList<Balance> getAll() throws RepositoryException, SQLException {
+    public static ArrayList<Balance> getAll() throws RepositoryException {
         ArrayList<Balance> balances = new ArrayList<>();
         ResultSet userInfo = MoneyStoreRepository.getINSTANCE().query(new GetAllBalanceSpecification());
         try {
-            while (userInfo.next()) {
-                Balance balance = new Balance();
-                balance.setBalance(userInfo.getDouble("moneyBalance"));
-                balance.setIdOperation(userInfo.getInt("idOperation"));
-                balance.setAuthorLogin(userInfo.getString("authorOperationLogin"));
-                balance.setType(userInfo.getString("typeOperation"));
-                Date date = new Date(userInfo.getLong("date"));
-                balance.setDate(date);
-                balances.add(balance);
+            try {
+                while (userInfo.next()) {
+                    Balance balance = new Balance();
+                    balance.setBalance(userInfo.getDouble("moneyBalance"));
+                    balance.setIdOperation(userInfo.getInt("idOperation"));
+                    balance.setAuthorLogin(userInfo.getString("authorOperationLogin"));
+                    balance.setType(userInfo.getString("typeOperation"));
+                    Date date = new Date(userInfo.getLong("date"));
+                    balance.setDate(date);
+                    balances.add(balance);
+                }
+            } finally {
+                closeConnection(userInfo.getStatement().getConnection());
+                closeStatement(userInfo.getStatement());
             }
         } catch (SQLException e) {
+            logger.error(e);
             throw new RepositoryException(e);
-        } finally {
-            closeConnection(userInfo.getStatement().getConnection());
-            closeStatement(userInfo.getStatement());
         }
+
         return balances;
     }
 }

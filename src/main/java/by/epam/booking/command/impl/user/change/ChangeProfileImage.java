@@ -7,6 +7,7 @@ import by.epam.booking.entity.User;
 import by.epam.booking.command.Router;
 import by.epam.booking.exception.CommandException;
 import by.epam.booking.exception.RepositoryException;
+import by.epam.booking.exception.ServiceException;
 import by.epam.booking.service.user.UserInfoType;
 import by.epam.booking.service.user.UserLogic;
 import by.epam.booking.type.PageChangeType;
@@ -31,7 +32,7 @@ public class ChangeProfileImage implements WebCommand{
     private static Logger logger = LogManager.getLogger();
 
     @Override
-    public Router execute(HttpServletRequest request) throws CommandException, RepositoryException {
+    public Router execute(HttpServletRequest request) throws CommandException{
         Router page = new Router();
         User user = new User();
         String applicationDir = request.getServletContext().getRealPath("");
@@ -62,7 +63,12 @@ public class ChangeProfileImage implements WebCommand{
 
         user.setLogin((String) request.getSession().getAttribute(ParameterName.PARAM_USER_LOGIN));
         user.setImage(imagePath);
-        UserLogic.userUpdate(user,user, UserInfoType.UPDATE_PROFILE_IMAGE);
+        try {
+            UserLogic.userUpdate(user,user, UserInfoType.UPDATE_PROFILE_IMAGE);
+        } catch (ServiceException e) {
+            logger.error(e);
+            throw new CommandException(e);
+        }
         request.getSession().setAttribute(ParameterName.PARAM_USER_IMAGE,UPLOAD_DIR + File.separator + imagePath);
 
         page.setPageFormat(PageChangeType.REDIRECT);

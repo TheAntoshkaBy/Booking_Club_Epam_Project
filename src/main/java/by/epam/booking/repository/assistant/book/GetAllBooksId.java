@@ -5,7 +5,6 @@ import by.epam.booking.exception.RepositoryException;
 import by.epam.booking.repository.assistant.RepositoryHelper;
 import by.epam.booking.repository.impl.BookRepository;
 import by.epam.booking.specification.impl.book.GetAllBooksIdSpecification;
-import by.epam.booking.specification.impl.book.SelectAllBooksForTableSpecification;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -27,19 +26,20 @@ public class GetAllBooksId extends RepositoryHelper {
         ResultSet bookSet = BookRepository.getInstance().query(new GetAllBooksIdSpecification());
         Book book;
         books.clear();
+
         try {
-            while (bookSet.next()) {
-                books.add(bookSet.getInt("idBook"));
-            }
-        } catch (SQLException e) {
-            throw new RepositoryException(e);
-        } finally {
             try {
+                while (bookSet.next()) {
+                    books.add(bookSet.getInt("idBook"));
+                }
+            } finally {
                 closeConnection(bookSet.getStatement().getConnection());
                 closeStatement(bookSet.getStatement());
-            } catch (SQLException e) {
-                e.printStackTrace();
             }
+
+        } catch (SQLException e) {
+            logger.error(e);
+            throw new RepositoryException(e);
         }
 
         return books;

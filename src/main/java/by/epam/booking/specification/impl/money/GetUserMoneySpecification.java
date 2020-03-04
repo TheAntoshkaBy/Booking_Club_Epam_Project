@@ -23,7 +23,7 @@ public class GetUserMoneySpecification implements Specification {
     }
 
     @Override
-    public PreparedStatement specify() throws SQLException, SpecificationException {
+    public PreparedStatement specify() throws SpecificationException {
         PreparedStatement statement = null;
         try {
             Connection connection = ConnectionPool.getInstance().getConnection();
@@ -32,6 +32,7 @@ public class GetUserMoneySpecification implements Specification {
             statement.setString(1,this.login);
 
         } catch (SQLException | ConnectionPoolException e) {
+            logger.error(e);
             throw new SpecificationException(e);
         }
         return statement;
