@@ -28,7 +28,7 @@ public class UserInfoByLogin extends RepositoryHelper {
                 buffUser.setName(userInfo.getString("u.name"));
                 buffUser.setSurname(userInfo.getString("u.surname"));
                 buffUser.setEmail(userInfo.getString("u.email"));
-                buffUser.setActive(userInfo.getBoolean("u.isActive"));
+                buffUser.setIsActive(userInfo.getBoolean("u.isActive"));
                 buffUser.setRole(userInfo.getString("u.role"));
                 buffUser.setBookName(userInfo.getString("b.name"));
                 buffUser.setMoneyBalance(userInfo.getDouble("u.moneyBalance"));

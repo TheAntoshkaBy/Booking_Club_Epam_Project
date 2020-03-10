@@ -12,17 +12,18 @@ import java.security.NoSuchAlgorithmException;
 public class EncryptPassword {
 
     private static Logger logger = LogManager.getLogger();
+    private static String DIGEST = "MD2";
 
     public static String encrypt(String password) {
         String encryptPassword = null;
         try {
-            MessageDigest messageDigest = MessageDigest.getInstance("MD2");
+            MessageDigest messageDigest = MessageDigest.getInstance(DIGEST);
             messageDigest.update(password.getBytes(StandardCharsets.UTF_8));
             byte[] bytes = messageDigest.digest();
             BigInteger bigInteger = new BigInteger(1, bytes);
             encryptPassword = bigInteger.toString(16);
         } catch (NoSuchAlgorithmException e) {
-            logger.error("Encrypt error", e);
+            logger.error("Encrypt error ", e);
         }
         return encryptPassword;
     }

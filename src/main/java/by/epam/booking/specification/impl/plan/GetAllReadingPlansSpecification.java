@@ -12,7 +12,6 @@ import java.sql.SQLException;
 
 public class GetAllReadingPlansSpecification implements Specification {
 
-    private int bookId;
     private final String SQL_REQUEST = "SELECT r.name, r.description, r.idReadingPlan FROM "+ READING_PLAN_TABLE;
     private static Logger logger = LogManager.getLogger();
 

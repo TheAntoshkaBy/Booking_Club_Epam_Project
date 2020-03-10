@@ -32,19 +32,7 @@ public class AddNewBookCommand implements WebCommand {
         User user = new User();
         user.setLogin((String) request.getSession().getAttribute(ParameterName.PARAM_USER_LOGIN));
         user.setBookId(Integer.parseInt(request.getParameter(ParameterName.PARAM_BOOK_ID)));
-        try {
-            if(UserLogic.userUpdate(user,user, UserInfoType.BOOK)){
-                user = UserLogic.userGet(user,UserInfoType.ALL);
-                request.getSession().setAttribute(ParameterName.PARAM_USER_BOOK_NAME,user.getBookName());
-                request.getSession().setAttribute(ParameterName.PARAM_USER_BOOK_ID,user.getBookId());
-            }
-        } catch (ServiceException e) {
-            logger.error(e);
-            throw new CommandException(e);
-        }
-
         Book book = new Book();
-
         book.setId(Integer.parseInt(request.getParameter(ParameterName.PARAM_BOOK_ID)));
         try {
             book = BookLogic.bookGet(book, BookInfoType.ALL);
@@ -52,16 +40,30 @@ public class AddNewBookCommand implements WebCommand {
             logger.error(e);
             throw new CommandException(e);
         }
+        if(book.getCount() > 0){
+            try {
+                if(UserLogic.userUpdate(user,user, UserInfoType.BOOK)){
+                    user = UserLogic.userGet(user,UserInfoType.ALL);
+                    request.getSession().setAttribute(ParameterName.PARAM_USER_BOOK_NAME,user.getBookName());
+                    request.getSession().setAttribute(ParameterName.PARAM_USER_BOOK_ID,user.getBookId());
+                }
+            } catch (ServiceException e) {
+                logger.error(e);
+                throw new CommandException(e);
+            }
+            book.setCount(book.getCount()-1);
+            logger.debug("New book added!");
+        }else {
+            logger.warn("Book don't add");
+        }
+
         request.getSession().setAttribute(ParameterName.PARAM_BOOK_ID, book.getId());
         request.getSession().setAttribute(ParameterName.BOOK_NAME_PARAMETER, book.getName());
         request.getSession().setAttribute(ParameterName.PARAM_BOOK_AUTHOR,book.getAuthor());
         request.getSession().setAttribute(ParameterName.PARAM_BOOK_DESCRIPTION,book.getDescription());
-        book.setCount(book.getCount()-1);
         BookLogic.bookUpdate(book,book,BookInfoType.COUNT);
         request.getSession().setAttribute(ParameterName.PARAM_BOOK_COUNT,book.getCount());
         request.getSession().setAttribute(ParameterName.PARAM_BOOK_IMAGE,UPLOAD_DIR + File.separator + book.getImage());
-
-        logger.debug("New book added!");
 
         Router page = new Router(PageChangeType.REDIRECT, ConfigurationManager.getProperty(PATH_PAGE));
         return page;

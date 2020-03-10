@@ -108,21 +108,58 @@
                             .big-checkbox  {width: 10px; height: 10px;}
                         </style>
                         <c:forEach items="${readingPlanBooks}" var="book">
-                            <form action="${pageContext.request.contextPath}/controller" method="post">
+
+                            <c:if test="${book.status}">
+                                <tr class="table-success">
+                                    <td><div class="d-flex justify-content-around"><h4><span class="badge badge-outline-primary"><c:out value="${book.name}"/></span></h4></div></td>
+                                    <td><div class="d-flex justify-content-around"><h4><span class="badge badge-outline-primary"> <c:out value="${book.author}"/></span></h4></div></td>
+                                    <td><div class="d-flex justify-content-around"><h4><span class="badge badge-outline-primary"><c:out value="${book.count}"/> </span></h4></div></td>
+                                    <form action="${pageContext.request.contextPath}/controller" method="post">
+                                        <input type="hidden" name="command" value="to_book"/>
+                                        <input type="hidden" name="bookId" value="${book.id}"/>
+                                        <th scope="row"><div class="d-flex justify-content-around"><input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="id" value="Подробнее" /></div></th>
+                                    </form>
+                                    <form action="${pageContext.request.contextPath}/controller" method="post">
+                                        <input type="hidden" name="command" value="delete_book"/>
+                                        <input type="hidden" name="bookId" value="${book.id}"/>
+                                        <th scope="row"><div class="d-flex justify-content-around"><input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="id" value="Удалить" /></div></th>
+                                    </form>
+                                </tr>
+                            </c:if>
+                            <c:if test="${not book.status}">
                                 <tr>
                                     <input type="hidden" name="command" value="to_book"/>
                                     <input type="hidden" name="bookId" value="${book.id}"/>
                                     <td><div class="d-flex justify-content-around"><h4><span class="badge badge-outline-primary"><c:out value="${book.name}"/></span></h4></div></td>
                                     <td><div class="d-flex justify-content-around"><h4><span class="badge badge-outline-primary"> <c:out value="${book.author}"/></span></h4></div></td>
                                     <td><div class="d-flex justify-content-around"><h4><span class="badge badge-outline-primary"><c:out value="${book.count}"/> </span></h4></div></td>
-                                    <th scope="row"><div class="d-flex justify-content-around"><input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="id" value="Подробнее" /></div></th>
+                                    <form action="${pageContext.request.contextPath}/controller" method="post">
+                                        <input type="hidden" name="command" value="to_book"/>
+                                        <input type="hidden" name="bookId" value="${book.id}"/>
+                                        <th scope="row"><div class="d-flex justify-content-around"><input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="id" value="Подробнее" /></div></th>
+                                    </form>
+                                    <form action="${pageContext.request.contextPath}/controller" method="post">
+                                        <input type="hidden" name="command" value="delete_book"/>
+                                        <input type="hidden" name="bookId" value="${book.id}"/>
+                                        <th scope="row"><div class="d-flex justify-content-around"><input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="id" value="Удалить" /></div></th>
+                                    </form>
                                 </tr>
-                            </form>
+                            </c:if>
                         </c:forEach>
                         </tbody>
                     </table>
                 </div>
             </form>
+<c:if test="${not empty userRoleType and readingPlanName eq '--' and userRoleType eq 'ADMIN' or userRoleType eq 'USER'}">
+            <div>
+                <form action="${pageContext.request.contextPath}/controller" method="post">
+                    <input type="hidden" name="command" value="add_reading_plan"/>
+                    <button class="btn btn-outline-success my-2 my-sm-0">
+                        <fmt:message key="label.add.reading.plan"/>
+                    </button>
+                </form>
+            </div>
+</c:if>
         </div>
         <div class="row justify-content-center no-gutters mx-auto text-center">
             <h1 class="mx-auto my-0 text-uppercase"><fmt:message key="text.site.name"/></h1>

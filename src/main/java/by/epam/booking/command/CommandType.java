@@ -2,10 +2,14 @@ package by.epam.booking.command;
 
 import by.epam.booking.command.impl.admin.book.*;
 import by.epam.booking.command.impl.admin.finance.ToFinanceListCommand;
+import by.epam.booking.command.impl.admin.user.BlockingUser;
+import by.epam.booking.command.impl.admin.user.DoUserActive;
+import by.epam.booking.command.impl.admin.user.GoToListOfUsers;
 import by.epam.booking.command.impl.guest.book.*;
 import by.epam.booking.command.impl.guest.plan.ToConcreteReadingPlanCommand;
 import by.epam.booking.command.impl.guest.plan.ToReadingPlansCommand;
 import by.epam.booking.command.impl.guest.user.*;
+import by.epam.booking.command.impl.guest.user.message.SendToAdminCommand;
 import by.epam.booking.command.impl.user.*;
 import by.epam.booking.command.impl.user.change.*;
 
@@ -200,6 +204,36 @@ public enum CommandType {
     ERROR_STEP{
         {
             this.command = new ErrorStepCommand();
+        }
+    },
+    GO_TO_ALL_USERS_LIST{
+        {
+            this.command = new GoToListOfUsers();
+        }
+    },
+    DO_USER_ACTIVE{
+        {
+            this.command = new DoUserActive();
+        }
+    },
+    BLOCKING_USER{
+        {
+            this.command = new BlockingUser();
+        }
+    },
+    ADD_READING_PLAN{
+        {
+            this.command = new AddReadingPlan();
+        }
+    },
+    DELETE_USER_READING_PLAN{
+        {
+            this.command = new DeleteUserReadingPlan();
+        }
+    },
+    CONFIRM{
+        {
+            this.command = new ConfirmCommand();
         }
     }
     ;

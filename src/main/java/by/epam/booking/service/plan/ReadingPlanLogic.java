@@ -5,6 +5,7 @@ import by.epam.booking.entity.ReadingPlan;
 import by.epam.booking.exception.RepositoryException;
 import by.epam.booking.exception.ServiceException;
 import by.epam.booking.repository.assistant.book.*;
+import by.epam.booking.repository.assistant.plan.GetReadingPlanInfo;
 import by.epam.booking.service.book.BookInfoType;
 import by.epam.booking.specification.impl.book.AddNewBookCommentSpecification;
 import org.apache.logging.log4j.LogManager;
@@ -28,6 +29,13 @@ public class ReadingPlanLogic {
                         transferredPlan.setBooks(GetAllBooks.getAllBooksInPlan(transferredPlan.getIdReadingPlan()));
                     } catch (RepositoryException e) {
                         logger.error(e);
+                        throw new ServiceException(e);
+                    }
+                }break;
+                case READING_PLAN_NAME:{
+                    try {
+                        transferredPlan.setName(GetReadingPlanInfo.getName(transferredPlan.getIdReadingPlan()));
+                    } catch (RepositoryException e) {
                         throw new ServiceException(e);
                     }
                 }break;

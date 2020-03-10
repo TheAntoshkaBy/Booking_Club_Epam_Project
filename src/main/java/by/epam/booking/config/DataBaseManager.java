@@ -10,16 +10,19 @@ import java.util.Properties;
 
 public class DataBaseManager {
 
-    private static Properties properties;
     private final static String RESOURCE = "database.properties";
+    private static Properties properties;
     private static Logger logger = LogManager.getLogger();
 
     static {
         try {
             loadProperties();
         } catch (PropertiesException e) {
-            logger.error("Properties error"+ e);
+            logger.error("Properties error" + e);
         }
+    }
+
+    private DataBaseManager() {
     }
 
     public static String getProperty(String key) {
@@ -33,9 +36,8 @@ public class DataBaseManager {
             InputStream resource = ConfigurationManager.class.getClassLoader().getResourceAsStream(RESOURCE);
             properties.load(resource);
         } catch (IOException e) {
-            logger.error("Properties error"+ e);
+            logger.error("Properties error" + e);
             throw new PropertiesException(e);
         }
     }
-    private DataBaseManager() { }
 }

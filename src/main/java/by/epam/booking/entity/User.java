@@ -22,6 +22,7 @@ public class User {
     private String image;
     private long buffDate;
     private String buffMoneyType;
+    private String status;
 
     public User(String login, String password, String email, String name, String surname, Enum<UserRoleType> role, boolean isActive) {
         this.login = login;
@@ -34,6 +35,10 @@ public class User {
     }
 
     public User() {
+    }
+
+    public User(String login) {
+        this.login = login;
     }
 
     public String getLogin() {
@@ -105,11 +110,11 @@ public class User {
         this.bookId = bookId;
     }
 
-    public boolean isActive() {
+    public boolean getIsActive() {
         return isActive;
     }
 
-    public void setActive(boolean active) {
+    public void setIsActive(boolean active) {
         isActive = active;
     }
 
@@ -171,6 +176,14 @@ public class User {
 
     public void setBuffMoneyType(String buffMoneyType) {
         this.buffMoneyType = buffMoneyType;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Override

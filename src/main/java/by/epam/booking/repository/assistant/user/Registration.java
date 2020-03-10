@@ -28,7 +28,7 @@ public class Registration extends RepositoryHelper {
         user.setName(name);
         user.setSurname(surname);
         user.setPassword(password);
-        user.setActive(false);
+        user.setIsActive(false);
         user.setRole(UserRoleType.USER);
         if(checkEqualsLogin(new SearchLoginAndPassByLoginSpecification(user))){
             returnedPage = MessageManager.getProperty("message.equal.login");

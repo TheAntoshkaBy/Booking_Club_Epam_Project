@@ -14,9 +14,9 @@
 
     <title>Grayscale - Start Bootstrap Theme</title>
     <style>
-        <%@include file="vendor/bootstrap/css/bootstrap.min.css"%>
-        <%@include file="css/grayscale2.css"%>
-        <%@include file="vendor/fontawesome-free/css/all.min.css"%>
+        <%@include file="/vendor/bootstrap/css/bootstrap.min.css"%>
+        <%@include file="/css/grayscale2.css"%>
+        <%@include file="/vendor/fontawesome-free/css/all.min.css"%>
     </style>
     <script>
         $('#exampleModal').on('show.bs.modal', function (event) {

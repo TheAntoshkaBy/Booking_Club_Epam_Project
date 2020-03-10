@@ -99,7 +99,7 @@
 
                             </h4>
                             <div class="text-right">
-                                <c:if test="${userBookId == null and login != null}">
+                                <c:if test="${userBookId == null and login != null and count != 0}">
                                     <form action="${pageContext.request.contextPath}/controller" method="post">
                                         <br>
                                         <input type="hidden" name="command" value="add_user_book"/>

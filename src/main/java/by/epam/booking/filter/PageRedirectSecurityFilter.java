@@ -43,11 +43,13 @@ public class PageRedirectSecurityFilter implements Filter {
         allowedPagesForGuest.add("planBook.jsp");
         allowedPagesForGuest.add("plans.jsp");
         allowedPagesForGuest.add("registration.jsp");
+        allowedPagesForGuest.add("passwordConfirmation.jsp");
         allowedPagesForUser.addAll(allowedPagesForGuest);
         allowedPagesForUser.add("user.jsp");
         allowedPagesForUser.add("completedBooks.jsp");
         allowedPagesForAdmin.addAll(allowedPagesForUser);
         allowedPagesForAdmin.add("finance.jsp");
+        allowedPagesForAdmin.add("usersList.jsp");
 
         String[] list = req.getRequestURI().split("/");
         String userRole = (String) req.getSession().getAttribute("userRoleType");
@@ -57,6 +59,9 @@ public class PageRedirectSecurityFilter implements Filter {
             page = list[list.length - 1];
         }
 
+        if(userRole == null){
+            userRole = "";
+        }
         if (!allowedPagesForGuest.contains(page) && userRole.isEmpty()) {
             resp.sendRedirect(req.getContextPath() + indexPath);
         }else if(!allowedPagesForUser.contains(page) && userRole.equals("USER")){

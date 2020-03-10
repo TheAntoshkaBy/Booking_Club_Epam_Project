@@ -30,6 +30,7 @@ public class LogOutCommand implements WebCommand {
         request.getSession().setAttribute(ParameterName.PARAM_USER_PLAN_ID, null);
         request.getSession().setAttribute(ParameterName.PARAM_LIST_OF_USER_COMPLETED_BOOKS, null);
         request.getSession().setAttribute(ParameterName.PARAM_COMPLETED_BOOKS, null);
+
         page.setPageFormat(PageChangeType.REDIRECT);
         return page;
     }

@@ -54,7 +54,7 @@ public class LogInCommand implements WebCommand {
                 request.getSession().setAttribute(ParameterName.PARAM_USER_SURNAME, user.getSurname());
                 request.getSession().setAttribute(ParameterName.PARAM_USER_EMAIL, user.getEmail());
                 request.getSession().setAttribute(ParameterName.PARAM_USER_ROLE, user.getRole().name());
-                request.getSession().setAttribute(ParameterName.PARAM_USER_STATUS, user.isActive());
+                request.getSession().setAttribute(ParameterName.PARAM_USER_STATUS, user.getIsActive());
                 String applicationDir = request.getServletContext().getRealPath("");
                 request.getSession().setAttribute(ParameterName.PARAM_USER_IMAGE, UPLOAD_DIR +
                         File.separator + user.getImage());
@@ -88,14 +88,16 @@ public class LogInCommand implements WebCommand {
                 page.setPage(ConfigurationManager.getProperty(PATH_PAGE_USER));
 
             } else {
-                page.setPageFormat(PageChangeType.FORWARD);
+                request.getSession().setAttribute(ParameterName.PARAM_USER_LOGIN_INTERIM, user.getLogin());
+                request.getSession().setAttribute(ParameterName.PARAM_USER_EMAIL_INTERIM, user.getEmail());
+                page.setPageFormat(PageChangeType.REDIRECT);
                 page.setPage(ConfigurationManager.getProperty(PATH_PAGE_USER_PASSIVE));
             }
 
         } else {
             page.setPage(ConfigurationManager.getProperty(PATH_PAGE_LOGIN));
-            page.setPageFormat(PageChangeType.REDIRECT);
-            request.getSession().setAttribute(ParameterName.PARAM_LOGIN_ERROR, MessageManager.getProperty(MESSAGE));
+            page.setPageFormat(PageChangeType.FORWARD);
+            request.setAttribute(ParameterName.PARAM_LOGIN_ERROR, MessageManager.getProperty(MESSAGE));
             return page;
         }
         } catch (ServiceException e) {

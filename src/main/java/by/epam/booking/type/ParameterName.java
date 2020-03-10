@@ -17,6 +17,7 @@ public class ParameterName {
     public static final String PARAM_BOOK_ID_INTERIM = "id";
     public static final String PARAM_USER_INTERIM = "user";
     public static final String PARAM_READING_PLAN_ID = "idReadingPlan";
+    public static final String PARAM_READING_PLAN_ID_INTERIM = "idReadingPlanInterim";
     public static final String PARAM_READING_PLAN_BOOKS = "readingPlanBooks";
     public static final String PARAM_ALL_READING_PLANS = "plans";
     public static final String PARAM_COMPLETED_BOOKS = "completedBooks";
@@ -25,16 +26,19 @@ public class ParameterName {
     public static final String PARAM_USER_BOOK_ID = "userBookId";
     public static final String PARAM_USER_BOOK_NAME = "bookName";
     public static final String PARAM_USER_LOGIN = "login";
+    public static final String PARAM_USER_LOGIN_INTERIM = "loginInterim";
     public static final String PARAM_LIST_OF_USER_COMPLETED_BOOKS = "completedBooksId";
     public static final String PARAM_USER_NAME = "userName";
     public static final String PARAM_USER_SURNAME = "surname";
     public static final String PARAM_USER_EMAIL = "email";
+    public static final String PARAM_USER_EMAIL_INTERIM = "emailInterim";
     public static final String PARAM_USER_ROLE = "userRoleType";
     public static final String PARAM_USER_STATUS = "status";
     public static final String PARAM_USER_IMAGE = "userImage";
     public static final String PARAM_USER_PLAN_ID = "userPlanId";
     public static final String PARAM_USER_BOOK_STATUS = "userBookStatus";
     public static final String PARAM_ALL_BOOKS_ID = "allBooksId";
+    public static final String PARAM_ALL_USERS = "allUsers";
 
 
     public static final String COMMENT_HEADER = "commentHeader";
@@ -52,7 +56,16 @@ public class ParameterName {
     public static final String PARAM_REGISTRATION_ERROR = "registrationError";
     public static final String PARAM_PASS_ERROR = "passError";
     public static final String PARAM_EMAIL_ERROR = "emailError";
+    public static final String PARAM_CONFIRM_ERROR = "confirmError";
 
     public static final String PARAM_CHANGE_SAVED = "ChangedSave";
+    public static final String PARAM_MESSAGE_TYPE = "messageType";
+    public static final String PARAM_CONFIRM_CODE = "code";
+    public static final String PARAM_THEME = "theme";
+    public static final String PARAM_MESSAGE = "message";
+    public static final String LOCALE = "locale";
+
+
+
 
 }

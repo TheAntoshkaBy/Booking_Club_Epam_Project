@@ -1,12 +1,11 @@
-package by.epam.booking.servlet;
+package by.epam.booking.controller;
 
 import by.epam.booking.command.CommandFactory;
 import by.epam.booking.command.WebCommand;
+import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.connection.ConnectionPool;
 import by.epam.booking.exception.CommandException;
 import by.epam.booking.exception.ConnectionPoolException;
-import by.epam.booking.exception.RepositoryException;
-import by.epam.booking.exception.ServiceException;
 import by.epam.booking.type.PageChangeType;
 import by.epam.booking.command.Router;
 import org.apache.logging.log4j.LogManager;
@@ -19,7 +18,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024
         , maxFileSize = 1024 * 1024 * 5
@@ -27,32 +25,36 @@ import java.sql.SQLException;
 @WebServlet("/controller")
 public class MainControllerServlet extends HttpServlet {
 
+    private final String ERROR_PAGE = "path.page.err.step";
     private static Logger logger = LogManager.getLogger();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (CommandException e) {
-            throw new ServletException(e);
-        }
+        processRequest(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (CommandException e) {
-           throw new  ServletException(e);
-        }
+        processRequest(request, response);
     }
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, CommandException {
+            throws ServletException, IOException {
         CommandFactory commandFactory = new CommandFactory();
-        WebCommand command = commandFactory.defineCommand(request);
-        Router page = command.execute(request);
-        if(page.getPageFormat() == PageChangeType.FORWARD) {
+        Router page = null;
+        WebCommand command = null;
+        try {
+            command = commandFactory.defineCommand(request);
+            page = command.execute(request);
+        } catch (CommandException e) {
+            logger.error(e);
+        }
+
+        if(page == null){
+            page = new Router();
+            page.setPage(ConfigurationManager.getProperty(ERROR_PAGE));
+            page.setPageFormat(PageChangeType.REDIRECT);
+        }else if(page.getPageFormat() == PageChangeType.FORWARD) {
             getServletContext()
                     .getRequestDispatcher(page.getPage())
                     .forward(request, response);

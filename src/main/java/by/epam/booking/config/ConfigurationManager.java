@@ -10,18 +10,21 @@ import java.util.Properties;
 
 public final class ConfigurationManager {
 
-    private static Properties properties;
     private static final String RESOURCE = "config.properties";
+    private static Properties properties;
     private static Logger logger = LogManager.getLogger();
 
     static {
         try {
             loadProperties();
         } catch (PropertiesException e) {
-            logger.error("Properties error"+ e);
+            logger.error("Properties error" + e);
         }
     }
-    private ConfigurationManager() { }
+
+    private ConfigurationManager() {
+    }
+
     public static String getProperty(String key) {
         return properties.getProperty(key);
 
@@ -33,8 +36,8 @@ public final class ConfigurationManager {
             InputStream resource = ConfigurationManager.class.getClassLoader().getResourceAsStream(RESOURCE);
             properties.load(resource);
         } catch (IOException e) {
-            logger.error("Properties error"+ e);
-           throw new PropertiesException(e);
+            logger.error("Properties error" + e);
+            throw new PropertiesException(e);
         }
     }
 

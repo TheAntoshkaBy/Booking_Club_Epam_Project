@@ -4,6 +4,7 @@ import by.epam.booking.defence.EncryptPassword;
 import by.epam.booking.entity.User;
 import by.epam.booking.exception.RepositoryException;
 import by.epam.booking.exception.ServiceException;
+import by.epam.booking.repository.assistant.book.change.ChangeBook;
 import by.epam.booking.repository.assistant.user.*;
 import by.epam.booking.repository.assistant.user.change.*;
 import by.epam.booking.service.validation.NewUserValidator;
@@ -13,6 +14,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,12 +50,6 @@ public class UserLogic {
                         logger.error(e);
                         throw new ServiceException(e);
                     }
-                }break;
-                case READING_PLAN_NAME:{
-
-                }break;
-                case BOOK_COMPLETED:{
-
                 }break;
             }
         }
@@ -119,46 +115,57 @@ public class UserLogic {
                         throw new ServiceException(e);
                     }
                 }break;
+                case IS_ACTIVE:{
+                    answer = ChangeUserInfo.change(new UpdateUserStatusSpecification(mutableUser.getLogin(),mutableUser.getIsActive()));
+                }break;
+                case READING_PLAN:{
+                    answer = ChangeUserInfo.change(new UpdateUserReadingPlanSpecification(mutableUser.getLogin(),
+                            mutableUser.getReadingPlanId()));
+                }break;
             }
         }
         return answer;
     }
 
-    private static Map<String, Boolean> checkUserDataIsCorrect(
-            String name,
-            String surname,
-            String login,
-            String password,
-            String email)
-            throws ServiceException {
+    public static ArrayList<User> userGetAll(UserInfoType... types) throws ServiceException {
+        ArrayList<User> users = null;
+        for (UserInfoType type : types){
+            switch (type){
+                case GET_ALL_USERS:{
+                    try {
+                        ArrayList<String> usersLogin = GetAllUsersId.getAllBooksId();
 
-        Map<String, Boolean> map = new HashMap<>();
+                        ArrayList<User> buffUser = new ArrayList<>();
+                        usersLogin.forEach(login -> {
+                            try {
+                                buffUser.add(userGet(new User(login), UserInfoType.ALL));
+                            } catch (ServiceException e) {
+                                logger.error("Users get error!", e);
+                            }
+                        });
+                        users = buffUser;
+                    } catch (RepositoryException e) {
+                        logger.error(e);
+                        throw new ServiceException(e);
+                    }
+                }break;
+            }
+        }
 
-        boolean incorrectName = !NewUserValidator.getInstance().isCorrectName(name);
-        boolean incorrectSurname = !NewUserValidator.getInstance().isCorrectSurName(surname);
-        boolean incorrectLogin = !NewUserValidator.getInstance().isCorrectLogin(login);
-        boolean incorrectPass = !NewUserValidator.getInstance().isCorrectPassword(password);
-        boolean incorrectEmail = !NewUserValidator.getInstance().isCorrectEmail(email);
-
-        map.put(ParameterName.PARAM_USERNAME_ERROR, incorrectName);
-        map.put(ParameterName.PARAM_SURNAME_ERROR, incorrectSurname);
-        map.put(ParameterName.PARAM_LOGIN_ERROR, incorrectLogin);
-        map.put(ParameterName.PARAM_PASS_ERROR, incorrectPass);
-        map.put(ParameterName.PARAM_EMAIL_ERROR, incorrectEmail);
-
-        return map;
+        return users;
     }
 
     public static Map<String,Boolean> registration(User user) throws ServiceException {
 
         Map<String, Boolean> userDataCheck =
-                checkUserDataIsCorrect(
+                CheckUser.checkUserDataIsCorrect(
                         user.getName(),
                         user.getSurname(),
                         user.getLogin(),
                         user.getPassword(),
                         user.getEmail()
                 );
+
         boolean isValid = userDataCheck.values().stream().filter(o -> o.equals(true)).findAny().orElse(false);
         if(!isValid){
             try {

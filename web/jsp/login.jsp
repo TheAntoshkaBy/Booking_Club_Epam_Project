@@ -75,7 +75,7 @@
                     </div>
                     <br>
                     <br>
-                    ${loginError}
+                    <label style="color: #9fcdff">${loginError}</label>
                     <br>
                     <br>
                     <div class="form-group row">
