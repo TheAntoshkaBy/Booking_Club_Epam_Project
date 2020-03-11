@@ -1,14 +1,14 @@
 package by.epam.booking.command.impl.user;
 
 import by.epam.booking.command.WebCommand;
+import by.epam.booking.command.impl.BookingClubCommand;
 import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.entity.User;
 import by.epam.booking.command.Router;
 import by.epam.booking.exception.CommandException;
-import by.epam.booking.exception.RepositoryException;
 import by.epam.booking.exception.ServiceException;
 import by.epam.booking.service.user.UserInfoType;
-import by.epam.booking.service.user.UserLogic;
+import by.epam.booking.service.user.impl.UserLogic;
 import by.epam.booking.type.ParameterName;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,7 +16,7 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-public class SettingsProfileCommand implements WebCommand {
+public class SettingsProfileCommand extends BookingClubCommand implements WebCommand {
 
     private static final String PATH_PAGE_REGISTRATION = "path.page.registration";
     private static final String PATH_PAGE_USER = "path.page.user";
@@ -35,7 +35,7 @@ public class SettingsProfileCommand implements WebCommand {
             searchedUser.setLogin(login);
             User user = null;
             try {
-                user = UserLogic.userGet(searchedUser, UserInfoType.ALL);
+                user = userLogic.userGet(searchedUser, UserInfoType.ALL);
             } catch (ServiceException e) {
                 logger.error(e);
                 throw new CommandException(e);

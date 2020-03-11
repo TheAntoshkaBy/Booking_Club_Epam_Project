@@ -1,5 +1,7 @@
 package by.epam.booking.filter;
 
+import by.epam.booking.filter.helper.AllowedPages;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebInitParam;
@@ -36,20 +38,7 @@ public class PageRedirectSecurityFilter implements Filter {
 
         HttpServletResponse resp = (HttpServletResponse) response;
 
-        allowedPagesForGuest.add("login.jsp");
-        allowedPagesForGuest.add("userPass.jsp");
-        allowedPagesForGuest.add("book.jsp");
-        allowedPagesForGuest.add("library.jsp");
-        allowedPagesForGuest.add("planBook.jsp");
-        allowedPagesForGuest.add("plans.jsp");
-        allowedPagesForGuest.add("registration.jsp");
-        allowedPagesForGuest.add("passwordConfirmation.jsp");
-        allowedPagesForUser.addAll(allowedPagesForGuest);
-        allowedPagesForUser.add("user.jsp");
-        allowedPagesForUser.add("completedBooks.jsp");
-        allowedPagesForAdmin.addAll(allowedPagesForUser);
-        allowedPagesForAdmin.add("finance.jsp");
-        allowedPagesForAdmin.add("usersList.jsp");
+        AllowedPages.FillAllowLists(allowedPagesForGuest, allowedPagesForUser, allowedPagesForAdmin);
 
         String[] list = req.getRequestURI().split("/");
         String userRole = (String) req.getSession().getAttribute("userRoleType");

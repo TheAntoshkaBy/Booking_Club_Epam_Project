@@ -1,15 +1,15 @@
 package by.epam.booking.command.impl.user.change;
 
 import by.epam.booking.command.WebCommand;
+import by.epam.booking.command.impl.BookingClubCommand;
 import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.config.MessageManager;
 import by.epam.booking.entity.User;
 import by.epam.booking.command.Router;
 import by.epam.booking.exception.CommandException;
-import by.epam.booking.exception.RepositoryException;
 import by.epam.booking.exception.ServiceException;
 import by.epam.booking.service.user.UserInfoType;
-import by.epam.booking.service.user.UserLogic;
+import by.epam.booking.service.user.impl.UserLogic;
 import by.epam.booking.type.PageChangeType;
 import by.epam.booking.type.ParameterName;
 import org.apache.logging.log4j.LogManager;
@@ -23,7 +23,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
-public class ChangeProfileImage implements WebCommand{
+public class ChangeProfileImage extends BookingClubCommand implements WebCommand{
 
     public static final String UPLOAD_DIR = "profile_image";
     private static final String PATH_PAGE_USER = "path.page.user";
@@ -64,7 +64,7 @@ public class ChangeProfileImage implements WebCommand{
         user.setLogin((String) request.getSession().getAttribute(ParameterName.PARAM_USER_LOGIN));
         user.setImage(imagePath);
         try {
-            UserLogic.userUpdate(user,user, UserInfoType.UPDATE_PROFILE_IMAGE);
+            userLogic.userUpdate(user,user, UserInfoType.UPDATE_PROFILE_IMAGE);
         } catch (ServiceException e) {
             logger.error(e);
             throw new CommandException(e);

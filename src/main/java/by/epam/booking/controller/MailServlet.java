@@ -17,8 +17,7 @@ public class MailServlet extends HttpServlet {
                           HttpServletResponse response) throws IOException {
 
         Router page = null;
-
-
+        // FIXME: 11.03.2020 убрать этот сервлет.
         SendToAdminCommand sendToAdmin = new SendToAdminCommand();
         page = sendToAdmin.execute(request);
 

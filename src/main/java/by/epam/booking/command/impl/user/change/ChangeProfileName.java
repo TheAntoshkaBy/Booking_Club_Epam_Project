@@ -1,15 +1,15 @@
 package by.epam.booking.command.impl.user.change;
 
 import by.epam.booking.command.WebCommand;
+import by.epam.booking.command.impl.BookingClubCommand;
 import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.config.MessageManager;
 import by.epam.booking.entity.User;
 import by.epam.booking.command.Router;
 import by.epam.booking.exception.CommandException;
-import by.epam.booking.exception.RepositoryException;
 import by.epam.booking.exception.ServiceException;
 import by.epam.booking.service.user.UserInfoType;
-import by.epam.booking.service.user.UserLogic;
+import by.epam.booking.service.user.impl.UserLogic;
 import by.epam.booking.type.PageChangeType;
 import by.epam.booking.type.ParameterName;
 import org.apache.logging.log4j.LogManager;
@@ -17,7 +17,7 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class ChangeProfileName implements WebCommand {
+public class ChangeProfileName extends BookingClubCommand implements WebCommand {
 
     private static final String PARAM_VALUE_TO_PAGE = "change";
     private static final String PATH_PAGE = "path.page.user";
@@ -35,7 +35,7 @@ public class ChangeProfileName implements WebCommand {
             user.setLogin((String) request.getSession().getAttribute(ParameterName.PARAM_USER_LOGIN));
             user.setName(request.getParameter(ParameterName.BOOK_NAME_PARAMETER));
             try {
-                UserLogic.userUpdate(user,user, UserInfoType.NAME);
+                userLogic.userUpdate(user,user, UserInfoType.NAME);
             } catch (ServiceException e) {
                 logger.error(e);
                 throw new CommandException(e);

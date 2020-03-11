@@ -1,36 +1,60 @@
-package by.epam.booking.service.user;
+package by.epam.booking.service.user.impl;
 
 import by.epam.booking.defence.EncryptPassword;
 import by.epam.booking.entity.User;
 import by.epam.booking.exception.RepositoryException;
 import by.epam.booking.exception.ServiceException;
-import by.epam.booking.repository.assistant.book.change.ChangeBook;
 import by.epam.booking.repository.assistant.user.*;
 import by.epam.booking.repository.assistant.user.change.*;
-import by.epam.booking.service.validation.NewUserValidator;
+import by.epam.booking.service.user.CheckUser;
+import by.epam.booking.service.user.UserInfoType;
+import by.epam.booking.service.user.UserLogicProtocol;
 import by.epam.booking.specification.impl.user.update.*;
-import by.epam.booking.type.ParameterName;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.locks.ReentrantLock;
 
 
-public class UserLogic {
+public class UserLogic implements UserLogicProtocol {
 
+    private static UserLogic INSTANCE;
+    private static AtomicBoolean instanceCreated = new AtomicBoolean();
+    private static final ReentrantLock getInstanceLock = new ReentrantLock();
+    private String CORRECT_USER_DATA_PARAMETER  = "correct";
     private static Logger logger = LogManager.getLogger();
 
-    public static User userGet(User transferredUser, UserInfoType... types) throws ServiceException {
+    private UserLogic(){
+    }
+
+    public static UserLogic getInstance() {
+        if (!instanceCreated.get()) {
+            getInstanceLock.lock();
+            try {
+                if (null == INSTANCE) {
+                    INSTANCE = new UserLogic();
+                    instanceCreated.set(true);
+                }
+            } finally {
+                getInstanceLock.unlock();
+            }
+        }
+        return INSTANCE;
+    }
+
+
+    @Override
+    public User userGet(User transferredUser, UserInfoType... types) throws ServiceException {
         User user = new User();
         for (UserInfoType type : types) {
             switch (type){
                 case ALL:{
                     try {
                         user = UserInfoByLogin.searchUserByLogin(transferredUser.getLogin());
-                        assert user != null;
                         user.setCompletedBooks(UserInfoByLogin.getCompletedBooks(transferredUser.getLogin()));
                         user.setImage(GetUserDataString.getString(transferredUser.getLogin()));
                     }catch (RepositoryException e){
@@ -39,7 +63,6 @@ public class UserLogic {
                     }
                 }break;
                 case NAME:{
-                    assert user != null;
                     user.setName(transferredUser.getLogin());
                 }break;
 
@@ -55,7 +78,9 @@ public class UserLogic {
         }
         return user;
     }
-    public static boolean userUpdate(User mutableUser, User changeParamOfUser, UserInfoType ... types) throws ServiceException {
+
+    @Override
+    public boolean userUpdate(User mutableUser, User changeParamOfUser, UserInfoType ... types) throws ServiceException {
         boolean answer  = false;
         for (UserInfoType type : types) {
             switch (type){
@@ -127,7 +152,8 @@ public class UserLogic {
         return answer;
     }
 
-    public static ArrayList<User> userGetAll(UserInfoType... types) throws ServiceException {
+    @Override
+    public ArrayList<User> userGetAll(UserInfoType... types) throws ServiceException {
         ArrayList<User> users = null;
         for (UserInfoType type : types){
             switch (type){
@@ -155,7 +181,7 @@ public class UserLogic {
         return users;
     }
 
-    public static Map<String,Boolean> registration(User user) throws ServiceException {
+    public Map<String,Boolean> registration(User user) throws ServiceException {
 
         Map<String, Boolean> userDataCheck =
                 CheckUser.checkUserDataIsCorrect(
@@ -179,9 +205,9 @@ public class UserLogic {
                 logger.error(e);
                 throw new ServiceException(e);
             }
-            userDataCheck.put("correct",true);
+            userDataCheck.put(CORRECT_USER_DATA_PARAMETER,true);
         }else {
-            userDataCheck.put("correct",false);
+            userDataCheck.put(CORRECT_USER_DATA_PARAMETER,false);
         }
         return userDataCheck;
 

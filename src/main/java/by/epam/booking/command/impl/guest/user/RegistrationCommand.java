@@ -1,17 +1,16 @@
 package by.epam.booking.command.impl.guest.user;
 
 import by.epam.booking.command.WebCommand;
+import by.epam.booking.command.impl.BookingClubCommand;
 import by.epam.booking.command.impl.guest.user.message.MailThread;
 import by.epam.booking.config.ConfigurationManager;
-import by.epam.booking.defence.EncryptPassword;
 import by.epam.booking.entity.User;
 import by.epam.booking.command.Router;
 import by.epam.booking.exception.CommandException;
-import by.epam.booking.exception.RepositoryException;
 import by.epam.booking.exception.ServiceException;
 import by.epam.booking.repository.assistant.user.Registration;
 import by.epam.booking.service.user.CodeGenerator;
-import by.epam.booking.service.user.UserLogic;
+import by.epam.booking.service.user.impl.UserLogic;
 import by.epam.booking.type.PageChangeType;
 import by.epam.booking.type.ParameterName;
 import by.epam.booking.type.UserRoleType;
@@ -19,10 +18,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
-import java.sql.SQLException;
 import java.util.Map;
 
-public class RegistrationCommand implements WebCommand {
+public class RegistrationCommand extends BookingClubCommand implements WebCommand {
 
     private static final String PARAM_NAME_LOGIN = "login";
     private static final String PARAM_NAME_PASSWORD = "password";
@@ -56,7 +54,7 @@ public class RegistrationCommand implements WebCommand {
         template += template + '\n';
         Map<String,Boolean> userData = null;
         try {
-            userData = UserLogic.registration(user);
+            userData = userLogic.registration(user);
         } catch (ServiceException e) {
             logger.error(e);
             throw new CommandException(e);

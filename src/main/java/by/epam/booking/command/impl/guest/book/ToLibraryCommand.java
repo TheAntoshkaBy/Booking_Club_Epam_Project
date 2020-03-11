@@ -1,6 +1,7 @@
 package by.epam.booking.command.impl.guest.book;
 
 import by.epam.booking.command.WebCommand;
+import by.epam.booking.command.impl.BookingClubCommand;
 import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.entity.Book;
 import by.epam.booking.command.Router;
@@ -17,7 +18,7 @@ import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class ToLibraryCommand implements WebCommand {
+public class ToLibraryCommand extends BookingClubCommand implements WebCommand {
 
     private static final String PATH_PAGE = "path.page.library";
     private static Logger logger = LogManager.getLogger();

@@ -1,9 +1,9 @@
 package by.epam.booking.command.impl.guest.user;
 
 import by.epam.booking.command.WebCommand;
+import by.epam.booking.command.impl.BookingClubCommand;
 import by.epam.booking.defence.EncryptPassword;
 import by.epam.booking.exception.CommandException;
-import by.epam.booking.exception.RepositoryException;
 import by.epam.booking.exception.ServiceException;
 import by.epam.booking.service.user.CheckUser;
 import by.epam.booking.config.ConfigurationManager;
@@ -11,7 +11,7 @@ import by.epam.booking.config.MessageManager;
 import by.epam.booking.entity.User;
 import by.epam.booking.command.Router;
 import by.epam.booking.service.user.UserInfoType;
-import by.epam.booking.service.user.UserLogic;
+import by.epam.booking.service.user.impl.UserLogic;
 import by.epam.booking.service.validation.LoginValidation;
 import by.epam.booking.type.PageChangeType;
 import by.epam.booking.type.ParameterName;
@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 
-public class LogInCommand implements WebCommand {
+public class LogInCommand extends BookingClubCommand implements WebCommand {
 
     public static final String UPLOAD_DIR = "profile_image";
     public static final String PATH_PAGE_USER = "path.page.user";
@@ -47,7 +47,7 @@ public class LogInCommand implements WebCommand {
         if (CheckUser.isUserConsist(login, password)) {
             User user = new User();
             user.setLogin(login);
-            user = UserLogic.userGet(user, UserInfoType.ALL, UserInfoType.BOOK_NAME);
+            user = userLogic.userGet(user, UserInfoType.ALL, UserInfoType.BOOK_NAME);
             if (CheckUser.userIsActive(user)) {
                 request.getSession().setAttribute(ParameterName.PARAM_USER_LOGIN, user.getLogin());
                 request.getSession().setAttribute(ParameterName.PARAM_USER_NAME, user.getName());

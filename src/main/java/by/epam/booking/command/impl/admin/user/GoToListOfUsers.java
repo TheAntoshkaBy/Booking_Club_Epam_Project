@@ -2,12 +2,13 @@ package by.epam.booking.command.impl.admin.user;
 
 import by.epam.booking.command.Router;
 import by.epam.booking.command.WebCommand;
+import by.epam.booking.command.impl.BookingClubCommand;
 import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.entity.User;
 import by.epam.booking.exception.CommandException;
 import by.epam.booking.exception.ServiceException;
 import by.epam.booking.service.user.UserInfoType;
-import by.epam.booking.service.user.UserLogic;
+import by.epam.booking.service.user.impl.UserLogic;
 import by.epam.booking.type.PageChangeType;
 import by.epam.booking.type.ParameterName;
 import org.apache.logging.log4j.LogManager;
@@ -16,7 +17,7 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 
-public class GoToListOfUsers implements WebCommand {
+public class GoToListOfUsers extends BookingClubCommand implements WebCommand {
 
     private static final String PATH_PAGE = "path.page.users.all";
     private static Logger logger = LogManager.getLogger();
@@ -26,7 +27,7 @@ public class GoToListOfUsers implements WebCommand {
     public Router goToUserList(HttpServletRequest request) throws CommandException{
         ArrayList<User> users = null;
         try {
-            users = UserLogic.userGetAll(UserInfoType.GET_ALL_USERS);
+            users = userLogic.userGetAll(UserInfoType.GET_ALL_USERS);
             users.forEach(user -> {
                 if(user.getIsActive()){
                     user.setStatus(activeUserStatus);

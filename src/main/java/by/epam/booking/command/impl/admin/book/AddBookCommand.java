@@ -29,6 +29,8 @@ public class AddBookCommand implements WebCommand {
      * @return page
      * @throws CommandException
      */
+
+    // FIXME: 11.03.2020 autodoc (jautodoc) интерфейсы основные методы, сервлеты
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {
         Router page = new Router();
@@ -45,7 +47,7 @@ public class AddBookCommand implements WebCommand {
             throw new CommandException(e);
         }
 
-        logger.debug("Add book " + book + " to library");// FIXME: 03.03.2020
+        logger.debug("Add book " + book + " to library");
         page.setPage(ConfigurationManager.getProperty(PAGE_PATH));
         page.setPageFormat(PageChangeType.REDIRECT);
         return page;

@@ -1,23 +1,21 @@
 package by.epam.booking.command.impl.admin.book;
 
 import by.epam.booking.command.WebCommand;
+import by.epam.booking.command.impl.BookingClubCommand;
 import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.entity.Book;
 import by.epam.booking.command.Router;
 import by.epam.booking.exception.CommandException;
-import by.epam.booking.exception.RepositoryException;
 import by.epam.booking.exception.ServiceException;
 import by.epam.booking.service.book.BookInfoType;
-import by.epam.booking.service.book.BookLogic;
 import by.epam.booking.type.PageChangeType;
 import by.epam.booking.type.ParameterName;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
-import java.sql.SQLException;
 
-public class ToBookSettingsCommand implements WebCommand {
+public class ToBookSettingsCommand extends BookingClubCommand implements WebCommand {
 
     private static final String SETTINGS_PARAM_VALUE = "settings";
     private static final String PATH_PAGE = "path.page.book";
@@ -31,7 +29,7 @@ public class ToBookSettingsCommand implements WebCommand {
         book = new Book();
         book.setId(Integer.parseInt(request.getParameter(ParameterName.PARAM_BOOK_ID)));
         try {
-            book = BookLogic.bookGet(book, BookInfoType.ALL);
+            book = bookLogic.bookGet(book, BookInfoType.ALL);
         } catch (ServiceException e) {
             logger.error(e);
             throw new CommandException(e);

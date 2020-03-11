@@ -1,14 +1,14 @@
 package by.epam.booking.command.impl.user;
 
 import by.epam.booking.command.WebCommand;
+import by.epam.booking.command.impl.BookingClubCommand;
 import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.entity.User;
 import by.epam.booking.command.Router;
 import by.epam.booking.exception.CommandException;
-import by.epam.booking.exception.RepositoryException;
 import by.epam.booking.exception.ServiceException;
 import by.epam.booking.service.user.UserInfoType;
-import by.epam.booking.service.user.UserLogic;
+import by.epam.booking.service.user.impl.UserLogic;
 import by.epam.booking.type.PageChangeType;
 import by.epam.booking.type.ParameterName;
 import org.apache.logging.log4j.LogManager;
@@ -17,7 +17,7 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 
-public class NewCompletedBook implements WebCommand {
+public class NewCompletedBook extends BookingClubCommand implements WebCommand {
 
     private static final String PATH_PAGE = "path.page.user";
     private static final String PARAM_BOOK_STATUS_VALUE = "completed";
@@ -36,7 +36,7 @@ public class NewCompletedBook implements WebCommand {
         user.setLogin((String) request.getSession().getAttribute(ParameterName.PARAM_USER_LOGIN));
         user.setBookId(bookId);
         try {
-            UserLogic.userUpdate(user, user, UserInfoType.ADD_NEW_BOOK_COMPLETED);
+            userLogic.userUpdate(user, user, UserInfoType.ADD_NEW_BOOK_COMPLETED);
         } catch (ServiceException e) {
             logger.error(e);
             throw new CommandException(e);

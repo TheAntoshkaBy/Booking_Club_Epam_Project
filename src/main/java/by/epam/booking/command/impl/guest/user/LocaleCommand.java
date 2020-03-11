@@ -22,7 +22,6 @@ public class LocaleCommand implements WebCommand {
             request.getSession().setAttribute(LOCALE, ENG);
         } else if (locale.equals(ENG)) {
             request.getSession().setAttribute(LOCALE, RUS);
-        } else {
         }
 
         page.setPage(ConfigurationManager.getProperty(PATH_PAGE));

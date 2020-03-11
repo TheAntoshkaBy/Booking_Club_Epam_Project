@@ -6,7 +6,7 @@ import by.epam.booking.entity.User;
 import by.epam.booking.exception.CommandException;
 import by.epam.booking.exception.ServiceException;
 import by.epam.booking.service.user.UserInfoType;
-import by.epam.booking.service.user.UserLogic;
+import by.epam.booking.service.user.impl.UserLogic;
 import by.epam.booking.type.ParameterName;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,9 +24,9 @@ public class BlockingUser extends GoToListOfUsers implements WebCommand {
         User user = new User(request.getParameter(ParameterName.PARAM_USER_LOGIN));
 
         try {
-            user = UserLogic.userGet(user, UserInfoType.ALL);
+            user = userLogic.userGet(user, UserInfoType.ALL);
             user.setIsActive(false);
-            UserLogic.userUpdate(user,user,UserInfoType.IS_ACTIVE);
+            userLogic.userUpdate(user,user,UserInfoType.IS_ACTIVE);
         } catch (ServiceException e) {
             logger.error(e);
             throw new CommandException(e);

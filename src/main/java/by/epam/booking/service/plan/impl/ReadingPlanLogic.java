@@ -1,23 +1,45 @@
-package by.epam.booking.service.plan;
+package by.epam.booking.service.plan.impl;
 
-import by.epam.booking.entity.Book;
 import by.epam.booking.entity.ReadingPlan;
 import by.epam.booking.exception.RepositoryException;
 import by.epam.booking.exception.ServiceException;
 import by.epam.booking.repository.assistant.book.*;
 import by.epam.booking.repository.assistant.plan.GetReadingPlanInfo;
-import by.epam.booking.service.book.BookInfoType;
-import by.epam.booking.specification.impl.book.AddNewBookCommentSpecification;
+import by.epam.booking.service.plan.ReadingPlanInfoType;
+import by.epam.booking.service.plan.ReadingPlanLogicProtocol;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.SQLException;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.locks.ReentrantLock;
 
-public class ReadingPlanLogic {
+public class ReadingPlanLogic implements ReadingPlanLogicProtocol {
 
+    private static ReadingPlanLogic INSTANCE;
+    private static AtomicBoolean instanceCreated = new AtomicBoolean();
+    private static final ReentrantLock getInstanceLock = new ReentrantLock();
     private static Logger logger = LogManager.getLogger();
 
-    public static ReadingPlan planGet(ReadingPlan transferredPlan, ReadingPlanInfoType... types) throws ServiceException {
+    private ReadingPlanLogic(){
+    }
+
+    public static ReadingPlanLogic getInstance() {
+        if (!instanceCreated.get()) {
+            getInstanceLock.lock();
+            try {
+                if (null == INSTANCE) {
+                    INSTANCE = new ReadingPlanLogic();
+                    instanceCreated.set(true);
+                }
+            } finally {
+                getInstanceLock.unlock();
+            }
+        }
+        return INSTANCE;
+    }
+
+    @Override
+    public ReadingPlan planGet(ReadingPlan transferredPlan, ReadingPlanInfoType... types) throws ServiceException {
 
         for (ReadingPlanInfoType type : types) {
             switch (type) {
@@ -44,13 +66,4 @@ public class ReadingPlanLogic {
         return transferredPlan;
     }
 
-    public static boolean bookUpdate(Book mutableBook, Book changeParamOfBook, BookInfoType... types) {
-        boolean answer = false;
-        for (BookInfoType type : types) {
-            switch (type) {
-
-            }
-        }
-        return answer;
-    }
 }

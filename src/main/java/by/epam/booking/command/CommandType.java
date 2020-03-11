@@ -138,17 +138,17 @@ public enum CommandType {
     },
     CHANGE_BOOK_NAME{
         {
-            this.command = new ChangeBookNameCommand();
+            this.command = new ChangeBookNameClubCommand();
         }
     },
     CHANGE_BOOK_AUTHOR{
         {
-            this.command = new ChangeBookAuthorCommand();
+            this.command = new ChangeBookAuthorClubCommand();
         }
     },
     CHANGE_BOOK_DESCRIPTION{
         {
-            this.command = new ChangeBookDescriptionCommand();
+            this.command = new ChangeBookDescriptionClubCommand();
         }
     },
     GO_TO_ADD_BOOK{
@@ -183,12 +183,12 @@ public enum CommandType {
     },
     DELETE_BOOK{
         {
-            this.command = new DeleteBookCommand();
+            this.command = new DeleteBookClubCommand();
         }
     },
     CHANGE_BOOK_IMAGE{
         {
-            this.command = new ChangeBookImageCommand();
+            this.command = new ChangeBookImageClubCommand();
         }
     },
     PAY{

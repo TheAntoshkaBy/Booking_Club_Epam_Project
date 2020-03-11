@@ -1,13 +1,13 @@
 package by.epam.booking.command.impl.admin.book;
 
 import by.epam.booking.command.WebCommand;
+import by.epam.booking.command.impl.BookingClubCommand;
 import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.config.MessageManager;
 import by.epam.booking.entity.Book;
 import by.epam.booking.command.Router;
 import by.epam.booking.exception.CommandException;
 import by.epam.booking.service.book.BookInfoType;
-import by.epam.booking.service.book.BookLogic;
 import by.epam.booking.type.ParameterName;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,7 +19,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
-public class ChangeBookImageCommand implements WebCommand {
+public class ChangeBookImageClubCommand extends BookingClubCommand implements WebCommand {
 
     public static final String UPLOAD_DIR = "book_image";
     public static final String PATH = "path.page.user";
@@ -57,7 +57,7 @@ public class ChangeBookImageCommand implements WebCommand {
 
         book.setId(Integer.parseInt(request.getParameter(ParameterName.PARAM_BOOK_ID)));
         book.setImage(imagePath);
-        BookLogic.bookUpdate(book, book, BookInfoType.IMAGE);
+        bookLogic.bookUpdate(book, book, BookInfoType.IMAGE);
         request.getSession().setAttribute(ParameterName.PARAM_BOOK_IMAGE, UPLOAD_DIR + File.separator + imagePath);
 
         logger.debug("Image successfully changed!");

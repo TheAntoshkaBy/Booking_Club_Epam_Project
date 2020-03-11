@@ -2,27 +2,24 @@ package by.epam.booking.command.impl.user.change;
 
 import by.epam.booking.command.Router;
 import by.epam.booking.command.WebCommand;
+import by.epam.booking.command.impl.BookingClubCommand;
 import by.epam.booking.config.ConfigurationManager;
-import by.epam.booking.entity.Book;
 import by.epam.booking.entity.ReadingPlan;
 import by.epam.booking.entity.User;
 import by.epam.booking.exception.CommandException;
 import by.epam.booking.exception.ServiceException;
-import by.epam.booking.service.book.BookInfoType;
-import by.epam.booking.service.book.BookLogic;
 import by.epam.booking.service.plan.ReadingPlanInfoType;
-import by.epam.booking.service.plan.ReadingPlanLogic;
+import by.epam.booking.service.plan.impl.ReadingPlanLogic;
 import by.epam.booking.service.user.UserInfoType;
-import by.epam.booking.service.user.UserLogic;
+import by.epam.booking.service.user.impl.UserLogic;
 import by.epam.booking.type.PageChangeType;
 import by.epam.booking.type.ParameterName;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
 
-public class AddReadingPlan implements WebCommand {
+public class AddReadingPlan extends BookingClubCommand implements WebCommand {
 
     private static String PATH_PAGE = "path.page.plan.book";
     private static Logger logger = LogManager.getLogger();
@@ -34,7 +31,7 @@ public class AddReadingPlan implements WebCommand {
         user.setReadingPlanId((Integer) request.getSession().getAttribute(ParameterName.PARAM_READING_PLAN_ID_INTERIM));
 
         try {
-            UserLogic.userUpdate(user,user, UserInfoType.READING_PLAN);
+            userLogic.userUpdate(user,user, UserInfoType.READING_PLAN);
         } catch (ServiceException e) {
             logger.error(e);
             throw new CommandException(e);
@@ -42,7 +39,7 @@ public class AddReadingPlan implements WebCommand {
         ReadingPlan readingPlan = new ReadingPlan();
         readingPlan.setIdReadingPlan(user.getReadingPlanId());
         try {
-            ReadingPlanLogic.planGet(readingPlan, ReadingPlanInfoType.READING_PLAN_NAME);
+            readingPlanLogic.planGet(readingPlan, ReadingPlanInfoType.READING_PLAN_NAME);
         } catch (ServiceException e) {
             throw new CommandException(e);
         }

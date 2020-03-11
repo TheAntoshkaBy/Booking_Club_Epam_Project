@@ -1,6 +1,7 @@
 package by.epam.booking.command.impl.admin.book;
 
 import by.epam.booking.command.WebCommand;
+import by.epam.booking.command.impl.BookingClubCommand;
 import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.entity.Book;
 import by.epam.booking.command.Router;
@@ -9,17 +10,15 @@ import by.epam.booking.exception.RepositoryException;
 import by.epam.booking.repository.assistant.book.GetAllBooks;
 import by.epam.booking.repository.assistant.user.UserInfoByLogin;
 import by.epam.booking.service.book.BookInfoType;
-import by.epam.booking.service.book.BookLogic;
 import by.epam.booking.type.ParameterName;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class DeleteBookCommand implements WebCommand {
+public class DeleteBookClubCommand extends BookingClubCommand implements WebCommand {
 
     private static final String GUEST_PARAMETER_VALUE = "Guest";
     private static final String BOOK_ID_EMPTY_PARAMETER_VALUE = null;
@@ -36,7 +35,7 @@ public class DeleteBookCommand implements WebCommand {
         Integer bookId = Integer.parseInt(request.getParameter(ParameterName.PARAM_BOOK_ID));
         Book book = new Book();
         book.setId(bookId);
-        BookLogic.bookUpdate(book, book, BookInfoType.DELETE);
+        bookLogic.bookUpdate(book, book, BookInfoType.DELETE);
         request.getSession().setAttribute(ParameterName.PARAM_USER_BOOK_ID, BOOK_ID_EMPTY_PARAMETER_VALUE);
         request.getSession().setAttribute(ParameterName.PARAM_USER_BOOK_NAME, EMPTY_BOOK_NAME_PARAMETER_VALUE);
         ArrayList<Book> books = null;

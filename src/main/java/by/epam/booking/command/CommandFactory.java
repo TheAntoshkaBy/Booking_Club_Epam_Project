@@ -24,7 +24,7 @@ public class CommandFactory {
             CommandType currentEnum = CommandType.valueOf(action.toUpperCase());
             current = currentEnum.getCurrentCommand();
         } catch (IllegalArgumentException e) {
-            logger.error("Command is Error" , e);// FIXME: 27.02.2020 черещ щапятную
+            logger.error("Command is Error" , e);
             throw new CommandException(e);
         }
         return current;

@@ -2,6 +2,7 @@ package by.epam.booking.command.impl.guest.user;
 
 import by.epam.booking.command.Router;
 import by.epam.booking.command.WebCommand;
+import by.epam.booking.command.impl.BookingClubCommand;
 import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.config.MessageManager;
 import by.epam.booking.entity.User;
@@ -9,13 +10,13 @@ import by.epam.booking.exception.CommandException;
 import by.epam.booking.exception.ServiceException;
 import by.epam.booking.service.user.CodeGenerator;
 import by.epam.booking.service.user.UserInfoType;
-import by.epam.booking.service.user.UserLogic;
+import by.epam.booking.service.user.impl.UserLogic;
 import by.epam.booking.type.PageChangeType;
 import by.epam.booking.type.ParameterName;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class ConfirmCommand implements WebCommand {
+public class ConfirmCommand extends BookingClubCommand implements WebCommand {
 
     public static final String MESSAGE = "message.confirmError";
     private static final String PATH_PAGE = "path.page.user.confirmation";
@@ -31,7 +32,7 @@ public class ConfirmCommand implements WebCommand {
             user.setLogin((String) request.getSession().getAttribute(ParameterName.PARAM_USER_LOGIN_INTERIM));
             user.setIsActive(true);
             try {
-                UserLogic.userUpdate(user, user, UserInfoType.IS_ACTIVE);
+                userLogic.userUpdate(user, user, UserInfoType.IS_ACTIVE);
             } catch (ServiceException e) {
                 throw new CommandException(e);
             }

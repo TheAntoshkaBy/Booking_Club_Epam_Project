@@ -15,21 +15,22 @@ public class LogOutCommand implements WebCommand {
 
     @Override
     public Router execute(HttpServletRequest request) {
+
         Router page = new Router();
         page.setPage(ConfigurationManager.getProperty(PATH_PAGE));
         HttpSession session = request.getSession();
-        session.setAttribute(ParameterName.PARAM_USER_LOGIN, null);
-        request.getSession().setAttribute(ParameterName.PARAM_USER_INTERIM, null);
-        request.getSession().setAttribute(ParameterName.PARAM_USER_SURNAME, null);
-        request.getSession().setAttribute(ParameterName.PARAM_USER_EMAIL, null);
-        request.getSession().setAttribute(ParameterName.PARAM_USER_ROLE, null);
-        request.getSession().setAttribute(ParameterName.PARAM_USER_STATUS, null);
-        request.getSession().setAttribute(ParameterName.PARAM_USER_BOOK_NAME, null);
-        request.getSession().setAttribute(ParameterName.PARAM_USER_BOOK_ID, null);
-        request.getSession().setAttribute(ParameterName.PARAM_NAME_OF_READING_PLAN, null);
-        request.getSession().setAttribute(ParameterName.PARAM_USER_PLAN_ID, null);
-        request.getSession().setAttribute(ParameterName.PARAM_LIST_OF_USER_COMPLETED_BOOKS, null);
-        request.getSession().setAttribute(ParameterName.PARAM_COMPLETED_BOOKS, null);
+        session.removeAttribute(ParameterName.PARAM_USER_LOGIN);
+        request.getSession().removeAttribute(ParameterName.PARAM_USER_INTERIM);
+        request.getSession().removeAttribute(ParameterName.PARAM_USER_SURNAME);
+        request.getSession().removeAttribute(ParameterName.PARAM_USER_EMAIL);
+        request.getSession().removeAttribute(ParameterName.PARAM_USER_ROLE);
+        request.getSession().removeAttribute(ParameterName.PARAM_USER_STATUS);
+        request.getSession().removeAttribute(ParameterName.PARAM_USER_BOOK_NAME);
+        request.getSession().removeAttribute(ParameterName.PARAM_USER_BOOK_ID);
+        request.getSession().removeAttribute(ParameterName.PARAM_NAME_OF_READING_PLAN);
+        request.getSession().removeAttribute(ParameterName.PARAM_USER_PLAN_ID);
+        request.getSession().removeAttribute(ParameterName.PARAM_LIST_OF_USER_COMPLETED_BOOKS);
+        request.getSession().removeAttribute(ParameterName.PARAM_COMPLETED_BOOKS);
 
         page.setPageFormat(PageChangeType.REDIRECT);
         return page;

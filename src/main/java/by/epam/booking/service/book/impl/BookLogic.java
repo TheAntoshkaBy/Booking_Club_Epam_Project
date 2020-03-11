@@ -1,4 +1,4 @@
-package by.epam.booking.service.book;
+package by.epam.booking.service.book.impl;
 
 import by.epam.booking.entity.Book;
 import by.epam.booking.exception.RepositoryException;
@@ -8,19 +8,42 @@ import by.epam.booking.repository.assistant.book.GetBookComments;
 import by.epam.booking.repository.assistant.book.GetBookInfo;
 import by.epam.booking.repository.assistant.book.GetMaxId;
 import by.epam.booking.repository.assistant.book.change.ChangeBook;
+import by.epam.booking.service.book.BookInfoType;
+import by.epam.booking.service.book.BookLogicProtocol;
 import by.epam.booking.specification.impl.book.AddNewBookCommentSpecification;
 import by.epam.booking.specification.impl.book.update.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.SQLException;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.locks.ReentrantLock;
 
 
-public class BookLogic {
+public class BookLogic implements BookLogicProtocol {
 
+    private static BookLogic INSTANCE;
+    private static AtomicBoolean instanceCreated = new AtomicBoolean();
+    private static final ReentrantLock getInstanceLock = new ReentrantLock();
     private static Logger logger = LogManager.getLogger();
+    private BookLogic(){
+    }
 
-    public static Book bookGet(Book transferredBook, BookInfoType... types) throws ServiceException {
+    public static BookLogic getInstance() {
+        if (!instanceCreated.get()) {
+            getInstanceLock.lock();
+            try {
+                if (null == INSTANCE) {
+                    INSTANCE = new BookLogic();
+                    instanceCreated.set(true);
+                }
+            } finally {
+                getInstanceLock.unlock();
+            }
+        }
+        return INSTANCE;
+    }
+
+    public Book bookGet(Book transferredBook, BookInfoType... types) throws ServiceException {
         Book book = new Book();
         for (BookInfoType type : types) {
             switch (type){
@@ -55,7 +78,7 @@ public class BookLogic {
         }
         return book;
     }
-    public static boolean bookUpdate(Book mutableBook, Book changeParamOfBook, BookInfoType ... types){
+    public boolean bookUpdate(Book mutableBook, Book changeParamOfBook, BookInfoType ... types){
         boolean answer  = false;
         for (BookInfoType type : types) {
             switch (type){

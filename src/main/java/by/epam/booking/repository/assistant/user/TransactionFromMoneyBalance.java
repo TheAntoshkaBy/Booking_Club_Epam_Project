@@ -60,7 +60,7 @@ public class TransactionFromMoneyBalance extends RepositoryHelper {
                 stGetBalance.getConnection().setAutoCommit(true);
                 stSetBalance.getConnection().setAutoCommit(true);
                 stNewMoneyOperation.getConnection().setAutoCommit(true);
-// FIXME: 04.03.2020 
+
                 closeConnection(stGetBalance.getConnection());
                 closeConnection(stSetBalance.getConnection());
                 closeConnection(stNewMoneyOperation.getConnection());
