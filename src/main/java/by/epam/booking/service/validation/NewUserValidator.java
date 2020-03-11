@@ -33,7 +33,7 @@ public class NewUserValidator {
         return surname != null && Pattern.matches(SURNAME_REG, surname);
     }
     public boolean isCorrectLogin(String login) throws ServiceException {
-        return login != null && Pattern.matches(LOGIN_REG, login) && !CheckUser.isUserConsist(login);
+        return login != null && Pattern.matches(LOGIN_REG, login) && !CheckUser.isUserConsist(login) && !login.isEmpty();
     }
     public boolean isCorrectPassword(String password) {
         return password != null && Pattern.matches(PASSWORD_REG, password);

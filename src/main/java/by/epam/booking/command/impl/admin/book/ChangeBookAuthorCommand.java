@@ -23,6 +23,12 @@ public class ChangeBookAuthorCommand implements WebCommand {
     private final String VALUE_FOR_PAGE = "settings";
     private static Logger logger = LogManager.getLogger();
 
+    /**
+     *
+     * @param request
+     * @return
+     * @throws CommandException
+     */
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {
         Router page;

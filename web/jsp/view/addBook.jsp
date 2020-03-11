@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="ctg" uri="customtags" %>
 <fmt:setLocale value="${locale}"/>
 <fmt:setBundle basename="pagecontent"/>
 
@@ -18,9 +19,9 @@
     <link href="${pageContext.request.contextPath}/css/comment.css" rel="stylesheet">
     <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
     <style>
-        <%@include file="../vendor/bootstrap/css/bootstrap.min.css"%>
-        <%@include file="../css/grayscale.min.css"%>
-        <%@include file="../vendor/fontawesome-free/css/all.min.css"%>
+        <%@include file="../../vendor/bootstrap/css/bootstrap.min.css"%>
+        <%@include file="../../css/grayscale.min.css"%>
+        <%@include file="../../vendor/fontawesome-free/css/all.min.css"%>
 
         .field {clear:both; text-align:right; line-height:25px;}
         label {float:left; padding-right:10px;}
@@ -139,53 +140,13 @@
 
 
 
-<section class="contact-section bg-black" id="contact">
-    <div class="container">
-
-        <div class="row">
-            <div class="col-md-4 mb-3 mb-md-0">
-                <div class="card py-4 h-100">
-                    <div class="card-body text-center">
-                        <i class="fas fa-map-marked-alt text-primary mb-2"></i>
-                        <h4 class="text-uppercase m-0">Address</h4>
-                        <hr class="my-4">
-                        <div class="small text-black-50">4923 Market Street, Orlando FL</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 mb-3 mb-md-0">
-                <div class="card py-4 h-100">
-                    <div class="card-body text-center">
-                        <i class="fas fa-envelope text-primary mb-2"></i>
-                        <h4 class="text-uppercase m-0">Email</h4>
-                        <hr class="my-4">
-                        <div class="small text-black-50">
-                            <a href="#">hello@yourdomain.com</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 mb-3 mb-md-0">
-                <div class="card py-4 h-100">
-                    <div class="card-body text-center">
-                        <i class="fas fa-mobile-alt text-primary mb-2"></i>
-                        <h4 class="text-uppercase m-0">Phone</h4>
-                        <hr class="my-4">
-                        <div class="small text-black-50">+1 (555) 902-8832</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<ctg:end-page/>
 <!-- Bootstrap core JavaScript -->
 <script type="text/javascript">
-    <%@include file="../vendor/jquery/jquery.min.js"%>
-    <%@include file="../vendor/bootstrap/js/bootstrap.bundle.min.js"%>
-    <%@include file="../vendor/jquery-easing/jquery.easing.min.js"%>
-    <%@include file="../js/grayscale.min.js"%>
+    <%@include file="../../vendor/jquery/jquery.min.js"%>
+    <%@include file="../../vendor/bootstrap/js/bootstrap.bundle.min.js"%>
+    <%@include file="../../vendor/jquery-easing/jquery.easing.min.js"%>
+    <%@include file="../../js/grayscale.min.js"%>
 </script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>

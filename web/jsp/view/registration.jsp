@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="ctg" uri="customtags" %>
 <fmt:setLocale value="${locale}"/>
 <fmt:setBundle basename="pagecontent"/>
 
@@ -16,9 +17,9 @@
 
     <!-- Bootstrap core CSS -->
     <style>
-        <%@include file="../vendor/bootstrap/css/bootstrap.min.css"%>
-        <%@include file="../css/grayscale.min.css"%>
-        <%@include file="../vendor/fontawesome-free/css/all.min.css"%>
+        <%@include file="../../vendor/bootstrap/css/bootstrap.min.css"%>
+        <%@include file="../../css/grayscale.min.css"%>
+        <%@include file="../../vendor/fontawesome-free/css/all.min.css"%>
     </style>
     <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -136,16 +137,16 @@
     </div>
 </section>
 
-
+<ctg:end-page/>
 <!-- Footer -->
 
 <!-- Bootstrap core JavaScript -->
 <!-- Bootstrap core JavaScript -->
 <script type="text/javascript">
-    <%@include file="../vendor/jquery/jquery.min.js"%>
-    <%@include file="../vendor/bootstrap/js/bootstrap.bundle.min.js"%>
-    <%@include file="../vendor/jquery-easing/jquery.easing.min.js"%>
-    <%@include file="../js/grayscale.min.js"%>
+    <%@include file="../../vendor/jquery/jquery.min.js"%>
+    <%@include file="../../vendor/bootstrap/js/bootstrap.bundle.min.js"%>
+    <%@include file="../../vendor/jquery-easing/jquery.easing.min.js"%>
+    <%@include file="../../js/grayscale.min.js"%>
 </script>
 
 

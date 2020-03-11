@@ -1,0 +1,349 @@
+2020-03-11 10:36:08 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:36:08 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:36:08 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:36:08 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:36:08 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:36:08 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:36:08 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:36:08 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:36:08 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:36:08 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:36:08 [main] ERROR ConnectionPool - get Connection 9
+2020-03-11 10:36:08 [main] ERROR ConnectionPool - Close Connection 10
+2020-03-11 10:36:08 [main] ERROR ConnectionPool - get Connection 9
+2020-03-11 10:36:08 [main] ERROR ConnectionPool - Close Connection 10
+2020-03-11 10:36:47 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:36:47 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:36:47 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:36:47 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:36:47 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:36:47 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:36:47 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:36:47 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:36:47 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:36:47 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:36:47 [main] ERROR ConnectionPool - get Connection 9
+2020-03-11 10:36:47 [main] ERROR ConnectionPool - Close Connection 10
+2020-03-11 10:37:49 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:37:49 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:37:49 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:37:49 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:37:49 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:37:49 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:37:49 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:37:49 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:37:49 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:37:49 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:37:49 [main] ERROR ConnectionPool - get Connection 9
+2020-03-11 10:37:49 [main] ERROR ConnectionPool - Close Connection 10
+2020-03-11 10:37:49 [main] ERROR ConnectionPool - get Connection 9
+2020-03-11 10:37:49 [main] ERROR ConnectionPool - Close Connection 10
+2020-03-11 10:37:57 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:37:57 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:37:57 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:37:57 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:37:57 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:37:57 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:37:57 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:37:57 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:37:57 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:37:57 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:37:57 [main] ERROR ConnectionPool - get Connection 9
+2020-03-11 10:37:57 [main] ERROR ConnectionPool - Close Connection 10
+2020-03-11 10:37:57 [main] ERROR ConnectionPool - get Connection 9
+2020-03-11 10:37:57 [main] ERROR ConnectionPool - Close Connection 10
+2020-03-11 10:39:39 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:39:39 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:39:39 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:39:39 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:39:39 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:39:39 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:39:39 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:39:39 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:39:39 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:39:39 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 10:39:39 [main] ERROR ConnectionPool - get Connection 9
+2020-03-11 10:39:39 [main] ERROR ConnectionPool - Close Connection 10
+2020-03-11 10:39:39 [main] ERROR ConnectionPool - get Connection 9
+2020-03-11 10:39:39 [main] ERROR ConnectionPool - Close Connection 10
+2020-03-11 11:14:04 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:14:04 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:14:04 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:14:04 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:14:04 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:14:04 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:14:04 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:14:04 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:14:04 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:14:04 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:14:04 [main] ERROR ConnectionPool - get Connection 9
+2020-03-11 11:14:04 [main] ERROR ConnectionPool - Close Connection 10
+2020-03-11 11:14:27 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:14:27 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:14:27 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:14:27 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:14:27 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:14:27 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:14:27 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:14:27 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:14:27 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:14:27 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:14:27 [main] ERROR ConnectionPool - get Connection 9
+2020-03-11 11:14:27 [main] ERROR ConnectionPool - Close Connection 10
+2020-03-11 11:15:35 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:15:35 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:15:35 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:15:35 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:15:35 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:15:35 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:15:35 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:15:35 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:15:35 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:15:35 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:15:35 [main] ERROR ConnectionPool - get Connection 9
+2020-03-11 11:15:35 [main] ERROR ConnectionPool - Close Connection 10
+2020-03-11 11:19:06 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:19:06 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:19:06 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:19:06 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:19:06 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:19:06 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:19:06 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:19:06 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:19:06 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:19:06 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:19:06 [main] ERROR ConnectionPool - get Connection 9
+2020-03-11 11:19:06 [main] ERROR ConnectionPool - Close Connection 10
+2020-03-11 11:19:06 [main] ERROR ConnectionPool - get Connection 9
+2020-03-11 11:19:06 [main] ERROR ConnectionPool - Close Connection 10
+2020-03-11 11:19:25 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:19:25 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:19:25 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:19:25 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:19:25 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:19:25 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:19:25 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:19:25 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:19:25 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:19:25 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:19:25 [main] ERROR ConnectionPool - get Connection 9
+2020-03-11 11:19:25 [main] ERROR ConnectionPool - Close Connection 10
+2020-03-11 11:19:25 [main] ERROR ConnectionPool - get Connection 9
+2020-03-11 11:19:25 [main] ERROR ConnectionPool - Close Connection 10
+2020-03-11 11:20:29 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:20:29 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:20:29 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:20:29 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:20:29 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:20:29 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:20:29 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:20:29 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:20:29 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:20:29 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:20:29 [main] ERROR ConnectionPool - get Connection 9
+2020-03-11 11:20:29 [main] ERROR ConnectionPool - Close Connection 10
+2020-03-11 11:20:29 [main] ERROR ConnectionPool - get Connection 9
+2020-03-11 11:20:29 [main] ERROR ConnectionPool - Close Connection 10
+2020-03-11 11:20:56 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:20:56 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:20:56 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:20:56 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:20:56 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:20:56 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:20:56 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:20:56 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:20:56 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:20:56 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:20:56 [main] ERROR ConnectionPool - get Connection 9
+2020-03-11 11:20:56 [main] ERROR ConnectionPool - Close Connection 10
+2020-03-11 11:20:56 [main] ERROR ConnectionPool - get Connection 9
+2020-03-11 11:20:56 [main] ERROR ConnectionPool - Close Connection 10
+2020-03-11 11:21:12 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:21:12 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:21:12 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:21:12 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:21:12 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:21:12 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:21:12 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:21:13 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:21:13 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:21:13 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:21:13 [main] ERROR ConnectionPool - get Connection 9
+2020-03-11 11:21:13 [main] ERROR ConnectionPool - Close Connection 10
+2020-03-11 11:21:13 [main] ERROR ConnectionPool - get Connection 9
+2020-03-11 11:21:13 [main] ERROR ConnectionPool - Close Connection 10
+2020-03-11 11:23:13 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:23:13 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:23:13 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:23:13 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:23:13 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:23:13 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:23:13 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:23:13 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:23:13 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:23:13 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:23:13 [main] ERROR ConnectionPool - get Connection 9
+2020-03-11 11:23:13 [main] ERROR ConnectionPool - Close Connection 10
+2020-03-11 11:23:13 [main] ERROR ConnectionPool - get Connection 9
+2020-03-11 11:23:13 [main] ERROR ConnectionPool - Close Connection 10
+2020-03-11 11:23:34 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:23:34 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:23:34 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:23:34 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:23:34 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:23:34 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:23:34 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:23:34 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:23:34 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:23:34 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:23:34 [main] ERROR ConnectionPool - get Connection 9
+2020-03-11 11:23:34 [main] ERROR ConnectionPool - Close Connection 10
+2020-03-11 11:23:34 [main] ERROR ConnectionPool - get Connection 9
+2020-03-11 11:23:34 [main] ERROR ConnectionPool - Close Connection 10
+2020-03-11 11:23:55 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:23:55 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:23:55 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:23:55 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:23:55 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:23:55 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:23:55 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:23:55 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:23:55 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:23:55 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:23:55 [main] ERROR ConnectionPool - get Connection 9
+2020-03-11 11:23:55 [main] ERROR ConnectionPool - Close Connection 10
+2020-03-11 11:23:55 [main] ERROR ConnectionPool - get Connection 9
+2020-03-11 11:23:55 [main] ERROR ConnectionPool - Close Connection 10
+2020-03-11 11:24:26 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:24:26 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:24:26 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:24:26 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:24:26 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:24:26 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:24:26 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:24:26 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:24:26 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:24:26 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:24:26 [main] ERROR ConnectionPool - get Connection 9
+2020-03-11 11:24:26 [main] ERROR ConnectionPool - Close Connection 10
+2020-03-11 11:24:26 [main] ERROR ConnectionPool - get Connection 9
+2020-03-11 11:24:26 [main] ERROR ConnectionPool - Close Connection 10
+2020-03-11 11:24:56 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:24:56 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:24:56 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:24:56 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:24:56 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:24:56 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:24:56 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:24:56 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:24:56 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:24:56 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:24:56 [main] ERROR ConnectionPool - get Connection 9
+2020-03-11 11:24:56 [main] ERROR ConnectionPool - Close Connection 10
+2020-03-11 11:24:56 [main] ERROR ConnectionPool - get Connection 9
+2020-03-11 11:24:56 [main] ERROR ConnectionPool - Close Connection 10
+2020-03-11 11:25:58 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:25:58 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:25:58 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:25:58 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:25:58 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:25:58 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:25:58 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:25:58 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:25:58 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:25:58 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:25:58 [main] ERROR ConnectionPool - get Connection 9
+2020-03-11 11:25:58 [main] ERROR ConnectionPool - Close Connection 10
+2020-03-11 11:25:58 [main] ERROR ConnectionPool - get Connection 9
+2020-03-11 11:25:58 [main] ERROR ConnectionPool - Close Connection 10
+2020-03-11 11:33:58 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:33:58 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:33:58 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:33:58 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:33:58 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:33:58 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:33:58 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:33:58 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:33:58 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:33:58 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:33:58 [main] ERROR ConnectionPool - get Connection 9
+2020-03-11 11:37:27 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:37:27 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:37:27 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:37:27 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:37:27 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:37:27 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:37:27 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:37:27 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:37:27 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:37:27 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:37:27 [main] ERROR ConnectionPool - get Connection 9
+2020-03-11 11:37:27 [main] ERROR ConnectionPool - get Connection 8
+2020-03-11 11:37:42 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:37:42 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:37:43 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:37:43 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:37:43 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:37:43 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:37:43 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:37:43 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:37:43 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:37:43 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:37:43 [main] ERROR ConnectionPool - get Connection 9
+2020-03-11 11:37:43 [main] ERROR ConnectionPool - get Connection 8
+2020-03-11 11:38:06 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:38:06 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:38:06 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:38:06 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:38:06 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:38:06 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:38:06 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:38:06 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:38:06 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:38:06 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:38:06 [main] ERROR ConnectionPool - get Connection 9
+2020-03-11 11:38:06 [main] ERROR ConnectionPool - get Connection 8
+2020-03-11 11:38:23 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:38:23 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:38:23 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:38:23 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:38:23 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:38:23 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:38:23 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:38:23 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:38:23 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:38:23 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:38:23 [main] ERROR ConnectionPool - get Connection 9
+2020-03-11 11:38:23 [main] ERROR ConnectionPool - get Connection 8
+2020-03-11 11:41:09 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:41:09 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:41:09 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:41:09 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:41:09 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:41:09 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:41:09 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:41:09 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:41:09 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:41:09 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:41:09 [main] ERROR ConnectionPool - get Connection 9
+2020-03-11 11:41:09 [main] ERROR ConnectionPool - get Connection 8
+2020-03-11 11:41:09 [main] ERROR ConnectionPool - Close Connection 9
+2020-03-11 11:41:09 [main] ERROR ConnectionPool - Close Connection 10
+2020-03-11 11:41:15 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:41:15 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:41:15 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:41:15 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:41:15 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:41:15 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:41:15 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:41:15 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:41:15 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:41:15 [main] DEBUG DataBaseConnection - DataBase connection is successful!
+2020-03-11 11:41:15 [main] ERROR ConnectionPool - get Connection 9
+2020-03-11 11:41:15 [main] ERROR ConnectionPool - get Connection 8
+2020-03-11 11:41:15 [main] ERROR ConnectionPool - Close Connection 9
+2020-03-11 11:41:15 [main] ERROR ConnectionPool - Close Connection 10
+2020-03-11 11:41:15 [main] ERROR ConnectionPool - get Connection 9
+2020-03-11 11:41:15 [main] ERROR ConnectionPool - get Connection 8
+2020-03-11 11:41:15 [main] ERROR ConnectionPool - Close Connection 9
+2020-03-11 11:41:15 [main] ERROR ConnectionPool - Close Connection 10

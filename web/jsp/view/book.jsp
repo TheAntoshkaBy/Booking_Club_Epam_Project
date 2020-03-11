@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <fmt:setLocale value="${locale}"/>
 <fmt:setBundle basename="pagecontent"/>
+<%@ taglib prefix="ctg" uri="customtags" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -18,9 +19,9 @@
     <link href="${pageContext.request.contextPath}/css/comment.css" rel="stylesheet">
     <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
     <style>
-        <%@include file="../vendor/bootstrap/css/bootstrap.min.css"%>
-        <%@include file="../css/grayscale3.css"%>
-        <%@include file="../vendor/fontawesome-free/css/all.min.css"%>
+        <%@include file="../../vendor/bootstrap/css/bootstrap.min.css"%>
+        <%@include file="../../css/grayscale3.css"%>
+        <%@include file="../../vendor/fontawesome-free/css/all.min.css"%>
 
         .field {clear:both; text-align:right; line-height:25px;}
         label {float:left; padding-right:10px;}
@@ -38,7 +39,7 @@
             font-family: 'Varela Round';
         }
     </style>
-    <link href="../css/grayscale3.css" rel="stylesheet">
+    <link href="../../css/grayscale3.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -195,7 +196,7 @@
                 <h5 class="text-center">
                     <label>
                         <fmt:message key="label.book.request.log.one"/>
-                        <a href="${pageContext.request.contextPath}/jsp/login.jsp"><fmt:message key="label.login"/> </a>
+                        <a href="${pageContext.request.contextPath}/WEB-INF/jsp/login.jsp"><fmt:message key="label.login"/> </a>
                         <fmt:message key="label.book.request.log.two"/>
                     </label>
                 </h5>
@@ -328,15 +329,15 @@
         </div>
 </section>
 
-
+<ctg:end-page/>
 
 
 <!-- Bootstrap core JavaScript -->
 <script type="text/javascript">
-    <%@include file="../vendor/jquery/jquery.min.js"%>
-    <%@include file="../vendor/bootstrap/js/bootstrap.bundle.min.js"%>
-    <%@include file="../vendor/jquery-easing/jquery.easing.min.js"%>
-    <%@include file="../js/grayscale.min.js"%>
+    <%@include file="../../vendor/jquery/jquery.min.js"%>
+    <%@include file="../../vendor/bootstrap/js/bootstrap.bundle.min.js"%>
+    <%@include file="../../vendor/jquery-easing/jquery.easing.min.js"%>
+    <%@include file="../../js/grayscale.min.js"%>
 </script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>

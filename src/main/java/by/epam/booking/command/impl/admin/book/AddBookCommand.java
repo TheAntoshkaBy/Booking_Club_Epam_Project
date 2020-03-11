@@ -16,11 +16,19 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
 
+
 public class AddBookCommand implements WebCommand {
 
     private static final String PAGE_PATH = "path.page.book.add";
     private static Logger logger = LogManager.getLogger();
 
+    /**
+     *
+     * @param request
+     *
+     * @return page
+     * @throws CommandException
+     */
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {
         Router page = new Router();

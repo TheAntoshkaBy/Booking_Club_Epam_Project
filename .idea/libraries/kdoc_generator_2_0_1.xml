@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="kdoc-generator-2.0.1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/out/artifacts/BookingClub_war_exploded/WEB-INF/lib/kdoc-generator-2.0.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
