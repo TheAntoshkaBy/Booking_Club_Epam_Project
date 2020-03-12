@@ -22,14 +22,6 @@ public class AddBookCommand implements WebCommand {
     private static final String PAGE_PATH = "path.page.book.add";
     private static Logger logger = LogManager.getLogger();
 
-    /**
-     *
-     * @param request
-     *
-     * @return page
-     * @throws CommandException
-     */
-
     // FIXME: 11.03.2020 autodoc (jautodoc) интерфейсы основные методы, сервлеты
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {

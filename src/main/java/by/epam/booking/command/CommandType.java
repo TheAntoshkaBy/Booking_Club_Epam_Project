@@ -235,8 +235,7 @@ public enum CommandType {
         {
             this.command = new ConfirmCommand();
         }
-    }
-    ;
+    };
 
     WebCommand command;
     public WebCommand getCurrentCommand() {

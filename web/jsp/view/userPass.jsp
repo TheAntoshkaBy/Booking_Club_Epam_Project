@@ -68,9 +68,8 @@
                     <div class="bd-example">
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat"><fmt:message key="submit.mess.to.admin"/> </button>
                        <div class="modal fade" id="exampleModal" tabindex="-1" userRoleType="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                           <form class="form" action="${pageContext.request.contextPath}/MailServlet"  method="post">
+                           <form class="form" action="${pageContext.request.contextPath}/controller"  method="post">
                                <input type="hidden" name="command" value="send_to_admin"/>
-                               <input type="hidden" name="messageType" value="sendToAdmin"/>
                             <div class="modal-dialog" userRoleType="document">
                                 <div class="modal-content">
                                     <div class="modal-body">
