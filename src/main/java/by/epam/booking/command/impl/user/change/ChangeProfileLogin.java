@@ -3,13 +3,11 @@ package by.epam.booking.command.impl.user.change;
 import by.epam.booking.command.WebCommand;
 import by.epam.booking.command.impl.BookingClubCommand;
 import by.epam.booking.config.ConfigurationManager;
-import by.epam.booking.config.MessageManager;
 import by.epam.booking.entity.User;
 import by.epam.booking.command.Router;
 import by.epam.booking.exception.CommandException;
 import by.epam.booking.exception.ServiceException;
 import by.epam.booking.service.user.UserInfoType;
-import by.epam.booking.service.user.impl.UserLogic;
 import by.epam.booking.type.PageChangeType;
 import by.epam.booking.type.ParameterName;
 import org.apache.logging.log4j.LogManager;
@@ -39,19 +37,19 @@ public class ChangeProfileLogin extends BookingClubCommand implements WebCommand
                     request.getSession().setAttribute(ParameterName.PARAM_USER_LOGIN,
                             request.getParameter(ParameterName.PARAM_USER_LOGIN));
 
-                    page.setPage(ConfigurationManager.getProperty(PATH_PAGE_USER));
+                    page.setPage(ConfigurationManager.getPath(PATH_PAGE_USER));
                     page.setPageFormat(PageChangeType.REDIRECT);
                     request.getSession().setAttribute(ParameterName.PARAM_TYPE_PROFILE, PARAM_TYPE_VALUE);
                     request.getSession().setAttribute(ParameterName.PARAM_USER_LOGIN, changeParamOfUser.getLogin());
                     request.getSession().setAttribute(ParameterName.PARAM_USERNAME_ERROR, "");
                     request.getSession().setAttribute(ParameterName.PARAM_CHANGE_SAVED,
-                            MessageManager.getProperty(MESSAGE_ABOUT_CHANGED_SAVE));
+                            ConfigurationManager.getMessageProperty(MESSAGE_ABOUT_CHANGED_SAVE));
                     logger.debug("Login changed!");
                 } else {
-                    page.setPage(ConfigurationManager.getProperty(PATH_PAGE_USER));
+                    page.setPage(ConfigurationManager.getPath(PATH_PAGE_USER));
                     request.setAttribute(ParameterName.PARAM_TYPE_PROFILE, PARAM_TYPE_VALUE);
                     request.getSession().setAttribute(ParameterName.PARAM_USERNAME_ERROR,
-                            MessageManager.getProperty(MESSAGE_ABOUT_CONSIST_LOGIN));
+                            ConfigurationManager.getMessageProperty(MESSAGE_ABOUT_CONSIST_LOGIN));
                     return page;
                 }
             } catch (ServiceException e) {
@@ -59,10 +57,10 @@ public class ChangeProfileLogin extends BookingClubCommand implements WebCommand
                 throw new CommandException(e);
             }
         } else {
-            page.setPage(ConfigurationManager.getProperty(PATH_PAGE_USER));
+            page.setPage(ConfigurationManager.getPath(PATH_PAGE_USER));
             request.getSession().setAttribute(ParameterName.PARAM_TYPE_PROFILE, PARAM_TYPE_VALUE);
             request.getSession().setAttribute(ParameterName.PARAM_USERNAME_ERROR,
-                    MessageManager.getProperty(MESSAGE_ABOUT_EMPTY_LOGIN));
+                    ConfigurationManager.getMessageProperty(MESSAGE_ABOUT_EMPTY_LOGIN));
             return page;
         }
 

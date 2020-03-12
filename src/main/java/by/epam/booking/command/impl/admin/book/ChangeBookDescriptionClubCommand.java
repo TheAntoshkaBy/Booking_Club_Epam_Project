@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 public class ChangeBookDescriptionClubCommand extends BookingClubCommand implements WebCommand {
 
     private final String VALUE_FOR_PAGE = "settings";
-    private final String PAGE_PATH = "path.page.book";// FIXME: 27.02.2020 Разные названия констант
+    private final String PAGE_PATH = "path.page.book";
     private static Logger logger = LogManager.getLogger();
 
     @Override
@@ -44,7 +44,7 @@ public class ChangeBookDescriptionClubCommand extends BookingClubCommand impleme
         }
 
         request.getSession().setAttribute(ParameterName.PARAM_SETTINGS_FOR_BOOK_PAGE, VALUE_FOR_PAGE);
-        page = new Router(PageChangeType.FORWARD, ConfigurationManager.getProperty(PAGE_PATH));
+        page = new Router(PageChangeType.FORWARD, ConfigurationManager.getPath(PAGE_PATH));
 
         return page;
     }

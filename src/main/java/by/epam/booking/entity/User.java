@@ -3,6 +3,7 @@ package by.epam.booking.entity;
 import by.epam.booking.type.UserRoleType;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class User {
 
@@ -195,4 +196,31 @@ public class User {
         return sb.toString();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return getLogin().equals(user.getLogin()) &&
+                getEmail().equals(user.getEmail()) &&
+                getName().equals(user.getName()) &&
+                getSurname().equals(user.getSurname()) &&
+                getBookId().equals(user.getBookId()) &&
+                getReadingPlanId().equals(user.getReadingPlanId());
+    }
+
+    @Override
+    public int hashCode() {
+
+        int result;
+        long temp;
+        result = getLogin().hashCode();
+        result = 31 * result + getEmail().hashCode();
+        result = 31 * result + getName().hashCode();
+        result = 31 * result + getSurname().hashCode();
+        result = 31 * result + getBookId();
+        temp = Double.doubleToLongBits(getReadingPlanId());
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
+    }
 }

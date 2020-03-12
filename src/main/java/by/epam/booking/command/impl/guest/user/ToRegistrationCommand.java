@@ -14,7 +14,7 @@ public class ToRegistrationCommand implements WebCommand {
 
     @Override
     public Router execute(HttpServletRequest request) {
-        Router page = new Router(PageChangeType.FORWARD, ConfigurationManager.getProperty(PATH_PAGE));
+        Router page = new Router(PageChangeType.FORWARD, ConfigurationManager.getPath(PATH_PAGE));
         return page;
     }
 }

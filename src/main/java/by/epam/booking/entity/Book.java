@@ -1,6 +1,7 @@
 package by.epam.booking.entity;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Book {
     private Integer count;
@@ -75,17 +76,6 @@ public class Book {
         this.description = description;
     }
 
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("Book{");
-        sb.append("count=").append(count);
-        sb.append(", author='").append(author).append('\'');
-        sb.append(", name='").append(name).append('\'');
-        sb.append(", description='").append(description).append('\'');
-        sb.append('}');
-        return sb.toString();
-    }
-
     public Integer getId() {
         return id;
     }
@@ -116,5 +106,39 @@ public class Book {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Book{");
+        sb.append("count=").append(count);
+        sb.append(", author='").append(author).append('\'');
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", description='").append(description).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Book)) return false;
+        Book book = (Book) o;
+        return  getCount() == book.getCount() &&
+                getAuthor().equals(book.getAuthor()) &&
+                getId() == book.getId();
+    }
+
+    @Override
+    public int hashCode() {
+
+        int result;
+        long temp;
+        result = getId();
+        result = 31 * result + getCount();
+        result = 31 * result + getAuthor().hashCode();
+        temp = Double.doubleToLongBits(getId());
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
     }
 }

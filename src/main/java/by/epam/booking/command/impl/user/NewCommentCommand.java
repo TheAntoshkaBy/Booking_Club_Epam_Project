@@ -49,7 +49,7 @@ public class NewCommentCommand extends BookingClubCommand implements WebCommand 
         request.getSession().setAttribute(ParameterName.PARAM_BOOK_DESCRIPTION, book.getDescription());
         request.getSession().setAttribute(ParameterName.PARAM_BOOK_COUNT, book.getCount());
         request.getSession().setAttribute(ParameterName.PARAM_BOOK_COMMENTS, book.getComments());
-        Router page = new Router(PageChangeType.REDIRECT, ConfigurationManager.getProperty(PATH_PAGE));
+        Router page = new Router(PageChangeType.REDIRECT, ConfigurationManager.getPath(PATH_PAGE));
         return page;
     }
 }

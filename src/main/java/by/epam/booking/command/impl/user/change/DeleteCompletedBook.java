@@ -11,7 +11,6 @@ import by.epam.booking.type.PageChangeType;
 import by.epam.booking.command.Router;
 import by.epam.booking.service.book.BookInfoType;
 import by.epam.booking.service.user.UserInfoType;
-import by.epam.booking.service.user.impl.UserLogic;
 import by.epam.booking.type.ParameterName;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -60,7 +59,7 @@ public class DeleteCompletedBook extends BookingClubCommand implements WebComman
         logger.debug("Books " + books +" successfully delete");
         request.getSession().setAttribute(ParameterName.PARAM_COMPLETED_BOOKS, books);
         request.getSession().setAttribute(ParameterName.PARAM_TYPE_PROFILE,PARAM_VALUE_TO_PAGE);
-        page.setPage( ConfigurationManager.getProperty(PATH_PAGE));
+        page.setPage( ConfigurationManager.getPath(PATH_PAGE));
         page.setPageFormat(PageChangeType.REDIRECT);
         return page;
     }

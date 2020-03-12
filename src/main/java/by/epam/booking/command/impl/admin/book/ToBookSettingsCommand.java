@@ -36,7 +36,7 @@ public class ToBookSettingsCommand extends BookingClubCommand implements WebComm
         }
 
         request.getSession().setAttribute(ParameterName.PARAM_SETTINGS_FOR_BOOK_PAGE, SETTINGS_PARAM_VALUE);
-        page = new Router(PageChangeType.FORWARD, ConfigurationManager.getProperty(PATH_PAGE));
+        page = new Router(PageChangeType.FORWARD, ConfigurationManager.getPath(PATH_PAGE));
         return page;
     }
 }

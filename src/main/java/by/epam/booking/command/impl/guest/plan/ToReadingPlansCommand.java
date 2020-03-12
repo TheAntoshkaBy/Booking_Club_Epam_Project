@@ -13,7 +13,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ToReadingPlansCommand implements WebCommand {
@@ -32,7 +31,7 @@ public class ToReadingPlansCommand implements WebCommand {
             throw new CommandException(e);
         }
         request.setAttribute(ParameterName.PARAM_ALL_READING_PLANS, readingPlans);
-        Router page = new Router(PageChangeType.FORWARD, ConfigurationManager.getProperty(PATH_PAGE));
+        Router page = new Router(PageChangeType.FORWARD, ConfigurationManager.getPath(PATH_PAGE));
 
         return page;
     }

@@ -3,13 +3,11 @@ package by.epam.booking.command.impl.user.change;
 import by.epam.booking.command.WebCommand;
 import by.epam.booking.command.impl.BookingClubCommand;
 import by.epam.booking.config.ConfigurationManager;
-import by.epam.booking.config.MessageManager;
 import by.epam.booking.entity.User;
 import by.epam.booking.command.Router;
 import by.epam.booking.exception.CommandException;
 import by.epam.booking.exception.ServiceException;
 import by.epam.booking.service.user.UserInfoType;
-import by.epam.booking.service.user.impl.UserLogic;
 import by.epam.booking.type.PageChangeType;
 import by.epam.booking.type.ParameterName;
 import org.apache.logging.log4j.LogManager;
@@ -72,10 +70,10 @@ public class ChangeProfileImage extends BookingClubCommand implements WebCommand
         request.getSession().setAttribute(ParameterName.PARAM_USER_IMAGE,UPLOAD_DIR + File.separator + imagePath);
 
         page.setPageFormat(PageChangeType.REDIRECT);
-        page.setPage(ConfigurationManager.getProperty(PATH_PAGE_USER));
+        page.setPage(ConfigurationManager.getPath(PATH_PAGE_USER));
         request.getSession().setAttribute(ParameterName.PARAM_TYPE_PROFILE,PARAM_TYPE_VALUE);
         request.getSession().setAttribute(ParameterName.PARAM_USERNAME_ERROR,"");
-        request.getSession().setAttribute(ParameterName.PARAM_CHANGE_SAVED,MessageManager.getProperty(MESSAGE));
+        request.getSession().setAttribute(ParameterName.PARAM_CHANGE_SAVED,ConfigurationManager.getMessageProperty(MESSAGE));
         return page;
     }
 }

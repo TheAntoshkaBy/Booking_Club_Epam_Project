@@ -19,6 +19,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * The type Main controller servlet.
+ * Responsible for the execution of all commands on the site.
+ * @since 1.0
+ * @author Anton Vedenichev
+ */
 @MultipartConfig(fileSizeThreshold = 1024 * 1024
         , maxFileSize = 1024 * 1024 * 5
         , maxRequestSize = 1024 * 1024 * 5 * 5)
@@ -52,7 +58,7 @@ public class MainControllerServlet extends HttpServlet {
 
         if(page == null){
             page = new Router();
-            page.setPage(ConfigurationManager.getProperty(ERROR_PAGE));
+            page.setPage(ConfigurationManager.getPath(ERROR_PAGE));
             page.setPageFormat(PageChangeType.REDIRECT);
         }else if(page.getPageFormat() == PageChangeType.FORWARD) {
             getServletContext()

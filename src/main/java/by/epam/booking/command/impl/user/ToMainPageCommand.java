@@ -22,7 +22,7 @@ public class ToMainPageCommand implements WebCommand {
         HttpSession session = request.getSession();
         String login = (String) session.getAttribute(ParameterName.PARAM_USER_LOGIN);
         if (login == null) {
-            page.setPage(ConfigurationManager.getProperty(PATH_PAGE_REGISTRATION));
+            page.setPage(ConfigurationManager.getPath(PATH_PAGE_REGISTRATION));
         } else {
             ArrayList<Integer> booksId = (ArrayList<Integer>) request.getSession()
                     .getAttribute(ParameterName.PARAM_LIST_OF_USER_COMPLETED_BOOKS);
@@ -33,7 +33,7 @@ public class ToMainPageCommand implements WebCommand {
                 request.getSession().setAttribute(ParameterName.PARAM_USER_BOOK_STATUS, null);
             }
             request.getSession().setAttribute(ParameterName.PARAM_TYPE_PROFILE, PARAM_TYPE_PROFILE_PAGE_VALUE);
-            page.setPage(ConfigurationManager.getProperty(PATH_PAGE_USER));
+            page.setPage(ConfigurationManager.getPath(PATH_PAGE_USER));
         }
         return page;
     }

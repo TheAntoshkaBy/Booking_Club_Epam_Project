@@ -46,7 +46,7 @@ public class ChangeBookNameClubCommand extends BookingClubCommand implements Web
         }
 
         request.getSession().setAttribute(ParameterName.PARAM_SETTINGS_FOR_BOOK_PAGE, VALUE_FOR_PAGE);
-        page = new Router(PageChangeType.FORWARD, ConfigurationManager.getProperty(PAGE_PATH));
+        page = new Router(PageChangeType.FORWARD, ConfigurationManager.getPath(PAGE_PATH));
 
         return page;
     }

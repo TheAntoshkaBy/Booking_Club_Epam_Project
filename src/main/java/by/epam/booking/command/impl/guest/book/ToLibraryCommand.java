@@ -15,7 +15,6 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ToLibraryCommand extends BookingClubCommand implements WebCommand {
@@ -54,7 +53,7 @@ public class ToLibraryCommand extends BookingClubCommand implements WebCommand {
             }
         }
         request.setAttribute(ParameterName.PARAM_LIST_OF_BOOKS_INTERIM, books);
-        page.setPage(ConfigurationManager.getProperty(PATH_PAGE));
+        page.setPage(ConfigurationManager.getPath(PATH_PAGE));
 
         return page;
     }

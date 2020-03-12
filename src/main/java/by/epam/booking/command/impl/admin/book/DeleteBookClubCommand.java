@@ -64,7 +64,7 @@ public class DeleteBookClubCommand extends BookingClubCommand implements WebComm
 
         logger.warn("Book delete!");
         request.setAttribute(ParameterName.PARAM_LIST_OF_BOOKS_INTERIM, books);
-        page.setPage(ConfigurationManager.getProperty(PAGE_PATH));
+        page.setPage(ConfigurationManager.getPath(PAGE_PATH));
 
         return page;
     }

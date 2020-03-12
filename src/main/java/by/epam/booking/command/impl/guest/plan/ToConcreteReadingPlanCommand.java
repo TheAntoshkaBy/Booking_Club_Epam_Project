@@ -9,7 +9,6 @@ import by.epam.booking.command.Router;
 import by.epam.booking.exception.CommandException;
 import by.epam.booking.exception.ServiceException;
 import by.epam.booking.service.plan.ReadingPlanInfoType;
-import by.epam.booking.service.plan.impl.ReadingPlanLogic;
 import by.epam.booking.type.PageChangeType;
 import by.epam.booking.type.ParameterName;
 import org.apache.logging.log4j.LogManager;
@@ -56,7 +55,7 @@ public class ToConcreteReadingPlanCommand extends BookingClubCommand implements 
 
         request.getSession().setAttribute(ParameterName.PARAM_READING_PLAN_ID_INTERIM, readingPlan.getIdReadingPlan());
         request.getSession().setAttribute(ParameterName.PARAM_READING_PLAN_BOOKS, readingPlan.getBooks());
-        Router page = new Router(PageChangeType.FORWARD, ConfigurationManager.getProperty(PATH_PAGE));
+        Router page = new Router(PageChangeType.FORWARD, ConfigurationManager.getPath(PATH_PAGE));
 
         return page;
     }

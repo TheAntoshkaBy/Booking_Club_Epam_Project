@@ -17,16 +17,10 @@ import javax.servlet.http.HttpServletRequest;
 
 public class ChangeBookAuthorClubCommand extends BookingClubCommand implements WebCommand {
 
-    private final String PATH = "path.page.book";
-    private final String VALUE_FOR_PAGE = "settings";
+    private final String PATH_TO_CHANGE_BOOK_SETTINGS = "path.page.book";
+    private final String VALUE_FOR_BOOK_PAGE_SETTINGS = "settings";
     private static Logger logger = LogManager.getLogger();
 
-    /**
-     *
-     * @param request
-     * @return
-     * @throws CommandException
-     */
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {
         Router page;
@@ -49,8 +43,8 @@ public class ChangeBookAuthorClubCommand extends BookingClubCommand implements W
             logger.warn("Author don't changed because gladiolus");
         }
 
-        request.getSession().setAttribute(ParameterName.PARAM_SETTINGS_FOR_BOOK_PAGE, VALUE_FOR_PAGE);
-        page = new Router(PageChangeType.FORWARD, ConfigurationManager.getProperty(PATH));
+        request.getSession().setAttribute(ParameterName.PARAM_SETTINGS_FOR_BOOK_PAGE, VALUE_FOR_BOOK_PAGE_SETTINGS);
+        page = new Router(PageChangeType.FORWARD, ConfigurationManager.getPath(PATH_TO_CHANGE_BOOK_SETTINGS));
 
         return page;
     }

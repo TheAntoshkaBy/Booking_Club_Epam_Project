@@ -17,7 +17,7 @@ public class LogOutCommand implements WebCommand {
     public Router execute(HttpServletRequest request) {
 
         Router page = new Router();
-        page.setPage(ConfigurationManager.getProperty(PATH_PAGE));
+        page.setPage(ConfigurationManager.getPath(PATH_PAGE));
         HttpSession session = request.getSession();
         session.removeAttribute(ParameterName.PARAM_USER_LOGIN);
         request.getSession().removeAttribute(ParameterName.PARAM_USER_INTERIM);

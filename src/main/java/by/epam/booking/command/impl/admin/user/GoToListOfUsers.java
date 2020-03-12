@@ -8,7 +8,6 @@ import by.epam.booking.entity.User;
 import by.epam.booking.exception.CommandException;
 import by.epam.booking.exception.ServiceException;
 import by.epam.booking.service.user.UserInfoType;
-import by.epam.booking.service.user.impl.UserLogic;
 import by.epam.booking.type.PageChangeType;
 import by.epam.booking.type.ParameterName;
 import org.apache.logging.log4j.LogManager;
@@ -41,7 +40,7 @@ public class GoToListOfUsers extends BookingClubCommand implements WebCommand {
         }
         request.getSession().setAttribute(ParameterName.PARAM_ALL_USERS, users);
 
-        return new Router(PageChangeType.FORWARD, ConfigurationManager.getProperty(PATH_PAGE));
+        return new Router(PageChangeType.FORWARD, ConfigurationManager.getPath(PATH_PAGE));
 
     }
 

@@ -1,6 +1,6 @@
 package by.epam.booking.command.impl.guest.user.message;
 
-import by.epam.booking.config.MailProperties;
+import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.type.MessagePropertiesName;
 
 import javax.mail.PasswordAuthentication;
@@ -16,10 +16,10 @@ public class SessionCreator {
     private Properties sessionProperties;
 
     public SessionCreator() {
-        smtpHost = MailProperties.getProperty(MessagePropertiesName.HOST_PROPERTY);
-        smtpPort = MailProperties.getProperty(MessagePropertiesName.PORT_PROPERTY);
-        userName = MailProperties.getProperty(MessagePropertiesName.NAME_PROPERTY);
-        userPassword = MailProperties.getProperty(MessagePropertiesName.PASSWORD_PROPERTY);
+        smtpHost = ConfigurationManager.getMailProperty(MessagePropertiesName.HOST_PROPERTY);
+        smtpPort = ConfigurationManager.getMailProperty(MessagePropertiesName.PORT_PROPERTY);
+        userName = ConfigurationManager.getMailProperty(MessagePropertiesName.NAME_PROPERTY);
+        userPassword = ConfigurationManager.getMailProperty(MessagePropertiesName.PASSWORD_PROPERTY);
         System.out.println(userName);
         System.out.println(userPassword);
 

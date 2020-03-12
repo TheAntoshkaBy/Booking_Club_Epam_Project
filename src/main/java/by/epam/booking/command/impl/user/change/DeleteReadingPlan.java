@@ -3,13 +3,11 @@ package by.epam.booking.command.impl.user.change;
 import by.epam.booking.command.WebCommand;
 import by.epam.booking.command.impl.BookingClubCommand;
 import by.epam.booking.config.ConfigurationManager;
-import by.epam.booking.config.MessageManager;
 import by.epam.booking.entity.User;
 import by.epam.booking.command.Router;
 import by.epam.booking.exception.CommandException;
 import by.epam.booking.exception.ServiceException;
 import by.epam.booking.service.user.UserInfoType;
-import by.epam.booking.service.user.impl.UserLogic;
 import by.epam.booking.type.PageChangeType;
 import by.epam.booking.type.ParameterName;
 import org.apache.logging.log4j.LogManager;
@@ -40,10 +38,10 @@ public class DeleteReadingPlan extends BookingClubCommand implements WebCommand 
             throw new CommandException(e);
         }
         page.setPageFormat(PageChangeType.REDIRECT);
-        page.setPage(ConfigurationManager.getProperty(PATH_PAGE));
+        page.setPage(ConfigurationManager.getPath(PATH_PAGE));
         request.getSession().setAttribute(ParameterName.PARAM_TYPE_PROFILE,PARAM_VALUE_TO_PAGE);
-        request.getSession().setAttribute(ParameterName.PARAM_CHANGE_SAVED, MessageManager
-                .getProperty(MESSAGE_SAVE_CHANGED));
+        request.getSession().setAttribute(ParameterName.PARAM_CHANGE_SAVED,
+                ConfigurationManager.getMessageProperty(MESSAGE_SAVE_CHANGED));
         return page;
     }
 }

@@ -4,13 +4,11 @@ import by.epam.booking.command.Router;
 import by.epam.booking.command.WebCommand;
 import by.epam.booking.command.impl.BookingClubCommand;
 import by.epam.booking.config.ConfigurationManager;
-import by.epam.booking.config.MessageManager;
 import by.epam.booking.entity.User;
 import by.epam.booking.exception.CommandException;
 import by.epam.booking.exception.ServiceException;
 import by.epam.booking.service.user.CodeGenerator;
 import by.epam.booking.service.user.UserInfoType;
-import by.epam.booking.service.user.impl.UserLogic;
 import by.epam.booking.type.PageChangeType;
 import by.epam.booking.type.ParameterName;
 
@@ -38,11 +36,11 @@ public class ConfirmCommand extends BookingClubCommand implements WebCommand {
             }
             page.setPageFormat(PageChangeType.REDIRECT);
             request.getSession().setAttribute(ParameterName.PARAM_CONFIRM_ERROR, null);
-            page.setPage(ConfigurationManager.getProperty(PATH_PAGE_LOGIN));
+            page.setPage(ConfigurationManager.getPath(PATH_PAGE_LOGIN));
         } else {
             page.setPageFormat(PageChangeType.REDIRECT);
-            request.getSession().setAttribute(ParameterName.PARAM_CONFIRM_ERROR, MessageManager.getProperty(MESSAGE));
-            page.setPage(ConfigurationManager.getProperty(PATH_PAGE));
+            request.getSession().setAttribute(ParameterName.PARAM_CONFIRM_ERROR, ConfigurationManager.getMessageProperty(MESSAGE));
+            page.setPage(ConfigurationManager.getPath(PATH_PAGE));
         }
 
         return page;

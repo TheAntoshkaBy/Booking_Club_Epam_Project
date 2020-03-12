@@ -1,6 +1,6 @@
 package by.epam.booking.connection;
 
-import by.epam.booking.config.DataBaseManager;
+import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.exception.ConnectionPoolException;
 import by.epam.booking.exception.ConnectionToDataBaseException;
 import com.sun.mail.iap.ConnectionException;
@@ -36,21 +36,22 @@ final class DataBaseConnection {
 
     static Connection createConnection() throws ConnectionToDataBaseException {
         Connection dbConnection = null;
-        String connectionString = DataBaseManager.getProperty(HEAD)     +
-                DataBaseManager.getProperty(HOST)                       +
-                DataBaseManager.getProperty(PORT)                       +
-                DataBaseManager.getProperty(NAME)                       +
-                DataBaseManager.getProperty(CERTIFICATE)                +
-                DataBaseManager.getProperty(SSL)                        +
-                DataBaseManager.getProperty(REQ_SSL)                    +
-                DataBaseManager.getProperty(DATE_TIME)                  +
-                DataBaseManager.getProperty(AMP)                        +
-                DataBaseManager.getProperty(UNICODE)                    +
-                DataBaseManager.getProperty(TIME_ZONE);
+        String connectionString =
+                ConfigurationManager.getBaseProperty(HEAD)                       +
+                ConfigurationManager.getBaseProperty(HOST)                       +
+                ConfigurationManager.getBaseProperty(PORT)                       +
+                ConfigurationManager.getBaseProperty(NAME)                       +
+                ConfigurationManager.getBaseProperty(CERTIFICATE)                +
+                ConfigurationManager.getBaseProperty(SSL)                        +
+                ConfigurationManager.getBaseProperty(REQ_SSL)                    +
+                ConfigurationManager.getBaseProperty(DATE_TIME)                  +
+                ConfigurationManager.getBaseProperty(AMP)                        +
+                ConfigurationManager.getBaseProperty(UNICODE)                    +
+                ConfigurationManager.getBaseProperty(TIME_ZONE);
         try {
             dbConnection = DriverManager.getConnection(connectionString,
-                    DataBaseManager.getProperty(USER),
-                    DataBaseManager.getProperty(PASSWORD));
+                    ConfigurationManager.getBaseProperty(USER),
+                    ConfigurationManager.getBaseProperty(PASSWORD));
 
             if (!dbConnection.isClosed()) {
                 logger.debug("DataBase connection is successful!");
@@ -64,7 +65,7 @@ final class DataBaseConnection {
 
     private static void loadDriver() {
         try {
-            Class.forName(DataBaseManager.getProperty(DRIVER));
+            Class.forName(ConfigurationManager.getBaseProperty(DRIVER));
         } catch (ClassNotFoundException e) {
             logger.debug("Driver load is successful!");
         }

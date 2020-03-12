@@ -14,7 +14,7 @@ public class GoToAddBookCommand implements WebCommand {
     @Override
     public Router execute(HttpServletRequest request) {
         Router page;
-        page = new Router(PageChangeType.FORWARD, ConfigurationManager.getProperty(PAGE_PATH));
+        page = new Router(PageChangeType.FORWARD, ConfigurationManager.getPath(PAGE_PATH));
         return page;
     }
 }

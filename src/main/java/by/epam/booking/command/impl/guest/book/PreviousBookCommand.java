@@ -52,7 +52,7 @@ public class PreviousBookCommand extends BookingClubCommand implements WebComman
             request.getSession().setAttribute(ParameterName.PARAM_BOOK_IMAGE, UPLOAD_DIR + File.separator + book.getImage());
 
 
-        Router page = new Router(PageChangeType.FORWARD, ConfigurationManager.getProperty(PATH_PAGE));
+        Router page = new Router(PageChangeType.FORWARD, ConfigurationManager.getPath(PATH_PAGE));
         return page;
     }
 }

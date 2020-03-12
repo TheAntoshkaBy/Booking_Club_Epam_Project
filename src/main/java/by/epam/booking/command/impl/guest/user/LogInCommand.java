@@ -7,11 +7,9 @@ import by.epam.booking.exception.CommandException;
 import by.epam.booking.exception.ServiceException;
 import by.epam.booking.service.user.CheckUser;
 import by.epam.booking.config.ConfigurationManager;
-import by.epam.booking.config.MessageManager;
 import by.epam.booking.entity.User;
 import by.epam.booking.command.Router;
 import by.epam.booking.service.user.UserInfoType;
-import by.epam.booking.service.user.impl.UserLogic;
 import by.epam.booking.service.validation.LoginValidation;
 import by.epam.booking.type.PageChangeType;
 import by.epam.booking.type.ParameterName;
@@ -85,19 +83,19 @@ public class LogInCommand extends BookingClubCommand implements WebCommand {
                 }
 
                 page.setPageFormat(PageChangeType.FORWARD);
-                page.setPage(ConfigurationManager.getProperty(PATH_PAGE_USER));
+                page.setPage(ConfigurationManager.getPath(PATH_PAGE_USER));
 
             } else {
                 request.getSession().setAttribute(ParameterName.PARAM_USER_LOGIN_INTERIM, user.getLogin());
                 request.getSession().setAttribute(ParameterName.PARAM_USER_EMAIL_INTERIM, user.getEmail());
                 page.setPageFormat(PageChangeType.REDIRECT);
-                page.setPage(ConfigurationManager.getProperty(PATH_PAGE_USER_PASSIVE));
+                page.setPage(ConfigurationManager.getPath(PATH_PAGE_USER_PASSIVE));
             }
 
         } else {
-            page.setPage(ConfigurationManager.getProperty(PATH_PAGE_LOGIN));
+            page.setPage(ConfigurationManager.getPath(PATH_PAGE_LOGIN));
             page.setPageFormat(PageChangeType.FORWARD);
-            request.setAttribute(ParameterName.PARAM_LOGIN_ERROR, MessageManager.getProperty(MESSAGE));
+            request.setAttribute(ParameterName.PARAM_LOGIN_ERROR, ConfigurationManager.getMessageProperty(MESSAGE));
             return page;
         }
         } catch (ServiceException e) {

@@ -9,7 +9,6 @@ import by.epam.booking.exception.ServiceException;
 import by.epam.booking.type.PageChangeType;
 import by.epam.booking.command.Router;
 import by.epam.booking.service.user.UserInfoType;
-import by.epam.booking.service.user.impl.UserLogic;
 import by.epam.booking.type.ParameterName;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -45,7 +44,7 @@ public class PayCommand extends BookingClubCommand implements WebCommand {
         request.getSession().setAttribute(ParameterName.PARAM_FINANCE_MONEY,user.getMoneyBalance());
         request.getSession().setAttribute(ParameterName.PARAM_TYPE_PROFILE,PARAM_VALUE_TO_PAGE);
         logger.debug("User balance get " + user.getMoneyBalance());
-        page.setPage( ConfigurationManager.getProperty(PATH_PAGE));
+        page.setPage( ConfigurationManager.getPath(PATH_PAGE));
         page.setPageFormat(PageChangeType.REDIRECT);
         return page;
     }

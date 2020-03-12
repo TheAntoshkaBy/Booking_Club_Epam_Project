@@ -12,12 +12,14 @@ import java.sql.SQLException;
  */
 public interface WebCommand {
     /**
-     * Execute router.
+     * The interface Action command.
+     * Perform action according to command that was received from servlet.
      *
-     * @author Anton Vedenichev
-     * @param request the request
-     * @return the router
+     * @param request - get user request
+     * @return the router (Page and type of transition method to page)
      * @throws CommandException the command exception
+     * @since 1.0
+     * @author Anton Vedenichev
      */
     Router execute(HttpServletRequest request) throws CommandException;
 }

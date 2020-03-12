@@ -11,7 +11,6 @@ import by.epam.booking.type.PageChangeType;
 import by.epam.booking.command.Router;
 import by.epam.booking.service.book.BookInfoType;
 import by.epam.booking.service.user.UserInfoType;
-import by.epam.booking.service.user.impl.UserLogic;
 import by.epam.booking.type.ParameterName;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -63,7 +62,7 @@ public class AddNewBookCommand extends BookingClubCommand implements WebCommand 
         request.getSession().setAttribute(ParameterName.PARAM_BOOK_COUNT,book.getCount());
         request.getSession().setAttribute(ParameterName.PARAM_BOOK_IMAGE,UPLOAD_DIR + File.separator + book.getImage());
 
-        Router page = new Router(PageChangeType.REDIRECT, ConfigurationManager.getProperty(PATH_PAGE));
+        Router page = new Router(PageChangeType.REDIRECT, ConfigurationManager.getPath(PATH_PAGE));
         return page;
     }
 }

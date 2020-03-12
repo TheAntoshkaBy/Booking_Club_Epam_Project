@@ -9,9 +9,7 @@ import by.epam.booking.entity.User;
 import by.epam.booking.exception.CommandException;
 import by.epam.booking.exception.ServiceException;
 import by.epam.booking.service.plan.ReadingPlanInfoType;
-import by.epam.booking.service.plan.impl.ReadingPlanLogic;
 import by.epam.booking.service.user.UserInfoType;
-import by.epam.booking.service.user.impl.UserLogic;
 import by.epam.booking.type.PageChangeType;
 import by.epam.booking.type.ParameterName;
 import org.apache.logging.log4j.LogManager;
@@ -45,7 +43,7 @@ public class AddReadingPlan extends BookingClubCommand implements WebCommand {
         }
         request.getSession().setAttribute(ParameterName.PARAM_NAME_OF_READING_PLAN, readingPlan.getName());
 
-        Router page = new Router(PageChangeType.REDIRECT, ConfigurationManager.getProperty(PATH_PAGE));
+        Router page = new Router(PageChangeType.REDIRECT, ConfigurationManager.getPath(PATH_PAGE));
         return page;
     }
 

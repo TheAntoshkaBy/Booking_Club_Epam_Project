@@ -40,7 +40,7 @@ public class ToListCompleteBooks extends BookingClubCommand implements WebComman
         }
         request.setAttribute(ParameterName.PARAM_COMPLETED_BOOKS, books);
         request.getSession().setAttribute(ParameterName.PARAM_TYPE_PROFILE, PARAM_TYPE_VALUE);
-        page.setPage(ConfigurationManager.getProperty(PATH_PAGE));
+        page.setPage(ConfigurationManager.getPath(PATH_PAGE));
         page.setPageFormat(PageChangeType.FORWARD);
         return page;
     }

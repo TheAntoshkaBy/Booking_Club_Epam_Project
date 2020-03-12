@@ -6,7 +6,6 @@ import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.entity.Book;
 import by.epam.booking.exception.CommandException;
 import by.epam.booking.exception.RepositoryException;
-import by.epam.booking.exception.ServiceException;
 import by.epam.booking.repository.impl.BookRepository;
 import by.epam.booking.type.PageChangeType;
 import by.epam.booking.type.ParameterName;
@@ -14,15 +13,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
-import java.sql.SQLException;
 
 
 public class AddBookCommand implements WebCommand {
 
-    private static final String PAGE_PATH = "path.page.book.add";
+    private static final String PAGE_PATH_TO_ADD_BOOK = "path.page.book.add";
     private static Logger logger = LogManager.getLogger();
 
-    // FIXME: 11.03.2020 autodoc (jautodoc) интерфейсы основные методы, сервлеты
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {
         Router page = new Router();
@@ -40,7 +37,7 @@ public class AddBookCommand implements WebCommand {
         }
 
         logger.debug("Add book " + book + " to library");
-        page.setPage(ConfigurationManager.getProperty(PAGE_PATH));
+        page.setPage(ConfigurationManager.getPath(PAGE_PATH_TO_ADD_BOOK));
         page.setPageFormat(PageChangeType.REDIRECT);
         return page;
 

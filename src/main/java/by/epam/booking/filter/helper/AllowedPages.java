@@ -22,5 +22,6 @@ public class AllowedPages {
         allowedPagesForAdmin.addAll(allowedPagesForUser);
         allowedPagesForAdmin.add("finance.jsp");
         allowedPagesForAdmin.add("usersList.jsp");
+        allowedPagesForAdmin.add("addBook.jsp");
     }
 }

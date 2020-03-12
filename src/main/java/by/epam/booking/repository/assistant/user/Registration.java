@@ -1,6 +1,6 @@
 package by.epam.booking.repository.assistant.user;
 
-import by.epam.booking.config.MessageManager;
+import by.epam.booking.config.ConfigurationManager;
 import by.epam.booking.exception.RepositoryException;
 import by.epam.booking.repository.assistant.RepositoryHelper;
 import by.epam.booking.repository.impl.UserRepository;
@@ -31,10 +31,10 @@ public class Registration extends RepositoryHelper {
         user.setIsActive(false);
         user.setRole(UserRoleType.USER);
         if(checkEqualsLogin(new SearchLoginAndPassByLoginSpecification(user))){
-            returnedPage = MessageManager.getProperty("message.equal.login");
+            returnedPage = ConfigurationManager.getMessageProperty("message.equal.login");
             return false;
         }else if(checkEqualsLogin(new SearchEmailsByEmailSpecification(user))){
-            returnedPage = MessageManager.getProperty("message.equal.email");
+            returnedPage = ConfigurationManager.getMessageProperty("message.equal.email");
             return false;
         }
         UserRepository.getINSTANCE().add(user);

@@ -11,20 +11,20 @@ import by.epam.booking.service.user.impl.UserLogic;
 public abstract class BookingClubCommand implements WebCommand {
 
     /**
-     * The Book logic.
+     * Responsible for the book management logic in the application.
      */
     protected BookLogic bookLogic;
     /**
-     * The Reading plan logic.
+     * Responsible for the Reading plans management logic in the application.
      */
     protected ReadingPlanLogic readingPlanLogic;
     /**
-     * The User logic.
+     * Responsible for the user management logic in the application.
      */
     protected UserLogic userLogic;
 
     /**
-     * Instantiates a new Booking club command.
+     * Instantiates a logic classes for Application commands.
      */
     public BookingClubCommand(){
         bookLogic = BookLogic.getInstance();

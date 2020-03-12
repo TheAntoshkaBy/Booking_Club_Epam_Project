@@ -10,7 +10,6 @@ import by.epam.booking.exception.CommandException;
 import by.epam.booking.exception.ServiceException;
 import by.epam.booking.repository.assistant.user.Registration;
 import by.epam.booking.service.user.CodeGenerator;
-import by.epam.booking.service.user.impl.UserLogic;
 import by.epam.booking.type.PageChangeType;
 import by.epam.booking.type.ParameterName;
 import by.epam.booking.type.UserRoleType;
@@ -73,10 +72,10 @@ public class RegistrationCommand extends BookingClubCommand implements WebComman
             mailOperator.start();
 
             page.setPageFormat(PageChangeType.REDIRECT);
-            page.setPage(ConfigurationManager.getProperty(PATH_PAGE_TO_CONFIRMATION));
+            page.setPage(ConfigurationManager.getPath(PATH_PAGE_TO_CONFIRMATION));
 
         } else {
-            page.setPage(ConfigurationManager.getProperty(PATH_PAGE_TO_REGISTRATION));
+            page.setPage(ConfigurationManager.getPath(PATH_PAGE_TO_REGISTRATION));
             userData.forEach(request::setAttribute);
             request.getSession().setAttribute(ParameterName.PARAM_REGISTRATION_ERROR, Registration.getReturnedPage());
         }

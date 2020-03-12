@@ -24,7 +24,7 @@ public class LocaleCommand implements WebCommand {
             request.getSession().setAttribute(LOCALE, RUS);
         }
 
-        page.setPage(ConfigurationManager.getProperty(PATH_PAGE));
+        page.setPage(ConfigurationManager.getPath(PATH_PAGE));
         page.setPageFormat(PageChangeType.FORWARD);
         return page;
     }

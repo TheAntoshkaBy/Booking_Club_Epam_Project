@@ -8,7 +8,6 @@ import by.epam.booking.entity.User;
 import by.epam.booking.exception.CommandException;
 import by.epam.booking.exception.ServiceException;
 import by.epam.booking.service.user.UserInfoType;
-import by.epam.booking.service.user.impl.UserLogic;
 import by.epam.booking.type.PageChangeType;
 import by.epam.booking.type.ParameterName;
 import org.apache.logging.log4j.LogManager;
@@ -37,6 +36,6 @@ public class DeleteUserReadingPlan extends BookingClubCommand implements WebComm
 
         request.getSession().setAttribute(ParameterName.PARAM_NAME_OF_READING_PLAN, EMPTY_NAME);
 
-        return new Router(PageChangeType.REDIRECT, ConfigurationManager.getProperty(PATH_PAGE));
+        return new Router(PageChangeType.REDIRECT, ConfigurationManager.getPath(PATH_PAGE));
     }
 }

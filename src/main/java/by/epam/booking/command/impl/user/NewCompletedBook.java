@@ -8,7 +8,6 @@ import by.epam.booking.command.Router;
 import by.epam.booking.exception.CommandException;
 import by.epam.booking.exception.ServiceException;
 import by.epam.booking.service.user.UserInfoType;
-import by.epam.booking.service.user.impl.UserLogic;
 import by.epam.booking.type.PageChangeType;
 import by.epam.booking.type.ParameterName;
 import org.apache.logging.log4j.LogManager;
@@ -46,7 +45,7 @@ public class NewCompletedBook extends BookingClubCommand implements WebCommand {
         request.getSession().setAttribute(ParameterName.PARAM_LIST_OF_USER_COMPLETED_BOOKS, booksId);
         request.getSession().setAttribute(ParameterName.PARAM_USER_BOOK_STATUS, PARAM_BOOK_STATUS_VALUE);
         request.getSession().setAttribute(ParameterName.PARAM_TYPE_PROFILE, PARAM_TYPE_VALUE);
-        page.setPage(ConfigurationManager.getProperty(PATH_PAGE));
+        page.setPage(ConfigurationManager.getPath(PATH_PAGE));
         page.setPageFormat(PageChangeType.REDIRECT);
 
         return page;

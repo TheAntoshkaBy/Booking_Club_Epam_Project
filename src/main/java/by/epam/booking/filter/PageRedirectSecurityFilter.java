@@ -10,6 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * A filter that tracks all unauthorized access to pages.
+ * @since 1.0
+ * @author Anton Vedenichev
+ */
 @WebFilter(urlPatterns = {"/jsp/view/*"}, initParams = {@WebInitParam(name = "INDEX_PATH", value = "/jsp/error/errorStepPage.jsp")})
 
 public class PageRedirectSecurityFilter implements Filter {

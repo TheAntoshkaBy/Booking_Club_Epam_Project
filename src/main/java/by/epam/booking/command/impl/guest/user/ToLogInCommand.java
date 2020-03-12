@@ -13,7 +13,7 @@ public class ToLogInCommand implements WebCommand {
 
     @Override
     public Router execute(HttpServletRequest request) {
-        Router page = new Router(PageChangeType.REDIRECT, ConfigurationManager.getProperty(PATH_PAGE));
+        Router page = new Router(PageChangeType.REDIRECT, ConfigurationManager.getPath(PATH_PAGE));
         return page;
     }
 }

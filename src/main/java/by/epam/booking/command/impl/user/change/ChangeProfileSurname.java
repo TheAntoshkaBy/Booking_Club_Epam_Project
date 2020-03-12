@@ -3,13 +3,11 @@ package by.epam.booking.command.impl.user.change;
 import by.epam.booking.command.WebCommand;
 import by.epam.booking.command.impl.BookingClubCommand;
 import by.epam.booking.config.ConfigurationManager;
-import by.epam.booking.config.MessageManager;
 import by.epam.booking.entity.User;
 import by.epam.booking.command.Router;
 import by.epam.booking.exception.CommandException;
 import by.epam.booking.exception.ServiceException;
 import by.epam.booking.service.user.UserInfoType;
-import by.epam.booking.service.user.impl.UserLogic;
 import by.epam.booking.type.PageChangeType;
 import by.epam.booking.type.ParameterName;
 import org.apache.logging.log4j.LogManager;
@@ -42,18 +40,18 @@ public class ChangeProfileSurname extends BookingClubCommand implements WebComma
             page.setPageFormat(PageChangeType.REDIRECT);
             logger.debug("User surname changed");
         }else {
-            page.setPage(ConfigurationManager.getProperty(PATH_PAGE));
+            page.setPage(ConfigurationManager.getPath(PATH_PAGE));
             request.setAttribute(ParameterName.PARAM_TYPE_PROFILE,PARAM_VALUE_TO_PAGE);
             request.getSession().setAttribute(ParameterName.PARAM_SURNAME_ERROR,
-                    MessageManager.getProperty(MESSAGE));
+                    ConfigurationManager.getMessageProperty(MESSAGE));
             return page;
         }
-        page.setPage(ConfigurationManager.getProperty(PATH_PAGE));
+        page.setPage(ConfigurationManager.getPath(PATH_PAGE));
         request.getSession().setAttribute(ParameterName.PARAM_TYPE_PROFILE,PARAM_VALUE_TO_PAGE);
         request.getSession().setAttribute(ParameterName.PARAM_USER_SURNAME,transferredUser.getSurname());
         request.getSession().setAttribute(ParameterName.PARAM_SURNAME_ERROR,"");
         request.getSession().setAttribute(ParameterName.PARAM_CHANGED_SAVE,
-                MessageManager.getProperty(MESSAGE_SAVE_CHANGED));
+                ConfigurationManager.getMessageProperty(MESSAGE_SAVE_CHANGED));
         return page;
     }
 }

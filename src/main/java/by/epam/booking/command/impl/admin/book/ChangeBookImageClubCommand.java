@@ -3,7 +3,6 @@ package by.epam.booking.command.impl.admin.book;
 import by.epam.booking.command.WebCommand;
 import by.epam.booking.command.impl.BookingClubCommand;
 import by.epam.booking.config.ConfigurationManager;
-import by.epam.booking.config.MessageManager;
 import by.epam.booking.entity.Book;
 import by.epam.booking.command.Router;
 import by.epam.booking.exception.CommandException;
@@ -61,10 +60,11 @@ public class ChangeBookImageClubCommand extends BookingClubCommand implements We
         request.getSession().setAttribute(ParameterName.PARAM_BOOK_IMAGE, UPLOAD_DIR + File.separator + imagePath);
 
         logger.debug("Image successfully changed!");
-        page.setPage(ConfigurationManager.getProperty(PATH));
+        page.setPage(ConfigurationManager.getPath(PATH));
         request.getSession().setAttribute(ParameterName.PARAM_TYPE_PROFILE, PROFILE_TYPE);
         request.getSession().setAttribute(ParameterName.PARAM_USERNAME_ERROR, "");
-        request.getSession().setAttribute(ParameterName.PARAM_CHANGED_SAVE, MessageManager.getProperty(SAVING_MESSAGE));
+        request.getSession().setAttribute(ParameterName.PARAM_CHANGED_SAVE,
+                ConfigurationManager.getMessageProperty(SAVING_MESSAGE));
         return page;
     }
 }

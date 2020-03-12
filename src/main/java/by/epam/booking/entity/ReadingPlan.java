@@ -1,6 +1,7 @@
 package by.epam.booking.entity;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ReadingPlan {
     private String name;
@@ -52,5 +53,25 @@ public class ReadingPlan {
 
     public void setBooks(ArrayList<Book> books) {
         this.books = books;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ReadingPlan)) return false;
+        ReadingPlan that = (ReadingPlan) o;
+        return getIdReadingPlan() == that.getIdReadingPlan() &&
+                getName().equals(that.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = getIdReadingPlan();
+        result = 31 * result + getName().hashCode();
+        temp = Double.doubleToLongBits(getIdReadingPlan());
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
     }
 }

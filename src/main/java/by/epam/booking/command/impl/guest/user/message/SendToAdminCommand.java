@@ -25,7 +25,7 @@ public class SendToAdminCommand implements WebCommand {
 
         mailOperator.start();
 
-        page.setPage(ConfigurationManager.getProperty(PATH_PAGE));
+        page.setPage(ConfigurationManager.getPath(PATH_PAGE));
         page.setPageFormat(PageChangeType.REDIRECT);
         return page;
     }

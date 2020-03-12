@@ -8,7 +8,6 @@ import by.epam.booking.command.Router;
 import by.epam.booking.exception.CommandException;
 import by.epam.booking.exception.ServiceException;
 import by.epam.booking.service.user.UserInfoType;
-import by.epam.booking.service.user.impl.UserLogic;
 import by.epam.booking.type.ParameterName;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -29,7 +28,7 @@ public class SettingsProfileCommand extends BookingClubCommand implements WebCom
         HttpSession session = request.getSession();
         String login = (String) session.getAttribute(ParameterName.PARAM_USER_LOGIN);
         if (login == null) {
-            page.setPage(ConfigurationManager.getProperty(PATH_PAGE_REGISTRATION));
+            page.setPage(ConfigurationManager.getPath(PATH_PAGE_REGISTRATION));
         } else {
             User searchedUser = new User();
             searchedUser.setLogin(login);
@@ -50,7 +49,7 @@ public class SettingsProfileCommand extends BookingClubCommand implements WebCom
             request.getSession().setAttribute(ParameterName.PARAM_TYPE_PROFILE, PARAM_CHANGE_VALUE);
             request.getSession().setAttribute(ParameterName.PARAM_LOGIN_ERROR, "");
             session.setAttribute(ParameterName.PARAM_USER_LOGIN, user.getLogin());
-            page.setPage(ConfigurationManager.getProperty(PATH_PAGE_USER));
+            page.setPage(ConfigurationManager.getPath(PATH_PAGE_USER));
         }
 
         request.getSession().setAttribute(ParameterName.PARAM_CHANGE_SAVED, "");

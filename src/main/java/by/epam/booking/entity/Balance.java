@@ -75,15 +75,23 @@ public class Balance {
         if (this == o) return true;
         if (!(o instanceof Balance)) return false;
         Balance balance1 = (Balance) o;
-        return  Objects.equals(getIdOperation(), balance1.getIdOperation()) &&
-                Objects.equals(getBalance(), balance1.getBalance()) &&
-                Objects.equals(getDate(), balance1.getDate()) &&
-                Objects.equals(getAuthorLogin(), balance1.getAuthorLogin());
+        return  getIdOperation() == balance1.getIdOperation() &&
+                getBalance() == balance1.getBalance() &&
+                getDate() == balance1.getDate()&&
+                getAuthorLogin().equals(balance1.getAuthorLogin());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getIdOperation(), getBalance(), getDate(), getAuthorLogin());
+        int result;
+        long temp;
+        result = getIdOperation();
+        result = 31 * result + getAuthorLogin().hashCode();
+        result = (int) (31 * result + getBalance());
+        result = 31 * result + getDate().hashCode();
+        temp = Double.doubleToLongBits(getIdOperation());
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
     }
 
     @Override
