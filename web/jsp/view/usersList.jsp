@@ -102,9 +102,12 @@
 
                             <thead class="thead-dark ">
                             <tr>
-                                <th scope="col"><div class="d-flex justify-content-around"><fmt:message key="table.name.library.book.name"/></div></th>
-                                <th scope="col"><div class="d-flex justify-content-around"><fmt:message key="table.name.library.author"/></div></th>
-                                <th scope="col"><div class="d-flex justify-content-around"><fmt:message key="table.name.library.book.count"/> </div></th>
+                                <th scope="col"><div class="d-flex justify-content-around"><fmt:message key="label.login"/></div></th>
+                                <th scope="col"><div class="d-flex justify-content-around"><fmt:message key="label.name"/></div></th>
+                                <th scope="col"><div class="d-flex justify-content-around"><fmt:message key="label.surname"/> </div></th>
+                                <th scope="col"><div class="d-flex justify-content-around"><fmt:message key="label.status"/> </div></th>
+                                <th scope="col"><div class="d-flex justify-content-around"><fmt:message key="label.money"/> </div></th>
+                                <th scope="col"><div class="d-flex justify-content-around"><fmt:message key="label.userRoleType"/> </div></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -123,7 +126,7 @@
                                         <form action="${pageContext.request.contextPath}/controller" method="post">
                                             <input type="hidden" name="command" value="blocking_user"/>
                                             <input type="hidden" name="login" value="${user.login}"/>
-                                            <th scope="row"><div class="d-flex justify-content-around"><input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="id" value="Заблокировать" /></div></th>
+                                            <th scope="row"><div class="d-flex justify-content-around"><input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="id" value="<fmt:message key="label.block"/>" /></div></th>
                                         </form>
                                     </tr>
                                         </c:if>
@@ -138,7 +141,7 @@
                                             <form action="${pageContext.request.contextPath}/controller" method="post">
                                                 <input type="hidden" name="command" value="do_user_active"/>
                                                 <input type="hidden" name="login" value="${user.login}"/>
-                                                <th scope="row"><div class="d-flex justify-content-around"><input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="id" value="Разблокировать" /></div></th>
+                                                <th scope="row"><div class="d-flex justify-content-around"><input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="id" value="<fmt:message key="label.unlock"/>" /></div></th>
                                             </form>
                                         </tr>
                                         </c:if>

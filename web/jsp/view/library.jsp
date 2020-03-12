@@ -120,13 +120,15 @@
                                         <form action="${pageContext.request.contextPath}/controller" method="post">
                                             <input type="hidden" name="command" value="to_book"/>
                                             <input type="hidden" name="bookId" value="${book.id}"/>
-                                            <th scope="row"><div class="d-flex justify-content-around"><input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="id" value="Подробнее" /></div></th>
+                                            <th scope="row"><div class="d-flex justify-content-around"><input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="id" value="<fmt:message key="label.more"/>" /></div></th>
                                         </form>
+                                <c:if test="${not empty userRoleType and userRoleType eq 'ADMIN'}">
                                         <form action="${pageContext.request.contextPath}/controller" method="post">
                                             <input type="hidden" name="command" value="delete_book"/>
                                             <input type="hidden" name="bookId" value="${book.id}"/>
-                                            <th scope="row"><div class="d-flex justify-content-around"><input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="id" value="Удалить" /></div></th>
+                                            <th scope="row"><div class="d-flex justify-content-around"><input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="id" value="<fmt:message key="label.delete"/>" /></div></th>
                                         </form>
+                                </c:if>
                                     </tr>
                                         </c:if>
                                     <c:if test="${not book.status}">
@@ -139,13 +141,15 @@
                                     <form action="${pageContext.request.contextPath}/controller" method="post">
                                         <input type="hidden" name="command" value="to_book"/>
                                         <input type="hidden" name="bookId" value="${book.id}"/>
-                                        <th scope="row"><div class="d-flex justify-content-around"><input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="id" value="Подробнее" /></div></th>
+                                        <th scope="row"><div class="d-flex justify-content-around"><input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="id" value="<fmt:message key="label.more"/>" /></div></th>
                                     </form>
+                                <c:if test="${not empty userRoleType and userRoleType eq 'ADMIN'}">
                                     <form action="${pageContext.request.contextPath}/controller" method="post">
                                         <input type="hidden" name="command" value="delete_book"/>
                                         <input type="hidden" name="bookId" value="${book.id}"/>
-                                        <th scope="row"><div class="d-flex justify-content-around"><input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="id" value="Удалить" /></div></th>
+                                        <th scope="row"><div class="d-flex justify-content-around"><input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="id" value="<fmt:message key="label.delete"/>" /></div></th>
                                     </form>
+                                </c:if>
                                 </tr>
                                     </c:if>
 

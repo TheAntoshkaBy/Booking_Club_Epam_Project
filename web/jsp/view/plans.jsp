@@ -114,7 +114,7 @@
                                     <input type="hidden" name="command" value="to_reading_plan"/>
                                     <input type="hidden" name="idReadingPlan" value="${readingPlan.idReadingPlan}"/>
                                     <td><div class="d-flex justify-content-around"><h4><span class="badge badge-outline-primary"> <c:out value="${readingPlan.name}"/></span></h4></div></td>
-                                    <th scope="row"><div class="d-flex justify-content-around"><input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="id" value="Подробнее" /></div></th>
+                                    <th scope="row"><div class="d-flex justify-content-around"><input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="id" value="<fmt:message key="label.more"/>" /></div></th>
                                 </tr>
                             </form>
                         </c:forEach>
